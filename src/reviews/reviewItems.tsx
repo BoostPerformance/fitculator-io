@@ -1,4 +1,12 @@
-const reviews = [
+interface ReviewItem {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+}
+type ReviewItems = ReviewItem[];
+
+const reviewItems: ReviewItems = [
   {
     id: 1,
     title: '만약 핏큘레이터를 안했다면 운동을 하나도 안했겠다',
@@ -77,3 +85,5 @@ const reviews = [
     author: '익명의 후기 (만족도 설문 응답 결과)',
   },
 ];
+
+export default reviewItems;
