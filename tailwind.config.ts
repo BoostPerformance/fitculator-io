@@ -29,6 +29,8 @@ const config: Config = {
       },
     },
     fontSize: {
+      '1.25-500': ['1.25', { fontWeight: 500 }],
+
       '1.75-500': ['1.75rem', { fontWeight: 500 }],
       '1.75-700': ['1.75rem', { fontWeight: 700 }],
 
