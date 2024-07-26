@@ -18,7 +18,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
     <>
       <h1>{title}</h1>
       <p>
-        <Image src="/images/logo-2.png" alt="logo" width={10} height={10} />{' '}
+        <Image
+          src="/images/check-circle.png"
+          alt="logo"
+          width={10}
+          height={10}
+        />{' '}
         {description}
       </p>
       <span />

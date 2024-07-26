@@ -9,6 +9,7 @@ interface SectionProps {
   reverseY?: boolean;
   textCenter?: boolean;
   imgeSize?: number;
+  textAlign?: boolean;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -19,15 +20,20 @@ const Section: React.FC<SectionProps> = ({
   imageSrc,
   imgeSize,
   description,
+  textAlign = false,
 }) => {
   return (
     <div>
       <div
         className={`flex flex-row w-[56rem] ${
           reverseX ? 'flex-row-reverse' : ''
-        } h-auto ${reverseY ? 'flex-col' : ''} `}
+        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem]`}
       >
-        <div className={` ${textCenter ? 'text-center' : ''}`}>
+        <div
+          className={`${textAlign ? 'text-right' : 'text-left'} ${
+            textCenter ? 'text-center' : ''
+          }`}
+        >
           <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
             {title}
           </h2>
@@ -36,7 +42,7 @@ const Section: React.FC<SectionProps> = ({
           )}
         </div>
         {imageSrc && (
-          <div className="w-full md:w-1/2 p-4">
+          <div>
             <Image
               src={`/images/${imageSrc}.png`}
               alt={imageSrc}

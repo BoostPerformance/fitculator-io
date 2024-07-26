@@ -5,8 +5,8 @@ interface ButtonProps {
 }
 const Button: React.FC<ButtonProps> = ({ children, version = 'ver1' }) => {
   const buttonStyles = {
-    ver1: 'flex w-[29rem] py-[1.75rem] px-[4.25rem] justify-center items-center gap-[0.625rem] bg-blue-500 text-white rounded',
-    ver2: 'flex w-[29rem] py-[1.75rem] px-[4.25rem] justify-center items-center gap-[0.625rem] bg-[#00BBF5] text-white rounded',
+    ver1: 'flex w-[29rem] py-[1.75rem] px-[4.25rem] justify-center items-center bg-blue-500 text-white rounded',
+    ver2: 'flex w-[29rem] py-[1.75rem] px-[4.25rem] justify-center items-start bg-[#00BBF5] text-white rounded',
   };
   const buttonClass = buttonStyles[version];
 

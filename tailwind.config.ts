@@ -26,6 +26,8 @@ const config: Config = {
           DEFAULT: '#F2F2F2',
           1: '#625C5C',
           2: '#F9F9F9',
+          3: '#D9D9D9',
+          4: '#A3AAAD;',
         },
       },
     },

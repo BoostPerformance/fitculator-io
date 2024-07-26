@@ -7,8 +7,8 @@ import Product from '@/components/products';
 export default function Home() {
   return (
     <div className="flex flex-col items-center">
-      <section className="relative mb-10">
-        <div className="absolute">
+      <section className=" relative mb-10">
+        <div className="absolute flex flex-col items-center justify-center w-full h-[30rem] mt-[20rem] md:mt-1 gap-[0.6rem]">
           <Section
             title={
               <>
@@ -19,9 +19,7 @@ export default function Home() {
             description={<>핏큘레이터와 함께 꾸준한 운동을 생활화 하세요.</>}
           />
 
-          <div className="">
-            <Button version="ver2">핏큘레이터 신청하기</Button>
-          </div>
+          <Button version="ver2">핏큘레이터 신청하기</Button>
         </div>
         <div className="w-full bg-gradient-to-t">
           <Image
@@ -59,7 +57,7 @@ export default function Home() {
       </section>
 
       <section className="bg-blue w-full">
-        <div className="flex flex-col items-center mt-11 mb-11">
+        <div className="flex flex-col items-center mt-11 mb-11 gap-[8.75rem]">
           <Section
             title={
               <>
@@ -89,8 +87,9 @@ export default function Home() {
               </>
             }
             imageSrc="graph"
-            reverseX
             imgeSize={300}
+            reverseX
+            textAlign
           />
           <Section
             title={
@@ -125,11 +124,12 @@ export default function Home() {
             imageSrc="graph"
             imgeSize={300}
             reverseX
+            textAlign
           />
         </div>
       </section>
 
-      <section className="bg-gray-2 w-full pt-11">
+      <section className=" flex flex-col items-center w-full mb-10 h-auto bg-gray-2 pt-11">
         <Section
           title={
             <>
@@ -145,10 +145,10 @@ export default function Home() {
       <section>
         <Reviews />
       </section>
-      <section>
+      <section className="h-auto">
         <Product />
       </section>
-      <section className="w-full h-auto mb-1">
+      <section className="flex flex-col items-center w-full mb-10 h-auto pt-11">
         <Section
           title={
             <>
@@ -162,6 +162,7 @@ export default function Home() {
             </>
           }
           textCenter
+          reverseY
         />
       </section>
     </div>
