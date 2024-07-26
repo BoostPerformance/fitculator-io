@@ -1,5 +1,5 @@
 import Image from 'next/image';
 
 export default function Home() {
-  return <div>Fitculator Web</div>;
+  return <div>Fitculator Web!</div>;
 }
