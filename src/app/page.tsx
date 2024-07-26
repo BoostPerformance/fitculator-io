@@ -2,10 +2,11 @@ import Image from 'next/image';
 import Button from '@/components/button';
 import Section from '@/components/section';
 import Reviews from '@/components/reviews';
+import Product from '@/components/products';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <section className="relative mb-10">
         <div className="absolute">
           <Section
@@ -58,7 +59,7 @@ export default function Home() {
       </section>
 
       <section className="bg-blue w-full">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-11 mb-11">
           <Section
             title={
               <>
@@ -76,7 +77,7 @@ export default function Home() {
               </>
             }
             imageSrc="graph"
-            imgeSize={100}
+            imgeSize={300}
           />
           <Section
             title={<>운동량그래프, 피로도 분석</>}
@@ -89,7 +90,7 @@ export default function Home() {
             }
             imageSrc="graph"
             reverseX
-            imgeSize={100}
+            imgeSize={300}
           />
           <Section
             title={
@@ -105,7 +106,7 @@ export default function Home() {
               </>
             }
             imageSrc="graph"
-            imgeSize={100}
+            imgeSize={300}
           />
 
           <Section
@@ -122,13 +123,13 @@ export default function Home() {
               </>
             }
             imageSrc="graph"
-            imgeSize={100}
+            imgeSize={300}
             reverseX
           />
         </div>
       </section>
 
-      <section>
+      <section className="bg-gray-2 w-full pt-11">
         <Section
           title={
             <>
@@ -138,14 +139,16 @@ export default function Home() {
           imageSrc="example"
           reverseY
           textCenter
-          imgeSize={300}
+          imgeSize={1000}
         />
       </section>
       <section>
         <Reviews />
       </section>
-      <section>Product</section>
-      <section className="w-full h-[30rem] mb-1">
+      <section>
+        <Product />
+      </section>
+      <section className="w-full h-auto mb-1">
         <Section
           title={
             <>

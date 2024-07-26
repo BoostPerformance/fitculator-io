@@ -21,27 +21,31 @@ const Section: React.FC<SectionProps> = ({
   description,
 }) => {
   return (
-    <div
-      className={`flex flex-row ${reverseX ? 'flex-row-reverse' : ''} my-10 h-[25rem] ${reverseY ? 'flex-col' : ''}  items-center `}
-    >
-      <div className={`w-full md:w-1/2 ${textCenter ? 'text-center' : ''}`}>
-        <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
-          {title}
-        </h2>
-        {description && (
-          <p className="text-1.75-500 text-gray-700 ">{description}</p>
+    <div>
+      <div
+        className={`flex flex-row w-[56rem] ${
+          reverseX ? 'flex-row-reverse' : ''
+        } h-auto ${reverseY ? 'flex-col' : ''} `}
+      >
+        <div className={` ${textCenter ? 'text-center' : ''}`}>
+          <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
+            {title}
+          </h2>
+          {description && (
+            <p className="text-1.75-500 text-gray-700 ">{description}</p>
+          )}
+        </div>
+        {imageSrc && (
+          <div className="w-full md:w-1/2 p-4">
+            <Image
+              src={`/images/${imageSrc}.png`}
+              alt={imageSrc}
+              width={imgeSize}
+              height={100}
+            />
+          </div>
         )}
       </div>
-      {imageSrc && (
-        <div className="w-full md:w-1/2 p-4">
-          <Image
-            src={`/images/${imageSrc}.png`}
-            alt={imageSrc}
-            width={imgeSize}
-            height={100}
-          />
-        </div>
-      )}
     </div>
   );
 };
