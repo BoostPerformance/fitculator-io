@@ -25,18 +25,19 @@ const config: Config = {
         gray: {
           DEFAULT: '#F2F2F2',
           1: '#625C5C',
+          2: '#F9F9F9',
+          3: '#D9D9D9',
+          4: '#A3AAAD;',
         },
       },
     },
     fontSize: {
+      '1.25-500': ['1.25', { fontWeight: 500 }],
       '1.75-500': ['1.75rem', { fontWeight: 500 }],
       '1.75-700': ['1.75rem', { fontWeight: 700 }],
-
       '2-700': ['2rem', { fontWeight: 700 }],
-
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
       '2.5-900': ['2.5rem', { fontWeight: 900 }],
-
       '1.6-700': ['1.6rem', { fontWeight: 700 }],
     },
     screens: {
