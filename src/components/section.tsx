@@ -29,7 +29,7 @@ const Section: React.FC<SectionProps> = ({
       <div
         className={`flex flex-row w-[56rem] ${
           reverseX ? 'flex-row-reverse' : ''
-        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem] sm:flex-col-reverse sm:items-center sm:w-[30rem]`}
+        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem] sm:flex-col-reverse sm:items-center sm:w-full`}
       >
         <div
           className={`${textAlign ? 'text-right' : 'text-left'} ${
@@ -42,9 +42,13 @@ const Section: React.FC<SectionProps> = ({
             </h1>
           )}
 
-          <h2 className="text-2.5-700 mb-2">{title}</h2>
+          <h2 className="text-2.5-700 mb-2 sm:text-1.75-900 sm:text-center">
+            {title}
+          </h2>
           {description && (
-            <p className="text-1.75-500 text-gray-700 ">{description}</p>
+            <p className="text-1.75-500 text-gray-700 sm:text-1.125-700 sm:text-1.5-500">
+              {description}
+            </p>
           )}
         </div>
         {imageSrc && (

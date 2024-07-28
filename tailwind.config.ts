@@ -33,6 +33,8 @@ const config: Config = {
       },
     },
     fontSize: {
+      '0.7-700': ['0.7rem', { fontWeight: 700 }],
+      '1-700': ['1rem', { fontWeight: 700 }],
       '1.125-700': ['1.125rem', { fontWeight: 700 }],
       '1.25-500': ['1.25rem', { fontWeight: 500 }],
       '1.5-700': ['1.5rem', { fontWeight: 700 }],

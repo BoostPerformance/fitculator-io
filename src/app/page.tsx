@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       <section className=" relative mb-10">
-        <div className="absolute flex flex-col items-center justify-center w-full h-[30rem] mt-[20rem] md:mt-1">
+        <div className="absolute flex flex-col items-center justify-center w-full h-[30rem] md:h-auto mt-[10rem] md:mt-[5rem] md:ml-[3rem] sm:pt-1 sm:m-0">
           <div>
             <Section
               title={
@@ -25,6 +25,7 @@ export default function Home() {
         </div>
         <div className="w-full bg-gradient-to-t">
           <Image
+            className="size-full"
             src="/images/landing-running.png"
             alt="woman running"
             width={2300}
@@ -38,7 +39,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center w-full h-[30rem] mb-10 gap-[2rem]">
+      <section className="flex flex-col items-center w-full h-[30rem] mb-10 gap-[2rem] sm:pt-[10rem] sm:mb-[15rem]">
         <Image
           src="/svg/smart-watch.svg"
           alt="smart-watch"
