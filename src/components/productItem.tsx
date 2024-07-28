@@ -17,7 +17,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   special,
 }) => {
   return (
-    <div className="w-[27rem] h-[37rem] border-2 border-gray-3 rounded-[1.25rem] flex flex-col justify-around items-center gap-1 shadow-lg">
+    <div className="w-[27rem] h-[37rem] border-2 border-gray-3 rounded-[1.25rem] flex flex-col justify-around items-center gap-1 shadow-lg sm:w-[25rem] sm:h-[34rem]">
       <div className="w-[22rem] flex-start flex flex-col justify-center gap-2">
         <h1 className="text-3.7-900">{title}</h1>
 
