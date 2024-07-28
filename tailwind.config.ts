@@ -20,7 +20,7 @@ const config: Config = {
       },
       colors: {
         blue: {
-          DEFAULT: '#E4EFF5',
+          DEFAULT: '#EBF8FF',
         },
         gray: {
           DEFAULT: '#F2F2F2',

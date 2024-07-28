@@ -75,7 +75,7 @@ export default function Home() {
               </>
             }
             imageSrc="graph"
-            imgeSize={300}
+            imgeSize={350}
           />
           <Section
             title={<>운동량그래프, 피로도 분석</>}
@@ -86,8 +86,8 @@ export default function Home() {
                 친절하게 답변을 남겨요.
               </>
             }
-            imageSrc="graph"
-            imgeSize={300}
+            imageSrc="section-image1"
+            imgeSize={400}
             reverseX
             textAlign
           />
@@ -104,8 +104,8 @@ export default function Home() {
                 <br /> 친절하게 답변을 남겨요.
               </>
             }
-            imageSrc="graph"
-            imgeSize={300}
+            imageSrc="section-image2"
+            imgeSize={400}
           />
 
           <Section
@@ -121,8 +121,8 @@ export default function Home() {
                 <br /> 받아볼 수 있어요.
               </>
             }
-            imageSrc="graph"
-            imgeSize={300}
+            imageSrc="section-image3"
+            imgeSize={400}
             reverseX
             textAlign
           />
