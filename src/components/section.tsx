@@ -27,7 +27,7 @@ const Section: React.FC<SectionProps> = ({
   return (
     <div>
       <div
-        className={`flex flex-row w-[56rem] ${
+        className={`flex flex-row w-[56rem] sm:w-[27rem] sm:flex-col ${
           reverseX ? 'flex-row-reverse' : ''
         } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem]`}
       >
@@ -42,7 +42,7 @@ const Section: React.FC<SectionProps> = ({
             </h1>
           )}
 
-          <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
+          <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.5-900 mb-2">
             {title}
           </h2>
           {description && (

@@ -3,6 +3,7 @@ import Button from '@/components/button';
 import Section from '@/components/section';
 import Reviews from '@/components/reviews';
 import Product from '@/components/products';
+import AppleWatchSection from '@/components/appleWatchSection';
 
 export default function Home() {
   return (
@@ -13,8 +14,11 @@ export default function Home() {
             <Section
               title={
                 <>
-                  정확한 운동량을 알려주는 <br /> 나만의 피트니스 가이드, <br />
-                  핏큘레이터
+                  <p className="text-3-700">
+                    정확한 운동량을 알려주는 <br /> 나만의 피트니스 가이드,{' '}
+                    <br />
+                    핏큘레이터
+                  </p>
                 </>
               }
               description={<>핏큘레이터와 함께 꾸준한 운동을 생활화 하세요.</>}
@@ -38,25 +42,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center w-full h-[30rem] mb-10 gap-[2rem]">
-        <Image
-          src="/svg/smart-watch.svg"
-          alt="smart-watch"
-          width={100}
-          height={10}
-        />
-        <Section
-          title={
-            <>
-              세계보건기구(WHO)의 신체활동 가이드라인에 맞춘 <br /> 체계적인
-              운동관리로 (...)
-            </>
-          }
-          description={<> 스마트워치를 가지고 있다면 누구나 사용할 수 있어요</>}
-          reverseY
-          textCenter
-        />
-      </section>
+      <AppleWatchSection />
 
       <div className=" bg-blue w-full flex flex-col items-center py-[6.25rem]  gap-[8.75rem]">
         <Section
