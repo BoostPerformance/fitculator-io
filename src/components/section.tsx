@@ -29,12 +29,12 @@ const Section: React.FC<SectionProps> = ({
       <div
         className={`flex flex-row w-[56rem] ${
           reverseX ? 'flex-row-reverse' : ''
-        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem]`}
+        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem] sm:flex-col-reverse sm:items-center sm:w-[30rem]`}
       >
         <div
           className={`${textAlign ? 'text-right' : 'text-left'} ${
             textCenter ? 'text-center' : ''
-          }`}
+          } sm:text-center`}
         >
           {pro && (
             <h1 className="inline-block border-2 px-2 py-1 rounded-lg w-auto  border-gray-1">
@@ -42,22 +42,18 @@ const Section: React.FC<SectionProps> = ({
             </h1>
           )}
 
-          <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
-            {title}
-          </h2>
+          <h2 className="text-2.5-700 mb-2">{title}</h2>
           {description && (
             <p className="text-1.75-500 text-gray-700 ">{description}</p>
           )}
         </div>
         {imageSrc && (
-          <div>
-            <Image
-              src={`/images/${imageSrc}.png`}
-              alt={imageSrc}
-              width={imgeSize}
-              height={100}
-            />
-          </div>
+          <Image
+            src={`/images/${imageSrc}.png`}
+            alt={imageSrc}
+            width={imgeSize}
+            height={100}
+          />
         )}
       </div>
     </div>

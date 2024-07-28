@@ -47,7 +47,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
       </div>
       {special && <div> {special}</div>}
       <div className="flex flex-col mt-4 ml-[10rem]">
-        <span className="w-full border-[0.02rem] border-gray-3 mt-4 mb-2"></span>
+        <span className="w-full border-[0.02rem] border-gray-3 mb-2"></span>
         <div className="flex items-baseline">
           <p className="text-2.5-700">{price}</p>
           <p className="text-1.25-500">/ {perMonth}</p>
