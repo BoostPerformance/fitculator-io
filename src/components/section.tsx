@@ -10,6 +10,7 @@ interface SectionProps {
   textCenter?: boolean;
   imgeSize?: number;
   textAlign?: boolean;
+  pro?: ReactNode;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -21,6 +22,7 @@ const Section: React.FC<SectionProps> = ({
   imgeSize,
   description,
   textAlign = false,
+  pro,
 }) => {
   return (
     <div>
@@ -34,6 +36,12 @@ const Section: React.FC<SectionProps> = ({
             textCenter ? 'text-center' : ''
           }`}
         >
+          {pro && (
+            <h1 className="inline-block border-2 px-2 py-1 rounded-lg w-auto  border-gray-1">
+              PRO
+            </h1>
+          )}
+
           <h2 className="text-2.5-700 md:text-1.5-700 sm:text-1.6-700 mb-2">
             {title}
           </h2>
