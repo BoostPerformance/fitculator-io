@@ -6,7 +6,6 @@ import Product from '@/components/products';
 import SlideSection from '@/components/slideSection';
 import ApplySection from '@/components/applySection';
 import AppleWatchSection from '@/components/appleWatchSection';
-
 export default function Home() {
   return (
     <div className="flex flex-col items-center">

@@ -11,7 +11,9 @@ const Button: React.FC<ButtonProps> = ({ children, version = 'ver1' }) => {
   const buttonClass = buttonStyles[version];
 
   return (
-    <button className={`${buttonClass} font-[900] text-[1.75rem]`}>
+    <button
+      className={`${buttonClass} text-1.75-900 md:text-1.5-900 sm:text-1.5-900`}
+    >
       {children}
     </button>
   );
