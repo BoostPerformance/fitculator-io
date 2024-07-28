@@ -4,7 +4,9 @@ import Image from 'next/image';
 const Footer = () => {
   return (
     <footer className="h-[30rem]">
-      <Header />
+      <div className="text-gray-1">
+        <Header />
+      </div>
       <div className="flex flex-row justify-around mt-[4.5rem]">
         <p>
           FITCULATOR (핏큘레이터) <br />

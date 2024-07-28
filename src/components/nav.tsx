@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Nav = () => {
   return (
-    <div className="flex gap-[4rem] p-[0.6rem] text-[1.25rem] font-[700] ">
+    <div className="flex gap-[4rem] p-[0.6rem] text-1.125-700 ">
       <div>
         <Link href="/team">
           <h3>TEAM</h3>
