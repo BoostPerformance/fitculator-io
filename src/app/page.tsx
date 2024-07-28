@@ -13,8 +13,13 @@ export default function Home() {
             <Section
               title={
                 <>
-                  정확한 운동량을 알려주는 <br /> 나만의 피트니스 가이드, <br />
-                  핏큘레이터
+
+                  <p className="text-3-700">
+                    정확한 운동량을 알려주는 <br /> 나만의 피트니스 가이드,{' '}
+                    <br />
+                    핏큘레이터
+                  </p>
+
                 </>
               }
               description={<>핏큘레이터와 함께 꾸준한 운동을 생활화 하세요.</>}
