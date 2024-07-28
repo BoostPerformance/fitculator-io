@@ -37,7 +37,7 @@ const Section: React.FC<SectionProps> = ({
           } sm:text-center`}
         >
           {pro && (
-            <h1 className="inline-block border-2 px-2 py-1 rounded-lg w-auto  border-gray-1">
+            <h1 className="inline-block border-2 px-2 py-1 rounded-lg w-auto  border-gray-1 sm:px-1 sm:py-[0.1rem] text-gray-1">
               PRO
             </h1>
           )}
