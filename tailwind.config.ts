@@ -56,6 +56,6 @@ const config: Config = {
       sm: { max: '743px' },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
 export default config;

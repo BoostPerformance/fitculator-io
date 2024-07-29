@@ -2,7 +2,7 @@ import ProductItem from './productItem';
 import Image from 'next/image';
 const Product = () => {
   return (
-    <div className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] ">
+    <div className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem]">
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
       <h1 className="text-2.5-900 sm:text-1.75-900">
         4주 비대면 운동관리 프로젝트 핏큘레이터 신청하기

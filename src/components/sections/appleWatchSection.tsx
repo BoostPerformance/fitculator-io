@@ -3,7 +3,7 @@ import Section from './section';
 
 export default function AppleWatchSection() {
   return (
-    <section className="flex flex-col items-center w-full h-[30rem] mb-10 gap-[2rem] sm:py-[5rem] sm:mb-0">
+    <section className="flex flex-col items-center w-full h-auto py-[6.73rem] mb-[2rem] gap-[2rem] sm:py-[5rem]">
       <Image
         className="sm:w-[4rem]"
         src="/svg/smart-watch.svg"
