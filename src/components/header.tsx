@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import Nav from './nav';
 import Image from 'next/image';
 
 const Header = () => {
   return (
     <header className="flex place-content-around items-center">
-      <div className="p-2">
+      <Link className="p-2" href='./'>
         <Image
           className="sm:w-[7rem]"
           src="/images/logo.png"
@@ -12,7 +13,7 @@ const Header = () => {
           width={174}
           height={40}
         />
-      </div>
+      </Link>
 
       <Nav />
     </header>

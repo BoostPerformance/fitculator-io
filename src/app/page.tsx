@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import Button from '@/components/button';
+
 import Section from '@/components/sections/section';
 import Reviews from '@/components/reviews';
 import Product from '@/components/products';
@@ -11,12 +10,12 @@ import AppleWatchSection from '@/components/sections/appleWatchSection';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <ApplySection />
-
-      <SlideSection />
-
       <AppleWatchSection />
+      <SlideSection  />
+
+      
 
       <section className=" flex flex-col items-center w-full py-[11rem] h-auto bg-gray-2 sm:py-[6em]">
         <Section

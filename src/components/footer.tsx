@@ -3,7 +3,7 @@ import Header from './header';
 import Image from 'next/image';
 const Footer = () => {
   return (
-    <footer className="h-[30rem]">
+    <footer className="h-[20rem]">
       <div className="text-gray-1">
         <Header />
       </div>
