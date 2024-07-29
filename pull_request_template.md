@@ -14,12 +14,12 @@
 ## 설명
 
 > pr 내용을 간략히 설명해주세요.
-> 회원가입 기타수정
 
 ### 이슈 번호
 
-> 예) https://github.com//fitculator-io/fitculator-web/[이슈번호] > https://github.com//fitculator-io/fitculator-web/10
+> 예) https://github.com//fitculator-io/fitculator-web/[이슈번호]
+> https://github.com//fitculator-io/fitculator-web/
 
 ### To Reviewers
 
-close #10
+close #
