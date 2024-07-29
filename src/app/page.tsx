@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Button from '@/components/button';
-import Section from '@/components/section';
+import Section from '@/components/sections/section';
 import Reviews from '@/components/reviews';
 import Product from '@/components/products';
-import SlideSection from '@/components/slideSection';
-import ApplySection from '@/components/applySection';
-import AppleWatchSection from '@/components/appleWatchSection';
+import SlideSection from '@/components/sections/slideSection';
+import ApplySection from '@/components/sections/applySection';
+import AppleWatchSection from '@/components/sections/appleWatchSection';
+
+
+
 export default function Home() {
   return (
     <div className="flex flex-col items-center">

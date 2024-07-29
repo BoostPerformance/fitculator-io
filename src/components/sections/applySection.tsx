@@ -1,5 +1,5 @@
 import Section from './section';
-import Button from './button';
+import Button from '../button';
 import Image from 'next/image';
 
 export default function ApplySection() {
