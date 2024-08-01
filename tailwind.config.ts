@@ -18,10 +18,14 @@ const config: Config = {
       fontFamily: {
         pretendard: ['var(--pretendard)'],
       },
+      backgroundImage:{
+        'selected-gradient' : 'linear-gradient(156deg, #06F1 6.29%, #00BBF5 117.95%)',
+      },
       colors: {
         blue: {
           DEFAULT: '#EBF8FF',
           1: '#0066FF',
+          2: '#00BBF5'
         },
         gray: {
           DEFAULT: '#F2F2F2',

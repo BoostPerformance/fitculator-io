@@ -5,8 +5,8 @@ import Product from '@/components/products';
 import SlideSection from '@/components/sections/slideSection';
 import ApplySection from '@/components/sections/applySection';
 import AppleWatchSection from '@/components/sections/appleWatchSection';
-
-
+import FaqSection from '@/components/sections/faqSection';
+import LonelySection from '@/components/sections/lonelySection'
 
 export default function Home() {
   return (
@@ -15,42 +15,11 @@ export default function Home() {
       <AppleWatchSection />
       <SlideSection  />
 
-      <section className=" flex flex-col items-center w-full py-[11rem] h-auto bg-gray-2 sm:py-[6em]">
-        <Section
-          title={
-            <>
-              외로운 운동은 그만. <br /> 즐거운 운동은 같이.
-            </>
-          }
-          imageSrc="example"
-          reverseY
-          textCenter
-          imgeSize={1000}
-          title2
-        />
-      </section>
-
+      <LonelySection/>
       <Reviews />
-
       <Product />
-
-      <section className="flex flex-col items-center w-full py-[10rem] h-auto sm:py-[5rem]">
-        <Section
-          title={
-            <>
-              FAQ <br />더 궁금한 점이 있으신가요?
-            </>
-          }
-          description={
-            <>
-              자주 물어보신 질문들만 <br />
-              모아 둔 FAQ를 참고해 주세요.
-            </>
-          }
-          textCenter
-          reverseY
-        />
-      </section>
+      <FaqSection/>
+      
     </div>
   );
 }
