@@ -16,7 +16,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['Pretendard', 'sans-serif'],
+        pretendard: ['var(--pretendard)'],
       },
       colors: {
         blue: {
@@ -33,6 +33,7 @@ const config: Config = {
       },
     },
     fontSize: {
+      '0.875-700': [' 0.875rem', {fontWeight:700}],
       '0.7-700': ['0.7rem', { fontWeight: 700 }],
       '1-700': ['1rem', { fontWeight: 700 }],
       '1.125-700': ['1.125rem', { fontWeight: 700 }],

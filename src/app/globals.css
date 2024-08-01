@@ -1,18 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard';
 }
 
 @layer utilities {
