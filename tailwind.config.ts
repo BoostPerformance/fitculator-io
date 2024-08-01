@@ -21,7 +21,7 @@ const config: Config = {
       colors: {
         blue: {
           DEFAULT: '#EBF8FF',
-          1: '#00BBF5',
+          1: '#0066FF',
         },
         gray: {
           DEFAULT: '#F2F2F2',
@@ -29,6 +29,7 @@ const config: Config = {
           2: '#F9F9F9',
           3: '#D9D9D9',
           4: '#A3AAAD;',
+          5: '#5E5A5A'
         },
       },
     },
@@ -40,6 +41,7 @@ const config: Config = {
       '1.25-500': ['1.25rem', { fontWeight: 500 }],
       '1.25-700': ['1.125rem', { fontWeight: 700 }],
       '1.25-900': ['1.125rem', { fontWeight: 900 }],
+      '1.5-500': ['1.5rem', { fontWeight: 500 }],
       '1.5-700': ['1.5rem', { fontWeight: 700 }],
       '1.5-900': ['1.5rem', { fontWeight: 900 }],
       '1.6-700': ['1.6rem', { fontWeight: 700 }],
@@ -47,8 +49,10 @@ const config: Config = {
       '1.75-700': ['1.75rem', { fontWeight: 700 }],
       '1.75-900': ['1.75rem', { fontWeight: 900 }],
       '2-700': ['2rem', { fontWeight: 700 }],
+      '2-900': ['2rem', { fontWeight: 900 }],
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
       '2.5-900': ['2.5rem', { fontWeight: 900 }],
+      '3-700': ['3rem', { fontWeight: 700 }],
       '3.7-900': ['3.7rem', { fontWeight: 900 }],
     },
     screens: {

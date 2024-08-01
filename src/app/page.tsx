@@ -15,8 +15,6 @@ export default function Home() {
       <AppleWatchSection />
       <SlideSection  />
 
-      
-
       <section className=" flex flex-col items-center w-full py-[11rem] h-auto bg-gray-2 sm:py-[6em]">
         <Section
           title={
@@ -28,6 +26,7 @@ export default function Home() {
           reverseY
           textCenter
           imgeSize={1000}
+          title2
         />
       </section>
 

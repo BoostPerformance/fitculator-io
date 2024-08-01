@@ -31,7 +31,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               className="flex flex-row gap-2 items-center sm:text-1-500 relative"
             >
               <Image
-                src="/images/check-circle.png"
+                src="/images/check-blue.png"
                 alt="check"
                 width={25}
                 height={25}
