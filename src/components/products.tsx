@@ -13,11 +13,16 @@ const [selectedPeriod, setSelectedPeriod] = useState('1개월');
 
 
   return (
-    <div className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem]">
+    <div className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem]">
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
-      <h1 className="text-2.5-900 sm:text-1.75-900">
-        비대면 운동관리 프로젝트 핏큘레이터 신청하기
-      </h1>
+    <div className="flex-row gap-0 flex sm:flex-col sm:items-center sm:mb-[3rem]">
+        <h1 className="text-2.5-900 sm:text-1.75-900">
+          비대면 운동관리 프로젝트
+        </h1>
+        <h1 className="text-2.5-900 sm:text-1.75-900 sm:mt-2">
+          핏큘레이터 신청하기
+        </h1>
+      </div>
       <Toggle handleToggleProduct={handleToggleProduct} selectedPeriod={selectedPeriod}/>
       
       <div className="flex flex-row h-auto gap-[3rem] sm:flex-col">
@@ -48,7 +53,7 @@ const [selectedPeriod, setSelectedPeriod] = useState('1개월');
             </>,
             '커뮤니티 활동',
             <>
-            <div className='flex items-end'>
+            <div className='flex items-end sm:items-start'>
               <div>
             <div> 전담 코치 배정</div>
             <div>• 개별 운동 루틴, 데일리 피드백</div>

@@ -10,7 +10,7 @@ export default function Toggle({
   selectedPeriod,
 }: ToggleProps) {
   return (
-    <div className="w-[14.5rem] h-[3.1rem] justify-around items-center border-[0.2rem] flex border-gray-3 rounded-[2.6rem] bg-white">
+    <div className="w-[14.5rem] h-[3.1rem] justify-around items-center border-[0.2rem] flex border-gray-3 rounded-[2.6rem] bg-white sm:mb-[1.25rem]">
       <button
         onClick={() => handleToggleProduct('1개월')}
         className={`${

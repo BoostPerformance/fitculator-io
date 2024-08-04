@@ -14,7 +14,6 @@ export default function Home() {
       <RegisterSection />
       <AppleWatchSection />
       <SlideSection  />
-
       <LonelySection/>
       <Reviews />
       <Product />

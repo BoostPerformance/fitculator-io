@@ -19,7 +19,7 @@ export default function RegisterSection() {
             description1_75700
           />
 
-          <Button version="ver2">핏큘레이터 신청하기</Button>
+          <Button text="핏큘레이터 신청하기" variant="default" size="md" />
         </div>
       </div>
       <div>
