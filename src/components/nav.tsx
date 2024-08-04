@@ -11,9 +11,9 @@ interface NavProps {
 
 const Nav: React.FC<NavProps> = ({navMenu = false}) => {
   return (
-    <nav className="flex place-content-around items-center py-[0.88rem] sticky top-0 z-50 bg-gray-2 sm:flex-col">
+    <nav className={`flex text-gray-1 place-content-around items-center py-[0.88rem] sticky top-0 z-50 bg-gray-2 sm:flex-col ${navMenu ? ' sm:items-start sm:gap-[1.62rem]' : ''}`}>
       <NavLogo/>
-      {navMenu ? <NavMenu/ > : <Button version="ver1">핏큘레이터 신청하기</Button> }
+      {navMenu ? <NavMenu/ > : <Button text='핏큘레이터 신청하기' size='sm' variant='default'/> }
     </nav>
   );
 };
