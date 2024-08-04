@@ -4,7 +4,8 @@ import { ReactNode } from 'react';
 interface SectionProps {
   title: ReactNode;
   description?: ReactNode;
-  slidDescription?: boolean;
+  description1_75500?: boolean;
+  description1_75700?: boolean;
   imageSrc?: string;
   reverseX?: boolean;
   reverseY?: boolean;
@@ -12,23 +13,24 @@ interface SectionProps {
   imgeSize?: number;
   textAlign?: boolean;
   pro?: ReactNode;
-  title1?: boolean;
-  title2?: boolean;
-  title3?: boolean;
+  title3700?: boolean;
+  title2_5700?: boolean;
+  title2_5900?: boolean;
 }
 
 const Section: React.FC<SectionProps> = ({
   title,
-  title1 = false,
-  title2 = false,
-  title3 = false,
+  title3700 = false,
+  title2_5700 = false,
+  title2_5900 = false,
   reverseX = false,
   reverseY = false,
   textCenter = false,
   imageSrc,
   imgeSize,
   description,
-  slidDescription = false,
+  description1_75500 = false,
+  description1_75700 = false,
   textAlign = false,
   pro,
 }) => {
@@ -53,16 +55,18 @@ const Section: React.FC<SectionProps> = ({
           )}
 
           <h2
-            className={`${title1 && 'text-3-700'} ${title2 && 'text-2.5-700'} ${
-              title3 && 'text-2.5-900'
+            className={`${title3700 && 'text-3-700'} ${
+              title2_5700 && 'text-2.5-700'
+            } ${
+              title2_5900 && 'text-2.5-900'
             } mb-2 md:text-2-900 sm:text-1.75-900 sm:text-center`}
           >
             {title}
           </h2>
           {description && (
             <p
-              className={`${
-                slidDescription ? 'text-1.5-500' : 'text-1.75-700'
+              className={`${description1_75500 && 'text-1.5-500'} ${
+                description1_75700 && 'text-1.5-700'
               } text-gray-5 md:text-1.5-700 sm:text-1.125-700 `}
             >
               {description}

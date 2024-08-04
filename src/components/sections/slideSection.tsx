@@ -21,8 +21,8 @@ export default function SlideSection() {
         }
         imageSrc="graph"
         imgeSize={350}
-        title2
-        slidDescription
+        title2_5700
+        description1_75500
       />
       <Section
         title={<>운동량그래프, 피로도 분석</>}
@@ -37,8 +37,8 @@ export default function SlideSection() {
         imgeSize={400}
         reverseX
         textAlign
-        title2
-        slidDescription
+        title2_5700
+        description1_75500
       />
       <Section
         title={
@@ -55,8 +55,8 @@ export default function SlideSection() {
         }
         imageSrc="section-image2"
         imgeSize={400}
-        title2
-        slidDescription
+        title2_5700
+        description1_75500
       />
 
       <Section
@@ -77,8 +77,8 @@ export default function SlideSection() {
         reverseX
         textAlign
         pro
-        title2
-        slidDescription
+        title2_5700
+        description1_75500
       />
     </div>
   );

@@ -21,7 +21,8 @@ export default function AppleWatchSection() {
         description={<> 스마트워치를 가지고 있다면 누구나 사용할 수 있어요</>}
         reverseY
         textCenter
-        title3
+        title2_5900
+        description1_75700
       />
     </section>
   );
