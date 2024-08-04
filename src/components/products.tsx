@@ -3,13 +3,11 @@ import Image from 'next/image';
 const Product = () => {
   return (
     <div className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem]">
-
-      <Image src="/images/logo-2.png" alt="logo" width={70} height={50} />
-      <h1 className="text-2.5-900 sm:text-1.75-700">
+      <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
+      <h1 className="text-2.5-900 sm:text-1.75-900">
         4주 비대면 운동관리 프로젝트 핏큘레이터 신청하기
       </h1>
       <div className="flex flex-row h-auto gap-[3rem] sm:flex-col">
-
         <ProductItem
           title="LITE"
           descriptions={[
@@ -39,7 +37,6 @@ const Product = () => {
             '피로도 관리',
             ['피트니스 특화 챗봇', '(질문답변, 프로그램 피드백 등)'],
             '커뮤니티 활동',
-
           ]}
           price="70,000원"
           perMonth="1달"

@@ -3,12 +3,12 @@ import Header from './header';
 import Image from 'next/image';
 const Footer = () => {
   return (
-    <footer className="h-[30rem]">
+    <footer className="h-[20rem]">
       <div className="text-gray-1">
         <Header />
       </div>
-      <div className="flex flex-row justify-around mt-[4.5rem]">
-        <p>
+      <div className="flex flex-row justify-around mt-[4.5rem] sm:flex-col sm:items-center sm:gap-3">
+        <p className="sm:text-0.7-700 sm:text-center">
           FITCULATOR (핏큘레이터) <br />
           사업자등록번호: 262-67-00523 | 대표:류현지 <br />
           통신판매신고: 2023-서울서대문-0576 <br />
@@ -17,10 +17,11 @@ const Footer = () => {
           ©2024 FITCULATOR. All rights reserved.
         </p>
         <Link
-          className="flex flex-row items-start gap-2"
+          className="flex flex-row items-start gap-2 sm:text-0.7-700"
           href="https://instagram.com/fitculator_official/"
         >
           <Image
+            className="sm:size-[1rem]"
             src="/svg/instagram.svg"
             alt="instagram"
             width={24}
