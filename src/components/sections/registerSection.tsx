@@ -2,7 +2,7 @@ import Section from './section';
 import Button from '../button';
 import Image from 'next/image';
 
-export default function ApplySection() {
+export default function RegisterSection() {
   return (
     <section className=" relative mb-10 sm:mb-0">
       <div className="absolute flex flex-col items-center justify-center w-full h-[30rem] mt-[10rem] md:h-auto md:mt-[5rem] md:ml-[8rem] sm:pt-[2rem] sm:m-1 z-10">

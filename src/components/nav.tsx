@@ -1,24 +1,20 @@
 import Link from 'next/link';
+import Button from './button';
+import Image from 'next/image';
+import NavLogo from './navLogo';
+import NavMenu from './navMenu';
+import React from 'react';
 
-const Nav = () => {
+interface NavProps {
+  navMenu?: boolean
+}
+
+const Nav: React.FC<NavProps> = ({navMenu = false}) => {
   return (
-    <div className="flex gap-[4rem] p-[0.6rem] text-1.125-700 sm:text-0.7-700 sm:gap-3">
-      <div>
-        <Link href="/team">
-          <h3>TEAM</h3>
-        </Link>
-      </div>
-      <div>
-        <Link href="https://airtable.com/apprBZkCTk4gpMmSW/pagWPcKsiuiwaS8zs/form">
-          <h3>FAQ</h3>
-        </Link>
-      </div>
-      <div>
-        <Link href="https://airtable.com/apprBZkCTk4gpMmSW/pagWPcKsiuiwaS8zs/form">
-          <h3>CONTACT US</h3>
-        </Link>
-      </div>
-    </div>
+    <nav className="flex place-content-around items-center py-[0.88rem] sticky top-0 z-50 bg-gray-2 sm:flex-col">
+      <NavLogo/>
+      {navMenu ? <NavMenu/ > : <Button version="ver1">핏큘레이터 신청하기</Button> }
+    </nav>
   );
 };
 
