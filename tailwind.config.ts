@@ -15,6 +15,20 @@ const config: Config = {
       },
     },
     extend: {
+      animation: {
+        marquee: 'marquee 120s linear infinite',
+        marquee2: 'marquee2 120s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
+      },
       fontFamily: {
         pretendard: ['var(--pretendard)'],
       },
@@ -22,7 +36,7 @@ const config: Config = {
         blue: {
           DEFAULT: '#EBF8FF',
           1: '#0066FF',
-          2: '#00BBF5'
+          2: '#00BBF5',
         },
         gray: {
           DEFAULT: '#F2F2F2',
@@ -30,12 +44,12 @@ const config: Config = {
           2: '#F9F9F9',
           3: '#D9D9D9',
           4: '#A3AAAD;',
-          5: '#5E5A5A'
+          5: '#5E5A5A',
         },
       },
     },
     fontSize: {
-      '0.875-700': [' 0.875rem', {fontWeight:700}],
+      '0.875-700': [' 0.875rem', { fontWeight: 700 }],
       '0.7-700': ['0.7rem', { fontWeight: 700 }],
       '1-700': ['1rem', { fontWeight: 700 }],
       '1.125-700': ['1.125rem', { fontWeight: 700 }],

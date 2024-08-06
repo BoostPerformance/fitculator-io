@@ -1,6 +1,7 @@
 import Section from './section';
 import Button from '../button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function RegisterSection() {
   return (
@@ -19,7 +20,9 @@ export default function RegisterSection() {
             description1_75700
           />
 
-          <Button text="핏큘레이터 신청하기" variant="default" size="md" />
+          <Link href="./register">
+            <Button text="핏큘레이터 신청하기" size="md" variant="default" />
+          </Link>
         </div>
       </div>
       <div>
