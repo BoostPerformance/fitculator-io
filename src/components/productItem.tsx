@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import Button from './button';
+import Link from 'next/link';
 
 interface ProductItemProps {
   title: string;
@@ -66,7 +67,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
       </div>
 
-      <Button text='신청하기' variant={buttonVariant} size='sm'/>
+      <Link href='./register'>
+        <Button text='신청하기' variant={buttonVariant} size='sm'/>
+      </Link>
+      
 
     </div>
   );
