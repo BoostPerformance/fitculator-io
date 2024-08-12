@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function SnsIcons() {
   return (
     <div className="flex gap-[0.94rem]">
-      <Link href="https://instagram.com/fitculator_official/">
+      <Link href="mailto:info@fitculator.io">
         <Image
           className="sm:size-[1rem]"
           src="/svg/email.svg"

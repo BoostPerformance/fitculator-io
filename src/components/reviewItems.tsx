@@ -1,4 +1,4 @@
-import reviewItems from '@/reviews/reviewItems';
+import reviewItems from '@/data/reviewItems';
 import Image from 'next/image';
 
 export default function ReviewItems() {
