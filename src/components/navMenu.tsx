@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const NavMenu = () => {
   return (
-    <div className="flex gap-[4rem] p-[0.6rem] text-1.125-700 sm:text-1.125-700 sm:gap-3 sm:p-0">
+    <div className="flex gap-[4rem] p-[0.6rem] text-1.125-700 sm:text-1.125-700 sm:gap-3 sm:p-0 sm:flex-col">
       <Link href="https://airtable.com/apprBZkCTk4gpMmSW/pagWPcKsiuiwaS8zs/form">
         CONTACT US
       </Link>

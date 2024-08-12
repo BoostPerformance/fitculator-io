@@ -20,7 +20,7 @@ export default function RegisterSection() {
             description1_75700
           />
 
-          <Link href="./register">
+          <Link href="#product-section">
             <Button text="핏큘레이터 신청하기" size="md" variant="default" />
           </Link>
         </div>

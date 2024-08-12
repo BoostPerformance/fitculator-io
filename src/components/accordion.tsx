@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 type AccordionItemProps = {
   title: string;
-  content: string;
+  content: JSX.Element;
 };
 
 function AccordionItem({ title, content }: AccordionItemProps) {
@@ -12,12 +12,12 @@ function AccordionItem({ title, content }: AccordionItemProps) {
   return (
     <div className="border-1 border-gray-2">
       <button
-        className="flex justify-between w-full py-4 text-left text-1.5-500 text-gray-1"
+        className="flex justify-between w-full py-4 text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{title}</span>
+        <span className="py-2 text-1.25-700 w-[52.75rem]">{title}</span>
         <svg
-          className={`w-4 h-4 transform transition-transform duration-200 ${
+          className={`w-[1.5rem] h-[1.5rem] transform transition-transform duration-200 text-blue-1 ${
             isOpen ? 'rotate-180' : 'rotate-0'
           }`}
           xmlns="http://www.w3.org/2000/svg"
@@ -34,21 +34,40 @@ function AccordionItem({ title, content }: AccordionItemProps) {
         </svg>
       </button>
       {isOpen && (
-        <div className="py-2 text-gray-600 dark:text-gray-400">{content}</div>
+        <div className="text-gray-1 text-1-500 pb-[2.75rem] flex flex-col gap-[1.69rem]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="840"
+            height="2"
+            viewBox="0 0 920 2"
+            fill="none"
+          >
+            <path d="M0 1H920" stroke="#F5F5F5" stroke-width="2" />
+          </svg>
+          {content}
+        </div>
       )}
     </div>
   );
 }
 
 type AccordionProps = {
-  items: AccordionItemProps[];
+  items: {
+    id: number;
+    title: string;
+    content: JSX.Element;
+  }[];
 };
 
 export default function Accordion({ items }: AccordionProps) {
   return (
-    <div className="w-full max-w-[35rem] mx-auto">
-      {items.map((item, index) => (
-        <AccordionItem key={index} title={item.title} content={item.content} />
+    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem]">
+      {items.map((item) => (
+        <AccordionItem
+          key={item.id}
+          title={item.title}
+          content={item.content}
+        />
       ))}
     </div>
   );
