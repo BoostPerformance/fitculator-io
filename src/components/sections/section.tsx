@@ -74,7 +74,7 @@ const Section: React.FC<SectionProps> = ({
       </div>
       {imageSrc && (
         <Image
-          src={`/images/${imageSrc}.png`}
+          src={`/images/${imageSrc}.svg`}
           alt={imageSrc}
           width={imgeSize}
           height={100}
