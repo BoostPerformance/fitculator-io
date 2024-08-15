@@ -2,14 +2,19 @@ import Section from './section';
 
 export default function SlideSection() {
   return (
-    <div className=" bg-white w-full flex flex-col items-center py-[6.25rem] gap-[8.75rem]">
+    <div className=" bg-white w-full flex flex-col items-center py-[6.25rem] gap-[8.75rem] sm:px-[1.8rem]">
       <Section
         title={
           <>
-            운동기록을 올리면 <br />
-            실시간으로
-            <br />
-            운동량이 계산돼요.
+            <div>
+              운동기록을 올리면&nbsp;
+              <span className="sm:hidden inline">
+                <br />
+              </span>
+              실시간으로
+              <br />
+              운동량이 계산돼요.
+            </div>
           </>
         }
         description={
@@ -19,7 +24,7 @@ export default function SlideSection() {
             피드백을 받을 수 있어요.
           </>
         }
-        imageSrc="graph"
+        imageSrc="/images/graph.png"
         imgeSize={350}
         title2_5700
         description1_75500
@@ -33,7 +38,7 @@ export default function SlideSection() {
             친절하게 답변을 남겨요.
           </>
         }
-        imageSrc="section-image1"
+        imageSrc="/svg/section-image1.svg"
         imgeSize={400}
         reverseX
         textAlign
@@ -53,7 +58,7 @@ export default function SlideSection() {
             <br /> 친절하게 답변을 남겨요.
           </>
         }
-        imageSrc="section-image2"
+        imageSrc="/svg/section-image2.svg"
         imgeSize={400}
         title2_5700
         description1_75500
@@ -62,17 +67,27 @@ export default function SlideSection() {
       <Section
         title={
           <>
-            전문 코치님의 <br /> 피드백을 <br />
-            받아보세요.
+            <div>
+              전문 코치님의
+              <span className="hidden sm:inline">
+                <br />
+              </span>
+              세심한 피드백을
+              <span className="sm:hidden inline">
+                <br />
+              </span>
+              받아보세요.
+            </div>
           </>
         }
         description={
           <>
-            코치님이 직업 짜주는 프로그램도
+            코치님이 직업 짜주는 <br />
+            운동 프로그램도
             <br /> 받아볼 수 있어요.
           </>
         }
-        imageSrc="section-image3"
+        imageSrc="/svg/section-image3.svg"
         imgeSize={400}
         reverseX
         textAlign

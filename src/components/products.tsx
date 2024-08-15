@@ -13,7 +13,7 @@ const Product = () => {
 
   return (
     <div
-      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem]"
+      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full"
       id="product-section"
     >
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
@@ -58,14 +58,19 @@ const Product = () => {
             </>,
             '커뮤니티 활동',
             <>
-              <div className="flex items-end sm:items-start">
-                <div>
-                  <div> 전담 코치 배정</div>
-                  <div>• 개별 운동 루틴, 데일리 피드백</div>
+              <div className="flex flex-col items-start">
+                <div className="flex items-start">
+                  <div>전담 코치 배정</div>
+                  <span className="rounded-[1.125rem] py-0 px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 ml-2 hidden sm:inline">
+                    인기
+                  </span>
                 </div>
-                <span className="rounded-[1.125rem] py-[0.25rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 ml-2">
-                  인기
-                </span>
+                <div className="flex items-start sm:flex-row">
+                  <div>• 개별 운동 루틴, 데일리 피드백</div>
+                  <span className="rounded-[1.125rem] py-[0.25rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent sm:text-0.7-700 ml-2 sm:hidden ">
+                    인기
+                  </span>
+                </div>
               </div>
             </>,
           ]}

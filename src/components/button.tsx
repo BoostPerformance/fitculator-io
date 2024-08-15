@@ -5,7 +5,7 @@ function classNames(...classes: string[]) {
 }
 
 type ButtonVariant = 'default' | 'outline' | 'white';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize = 'xs' | 'sm' | 'md';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -19,7 +19,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const baseStyles = 'flex justify-center py-[1.75rem] px-[4.25rem]';
+  const baseStyles =
+    'flex justify-center items-center py-[1.75rem] px-[4.25rem] bg-blue-1';
 
   const variantStyles: Record<ButtonVariant, string> = {
     default: 'text-white',
@@ -28,9 +29,9 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const sizeStyles: Record<ButtonSize, string> = {
-    sm: 'w-[25rem] h-[2.5rem] sm:h-[3.5rem] items-center bg-blue-1 rounded-[0.375rem] text-1.25-900',
-    md: 'w-[29rem] bg-blue-1 text-white rounded-[0.75rem] mt-[6.25rem] md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[17rem] sm:py-[1rem] sm:ml-[2rem]  text-1.75-900 md:text-1.5-900 sm:text-1.125-700',
-    lg: 'w-[30rem]',
+    xs: 'h-[2.75rem] w-[15.5rem] rounded-[0.375rem] text-1.25-900 py-[1rem] px-[3rem] sm:w-[8.625rem] sm:h-[1.875rem] sm:py-[1rem] sm:px-[0rem] sm:text-0.875-700',
+    sm: 'w-[22rem] h-[3.5rem] sm:w-[17rem] items-center rounded-[0.375rem] text-1.25-900',
+    md: 'w-[29rem]  text-white rounded-[0.75rem] mt-[6.25rem] md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[17rem] sm:py-[1rem] sm:ml-[2rem]  text-1.75-900 md:text-1.5-900 sm:text-1.125-700',
   };
 
   const buttonClassName = classNames(
