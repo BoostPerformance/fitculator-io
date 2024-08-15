@@ -36,7 +36,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-row w-[56rem] sm:w-[27rem] sm:flex-col ${
+      className={`flex flex-row sm:w-[27rem] sm:flex-col ${
         reverseX ? 'flex-row-reverse' : ''
       } h-auto ${
         reverseY ? 'flex-col' : ''
@@ -73,12 +73,7 @@ const Section: React.FC<SectionProps> = ({
         )}
       </div>
       {imageSrc && (
-        <Image
-          src={`/images/${imageSrc}.png`}
-          alt={imageSrc}
-          width={imgeSize}
-          height={100}
-        />
+        <Image src={imageSrc} alt={imageSrc} width={imgeSize} height={100} />
       )}
     </div>
   );
