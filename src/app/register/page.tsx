@@ -1,5 +1,11 @@
+import RegisterTitle from '@/components/registerTitle';
+
 const Register = () => {
-  return <div>Register</div>;
+  return (
+    <>
+      <RegisterTitle />
+    </>
+  );
 };
 
 export default Register;

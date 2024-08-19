@@ -76,7 +76,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
       </div>
 
-      <Link href="./register">
+      <Link
+        href={{
+          pathname: './register',
+          query: {
+            title: title,
+            period: selectedPeriod,
+          },
+        }}
+      >
         <Button text="신청하기" variant={buttonVariant} size="sm" />
       </Link>
     </div>
