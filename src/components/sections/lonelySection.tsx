@@ -9,7 +9,7 @@ export default function LonelySection() {
             외로운 운동은 그만. <br /> 즐거운 운동은 같이.
           </>
         }
-        imageSrc="/images/example.png"
+        imageSrc="/svg/example.svg"
         reverseY
         textCenter
         imgeSize={1000}

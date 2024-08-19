@@ -1,4 +1,13 @@
-const faqItems = [
+import React, { ReactNode } from 'react';
+
+interface FAQItem {
+  id: number;
+  title: string;
+  content: ReactNode;
+}
+
+// FAQ 아이템 배열의 타입을 정의
+const faqItems: FAQItem[] = [
   {
     id: 1,
     title: '스마트 워치 브랜드는 상관없나요?',
