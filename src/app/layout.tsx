@@ -1,17 +1,17 @@
-import localFont from 'next/font/local'
+'use client';
+import localFont from 'next/font/local';
 import './globals.css';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import React from 'react';
 import Providers from './providers';
+import React from 'react';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
   variable: '--font-pretendard',
-})
-
+});
 
 export default function RootLayout({
   children,
@@ -19,13 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className='scrollbar-hide'>
+    <html lang="en" className="scrollbar-hide">
       <body className={`${pretendard.variable} font-pretendard`}>
-        <Nav/>
+        <Nav />
         <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>
   );
 }
-

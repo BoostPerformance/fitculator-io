@@ -1,10 +1,10 @@
 import Reviews from '@/components/reviews';
 import Product from '@/components/products';
-import SlideSection from '@/components/sections/slideSection';
-import RegisterSection from '@/components/sections/registerSection';
-import AppleWatchSection from '@/components/sections/appleWatchSection';
-import FaqSection from '@/components/sections/faqSection';
-import LonelySection from '@/components/sections/lonelySection';
+import SlideSection from '@/components/landing-sections/slideSection';
+import RegisterSection from '@/components/landing-sections/registerSection';
+import AppleWatchSection from '@/components/landing-sections/appleWatchSection';
+import FaqSection from '@/components/landing-sections/faqSection';
+import LonelySection from '@/components/landing-sections/lonelySection';
 
 export default function Home() {
   return (

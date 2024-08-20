@@ -22,6 +22,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
 }) => {
   const calcPrice = selectedPeriod === '3개월' ? price * 3 : price;
   const buttonVariant = pro ? 'white' : 'default';
+  const priceString = calcPrice.toLocaleString();
 
   return (
     <div
@@ -70,7 +71,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               pro ? 'text-white' : 'text-blue-1'
             }`}
           >
-            {calcPrice.toLocaleString()} 원
+            {priceString} 원
           </p>
           <p className="text-1.25-500">/ {perMonth}</p>
         </div>
@@ -82,6 +83,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
           query: {
             title: title,
             period: selectedPeriod,
+            price: priceString,
+            pro: pro ? true : false,
           },
         }}
       >

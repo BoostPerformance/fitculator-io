@@ -9,15 +9,17 @@ const RegisterTitle: React.FC = () => {
   const period: string | null = searchParams.get('period');
   return (
     <>
-      <div className="text-1.75-500">
-        <h1>
-          FITCULATOR{' '}
-          <span className="text-blue-1">
-            {title} &nbsp;{period}
+      <div className="w-[56.4375rem]">
+        <h1 className="text-3-700">
+          FITCULATOR
+          <span className="text-blue-1 ">
+            &nbsp;{title}&nbsp;{period}
           </span>
           신청
         </h1>
-        <p>WHO 표준운동량에 맞게 운동해보세요!</p>
+        <p className="text-1.25-700 text-gray-1">
+          WHO 표준운동량에 맞게 운동해보세요!
+        </p>
       </div>
     </>
   );

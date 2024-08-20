@@ -6,7 +6,6 @@ interface FAQItem {
   content: ReactNode;
 }
 
-// FAQ 아이템 배열의 타입을 정의
 const faqItems: FAQItem[] = [
   {
     id: 1,

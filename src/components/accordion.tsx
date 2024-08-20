@@ -1,12 +1,14 @@
 'use client';
 import { useState } from 'react';
+import { ReactNode } from 'react';
 
 type AccordionItemProps = {
   title: string;
-  content: JSX.Element;
+  content: ReactNode;
+  path: boolean;
 };
 
-function AccordionItem({ title, content }: AccordionItemProps) {
+function AccordionItem({ title, content, path }: AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +17,7 @@ function AccordionItem({ title, content }: AccordionItemProps) {
         className="flex justify-between w-full py-4 text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="py-2 text-1.25-700 w-[52.75rem]">{title}</span>
+        <span className="py-2 text-1.25-700 w-auto">{title}</span>
         <svg
           className={`w-[1.5rem] h-[1.5rem] transform transition-transform duration-200 text-blue-1 ${
             isOpen ? 'rotate-180' : 'rotate-0'
@@ -42,7 +44,11 @@ function AccordionItem({ title, content }: AccordionItemProps) {
             viewBox="0 0 920 2"
             fill="none"
           >
-            <path d="M0 1H920" stroke="#F5F5F5" stroke-width="2" />
+            {path ? (
+              <path d="M0 1H920" stroke="#F5F5F5" stroke-width="2" />
+            ) : (
+              ' '
+            )}
           </svg>
           {content}
         </div>
@@ -55,15 +61,16 @@ type AccordionProps = {
   items: {
     id: number;
     title: string;
-    content: JSX.Element;
+    content: ReactNode;
   }[];
 };
 
-export default function Accordion({ items }: AccordionProps) {
+function Accordion({ items }: AccordionProps) {
   return (
     <div className="w-full max-w-[55rem] mx-auto px-[1.37rem]">
       {items.map((item) => (
         <AccordionItem
+          path
           key={item.id}
           title={item.title}
           content={item.content}
@@ -72,3 +79,5 @@ export default function Accordion({ items }: AccordionProps) {
     </div>
   );
 }
+
+export { Accordion, AccordionItem };

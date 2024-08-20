@@ -1,4 +1,4 @@
-import Accordion from '../accordion';
+import { Accordion } from '../accordion';
 import Section from './section';
 import faqItems from '@/data/faqItems';
 
