@@ -2,28 +2,6 @@ import Dropdown from '../dropdown';
 import Input from '../input';
 import RegisterItemTitle from './registerItemTitle';
 
-// const Inputs = ({
-//   title,
-//   description,
-//   input,
-// }: {
-//   title: string;
-//   description: string;
-//   input: boolean;
-// }): JSX.Element => {
-//   return (
-//     <>
-//       <div className="flex flex-col">
-//         <div>
-//           <h1>{title}</h1>
-//           <p>{description}</p>
-//         </div>
-//         {input ? <Input /> : <Dropdown />}
-//       </div>
-//     </>
-//   );
-// };
-
 export default function PersonalInformation() {
   const startMonth = 8;
   const startDay = 1;

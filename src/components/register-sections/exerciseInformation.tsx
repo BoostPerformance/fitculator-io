@@ -1,7 +1,7 @@
 import { AccordionItem } from '../accordion';
 import Dropdown from '../dropdown';
 import RegisterItemTitle from './registerItemTitle';
-import MultiSelectionButtons from './multiselectionButtons';
+// import MultiSelectionButtons from './multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
 
 export default function ExerciseInformation() {

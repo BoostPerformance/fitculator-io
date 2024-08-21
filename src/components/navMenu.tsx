@@ -13,9 +13,7 @@ const NavMenu = () => {
         FAQ
       </Link>
 
-      <Link href="https://airtable.com/apprBZkCTk4gpMmSW/pagWPcKsiuiwaS8zs/form">
-        개인정보 처리방침
-      </Link>
+      <Link href="/privacy-policy">개인정보 처리방침</Link>
     </div>
   );
 };
