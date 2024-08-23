@@ -46,6 +46,7 @@ const config: Config = {
           7: '#9E9E9E',
           8: '#F6F6F6',
           9: '#E0E0E0',
+          10: '#BDBDBD',
         },
       },
     },

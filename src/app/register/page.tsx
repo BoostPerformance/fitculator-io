@@ -14,7 +14,7 @@ const Register = () => {
   const price: string | null = searchParams.get('price');
 
   return (
-    <div className="flex flex-col items-center gap-[5rem] p-[6.88rem]">
+    <form className="flex flex-col items-center gap-[5rem] p-[6.88rem]">
       <RegisterTitle />
       <PersonalInformation />
       <ExerciseInformation />
@@ -29,7 +29,7 @@ const Register = () => {
         />
         <p>약관 및 주문 내용을 확인했으며, 정보 제공등에 동의합니다.</p>
       </div>
-    </div>
+    </form>
   );
 };
 

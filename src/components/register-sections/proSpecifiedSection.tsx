@@ -13,7 +13,7 @@ export default function ProSpecifiedSection() {
           말이 있다면 작성해주세요. <br />이 내용을 최대한 반영하여 더 좋은
           서비스를 제공해드릴게요.
         </p>
-        <Input placeholder="자유롭게 작성해주세요." />
+        <Input placeholder="자유롭게 작성해주세요." width="42.75rem" />
       </div>
     </div>
   );

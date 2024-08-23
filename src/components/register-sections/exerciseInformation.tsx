@@ -1,8 +1,11 @@
 import { AccordionItem } from '../accordion';
 import Dropdown from '../dropdown';
+import GoalPercentage from '@/data/goalPercentage';
+import HowFoundFitculator from '@/data/howFoundFitculator';
 import RegisterItemTitle from './registerItemTitle';
-// import MultiSelectionButtons from './multiselectionButtons';
+import MultiSelectionButtons from './multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
+import RadioButtonSlide from './radioButtonSlide';
 
 export default function ExerciseInformation() {
   const searchParams = useSearchParams();
@@ -22,6 +25,7 @@ export default function ExerciseInformation() {
               <p className="text-1-500 text-gray-7">
                 운동 목표를 선택 해 주세요. (복수 선택 가능)
               </p>
+              <MultiSelectionButtons />
             </div>
           </div>
 
@@ -32,6 +36,7 @@ export default function ExerciseInformation() {
                 본인이 생각하는 운동 수행력을 선택해주세요
               </p>
             </div>
+            <RadioButtonSlide />
           </div>
           {proQuestions ? (
             <div className="flex flex-col">
@@ -44,7 +49,7 @@ export default function ExerciseInformation() {
                   페이백 대상자가 됩니다.
                 </p>
               </div>
-              <Dropdown />
+              <Dropdown data={GoalPercentage} />
               <span>*핏큘레이터가 처음이라면 &apos;100&apos;을 추천해요!</span>
               <div className="w-[34.81rem]">
                 <AccordionItem
@@ -68,7 +73,7 @@ export default function ExerciseInformation() {
                   저희를 어떻게 알게 되셨나요?
                 </p>
               </div>
-              <Dropdown />
+              <Dropdown data={HowFoundFitculator} />
             </div>
           )}
         </div>
