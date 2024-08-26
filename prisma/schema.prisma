@@ -1,0 +1,111 @@
+datasource db{
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 모델 정의
+
+model User {
+  id               BigInt   @id @default(autoincrement())
+  discord_id       String   @unique
+  nickname         String
+  name             String
+  email            String   @unique
+  phone_number     String?  @unique
+  gender           String
+  birth            DateTime?
+  restingHeartRate Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // 관계
+  subscriptions    UserSubscription[]
+  exercisePrefs    ExercisePreference[]
+}
+
+model Program {
+  id          BigInt   @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 관계
+  batches     ProgramBatch[]
+  subscriptions UserSubscription[]
+}
+
+model ProgramBatch {
+  id          BigInt   @id @default(autoincrement())
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId   BigInt
+  batch_number Int
+  start_date  DateTime
+  end_date    DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 관계
+  subscriptions UserSubscription[]
+}
+
+model Event {
+  id          BigInt   @id @default(autoincrement())
+  name        String
+  description String?
+  duration    Int
+  start_date  DateTime
+  end_date    DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 관계
+  subscriptions UserSubscription[]
+}
+
+model UserSubscription {
+  id          BigInt   @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      BigInt   
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId   BigInt
+  batch       ProgramBatch? @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  batchId     BigInt?
+  event       Event?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  eventId     BigInt?
+  start_date  DateTime
+  end_date    DateTime?
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 관계
+  payments    PaymentInfo[]
+}
+
+model ExercisePreference {
+  id             BigInt   @id @default(autoincrement())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         BigInt   
+  exercise_level Int
+  exercise_goal  String
+  exercise_concern String
+  referral_source String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PaymentInfo {
+  id                  BigInt   @id @default(autoincrement())
+  userSubscription    UserSubscription @relation(fields: [userSubscriptionId], references: [id], onDelete: Cascade)
+  userSubscriptionId  BigInt
+  payment_method      String
+  amount              Float
+  payment_date        DateTime
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

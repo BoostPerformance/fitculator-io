@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const RadioButtonSlide = () => {
+interface RadioButtonSlideProps {
+  onChange?: (id: number) => void;
+}
+
+const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
 
   const debtAmounts = [
@@ -15,7 +19,7 @@ const RadioButtonSlide = () => {
 
   const handleChange = (id: number) => {
     setSelectedAmount(id);
-    console.log(id);
+    onChange!(id);
   };
 
   return (
@@ -28,7 +32,6 @@ const RadioButtonSlide = () => {
           <div key={amount.id} className="relative flex-1">
             <input
               type="radio"
-              name="debt-amount"
               id={`amount-${amount.id}`}
               value={amount.id}
               required

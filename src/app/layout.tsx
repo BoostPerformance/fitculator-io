@@ -1,4 +1,4 @@
-'use client';
+import { Suspense } from 'react';
 import localFont from 'next/font/local';
 import './globals.css';
 import Nav from '@/components/nav';

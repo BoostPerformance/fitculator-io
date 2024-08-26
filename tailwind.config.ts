@@ -34,6 +34,7 @@ const config: Config = {
           DEFAULT: '#EBF8FF',
           1: '#0066FF',
           2: '#00BBF5',
+          3: '#EDF4F8',
         },
         gray: {
           DEFAULT: '#F2F2F2',

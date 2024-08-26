@@ -1,18 +1,65 @@
 import { AccordionItem } from '../accordion';
 import Dropdown from '../dropdown';
 import GoalPercentage from '@/data/goalPercentage';
-import HowFoundFitculator from '@/data/howFoundFitculator';
+import ReferralSource from '@/data/referralSource';
 import RegisterItemTitle from './registerItemTitle';
 import MultiSelectionButtons from './multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
 import RadioButtonSlide from './radioButtonSlide';
+import {
+  RegisterFormData,
+  ExercisePreferenceProps,
+  DropdownOption,
+} from '@/types/types';
 
-export default function ExerciseInformation() {
+export default function ExercisePreference({
+  formData,
+  setFormData,
+}: ExercisePreferenceProps) {
   const searchParams = useSearchParams();
 
   const pro: string | null = searchParams.get('pro');
   const proQuestions: boolean = pro === 'true' ? true : false;
 
+  const handleGoalChange = (item: DropdownOption) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        exerciseGoal: item.option,
+      },
+    }));
+    console.log('goal', item);
+  };
+
+  const handleReferralSourceChange = (item: DropdownOption) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        ReferralSource: item.option,
+      },
+    }));
+  };
+
+  const handleRadioChange = (id: number) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        exerciseLevel: id,
+      },
+    }));
+    console.log('level', id);
+  };
+
+  const handleMultiSelectChange = (item: string[]) => {
+    setFormData((prev: RegisterFormData) => ({
+      ...prev,
+      exerciseGoal: item,
+    }));
+    console.log('selected', item);
+  };
   return (
     <div>
       <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem]">
@@ -21,11 +68,13 @@ export default function ExerciseInformation() {
         <div className="flex flex-col gap-[3.12rem]">
           <div className="flex flex-col">
             <div>
-              <h1 className="text-1.25-700 text-gray-1">운동목표</h1>
-              <p className="text-1-500 text-gray-7">
-                운동 목표를 선택 해 주세요. (복수 선택 가능)
-              </p>
-              <MultiSelectionButtons />
+              <div className="flex gap-[0.5rem] items-end">
+                <h1 className="text-1.25-700 text-gray-1">운동목표</h1>
+                <p className="text-1-500 text-gray-7">
+                  운동 목표를 선택 해 주세요. (복수 선택 가능)
+                </p>
+              </div>
+              <MultiSelectionButtons onChange={handleMultiSelectChange} />
             </div>
           </div>
 
@@ -36,7 +85,7 @@ export default function ExerciseInformation() {
                 본인이 생각하는 운동 수행력을 선택해주세요
               </p>
             </div>
-            <RadioButtonSlide />
+            <RadioButtonSlide onChange={handleRadioChange} />
           </div>
           {proQuestions ? (
             <div className="flex flex-col">
@@ -49,9 +98,9 @@ export default function ExerciseInformation() {
                   페이백 대상자가 됩니다.
                 </p>
               </div>
-              <Dropdown data={GoalPercentage} />
+              <Dropdown data={GoalPercentage} onChange={handleGoalChange} />
               <span>*핏큘레이터가 처음이라면 &apos;100&apos;을 추천해요!</span>
-              <div className="w-[34.81rem]">
+              {/* <div className="w-[34.81rem]">
                 <AccordionItem
                   path={false}
                   title="What is a Secure Key?"
@@ -61,7 +110,7 @@ export default function ExerciseInformation() {
                     </>
                   }
                 />
-              </div>
+              </div> */}
             </div>
           ) : (
             <div>
@@ -73,7 +122,10 @@ export default function ExerciseInformation() {
                   저희를 어떻게 알게 되셨나요?
                 </p>
               </div>
-              <Dropdown data={HowFoundFitculator} />
+              <Dropdown
+                data={ReferralSource}
+                onChange={handleReferralSourceChange}
+              />
             </div>
           )}
         </div>

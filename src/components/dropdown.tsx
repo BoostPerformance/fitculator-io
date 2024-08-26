@@ -10,7 +10,6 @@ import {
 } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-// 데이터 구조에 맞춘 타입 정의
 interface DropdownOption {
   id: number;
   option: string;
@@ -40,22 +39,30 @@ function DropdownItem({ item }: DropdownItemProps) {
 
 interface DropdownMenuProps {
   data: DropdownOption[];
-  label?: string; // 선택적 라벨
+  label?: string;
+  onChange: (item: DropdownOption) => void;
 }
 
-export default function DropdownMenu({ data, label }: DropdownMenuProps) {
+export default function DropdownMenu({
+  data,
+  label,
+  onChange,
+}: DropdownMenuProps) {
   const [selected, setSelected] = useState<DropdownOption | null>(
     data ? data[0] : null
   );
+
+  const handleChange = (item: DropdownOption) => {
+    setSelected(item);
+    onChange(item);
+  };
 
   if (!data || data.length === 0) {
     return <div>No options available</div>;
   }
 
-  return !data || data.length === 0 ? (
-    <div>No options available</div>
-  ) : (
-    <Listbox value={selected} onChange={setSelected}>
+  return (
+    <Listbox value={selected} onChange={handleChange}>
       {label && (
         <Label className="block text-sm font-medium leading-6 text-gray-900">
           {label}

@@ -8,16 +8,20 @@ const goals = [
   '근력/근육량 향상',
   '운동 습관 형성',
 ];
+type MultiSelect = {
+  onChange: (item: string[]) => void;
+};
 
-const MultiSelectionButtons = () => {
+const MultiSelectionButtons = ({ onChange }: MultiSelect) => {
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
 
   const toggleGoal = (goal: string) => {
-    setSelectedGoals((prev) =>
-      prev.includes(goal)
-        ? prev.filter((item) => item !== goal)
-        : [...prev, goal]
-    );
+    const updatedGoals = selectedGoals.includes(goal)
+      ? selectedGoals.filter((item) => item !== goal) // 이미 선택된 목표 제거
+      : [...selectedGoals, goal]; // 새 목표 추가
+
+    onChange(updatedGoals); // 변경된 배열을 부모 컴포넌트로 전달
+    setSelectedGoals(updatedGoals);
   };
 
   return (
@@ -25,10 +29,8 @@ const MultiSelectionButtons = () => {
       {goals.map((goal) => (
         <button
           key={goal}
-          onClick={() => {
-            toggleGoal(goal);
-            console.log(selectedGoals);
-          }}
+          onClick={() => toggleGoal(goal)}
+          type="button"
           className={`mt-[1.06rem] mr-[1.06rem] px-[1.25rem] py-[0.62rem] rounded-[0.375rem] border-[0.1rem] ${
             selectedGoals.includes(goal)
               ? 'bg-blue-500 text-white'
