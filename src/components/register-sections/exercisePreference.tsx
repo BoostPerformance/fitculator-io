@@ -47,7 +47,7 @@ export default function ExercisePreference({
       ...prev,
       exercisePreference: {
         ...prev.exercisePreference,
-        exerciseLevel: id,
+        exerciselevel: id,
       },
     }));
     console.log('level', id);

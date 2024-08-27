@@ -6,15 +6,14 @@ export interface UserInfoFormData {
 }
 
 export interface ExerciseConcernFormData {
-  exerciseConcern: string;
+  exercise_concern: string;
 }
 
 export interface ExercisePreferenceType {
   //exerciseType: string[]; // MultiSelect에서 선택된 운동 타입(?)
-  exerciseLevel: number; // 운동 수행 능력
-  exerciseGoal: string[]; // 운동 목표
-  exerciseConcern: string;
-  referralSource:
+  exercise_level: number; // 운동 수행 능력
+  exercise_goal: string[]; // 운동 목표
+  referral_source:
     | '지인 소개'
     | '인스타그램 광고'
     | 'FITCULATOR 계정'
@@ -31,8 +30,8 @@ export interface RegisterFormData
   programType: string;
   subscription: {
     batchId: number | null;
-    startDate: string;
-    endDate: string;
+    start_date: string;
+    end_date: string;
   };
   payment: {
     method: '신용카드' | 'Naverpay' | 'Kakaopay';
@@ -63,12 +62,16 @@ export interface PaymentInformationProps {
 export type RequestItemsType = {
   userId: number;
   programType: string;
-  subscription: { batchId: number | null; startDate: string; endDate: string };
+  subscription: {
+    batchId: number | null;
+    start_date: string;
+    end_date: string;
+  };
   payment: { method: string; amount: number };
-  exerciseLevel: number;
-  exerciseGoal: string;
-  referralSource: string;
-  exerciseConcern: string;
+  exercise_level: number;
+  exercise_goal: string;
+  referral_source: string;
+  exercise_concern: string;
 };
 
 export interface ApiResponse {
@@ -77,22 +80,22 @@ export interface ApiResponse {
     userId: number;
     programId: number;
     batchId: number | null;
-    startDate: string;
-    endDate: string;
+    start_date: Date;
+    end_date: Date;
     status: string;
   };
   paymentInfo: {
     id: number;
     userSubscriptionId: number;
-    paymentMethod: string;
+    payment_method: string;
     amount: number;
   };
   exercisePref: {
     id: number;
     userId: number;
-    exerciseLevel: number;
-    exerciseGoal: string;
-    referralSource: string;
-    exerciseConcern: string;
+    exercise_level: number;
+    exercise_goal: string;
+    referral_source: string;
+    exercise_concern: string;
   };
 }

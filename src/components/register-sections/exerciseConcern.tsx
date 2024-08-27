@@ -19,7 +19,7 @@ export default function ExerciseConcern({
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      exerciseConcern: value,
+      exercise_concern: value,
     }));
   };
   const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -50,7 +50,7 @@ export default function ExerciseConcern({
           name="text"
           placeholder="자유롭게 작성해주세요."
           width="42.75rem"
-          value={formData.exerciseConcern || ''}
+          value={formData.exercise_concern || ''}
           onChange={handleConcernChange}
           onBlur={handleBlurChange}
           type="text"

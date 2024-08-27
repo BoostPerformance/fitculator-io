@@ -15,7 +15,7 @@ model User {
   nickname         String
   name             String
   email            String   @unique
-  phone_number     String?  @unique
+  phone_number     String  @unique
   gender           String
   birth            DateTime?
   restingHeartRate Int?

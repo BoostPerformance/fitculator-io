@@ -11,13 +11,13 @@ export async function POST(req: NextRequest) {
       programType,
       subscription,
       payment,
-      exerciseLevel,
-      exerciseGoal,
-      referralSource,
-      exerciseConcern,
+      exercise_level,
+      exercise_goal,
+      referral_source,
+      exercise_concern,
     }: RequestItemsType = await req.json();
 
-    const exerciseGoalsArray = exerciseGoal
+    const exerciseGoalsArray = exercise_goal
       .split(',')
       .map((goal) => goal.trim());
 
@@ -28,8 +28,8 @@ export async function POST(req: NextRequest) {
             userId,
             programId: programType === 'PRO' ? 1 : 2,
             batchId: programType === 'PRO' ? subscription.batchId : null,
-            start_date: new Date(subscription.startDate),
-            end_date: new Date(subscription.endDate),
+            start_date: new Date(subscription.start_date),
+            end_date: new Date(subscription.end_date),
             status: 'active',
           },
         });
@@ -46,17 +46,17 @@ export async function POST(req: NextRequest) {
         const exercisePref = await tx.exercisePreference.upsert({
           where: { id: userId },
           update: {
-            exercise_level: exerciseLevel,
+            exercise_level: exercise_level,
             exercise_goal: exerciseGoalsArray.join(','),
-            referral_source: referralSource,
-            exercise_concern: exerciseConcern,
+            referral_source: referral_source,
+            exercise_concern: exercise_concern,
           },
           create: {
             userId,
-            exercise_level: exerciseLevel,
+            exercise_level: exercise_level,
             exercise_goal: exerciseGoalsArray.join(','),
-            referral_source: referralSource,
-            exercise_concern: exerciseConcern,
+            referral_source: referral_source,
+            exercise_concern: exercise_concern,
           },
         });
 
