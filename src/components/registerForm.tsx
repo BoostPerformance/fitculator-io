@@ -7,21 +7,23 @@ import ExerciseConcern from '@/components/register-sections/exerciseConcern';
 import RegisterTitle from '@/components/registerTitle';
 import { useSearchParams } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData, ApiResponse } from '@/types/types';
+import CalculateStartEndDate from './calculateStartEndDate';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
   const price: string | null = searchParams.get('price');
   const landing: string | null = searchParams.get('/');
   const error: string | null = searchParams.get('404');
+  const period: string | null = searchParams.get('period');
 
   const [formData, setFormData] = useState<RegisterFormData>({
-    userId: 0,
+    userId: 1,
     name: '',
     email: '',
-    phone: '',
+    phone_number: '',
     gender: '남성',
     programType: '',
     subscription: {
@@ -36,26 +38,26 @@ const RegisterForm = () => {
     exercise_level: 1,
     exercise_goal: [],
     referral_source: '지인 소개',
-    exercise_concern: '', // 운동 우려 사항 추가
+    exercise_concern: '',
   });
 
-  const submitForm = async (
-    newData: RegisterFormData
-  ): Promise<ApiResponse> => {
-    const response = await fetch('/api/subscriptions/route', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newData),
-    });
+  // const submitForm = async (
+  //   newData: RegisterFormData
+  // ): Promise<ApiResponse> => {
+  //   const response = await fetch('/api/subscriptions/route', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(newData),
+  //   });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      (error as any).response = errorData; // 에러 객체에 응답 데이터를 추가
-      throw error;
-    }
-    console.log('리스폰스 받기 성공', response.json());
-    return response.json();
-  };
+  //   if (!response.ok) {
+  //     const errorData = await response.json();
+  //     (error as any).response = errorData; // 에러 객체에 응답 데이터를 추가
+  //     throw error;
+  //   }
+  //   console.log('리스폰스 받기 성공', response.json());
+  //   return response.json();
+  // };
 
   // const mutation = useMutation<ApiResponse, Error, RegisterFormData>({
   //   mutationFn: (newData) => submitForm(newData),
@@ -74,13 +76,22 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData); // 폼 데이터를 전송
+
+    const updatedFormData = {
+      ...formData,
+      subscription: {
+        ...formData.subscription,
+      },
+      exercise_goal: formData.exercise_goal.join(','),
+    };
+
+    console.log('Updated Form Data:', updatedFormData);
 
     try {
-      const response = await fetch('/api/subscriptions/route', {
+      const response = await fetch('/api/subscriptions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
 
       if (!response.ok) {

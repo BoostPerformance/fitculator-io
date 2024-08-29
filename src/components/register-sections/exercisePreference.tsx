@@ -26,10 +26,9 @@ export default function ExercisePreference({
       ...prev,
       exercisePreference: {
         ...prev.exercisePreference,
-        exerciseGoal: item.option,
+        exercise_goal: item.option,
       },
     }));
-    console.log('goal', item);
   };
 
   const handleReferralSourceChange = (item: DropdownOption) => {
@@ -47,18 +46,16 @@ export default function ExercisePreference({
       ...prev,
       exercisePreference: {
         ...prev.exercisePreference,
-        exerciselevel: id,
+        exerciseLevel: id,
       },
     }));
-    console.log('level', id);
   };
 
   const handleMultiSelectChange = (item: string[]) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exerciseGoal: item,
+      exercise_goal: item,
     }));
-    console.log('selected', item);
   };
   return (
     <div>

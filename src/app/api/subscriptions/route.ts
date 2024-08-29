@@ -7,6 +7,10 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
   try {
     const {
+      name,
+      email,
+      phone_number,
+      gender,
       userId,
       programType,
       subscription,
@@ -17,19 +21,28 @@ export async function POST(req: NextRequest) {
       exercise_concern,
     }: RequestItemsType = await req.json();
 
-    const exerciseGoalsArray = exercise_goal
-      .split(',')
-      .map((goal) => goal.trim());
-
     const result = await prisma.$transaction(
       async (tx: Prisma.TransactionClient) => {
+        const user = await tx.user.create({
+          data: {
+            id: 0,
+            name: name,
+            email: email,
+            phone_number: phone_number,
+            gender: gender,
+            discord_id: 'defaultDiscordId', // 실제 데이터로 대체해야 함
+            nickname: 'defaultNickname', // 실제 데이터로 대체해야 함
+          },
+        });
+
+        // 생성된 사용자 ID를 사용하여 구독 생성
         const newSubscription = await tx.userSubscription.create({
           data: {
-            userId,
+            userId: user.id,
             programId: programType === 'PRO' ? 1 : 2,
             batchId: programType === 'PRO' ? subscription.batchId : null,
-            start_date: new Date(subscription.start_date),
-            end_date: new Date(subscription.end_date),
+            start_date: new Date(),
+            end_date: new Date(),
             status: 'active',
           },
         });
@@ -39,28 +52,28 @@ export async function POST(req: NextRequest) {
             userSubscriptionId: newSubscription.id,
             payment_method: payment.method,
             amount: payment.amount,
-            payment_date: new Date(), // 결제 날짜를 현재 날짜로 설정
+            payment_date: new Date(),
           },
         });
 
         const exercisePref = await tx.exercisePreference.upsert({
-          where: { id: userId },
+          where: { id: user.id },
           update: {
             exercise_level: exercise_level,
-            exercise_goal: exerciseGoalsArray.join(','),
+            exercise_goal: exercise_goal,
             referral_source: referral_source,
             exercise_concern: exercise_concern,
           },
           create: {
-            userId,
+            userId: user.id,
             exercise_level: exercise_level,
-            exercise_goal: exerciseGoalsArray.join(','),
+            exercise_goal: exercise_goal,
             referral_source: referral_source,
             exercise_concern: exercise_concern,
           },
         });
 
-        return { newSubscription, paymentInfo, exercisePref };
+        return { user, newSubscription, paymentInfo, exercisePref };
       }
     );
 

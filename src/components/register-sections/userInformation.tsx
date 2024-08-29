@@ -1,8 +1,7 @@
-import DropdownMenu from '../dropdown';
 import Input from '../input';
 import RegisterItemTitle from './registerItemTitle';
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import BatchesDropdown from './\bbatchesDropdown';
 import { UserInformationProps, DropdownOption } from '@/types/types';
 
@@ -21,7 +20,11 @@ export default function UserInformation({
   const baseBatch = 10; // 10기가 기본
 
   const [batchStartDate, setBatchStartDate] = useState(`${startMonth}`);
-  const [errors, setErrors] = useState({ name: '', email: '', phone: '' });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    phone_number: '',
+  });
 
   // 현재 월에 따른 기수 계산
   let rowNO;
@@ -42,7 +45,6 @@ export default function UserInformation({
       ...prev,
       gender,
     }));
-    console.log('Selected gender:', gender);
   };
 
   const emailValidation = (email: string) => {
@@ -53,9 +55,9 @@ export default function UserInformation({
     return '';
   };
 
-  const phoneValidation = (phone: string) => {
-    const phoneRegex = /^[0-9]+$/;
-    if (!phoneRegex.test(phone)) {
+  const phoneValidation = (phone_number: string) => {
+    const phoneRegex = /^010[0-9]{8}$/;
+    if (!phoneRegex.test(phone_number)) {
       return '* 전화번호만 입력해주세요.';
     }
     return '';
@@ -73,7 +75,6 @@ export default function UserInformation({
       ...prevData,
       [name]: value,
     }));
-    console.log(value);
 
     setFormData((prevData: any) => ({
       ...prevData,
@@ -89,7 +90,7 @@ export default function UserInformation({
       error = nameValidation(value);
     } else if (name === 'email') {
       error = emailValidation(value);
-    } else if (name === 'phone') {
+    } else if (name === 'phone_number') {
       error = phoneValidation(value);
     }
 
@@ -106,6 +107,7 @@ export default function UserInformation({
         batchId: item.id,
       },
     }));
+
     const dropdownBatchStartedMonth =
       baseMonth + (parseInt(item.option) - baseBatch);
     const month =
@@ -208,16 +210,18 @@ export default function UserInformation({
               <p className="text-1-500 text-gray-7">전화번호만 입력해주세요</p>
             </div>
             <Input
-              name="phone"
+              name="phone_number"
               placeholder="01012345678"
               width="21.25rem"
-              value={formData.phone || ''}
+              value={formData.phone_number || ''}
               onChange={handleInputChange}
               onBlur={handleBlurChange}
               type="tel"
             />
-            {errors.phone && (
-              <span className="text-red-500 text-sm">{errors.phone}</span>
+            {errors.phone_number && (
+              <span className="text-red-500 text-sm">
+                {errors.phone_number}
+              </span>
             )}
           </div>
         </div>
