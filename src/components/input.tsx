@@ -5,7 +5,7 @@ interface InputProps {
   name: string;
   value: string | number;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   placeholder: string;
   width?: string; // width를 선택적으로 받음
   type: string;

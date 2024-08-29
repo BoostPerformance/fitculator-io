@@ -111,12 +111,12 @@ const RegisterForm = () => {
     <form
       className="flex flex-col items-center gap-[5rem] p-[6.88rem]"
       onSubmit={handleSubmit}
+      noValidate
     >
       <RegisterTitle />
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />
-      <PaymentInformation formData={formData} setFormData={setFormData} />
       <div className="text-gray-9 text-1-500 flex flex-col items-center gap-[0.6rem]">
         <Button
           className="mt-0"

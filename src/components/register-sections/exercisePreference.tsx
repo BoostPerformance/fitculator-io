@@ -57,6 +57,8 @@ export default function ExercisePreference({
       exercise_goal: item,
     }));
   };
+  const handleBlurChange = () => {};
+
   return (
     <div>
       <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem]">
@@ -95,7 +97,11 @@ export default function ExercisePreference({
                   페이백 대상자가 됩니다.
                 </p>
               </div>
-              <Dropdown data={GoalPercentage} onChange={handleGoalChange} />
+              <Dropdown
+                data={GoalPercentage}
+                onChange={handleGoalChange}
+                title="목표운동량을"
+              />
               <span>*핏큘레이터가 처음이라면 &apos;100&apos;을 추천해요!</span>
               {/* <div className="w-[34.81rem]">
                 <AccordionItem
@@ -122,6 +128,7 @@ export default function ExercisePreference({
               <Dropdown
                 data={ReferralSource}
                 onChange={handleReferralSourceChange}
+                title="옵션을"
               />
             </div>
           )}

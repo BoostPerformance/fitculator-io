@@ -8,30 +8,12 @@ export default function ExerciseConcern({
   setFormData,
 }: ExercisePreferenceProps) {
   const [error, setError] = useState({ text: '' });
-  const textValidation = (text: string) => {
-    if (text.length < 3) {
-      return '* 최소 세글자 이상이어야 합니다.';
-    }
-    return '';
-  };
 
   const handleConcernChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       exercise_concern: value,
-    }));
-  };
-  const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
-    let error = '';
-    if (type === 'text') {
-      error = textValidation(value);
-    }
-
-    setError((prevError) => ({
-      ...prevError,
-      [name]: error,
     }));
   };
 
@@ -52,7 +34,6 @@ export default function ExerciseConcern({
           width="42.75rem"
           value={formData.exercise_concern || ''}
           onChange={handleConcernChange}
-          onBlur={handleBlurChange}
           type="text"
         />
         {error.text && (

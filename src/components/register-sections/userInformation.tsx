@@ -81,6 +81,9 @@ export default function UserInformation({
       [name]: value,
     }));
   };
+  const handleDropdownBlurChange = () => {
+    console.log('blur');
+  };
 
   const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -152,13 +155,17 @@ export default function UserInformation({
                     시작일은 {batchStartDate}월 1일입니다
                   </p>
                 </div>
-                <div className="flex flex-col gap-[0.3rem]"></div>
+
                 {startDay >= 21 && (
                   <span className="text-0.875-500 text-gray-7">
                     *{rowNO}기 마감이 얼마 안남았어요!
                   </span>
                 )}
-                <BatchesDropdown rowNO={rowNO} onChange={handleBatchesChange} />
+                <BatchesDropdown
+                  rowNO={rowNO}
+                  onChange={handleBatchesChange}
+                  title="기수를"
+                />
               </div>
             </div>
           ) : (
