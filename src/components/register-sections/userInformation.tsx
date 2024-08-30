@@ -136,7 +136,7 @@ export default function UserInformation({
               name="name"
               placeholder="홍길동"
               width="21.25rem"
-              value={formData.name || ''}
+              value={formData.user.name || ''}
               onChange={handleInputChange}
               onBlur={handleBlurChange}
               type="text"
@@ -201,7 +201,7 @@ export default function UserInformation({
               name="email"
               placeholder="fit@gmail.com"
               width="31.25rem"
-              value={formData.email || ''}
+              value={formData.user.email || ''}
               onChange={handleInputChange}
               onBlur={handleBlurChange}
               type="email"
@@ -220,7 +220,7 @@ export default function UserInformation({
               name="phone_number"
               placeholder="01012345678"
               width="21.25rem"
-              value={formData.phone_number || ''}
+              value={formData.user.phone_number || ''}
               onChange={handleInputChange}
               onBlur={handleBlurChange}
               type="tel"

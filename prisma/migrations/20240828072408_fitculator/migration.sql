@@ -1,12 +1,12 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" BIGSERIAL NOT NULL,
-    "discord_id" TEXT NOT NULL,
-    "nickname" TEXT NOT NULL,
+    "discord_id" TEXT UNIQUE,
+    "nickname" TEXT,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone_number" TEXT NOT NULL,
-    "gender" TEXT NOT NULL,
+    "gender" TEXT,
     "birth" TIMESTAMP(3),
     "restingHeartRate" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -15,29 +15,7 @@ CREATE TABLE "User" (
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "Program" (
-    "id" BIGSERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Program_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ProgramBatch" (
-    "id" BIGSERIAL NOT NULL,
-    "programId" BIGINT NOT NULL,
-    "batch_number" INTEGER NOT NULL,
-    "start_date" TIMESTAMP(3) NOT NULL,
-    "end_date" TIMESTAMP(3) NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "ProgramBatch_pkey" PRIMARY KEY ("id")
-);
+넘
 
 -- CreateTable
 CREATE TABLE "Event" (
@@ -75,7 +53,8 @@ CREATE TABLE "ExercisePreference" (
     "userId" BIGINT NOT NULL,
     "exercise_level" INTEGER NOT NULL,
     "exercise_goal" TEXT NOT NULL,
-    "exercise_concern" TEXT NOT NULL,
+    "exercise_concern" TEXT,
+    "exercise_performance_level" TEXT,
     "referral_source" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

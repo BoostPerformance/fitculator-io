@@ -20,27 +20,44 @@ const RegisterForm = () => {
   const period: string | null = searchParams.get('period');
 
   const [formData, setFormData] = useState<RegisterFormData>({
-    userId: 1,
-    name: '',
-    email: '',
-    phone_number: '',
-    gender: '남성',
-    programType: '',
-    subscription: {
-      batchId: null,
-      start_date: '2024-09-01',
-      end_date: '2024-09-30',
+    user: {
+      name: '',
+      email: '',
+      phone_number: '',
+      gender: '남성',
     },
-    payment: {
-      method: '신용카드',
-      amount: price ? parseFloat(price) : 0,
+    userSubscription: {
+      batchId: null,
+      programId: null,
+      start_date: '',
+      end_date: '',
+    },
+    program: {
+      name: 'pro',
+    },
+    paymentInfo: {
+      payment_method: '',
+      amount: 0,
     },
     exercise_level: 1,
     exercise_goal: [],
+    exercise_performance_level: '',
     referral_source: '지인 소개',
     exercise_concern: '',
   });
 
+  useEffect(() => {
+    const title = searchParams.get('title');
+    if (title) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        program: {
+          ...prevFormData.program,
+          name: title,
+        },
+      }));
+    }
+  }, [searchParams]);
   // const submitForm = async (
   //   newData: RegisterFormData
   // ): Promise<ApiResponse> => {
@@ -79,9 +96,6 @@ const RegisterForm = () => {
 
     const updatedFormData = {
       ...formData,
-      subscription: {
-        ...formData.subscription,
-      },
       exercise_goal: formData.exercise_goal.join(','),
     };
 
@@ -113,7 +127,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <RegisterTitle />
+      <RegisterTitle title={formData.program.name} />
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />

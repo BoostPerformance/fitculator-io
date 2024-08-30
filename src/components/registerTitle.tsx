@@ -2,10 +2,9 @@
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
-const RegisterTitle: React.FC = () => {
+const RegisterTitle: React.FC<{ title: string }> = ({ title }) => {
   const searchParams = useSearchParams();
 
-  const title: string | null = searchParams.get('title');
   const period: string | null = searchParams.get('period');
   return (
     <>
