@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scrollbar-hide">
+    <html lang="en" className="scrollbar-hide sm:bg-gray-2">
       <body className={`${pretendard.variable} font-pretendard`}>
         <Nav />
         <Providers>{children}</Providers>

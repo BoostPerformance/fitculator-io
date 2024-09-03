@@ -123,14 +123,18 @@ export default function UserInformation({
 
   return (
     <div>
-      <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem]">
+      <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-[20rem] sm:flex-col sm:gap-[1rem]">
         <RegisterItemTitle title="개인정보" required />
 
-        <div className="flex flex-col gap-[3.12rem]">
-          <div className="flex flex-col">
-            <div className="flex gap-[0.5rem] items-end">
-              <label className="text-1.25-700 text-gray-1">이름</label>
-              <p className="text-1-500 text-gray-7">본명을 적어주세요</p>
+        <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
+          <div className="flex flex-col sm:gap-[0.1rem]">
+            <div className="flex gap-[0.5rem] items-end sm:items-center">
+              <div className="text-1.25-700 text-gray-1 sm:text-1-700">
+                이름
+              </div>
+              <p className="text-1-500 text-gray-7 sm:text-0.75-500">
+                본명을 적어주세요
+              </p>
             </div>
             <Input
               name="name"
@@ -149,15 +153,17 @@ export default function UserInformation({
           {proQuestions ? (
             <div className="flex flex-col">
               <div>
-                <div className="flex gap-[0.3rem] items-end">
-                  <h1 className="text-1.25-700 text-gray-6">참여기수</h1>
-                  <p className="text-1-500 text-gray-7">
+                <div className="flex gap-[0.3rem] items-end sm:items-center sm:gap-[0.1rem]">
+                  <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
+                    참여기수
+                  </h1>
+                  <p className="text-1-500 text-gray-7 sm:text-0.75-500">
                     시작일은 {batchStartDate}월 1일입니다
                   </p>
                 </div>
 
                 {startDay >= 21 && (
-                  <span className="text-0.875-500 text-gray-7">
+                  <span className="text-0.875-500 text-gray-7 sm:text-0.75-500">
                     *{rowNO}기 마감이 얼마 안남았어요!
                   </span>
                 )}
@@ -170,7 +176,7 @@ export default function UserInformation({
             </div>
           ) : (
             <div className="flex flex-col gap-[0.75rem]">
-              <h1 className="text-1.25-700 text-gray-6">성별</h1>
+              <h1 className="text-1.25-700 text-gray-6 sm:text-1-700 ">성별</h1>
               <div className="flex gap-[1.06rem]">
                 <button
                   onClick={() => handleSelectGender('남성')}
@@ -191,9 +197,11 @@ export default function UserInformation({
           )}
 
           <div className="flex flex-col">
-            <div className="flex gap-[0.5rem] items-end">
-              <h1 className="text-1.25-700 text-gray-6">이메일 주소</h1>
-              <p className="text-1-500 text-gray-7">
+            <div className="flex gap-[0.5rem] items-end sm:items-center">
+              <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
+                이메일 주소
+              </h1>
+              <p className="text-1-500 text-gray-7 sm:text-0.75-500">
                 이메일 주소를 입력해 주세요.
               </p>
             </div>
@@ -211,10 +219,14 @@ export default function UserInformation({
             )}
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex gap-[0.5rem] items-end">
-              <h1 className="text-1.25-700 text-gray-6">연락처</h1>
-              <p className="text-1-500 text-gray-7">전화번호만 입력해주세요</p>
+          <div className="flex flex-col sm:gap-[0.75rem]">
+            <div className="flex gap-[0.5rem] items-end sm:items-center">
+              <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
+                연락처
+              </h1>
+              <p className="text-1-500 text-gray-7 sm:text-0.75-500">
+                전화번호만 입력해주세요
+              </p>
             </div>
             <Input
               name="phone_number"
@@ -235,12 +247,12 @@ export default function UserInformation({
       </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="938"
+        width="100%"
         height="2"
         viewBox="0 0 938 2"
         fill="none"
       >
-        <path d="M0 1H938" stroke="#CACACA" strokeWidth="2" />
+        <path d="M0 1H938" stroke="#CACACA" strokeWidth="5" />
       </svg>
     </div>
   );

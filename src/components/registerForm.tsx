@@ -123,11 +123,13 @@ const RegisterForm = () => {
 
   return (
     <form
-      className="flex flex-col items-center gap-[5rem] p-[6.88rem]"
+      className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem]"
       onSubmit={handleSubmit}
       noValidate
     >
-      <RegisterTitle title={formData.program.name} />
+
+      <RegisterTitle />
+
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />
@@ -135,11 +137,14 @@ const RegisterForm = () => {
         <Button
           className="mt-0"
           text={`${price}원 결제하기`}
-          size="md"
+          size="lg"
           variant="default"
           type="submit"
         />
-        <p>약관 및 주문 내용을 확인했으며, 정보 제공등에 동의합니다.</p>
+        <p className="sm:text-0.75-500 sm:text-center">
+          약관 및 주문 내용을 확인했으며, <br className="hidden sm:block" />
+          정보 제공등에 동의합니다.
+        </p>
       </div>
     </form>
   );

@@ -17,7 +17,9 @@ export default function ApplySection() {
             description={<>핏큘레이터와 함께 꾸준한 운동을 생활화 하세요.</>}
           />
 
-          <Button version="ver2">핏큘레이터 신청하기</Button>
+          <Button text="핏큘레이터 신청하기" size="xs" variant="default">
+            핏큘레이터 신청하기
+          </Button>
         </div>
       </div>
       <div className="">

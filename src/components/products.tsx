@@ -59,15 +59,15 @@ const Product = () => {
             '커뮤니티 활동',
             <>
               <div className="flex flex-col items-start">
-                <div className="flex items-start">
+                <div className="flex items-center sm:gap-1">
                   <div>전담 코치 배정</div>
-                  <span className="rounded-[1.125rem] py-0 px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 ml-2 hidden sm:inline">
+                  <span className="rounded-[1.125rem] py-0 px-[0.5rem] border-[0.1rem] border-white text-white bg-transparent sm:text-0.75-500 2 hidden sm:inline">
                     인기
                   </span>
                 </div>
-                <div className="flex items-start sm:flex-row">
+                <div className="flex items-center sm:flex-row gap-1">
                   <div>• 개별 운동 루틴, 데일리 피드백</div>
-                  <span className="rounded-[1.125rem] py-[0.25rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent sm:text-0.7-700 ml-2 sm:hidden ">
+                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 sm:text-0.7-700 sm:hidden">
                     인기
                   </span>
                 </div>

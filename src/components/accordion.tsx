@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ReactNode } from 'react';
 
 type AccordionItemProps = {
-  title: string;
+  title?: string;
   content: ReactNode;
   path: boolean;
 };

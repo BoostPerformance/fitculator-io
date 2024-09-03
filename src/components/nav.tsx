@@ -11,7 +11,7 @@ interface NavProps {
 const Nav: React.FC<NavProps> = ({ navMenu = false }) => {
   return (
     <nav
-      className={`w-auto flex text-gray-1 place-content-around items-center py-[0.88rem] sticky top-0 z-50 bg-gray-2 sm:flex-row sm:gap-[4rem] ${
+      className={`w-auto flex text-gray-1 place-content-around items-center py-[0.88rem] sticky top-0 bg-gray-2 sm:flex-row sm:gap-[4rem] ${
         navMenu ? ' sm:items-start sm:gap-[1.62rem] sm:flex-col' : ''
       }`}
     >

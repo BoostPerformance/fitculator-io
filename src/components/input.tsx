@@ -23,12 +23,11 @@ export default function Input({
   return (
     <>
       <input
-        className={`h-[3rem] pl-[1rem] rounded-[0.375rem] border-gray-9 border-[0.1rem]`}
+        className={`h-[3rem] pl-[1rem] rounded-[0.375rem] border-gray-9 border-[0.1rem] ${width} sm:w-[16.4rem]`}
         name={name}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        style={{ width }}
         type={type}
         placeholder={placeholder}
       />
