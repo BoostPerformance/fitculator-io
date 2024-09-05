@@ -37,13 +37,20 @@ export interface RegisterFormData
   };
 }
 
-export interface RequestItemsType
-  extends UserInfoFormData,
-    ExerciseConcernFormData {
-  exercise_level: number;
-  exercise_goal: string;
-  exercise_performance_level: string;
-  referral_source: string;
+export interface RequestItemsType {
+  user: {
+    name: string;
+    email: string;
+    phone_number: string;
+    gender: '남성' | '여성' | '기타' | '비공개';
+  };
+  exercisePreference: {
+    exercise_level: number;
+    exercise_goal: string;
+    exercise_performance_level?: string;
+    exercise_concern: string;
+    referral_source?: string;
+  };
   userSubscription: {
     id: number;
     batchId: number | null;

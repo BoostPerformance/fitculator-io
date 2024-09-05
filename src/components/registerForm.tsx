@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData, ApiResponse } from '@/types/types';
 import CalculateStartEndDate from './calculateStartEndDate';
+import RefundPolicy from './register-sections/refundPolicy';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -127,9 +128,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
-
       <RegisterTitle />
-
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />
@@ -145,6 +144,9 @@ const RegisterForm = () => {
           약관 및 주문 내용을 확인했으며, <br className="hidden sm:block" />
           정보 제공등에 동의합니다.
         </p>
+        <div className="w-[29rem] mt-0 text-gray-7 sm:w-[20rem] ">
+          <RefundPolicy />
+        </div>
       </div>
     </form>
   );

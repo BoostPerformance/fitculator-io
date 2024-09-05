@@ -12,11 +12,7 @@ export async function POST(req: NextRequest) {
       program,
       paymentInfo,
       batch_number,
-      exercise_level,
-      exercise_goal,
-      exercise_performance_level,
-      referral_source,
-      exercise_concern,
+      exercisePreference,
     }: RequestItemsType = await req.json();
     //지금 내가 리퀘스트에서 필요한것
     // 1. 아이디, 고유넘버
@@ -40,36 +36,27 @@ export async function POST(req: NextRequest) {
         });
         // program은 일단 lite면 batch가 없고, pro면 여러개batch 생김. program에서 programbatch갈일은 없는가?
 
-        const programInformation = await tx.program.findUnique({
-          where: { id: program.id }, //여기가 헷갈림. 왜냐면 프로그램에서 배치로 내려가는것도 있어야 하는것 아니냐.그래야 배치넘버로 뭔가 관리할 수 있는것아닌가?
-          select: { id: true },
-        });
+        const programId = program.name === 'lite' ? 1 : 2;
+        let batchId: bigint | null = null;
 
-        if (!program.name) {
-          throw new Error('Invalid program name');
-        }
-
-        if (program.name === 'pro') {
-          const programBatch = await tx.programBatch.upsert({
-            where: { id: program.id },
-            create: {
-              programId: program.id,
+        if (programId === 2) {
+          const programBatch = await tx.programBatch.create({
+            data: {
+              programId: programId,
               batch_number: batch_number,
-              start_date: new Date(), // 시작일 설정
-              end_date: new Date(), // 종료일 설정
-            },
-            update: {
-              batch_number: batch_number, // 기존 배치의 배치 번호 업데이트
+              start_date: userSubscription.start_date,
+              end_date: userSubscription.end_date,
             },
           });
+          batchId = programBatch.id;
         }
 
         const newSubscription = await tx.userSubscription.create({
           data: {
             userId: userInfo.id,
             programId: program.id,
-            batchId: userSubscription.batchId,
-            start_date: new Date(),
+            batchId: batchId,
+            start_date: userSubscription.start_date,
             end_date: userSubscription.end_date ? new Date() : null,
             status: 'active',
           },
@@ -78,8 +65,10 @@ export async function POST(req: NextRequest) {
         // 결제 정보 생성
         const paymentInformation = await tx.paymentInfo.create({
           data: {
+            userSubscriptionId: newSubscription.id,
             payment_method: paymentInfo.payment_method,
             amount: paymentInfo.amount,
+            payment_date: new Date(),
           },
         });
 
@@ -87,10 +76,17 @@ export async function POST(req: NextRequest) {
         const exercisePref = await tx.exercisePreference.create({
           data: {
             userId: userInfo.id,
-            exercise_level: exercise_level,
-            exercise_goal: exercise_goal,
-            referral_source: referral_source,
-            exercise_concern: exercise_concern,
+            exercise_level: exercisePreference.exercise_level,
+            exercise_goal: exercisePreference.exercise_goal,
+            exercise_concern: exercisePreference.exercise_concern,
+            exercise_performance_level:
+              program.name === 'pro'
+                ? exercisePreference.exercise_performance_level
+                : null,
+            referral_source:
+              program.name === 'lite'
+                ? exercisePreference.referral_source
+                : null,
           },
         });
 

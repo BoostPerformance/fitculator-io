@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 
-const RegisterTitle: React.FC<{ title: string }> = ({ title }) => {
+const RegisterTitle: React.FC<{ title?: string }> = ({ title }) => {
   const searchParams = useSearchParams();
 
   const period: string | null = searchParams.get('period');

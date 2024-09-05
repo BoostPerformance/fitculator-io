@@ -52,10 +52,12 @@ const faqItems: FAQItem[] = [
       <>
         <div className="whitespace-nowrap">
           네! 5인 이상 단체 등록의 경우,&nbsp;
+          <br className="hidden sm:block" />
           <a className="text-blue-1" href="mailto:contact@fitculator.io">
             contact@fitculator.io
           </a>
-          &nbsp;로 메일 보내주시면, 단체 등록 절차를 안내해드려요.
+          &nbsp;로 메일 보내주시면, <br className="hidden sm:block" />
+          단체 등록 절차를 안내해드려요.
         </div>
       </>
     ),

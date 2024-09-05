@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" BIGSERIAL NOT NULL,
-    "discord_id" TEXT UNIQUE,
+    "discord_id" TEXT,
     "nickname" TEXT,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -15,7 +15,29 @@ CREATE TABLE "User" (
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
-넘
+-- CreateTable
+CREATE TABLE "Program" (
+    "id" BIGSERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Program_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProgramBatch" (
+    "id" BIGSERIAL NOT NULL,
+    "programId" BIGINT NOT NULL,
+    "batch_number" INTEGER NOT NULL,
+    "start_date" TIMESTAMP(3) NOT NULL,
+    "end_date" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProgramBatch_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Event" (
@@ -54,8 +76,8 @@ CREATE TABLE "ExercisePreference" (
     "exercise_level" INTEGER NOT NULL,
     "exercise_goal" TEXT NOT NULL,
     "exercise_concern" TEXT,
-    "exercise_performance_level" TEXT,
     "referral_source" TEXT NOT NULL,
+    "exercise_performance_level" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -88,16 +110,16 @@ CREATE UNIQUE INDEX "User_phone_number_key" ON "User"("phone_number");
 ALTER TABLE "ProgramBatch" ADD CONSTRAINT "ProgramBatch_programId_fkey" FOREIGN KEY ("programId") REFERENCES "Program"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_userId_fkey" FOREIGN KEY ("UserId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "ProgramBatch"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_programId_fkey" FOREIGN KEY ("programId") REFERENCES "Program"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "ProgramBatch"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ExercisePreference" ADD CONSTRAINT "ExercisePreference_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
