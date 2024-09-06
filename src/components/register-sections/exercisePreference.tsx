@@ -39,40 +39,43 @@ export default function ExercisePreference({
     };
   }, []);
 
-  const handleGoalChange = (item: DropdownOption) => {
-    setFormData((prev: any) => ({
-      ...prev,
-      exercisePreference: {
-        ...prev.exercisePreference,
-        exercise_goal: item.option,
-      },
-    }));
-  };
-
   const handleReferralSourceChange = (item: DropdownOption) => {
-    setFormData((prev: any) => ({
-      ...prev,
-      exercisePreference: {
-        ...prev.exercisePreference,
-        ReferralSource: item.option,
-      },
-    }));
-  };
-
-  const handleRadioChange = (id: number) => {
-    setFormData((prev: any) => ({
-      ...prev,
-      exercisePreference: {
-        ...prev.exercisePreference,
-        exerciseLevel: id,
-      },
-    }));
-  };
-
-  const handleMultiSelectChange = (item: string[]) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exercise_goal: item,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        referral_source: item.option,
+      },
+    }));
+  };
+
+  const handleRadioChange = (item: number) => {
+    setFormData((prev: RegisterFormData) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        exercise_level: item,
+      },
+    }));
+  };
+
+  const handleMultiSelectChange = (selectedGoals: string[]) => {
+    setFormData((prev: RegisterFormData) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        exercise_goal: selectedGoals,
+      },
+    }));
+  };
+
+  const handlePerformanceLevelChange = (item: DropdownOption) => {
+    setFormData((prev: RegisterFormData) => ({
+      ...prev,
+      exercisePreference: {
+        ...prev.exercisePreference,
+        exercise_performance_level: item.option,
+      },
     }));
   };
 
@@ -133,7 +136,7 @@ export default function ExercisePreference({
 
               <Dropdown
                 data={GoalPercentage}
-                onChange={handleGoalChange}
+                onChange={handlePerformanceLevelChange}
                 title="목표운동량을"
               />
               <div className="w-[34.81rem] sm:w-auto ">

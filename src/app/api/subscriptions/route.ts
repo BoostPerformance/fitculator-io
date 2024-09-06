@@ -10,7 +10,6 @@ export async function POST(req: NextRequest) {
       user,
       userSubscription,
       program,
-      paymentInfo,
       batch_number,
       exercisePreference,
     }: RequestItemsType = await req.json();
@@ -34,7 +33,12 @@ export async function POST(req: NextRequest) {
             gender: user.gender,
           },
         });
-        // program은 일단 lite면 batch가 없고, pro면 여러개batch 생김. program에서 programbatch갈일은 없는가?
+
+        const programInfo = await tx.program.create({
+          data: {
+            name: program.name,
+          },
+        });
 
         const programId = program.name === 'LITE' ? 1 : 2;
         let batchId: bigint | null = null;
@@ -79,18 +83,18 @@ export async function POST(req: NextRequest) {
             exercise_level: exercisePreference.exercise_level,
             exercise_goal: exercisePreference.exercise_goal,
             exercise_concern: exercisePreference.exercise_concern,
+            referral_source:
+              program.name === 'LITE'
+                ? exercisePreference.referral_source ?? ''
+                : null,
             exercise_performance_level:
               program.name === 'PRO'
                 ? exercisePreference.exercise_performance_level
-                : null,
-            referral_source:
-              program.name === 'LITE'
-                ? exercisePreference.referral_source
-                : null,
+                : '',
           },
         });
 
-        return { user, newSubscription, paymentInfo, exercisePref };
+        return { user, programInfo, newSubscription, exercisePref };
       }
     );
 

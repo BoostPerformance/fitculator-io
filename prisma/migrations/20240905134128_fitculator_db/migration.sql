@@ -76,7 +76,7 @@ CREATE TABLE "ExercisePreference" (
     "exercise_level" INTEGER NOT NULL,
     "exercise_goal" TEXT NOT NULL,
     "exercise_concern" TEXT,
-    "referral_source" TEXT NOT NULL,
+    "referral_source" TEXT,
     "exercise_performance_level" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

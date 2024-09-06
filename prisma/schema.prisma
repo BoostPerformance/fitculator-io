@@ -36,7 +36,7 @@ model Program {
 
 model ProgramBatch {
   id            BigInt             @id @default(autoincrement())
-  programId     BigInt?
+  programId     BigInt
   batch_number  Int?
   start_date    DateTime
   end_date      DateTime
@@ -69,7 +69,6 @@ model UserSubscription {
   status     String
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
-  payments   PaymentInfo[]
   batch      ProgramBatch? @relation(fields: [batchId], references: [id])
   event      Event?        @relation(fields: [eventId], references: [id])
   program    Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
@@ -83,7 +82,7 @@ model ExercisePreference {
   exercise_level             Int
   exercise_goal              String
   exercise_concern           String?
-  referral_source            String
+  referral_source            String?
   exercise_performance_level String?
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt

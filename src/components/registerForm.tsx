@@ -1,7 +1,7 @@
 'use client';
 import Button from '@/components/button';
 import ExercisePreference from '@/components/register-sections/exercisePreference';
-import PaymentInformation from '@/components/register-sections/paymentInformation';
+// import PaymentInformation from '@/components/register-sections/paymentInformation';
 import UserInformation from '@/components/register-sections/userInformation';
 import ExerciseConcern from '@/components/register-sections/exerciseConcern';
 import RegisterTitle from '@/components/registerTitle';
@@ -36,15 +36,11 @@ const RegisterForm = () => {
     program: {
       name: '',
     },
-    paymentInfo: {
-      payment_method: '',
-      amount: 0,
-    },
     exercisePreference: {
       exercise_level: 1,
       exercise_goal: [],
       exercise_performance_level: '',
-      referral_source: '지인 소개',
+      referral_source: '',
       exercise_concern: '',
     },
   });
@@ -109,14 +105,28 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!Array.isArray(formData.exercisePreference.exercise_goal)) {
+      console.error(
+        'exercise_performance_level value:',
+        formData.exercisePreference.exercise_performance_level
+      );
+      // console.error(
+      //   'exercise_goal value:',
+      //   formData.exercisePreference.exercise_goal
+      // );
+      return;
+    }
+
     const updatedFormData = {
       ...formData,
-      exercise_goal: formData.exercisePreference.exercise_goal.join(','),
+      exercisePreference: {
+        ...formData.exercisePreference,
+        exercise_goal: formData.exercisePreference.exercise_goal.join(','),
+      },
     };
 
     console.log('Updated Form Data:', updatedFormData);
-
-    // useMutation으로 폼 데이터 전송
+    console.log(typeof updatedFormData.exercisePreference.exercise_goal);
     mutation.mutate(updatedFormData);
   };
 

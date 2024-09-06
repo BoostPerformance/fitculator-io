@@ -28,16 +28,12 @@ export interface RegisterFormData extends UserInfoFormData {
   program: {
     name: string;
   };
-  paymentInfo: {
-    payment_method: string;
-    amount: number;
-  };
   exercisePreference: {
     exercise_level: number;
-    exercise_goal: string[];
-    exercise_performance_level: string;
-    referral_source: string;
-    exercise_concern: string;
+    exercise_goal: any;
+    exercise_performance_level?: string;
+    referral_source?: string;
+    exercise_concern?: string;
   };
 }
 
@@ -52,11 +48,10 @@ export interface RequestItemsType {
     exercise_level: number;
     exercise_goal: string;
     exercise_performance_level?: string;
-    exercise_concern: string;
+    exercise_concern?: string;
     referral_source?: string;
   };
   userSubscription: {
-    id: number;
     batchId: number | null;
     programId: number | null;
     start_date: string;
@@ -78,15 +73,23 @@ export interface RequestItemsType {
 export interface ApiResponse {
   user: {
     id: number;
+    name: string;
+    email: string;
+    phone_number: string;
+    gender: '남성' | '여성' | '기타' | '비공개';
   };
-  newSubscription: {
+  program: {
     id: number;
-    userId: number;
-    programId: number;
-    batchId?: number | null;
-    start_date: Date;
-    end_date: Date;
-    status: string;
+    name: string;
+  };
+  userSubscription: {
+    id: number;
+    userSubscription: {
+      batchId: number | null;
+      programId: number | null;
+      start_date: string;
+      end_date: string;
+    };
   };
   exercisePreference: {
     id: number;
