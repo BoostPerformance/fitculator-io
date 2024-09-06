@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               BigInt               @id @default(autoincrement())
+  discord_id       String?              @unique
+  nickname         String?
+  name             String
+  email            String               @unique
+  phone_number     String               @unique
+  gender           String?
+  birth            DateTime?
+  restingHeartRate Int?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  exercisePrefs    ExercisePreference[]
+  subscriptions    UserSubscription[]
+}
+
+model Program {
+  id            BigInt             @id @default(autoincrement())
+  name          String
+  description   String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  batches       ProgramBatch[]
+  subscriptions UserSubscription[]
+}
+
+model ProgramBatch {
+  id            BigInt             @id @default(autoincrement())
+  programId     BigInt
+  batch_number  Int?
+  start_date    DateTime
+  end_date      DateTime
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  program       Program            @relation(fields: [programId], references: [id], onDelete: Cascade)
+  subscriptions UserSubscription[]
+}
+
+model Event {
+  id            BigInt             @id @default(autoincrement())
+  name          String
+  description   String?
+  duration      Int
+  start_date    DateTime
+  end_date      DateTime
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  subscriptions UserSubscription[]
+}
+
+model UserSubscription {
+  id         BigInt        @id @default(autoincrement())
+  userId     BigInt
+  programId  BigInt
+  batchId    BigInt?
+  eventId    BigInt?
+  start_date DateTime
+  end_date   DateTime?
+  status     String
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  batch      ProgramBatch? @relation(fields: [batchId], references: [id])
+  event      Event?        @relation(fields: [eventId], references: [id])
+  program    Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ExercisePreference {
+  id                         BigInt   @id @default(autoincrement())
+  userId                     BigInt
+  exercise_level             Int
+  exercise_goal              String
+  exercise_concern           String?
+  referral_source            String?
+  exercise_performance_level String?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  user                       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
