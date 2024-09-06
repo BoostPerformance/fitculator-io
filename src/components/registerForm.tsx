@@ -34,17 +34,19 @@ const RegisterForm = () => {
       end_date: '',
     },
     program: {
-      name: 'pro',
+      name: '',
     },
     paymentInfo: {
       payment_method: '',
       amount: 0,
     },
-    exercise_level: 1,
-    exercise_goal: [],
-    exercise_performance_level: '',
-    referral_source: '지인 소개',
-    exercise_concern: '',
+    exercisePreference: {
+      exercise_level: 1,
+      exercise_goal: [],
+      exercise_performance_level: '',
+      referral_source: '지인 소개',
+      exercise_concern: '',
+    },
   });
 
   useEffect(() => {
@@ -59,67 +61,63 @@ const RegisterForm = () => {
       }));
     }
   }, [searchParams]);
-  // const submitForm = async (
-  //   newData: RegisterFormData
-  // ): Promise<ApiResponse> => {
-  //   const response = await fetch('/api/subscriptions/route', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(newData),
-  //   });
 
-  //   if (!response.ok) {
-  //     const errorData = await response.json();
-  //     (error as any).response = errorData; // 에러 객체에 응답 데이터를 추가
-  //     throw error;
-  //   }
-  //   console.log('리스폰스 받기 성공', response.json());
-  //   return response.json();
-  // };
+  const submitForm = async (
+    newData: RegisterFormData
+  ): Promise<ApiResponse> => {
+    const response = await fetch('/api/subscriptions/route', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newData),
+    });
 
-  // const mutation = useMutation<ApiResponse, Error, RegisterFormData>({
-  //   mutationFn: (newData) => submitForm(newData),
-  //   onSuccess: (data) => {
-  //     console.log('Success:', data);
-  //     landing;
-  //   },
-  //   onError: (error: any) => {
-  //     console.log(error.response, '에러에러에럽');
-  //     if (error.response) {
-  //       console.log('응답 상태 코드:', error.response.status);
-  //       console.log('응답 데이터:', error.response.data);
-  //     }
-  //   },
-  // });
+    if (!response.ok) {
+      const errorData = await response.json();
+      (error as any).response = errorData; // 에러 객체에 응답 데이터를 추가
+      throw error;
+    }
+    console.log('리스폰스 받기 성공', response.json());
+    return response.json();
+  };
+
+  const mutation = useMutation<ApiResponse, Error, RegisterFormData>({
+    mutationFn: (newData) => submitForm(newData),
+    onSuccess: (data) => {
+      console.log('성공:', data);
+      if (landing) {
+        window.location.href = landing; // 성공 시 리다이렉션 처리
+      }
+    },
+    onError: (error: any) => {
+      let errorResponse;
+      try {
+        errorResponse = JSON.parse(error.message); // 에러 메시지 파싱
+      } catch (parseError) {
+        errorResponse = { message: error.message }; // 파싱 실패 시 기본 에러 메시지
+      }
+
+      console.error('에러 발생:', errorResponse);
+      if (errorResponse.status) {
+        console.log('응답 상태 코드:', errorResponse.status);
+      }
+      if (errorResponse.message) {
+        console.log('응답 데이터:', errorResponse.message);
+      }
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const updatedFormData = {
       ...formData,
-      exercise_goal: formData.exercise_goal.join(','),
+      exercise_goal: formData.exercisePreference.exercise_goal.join(','),
     };
 
     console.log('Updated Form Data:', updatedFormData);
 
-    try {
-      const response = await fetch('/api/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedFormData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.log('Error submitting form:', errorData);
-        throw new Error('Error submitting form');
-      }
-
-      const data: ApiResponse = await response.json();
-      console.log('Success:', data);
-    } catch (error) {
-      console.error('에러 발생:', error);
-    }
+    // useMutation으로 폼 데이터 전송
+    mutation.mutate(updatedFormData);
   };
 
   return (
@@ -128,7 +126,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <RegisterTitle />
+      <RegisterTitle title={formData.program.name} />
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />

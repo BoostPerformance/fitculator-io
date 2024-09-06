@@ -73,14 +73,13 @@ export default function UserInformation({
     const { name, value } = e.target;
     setFormData((prevData: any) => ({
       ...prevData,
-      [name]: value,
-    }));
-
-    setFormData((prevData: any) => ({
-      ...prevData,
-      [name]: value,
+      user: {
+        ...prevData.user,
+        [name]: value,
+      },
     }));
   };
+
   const handleDropdownBlurChange = () => {
     console.log('blur');
   };
@@ -140,7 +139,7 @@ export default function UserInformation({
               name="name"
               placeholder="홍길동"
               width="21.25rem"
-              value={formData.user.name || ''}
+              value={formData?.user?.name || ''}
               onChange={handleInputChange}
               onBlur={handleBlurChange}
               type="text"

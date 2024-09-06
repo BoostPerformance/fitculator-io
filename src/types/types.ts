@@ -16,12 +16,9 @@ export interface ExercisePreferenceType {
   exercise_goal: string[];
   exercise_performance_level: string;
   referral_source: string;
-} // FITCULATOR를 알게된 경로
+}
 
-export interface RegisterFormData
-  extends UserInfoFormData,
-    ExercisePreferenceType,
-    ExerciseConcernFormData {
+export interface RegisterFormData extends UserInfoFormData {
   userSubscription: {
     batchId: number | null;
     programId: number | null;
@@ -34,6 +31,13 @@ export interface RegisterFormData
   paymentInfo: {
     payment_method: string;
     amount: number;
+  };
+  exercisePreference: {
+    exercise_level: number;
+    exercise_goal: string[];
+    exercise_performance_level: string;
+    referral_source: string;
+    exercise_concern: string;
   };
 }
 
@@ -84,15 +88,14 @@ export interface ApiResponse {
     end_date: Date;
     status: string;
   };
-  paymentInfo: {
-    id: number;
-    userSubscriptionId: number;
-    payment_method: string;
-    amount: number;
-  };
-  exercisePref: {
+  exercisePreference: {
     id: number;
     userId: number;
+    exercise_level: number;
+    exercise_goal: string;
+    exercise_performance_level?: string;
+    exercise_concern: string;
+    referral_source?: string;
   };
 }
 export interface UserInformationProps {

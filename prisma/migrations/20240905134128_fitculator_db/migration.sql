@@ -84,18 +84,18 @@ CREATE TABLE "ExercisePreference" (
     CONSTRAINT "ExercisePreference_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "PaymentInfo" (
-    "id" BIGSERIAL NOT NULL,
-    "userSubscriptionId" BIGINT NOT NULL,
-    "payment_method" TEXT NOT NULL,
-    "amount" DOUBLE PRECISION NOT NULL,
-    "payment_date" TIMESTAMP(3) NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+-- -- CreateTable
+-- CREATE TABLE "PaymentInfo" (
+--     "id" BIGSERIAL NOT NULL,
+--     "userSubscriptionId" BIGINT NOT NULL,
+--     "payment_method" TEXT NOT NULL,
+--     "amount" DOUBLE PRECISION NOT NULL,
+--     "payment_date" TIMESTAMP(3) NOT NULL,
+--     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "PaymentInfo_pkey" PRIMARY KEY ("id")
-);
+--     CONSTRAINT "PaymentInfo_pkey" PRIMARY KEY ("id")
+-- );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_discord_id_key" ON "User"("discord_id");
@@ -125,4 +125,4 @@ ALTER TABLE "UserSubscription" ADD CONSTRAINT "UserSubscription_userId_fkey" FOR
 ALTER TABLE "ExercisePreference" ADD CONSTRAINT "ExercisePreference_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PaymentInfo" ADD CONSTRAINT "PaymentInfo_userSubscriptionId_fkey" FOREIGN KEY ("userSubscriptionId") REFERENCES "UserSubscription"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE "PaymentInfo" ADD CONSTRAINT "PaymentInfo_userSubscriptionId_fkey" FOREIGN KEY ("userSubscriptionId") REFERENCES "UserSubscription"("id") ON DELETE CASCADE ON UPDATE CASCADE;

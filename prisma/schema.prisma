@@ -36,8 +36,8 @@ model Program {
 
 model ProgramBatch {
   id            BigInt             @id @default(autoincrement())
-  programId     BigInt
-  batch_number  Int
+  programId     BigInt?
+  batch_number  Int?
   start_date    DateTime
   end_date      DateTime
   createdAt     DateTime           @default(now())
@@ -91,14 +91,3 @@ model ExercisePreference {
 
 }
 
-model PaymentInfo {
-  id                 BigInt           @id @default(autoincrement())
-  userSubscriptionId BigInt
-  payment_method     String
-  amount             Float
-  payment_date       DateTime
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  userSubscription   UserSubscription @relation(fields: [userSubscriptionId], references: [id], onDelete: Cascade)
-
-}

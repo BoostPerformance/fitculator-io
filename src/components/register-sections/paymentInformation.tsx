@@ -7,17 +7,17 @@ export default function PaymentInformation({
   setFormData,
 }: PaymentInformationProps) {
   const handlePaymentMethodChange = (
-    method: '신용카드' | 'Naverpay' | 'Kakaopay'
+    payment_method: '신용카드' | 'Naverpay' | 'Kakaopay'
   ) => {
     setFormData((prev) => ({
       ...prev,
-      payment: {
-        ...prev.payment,
-        method,
+      paymentInfo: {
+        ...prev.paymentInfo,
+        payment_method,
       },
     }));
 
-    console.log('Selected payment method:', method);
+    console.log('Selected payment method:', payment_method);
   };
 
   return (

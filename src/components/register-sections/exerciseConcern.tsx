@@ -34,7 +34,7 @@ export default function ExerciseConcern({
           name="text"
           placeholder="자유롭게 작성해주세요."
           width="42.75rem"
-          value={formData.exercise_concern || ''}
+          value={formData.exercisePreference.exercise_concern || ''}
           onChange={handleConcernChange}
           type="text"
         />

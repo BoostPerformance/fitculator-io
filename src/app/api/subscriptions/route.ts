@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
         });
         // program은 일단 lite면 batch가 없고, pro면 여러개batch 생김. program에서 programbatch갈일은 없는가?
 
-        const programId = program.name === 'lite' ? 1 : 2;
+        const programId = program.name === 'LITE' ? 1 : 2;
         let batchId: bigint | null = null;
 
         if (programId === 2) {
@@ -63,14 +63,14 @@ export async function POST(req: NextRequest) {
         });
 
         // 결제 정보 생성
-        const paymentInformation = await tx.paymentInfo.create({
-          data: {
-            userSubscriptionId: newSubscription.id,
-            payment_method: paymentInfo.payment_method,
-            amount: paymentInfo.amount,
-            payment_date: new Date(),
-          },
-        });
+        // const paymentInformation = await tx.paymentInfo.create({
+        //   data: {
+        //     userSubscriptionId: newSubscription.id,
+        //     payment_method: paymentInfo.payment_method,
+        //     amount: paymentInfo.amount,
+        //     payment_date: new Date(),
+        //   },
+        // });
 
         // 운동 선호도 생성 또는 업데이트
         const exercisePref = await tx.exercisePreference.create({
@@ -80,11 +80,11 @@ export async function POST(req: NextRequest) {
             exercise_goal: exercisePreference.exercise_goal,
             exercise_concern: exercisePreference.exercise_concern,
             exercise_performance_level:
-              program.name === 'pro'
+              program.name === 'PRO'
                 ? exercisePreference.exercise_performance_level
                 : null,
             referral_source:
-              program.name === 'lite'
+              program.name === 'LITE'
                 ? exercisePreference.referral_source
                 : null,
           },
