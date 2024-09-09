@@ -29,3 +29,25 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const user = searchParams.get('user');
+  const email = searchParams.get('email');
+
+  if (!user || !email) {
+    return NextResponse.json(
+      { message: 'User and email are required' },
+      { status: 400 }
+    );
+  }
+
+  return NextResponse.json(
+    {
+      message: 'Subscription fetched successfully',
+      user,
+      email,
+    },
+    { status: 200 }
+  );
+}
