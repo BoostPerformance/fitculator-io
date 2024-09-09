@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { RequestItemsType } from '@/types/types';
-import prisma from '@/lib/prisma';
 
-export async function POST(req: NextRequest) {
-  const {
-    user,
-    userSubscription,
-    program,
-    batch_number,
-    exercisePreference,
-  }: RequestItemsType = await req.json();
+const prisma = new PrismaClient();
 
+export async function main(req: NextRequest) {
   try {
+    const {
+      user,
+      userSubscription,
+      program,
+      batch_number,
+      exercisePreference,
+    }: RequestItemsType = await req.json();
     //지금 내가 리퀘스트에서 필요한것
     // 1. 아이디, 고유넘버
     // 2. 기존 고객이면, 수정된 내용. 새로운 고객이면, 1

@@ -61,7 +61,7 @@ const RegisterForm = () => {
   const submitForm = async (
     newData: RegisterFormData
   ): Promise<ApiResponse> => {
-    const response = await fetch('/api/subscriptions/route', {
+    const response = await fetch('/api/subscriptions/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
@@ -70,8 +70,9 @@ const RegisterForm = () => {
     if (!response.ok) {
       const errorData = await response.json();
       (error as any).response = errorData; // 에러 객체에 응답 데이터를 추가
-      throw error;
+      throw new Error(JSON.stringify(errorData));
     }
+
     console.log('리스폰스 받기 성공', response.json());
     return response.json();
   };
@@ -81,15 +82,15 @@ const RegisterForm = () => {
     onSuccess: (data) => {
       console.log('성공:', data);
       if (landing) {
-        window.location.href = landing; // 성공 시 리다이렉션 처리
+        window.location.href = landing;
       }
     },
     onError: (error: any) => {
       let errorResponse;
       try {
-        errorResponse = JSON.parse(error.message); // 에러 메시지 파싱
+        errorResponse = JSON.parse(error.message);
       } catch (parseError) {
-        errorResponse = { message: error.message }; // 파싱 실패 시 기본 에러 메시지
+        errorResponse = { message: error.message };
       }
 
       console.error('에러 발생:', errorResponse);

@@ -22,7 +22,6 @@ model User {
   updatedAt        DateTime             @updatedAt
   exercisePrefs    ExercisePreference[]
   subscriptions    UserSubscription[]
-
 }
 
 model Program {
@@ -74,7 +73,6 @@ model UserSubscription {
   event      Event?        @relation(fields: [eventId], references: [id])
   program    Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
   user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-
 }
 
 model ExercisePreference {
