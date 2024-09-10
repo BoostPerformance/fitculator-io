@@ -7,21 +7,18 @@ import RefundPolicy from './register-sections/refundPolicy';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    user: { name: '', email: '' },
+    name: '',
+    email: '',
   });
 
-  const submitForm = async (newData: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const response = await fetch('/api/subscriptions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newData),
+        body: JSON.stringify(formData),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(JSON.stringify(errorData));
-      }
 
       const responseData = await response.json();
       console.log('리스폰스 받기 성공', responseData);
@@ -29,17 +26,6 @@ const RegisterForm = () => {
     } catch (error) {
       console.error('Error submitting form:', error);
       throw error;
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await submitForm(formData);
-      console.log('Form submission successful:', response);
-    } catch (error) {
-      console.error('Form submission error:', error);
     }
   };
 
@@ -53,11 +39,11 @@ const RegisterForm = () => {
         type="text"
         name="name"
         placeholder="Name"
-        value={formData.user.name}
+        value={formData.name}
         onChange={(e) =>
           setFormData({
             ...formData,
-            user: { ...formData.user, name: e.target.value },
+            name: e.target.value,
           })
         }
       />
@@ -65,11 +51,11 @@ const RegisterForm = () => {
         type="email"
         name="email"
         placeholder="Email"
-        value={formData.user.email}
+        value={formData.email}
         onChange={(e) =>
           setFormData({
             ...formData,
-            user: { ...formData.user, email: e.target.value },
+            email: e.target.value,
           })
         }
       />

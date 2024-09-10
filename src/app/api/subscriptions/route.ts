@@ -1,53 +1,62 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { user } = body;
 
-    if (!user) {
+    const existingUser = await prisma.users.findUnique({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (existingUser) {
       return NextResponse.json(
-        { message: 'User data is required' },
+        { error: 'Email already exists' },
         { status: 400 }
       );
     }
 
-    return NextResponse.json(
-      {
-        message: 'Subscription created successfully',
-        user,
+    const userInfo = await prisma.users.create({
+      data: {
+        name: body.name,
+        email: body.email,
       },
-      { status: 200 }
-    );
+    });
+
+    const serializedUserInfo = {
+      ...userInfo,
+      id: userInfo.id.toString(), // BigInt 필드를 문자열로 변환
+    };
+    return Response.json(serializedUserInfo);
   } catch (error) {
-    return NextResponse.json(
-      {
-        message: 'Invalid JSON payload',
-        error: (error as Error).message,
-      },
-      { status: 400 }
-    );
+    console.error('Prisma error:', error);
+    return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
   }
 }
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const user = searchParams.get('user');
-  const email = searchParams.get('email');
+// export async function GET(req: NextRequest) {
+//   const { searchParams } = new URL(req.url);
+//   const user = searchParams.get('user');
+//   const email = searchParams.get('email');
 
-  if (!user || !email) {
-    return NextResponse.json(
-      { message: 'User and email are required' },
-      { status: 400 }
-    );
-  }
+//   if (!user || !email) {
+//     return NextResponse.json(
+//       { message: 'User and email are required' },
+//       { status: 400 }
+//     );
+//   }
+//   console.log(NextResponse.json);
 
-  return NextResponse.json(
-    {
-      message: 'Subscription fetched successfully',
-      user,
-      email,
-    },
-    { status: 200 }
-  );
-}
+//   return NextResponse.json(
+//     {
+//       message: 'Subscription fetched successfully',
+//       user,
+//       email,
+//     },
+//     { status: 200 }
+//   );
+// }
