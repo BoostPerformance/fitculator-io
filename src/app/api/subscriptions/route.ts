@@ -3,34 +3,32 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface RequestItemsType {
-  user: {
-    name: string;
-    email: string;
-    phone_number: string;
-    gender: '남성' | '여성' | '기타' | '비공개';
-  };
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log('Request body:', body);
 
-    const userInfo = await prisma.users.create({
-      data: {
-        email: body.users.email,
-        name: body.users.name,
-        phone_number: body.users.phone_number,
+    const userInfo = await prisma.users.upsert({
+      where: { email: body.user.email },
+      update: {
+        name: body.user.name,
+        phone_number: body.user.phone_number,
+      },
+      create: {
+        email: body.user.email,
+        name: body.user.name,
+        phone_number: body.user.phone_number,
       },
     });
 
     const serializedUserInfo = {
       ...userInfo,
-      id: userInfo.id.toString(), // BigInt 필드를 문자열로 변환
+      id: userInfo.id.toString(),
     };
     return Response.json(serializedUserInfo);
   } catch (error) {
     console.error('Prisma error:', error);
+
     return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
   }
 }
