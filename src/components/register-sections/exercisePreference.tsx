@@ -43,7 +43,7 @@ export default function ExercisePreference({
     setFormData((prev: RegisterFormData) => ({
       ...prev,
       exercisePreference: {
-        ...prev.exercisePreference,
+        ...prev.exercisePreferences,
         referral_source: item.option,
       },
     }));
@@ -53,7 +53,7 @@ export default function ExercisePreference({
     setFormData((prev: RegisterFormData) => ({
       ...prev,
       exercisePreference: {
-        ...prev.exercisePreference,
+        ...prev.exercisePreferences,
         exercise_level: item,
       },
     }));
@@ -63,8 +63,8 @@ export default function ExercisePreference({
     setFormData((prev: RegisterFormData) => ({
       ...prev,
       exercisePreference: {
-        ...prev.exercisePreference,
-        exercise_goal: selectedGoals,
+        ...prev.exercisePreferences,
+        exercise_goal: selectedGoals.join(','),
       },
     }));
   };
@@ -73,7 +73,7 @@ export default function ExercisePreference({
     setFormData((prev: RegisterFormData) => ({
       ...prev,
       exercisePreference: {
-        ...prev.exercisePreference,
+        ...prev.exercisePreferences,
         exercise_performance_level: item.option,
       },
     }));
@@ -151,7 +151,7 @@ export default function ExercisePreference({
                 </span>
                 {showModal && !isMobile && <ExerciseGuideline />}
                 {showModal && isMobile && (
-                  <ExerciseModal handleModal={handleModal} /> // 모바일에서는 전체화면 모달 열기
+                  <ExerciseModal handleModal={handleModal} />
                 )}
               </div>
             </div>

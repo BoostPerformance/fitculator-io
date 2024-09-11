@@ -21,37 +21,22 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const serializedUserInfo = {
-      ...userInfo,
-      id: userInfo.id.toString(),
-    };
-    return Response.json(serializedUserInfo);
+    const exercisePreferences = await prisma.exercisepreferences.create({
+      data: {
+        user_id: userInfo.id,
+        exercise_level: body.exercisePreference.exercise_level,
+        exercise_goal: body.exercisePreference.exercise_goal,
+        exercise_performance_level:
+          body.exercisePreference.exercise_performance_level,
+        exercise_concern: body.exercisePreference.exercise_concern,
+        referral_source: body.exercisePreference.referral_source,
+      },
+    });
+
+    return Response.json({ user: userInfo, preferences: exercisePreferences });
   } catch (error) {
     console.error('Prisma error:', error);
 
     return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
   }
 }
-
-// export async function GET(req: NextRequest) {
-//   const { searchParams } = new URL(req.url);
-//   const user = searchParams.get('user');
-//   const email = searchParams.get('email');
-
-//   if (!user || !email) {
-//     return NextResponse.json(
-//       { message: 'User and email are required' },
-//       { status: 400 }
-//     );
-//   }
-//   console.log(NextResponse.json);
-
-//   return NextResponse.json(
-//     {
-//       message: 'Subscription fetched successfully',
-//       user,
-//       email,
-//     },
-//     { status: 200 }
-//   );
-// }
