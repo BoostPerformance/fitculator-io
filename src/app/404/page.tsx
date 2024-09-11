@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Error() {
   return (
-    <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem]">
+    <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image
         src="/svg/404.svg"
         width={10}
@@ -12,7 +12,7 @@ export default function Error() {
         height={40}
         alt="404 이미지"
       />
-      <div className="flex flex-col gap-[2rem] w-[40rem]sm:w-auto sm:px-[3rem]">
+      <div className="flex flex-col gap-[2rem] w-[40rem] sm:w-auto sm:px-[3rem]">
         <Image
           src="/svg/logo.svg"
           width={200}
@@ -20,9 +20,9 @@ export default function Error() {
           alt="logo"
           className="sm:hidden"
         />
-        <div className="flex flex-col sm:items-center sm:justify-center">
+        <div className="flex flex-col sm:items-center sm:justify-center font-theJamsil">
           <h1 className="text-4.25-500">앗</h1>
-          <h2 className="text-1.87-500 text-gray-11">404! Error</h2>
+          <h2 className="text-1.875-300 text-gray-11 ">404! Error</h2>
         </div>
         <p className="text-1.87-400 sm:text-center sm:text-[1.7rem]">
           길을 잃으셨군요! <br /> 누구나 한번쯤은 길을 잃죠.
@@ -39,7 +39,7 @@ export default function Error() {
           />
         </Link>
       </div>
-      <div className="absolute z-1 right-[20rem] sm:right-0 sm:hidden">
+      <div className="absolute z-0 right-[20rem] sm:right-0 sm:hidden md:relative md:right-[20rem] md:z-[-1]">
         <Image
           src="/svg/404.svg"
           width={10}

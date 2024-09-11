@@ -28,6 +28,7 @@ const config: Config = {
       },
       fontFamily: {
         pretendard: ['var(--pretendard)'],
+        theJamsil: ['TheJamsil', 'sans-serif'],
       },
       colors: {
         blue: {
@@ -71,8 +72,8 @@ const config: Config = {
       '1.75-500': ['1.75rem', { fontWeight: 500 }],
       '1.75-700': ['1.75rem', { fontWeight: 700 }],
       '1.75-900': ['1.75rem', { fontWeight: 900 }],
-      '1.87-400': ['1.87rem', { fontWeight: 400 }],
-      '1.87-500': ['1.87rem', { fontWeight: 500 }],
+      '1.875-300': ['1.87rem', { fontWeight: 300 }],
+      '1.875-500': ['1.875rem', { fontWeight: 500 }],
       '2-700': ['2rem', { fontWeight: 700 }],
       '2-900': ['2rem', { fontWeight: 900 }],
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
