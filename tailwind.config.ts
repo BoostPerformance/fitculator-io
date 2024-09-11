@@ -28,6 +28,7 @@ const config: Config = {
       },
       fontFamily: {
         pretendard: ['var(--pretendard)'],
+        theJamsil: ['TheJamsil', 'sans-serif'],
       },
       colors: {
         blue: {
@@ -48,6 +49,7 @@ const config: Config = {
           8: '#F6F6F6',
           9: '#E0E0E0',
           10: '#BDBDBD',
+          11: '#A1A1A1',
         },
       },
     },
@@ -70,12 +72,15 @@ const config: Config = {
       '1.75-500': ['1.75rem', { fontWeight: 500 }],
       '1.75-700': ['1.75rem', { fontWeight: 700 }],
       '1.75-900': ['1.75rem', { fontWeight: 900 }],
+      '1.875-300': ['1.87rem', { fontWeight: 300 }],
+      '1.875-500': ['1.875rem', { fontWeight: 500 }],
       '2-700': ['2rem', { fontWeight: 700 }],
       '2-900': ['2rem', { fontWeight: 900 }],
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
       '2.5-900': ['2.5rem', { fontWeight: 900 }],
       '3-700': ['3rem', { fontWeight: 700 }],
       '3.7-900': ['3.7rem', { fontWeight: 900 }],
+      '4.25-500': ['4.25rem', { fontWeight: 500 }],
     },
     screens: {
       md: { max: '1024px' },
