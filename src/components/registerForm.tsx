@@ -3,7 +3,7 @@ import Button from '@/components/button';
 import { useState } from 'react';
 import React from 'react';
 // import { RegisterFormData, ApiResponse } from '@/types/types';
-import RefundPolicy from './register-sections/refundPolicy';
+import RefundPolicy from './refundPolicy';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({

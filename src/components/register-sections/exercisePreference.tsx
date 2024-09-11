@@ -1,10 +1,10 @@
 import Dropdown from '../dropdown';
 import GoalPercentage from '@/data/goalPercentage';
 import ReferralSource from '@/data/referralSource';
-import RegisterItemTitle from './registerItemTitle';
-import MultiSelectionButtons from './multiselectionButtons';
+import RegisterItemTitle from '../registerItemTitle';
+import MultiSelectionButtons from '../multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
-import RadioButtonSlide from './radioButtonSlide';
+import RadioButtonSlide from '../radioButtonSlide';
 import ExerciseGuideline from './exerciseGuideline';
 import {
   RegisterFormData,
@@ -12,7 +12,7 @@ import {
   DropdownOption,
 } from '@/types/types';
 import { useState, useEffect } from 'react';
-import ExerciseModal from './exerciseModal';
+import ExerciseModal from '../exerciseModal';
 
 export default function ExercisePreference({
   formData,

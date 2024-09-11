@@ -1,4 +1,4 @@
-import { AccordionItem } from '../accordion';
+import { AccordionItem } from './accordion';
 
 import React, { ReactNode } from 'react';
 

@@ -1,8 +1,8 @@
 import Input from '../input';
-import RegisterItemTitle from './registerItemTitle';
+import RegisterItemTitle from '../registerItemTitle';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import BatchesDropdown from './\bbatchesDropdown';
+import BatchesDropdown from '../\bbatchesDropdown';
 import { UserInformationProps, DropdownOption } from '@/types/types';
 
 export default function UserInformation({

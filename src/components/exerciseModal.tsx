@@ -1,4 +1,4 @@
-import ExerciseGuideline from './exerciseGuideline';
+import ExerciseGuideline from './register-sections/exerciseGuideline';
 
 interface ExerciseModalProps {
   handleModal: () => void;
