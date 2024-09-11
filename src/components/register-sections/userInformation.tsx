@@ -40,7 +40,7 @@ export default function UserInformation({
   const pro: string | null = searchParams.get('pro');
   const proQuestions: boolean = pro === 'true' ? true : false;
 
-  const handleSelectGender = (gender: '남성' | '여성') => {
+  const handleSelectGender = (gender: '남성' | '여성' | '기타' | '비공개') => {
     setFormData((prev) => ({
       ...prev,
       gender,
@@ -190,6 +190,20 @@ export default function UserInformation({
                   className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
                 >
                   여성
+                </button>
+                <button
+                  onClick={() => handleSelectGender('여성')}
+                  type="button"
+                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                >
+                  기타
+                </button>
+                <button
+                  onClick={() => handleSelectGender('여성')}
+                  type="button"
+                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                >
+                  비공개
                 </button>
               </div>
             </div>

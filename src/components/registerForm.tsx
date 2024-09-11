@@ -4,11 +4,15 @@ import { useState } from 'react';
 import React from 'react';
 // import { RegisterFormData, ApiResponse } from '@/types/types';
 import RefundPolicy from './refundPolicy';
+import UserInformation from './register-sections/userInformation';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user: {
+      name: '',
+      email: '',
+      phone_number: '',
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,30 +39,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            name: e.target.value,
-          })
-        }
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            email: e.target.value,
-          })
-        }
-      />
+      <UserInformation formData={formData} setFormData={setFormData} />
 
       <Button
         className="mt-0"

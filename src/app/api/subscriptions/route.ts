@@ -3,27 +3,24 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+interface RequestItemsType {
+  user: {
+    name: string;
+    email: string;
+    phone_number: string;
+    gender: '남성' | '여성' | '기타' | '비공개';
+  };
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const existingUser = await prisma.users.findUnique({
-      where: {
-        email: body.email,
-      },
-    });
-
-    if (existingUser) {
-      return NextResponse.json(
-        { error: 'Email already exists' },
-        { status: 400 }
-      );
-    }
-
     const userInfo = await prisma.users.create({
       data: {
-        name: body.name,
-        email: body.email,
+        email: body.users.email,
+        name: body.users.name,
+        phone_number: body.users.phone_number,
       },
     });
 

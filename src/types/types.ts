@@ -3,7 +3,7 @@ export interface UserInfoFormData {
     name: string;
     email: string;
     phone_number: string;
-    gender: '남성' | '여성';
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
 }
 
@@ -102,8 +102,8 @@ export interface ApiResponse {
   };
 }
 export interface UserInformationProps {
-  formData: RegisterFormData;
-  setFormData: React.Dispatch<React.SetStateAction<RegisterFormData>>;
+  formData: UserInfoFormData;
+  setFormData: React.Dispatch<React.SetStateAction<UserInfoFormData>>;
 }
 
 export interface ExercisePreferenceProps {
