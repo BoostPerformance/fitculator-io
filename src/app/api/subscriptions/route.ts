@@ -28,8 +28,8 @@ export async function POST(req: NextRequest) {
         exercise_goal: body.exercisePreferences.exercise_goal,
         exercise_performance_level:
           body.exercisePreferences.exercise_performance_level,
-        exercise_concern: body.exercisePreferences.exercise_concern,
-        referral_source: body.exercisePreferences.referral_source,
+        exercise_concern: body.exercisePreferences.exercise_concern || null,
+        referral_source: body.exercisePreferences.referral_source || null,
       },
     });
 
