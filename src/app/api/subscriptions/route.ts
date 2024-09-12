@@ -44,14 +44,14 @@ export async function POST(req: NextRequest) {
 
     const userSubscriptionInfo = await prisma.usersubscriptions.create({
       data: {
-        user_id: body.user.id,
-        program_id: body.program.id,
+        user_id: userInfo.id,
+        program_id: programInfo.id,
         batch_id: body.batch?.id || null,
         event_id: body.event?.id || null,
         start_date: body.program.start_date,
         end_date: body.program.end_date,
         status: body.usersubScriptions.status,
-      },
+      }, //이부분 어디서 데이터 가져올지 수정해야해. program batches 도 여기 이 파일에 작성해야하나.. ?
     });
 
     return Response.json({
