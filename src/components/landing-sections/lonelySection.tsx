@@ -12,7 +12,7 @@ export default function LonelySection() {
         imageSrc="/svg/example.svg"
         reverseY
         textCenter
-        imgeSize={1000}
+        className="w-[60rem]"
         title2_5700
       />
     </section>

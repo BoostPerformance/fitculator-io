@@ -33,9 +33,17 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const programInfo = await prisma.programs.create({
+      data: {
+        type: body.programs.type,
+        duration_in_months: body.programs.duration_in_months,
+      },
+    });
+
     return Response.json({
       user: userInfo,
       exercisepreferences: exercisePreferenceInfo,
+      programs: programInfo,
     });
   } catch (error) {
     console.error('Prisma error:', error);

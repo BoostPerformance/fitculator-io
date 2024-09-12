@@ -10,7 +10,7 @@ interface SectionProps {
   reverseX?: boolean;
   reverseY?: boolean;
   textCenter?: boolean;
-  imgeSize?: number;
+  className?: string;
   textAlign?: boolean;
   pro?: ReactNode;
   title3700?: boolean;
@@ -27,7 +27,7 @@ const Section: React.FC<SectionProps> = ({
   reverseY = false,
   textCenter = false,
   imageSrc,
-  imgeSize,
+  className,
   description,
   description1_75500 = false,
   description1_75700 = false,
@@ -73,7 +73,13 @@ const Section: React.FC<SectionProps> = ({
         )}
       </div>
       {imageSrc && (
-        <Image src={imageSrc} alt={imageSrc} width={imgeSize} height={100} />
+        <Image
+          src={imageSrc}
+          alt={imageSrc}
+          className={className}
+          width={100}
+          height={100}
+        />
       )}
     </div>
   );
