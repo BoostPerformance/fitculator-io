@@ -8,11 +8,12 @@ import UserInformation from './register-sections/userInformation';
 import ExercisePreference from './register-sections/exercisePreference';
 import ExerciseConcern from './register-sections/exerciseConcern';
 import RegisterTitle from './registerTitle';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
   const period: string | null = searchParams.get('period');
+  const router = useRouter();
 
   const title = searchParams.get('title');
 
@@ -46,6 +47,9 @@ const RegisterForm = () => {
 
       const responseData = await response.json();
       console.log('리스폰스 받기 성공', responseData);
+      if (response.ok) {
+        router.push('/payment');
+      }
       return responseData;
     } catch (error) {
       console.error('Error submitting form:', error);
