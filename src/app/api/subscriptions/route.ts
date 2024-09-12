@@ -42,10 +42,23 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const userSubscriptionInfo = await prisma.usersubscriptions.create({
+      data: {
+        user_id: body.user.id,
+        program_id: body.program.id,
+        batch_id: body.batch?.id || null,
+        event_id: body.event?.id || null,
+        start_date: body.program.start_date,
+        end_date: body.program.end_date,
+        status: body.usersubScriptions.status,
+      },
+    });
+
     return Response.json({
       user: userInfo,
       exercisepreferences: exercisePreferenceInfo,
       programs: programInfo,
+      usersubscriptions: userSubscriptionInfo,
     });
   } catch (error) {
     console.error('Prisma error:', error);

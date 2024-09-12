@@ -74,15 +74,14 @@ model events {
   usersubscriptions usersubscriptions[]
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model usersubscriptions {
   id             Int             @id @default(autoincrement())
   user_id        Int?
   program_id     Int?
   batch_id       Int?
   event_id       Int?
-  start_date     DateTime        @db.Date
-  end_date       DateTime        @db.Date
+  start_date     DateTime?       @db.Date
+  end_date       DateTime?       @db.Date
   status         String          @db.VarChar(10)
   createdat      DateTime?       @default(now()) @db.Timestamptz(6)
   updatedat      DateTime?       @default(now()) @db.Timestamptz(6)

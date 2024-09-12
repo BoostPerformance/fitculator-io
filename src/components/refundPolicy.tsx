@@ -26,6 +26,8 @@ export default function RefundPolicy({ items }: any) {
         path={false}
         title={refundPolicyItems.title}
         content={refundPolicyItems.content}
+        svgColor="#9E9E9E"
+        titleFontWeight="text-1-500"
       />
     </div>
   );
