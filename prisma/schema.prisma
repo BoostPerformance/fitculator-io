@@ -25,13 +25,15 @@ model users {
 
 model exercisepreferences {
   id                         Int       @id @default(autoincrement())
-  user_id                    BigInt?
+  user_id                    Int?
   exercise_level             Int
   exercise_performance_level String?   @db.VarChar(10)
-  exercise_goal              String    @db.VarChar(12)
+  exercise_goal              String    @default("40") @db.VarChar
   exercise_concern           String?   @db.VarChar(100)
   referral_source            String?   @db.VarChar(12)
   createdat                  DateTime? @default(now()) @db.Timestamptz(6)
   updatedat                  DateTime? @default(now()) @db.Timestamptz(6)
   users                      users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("exercisepreferences")
 }

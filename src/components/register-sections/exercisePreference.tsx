@@ -42,7 +42,7 @@ export default function ExercisePreference({
   const handleReferralSourceChange = (item: DropdownOption) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exercisePreference: {
+      exercisePreferences: {
         ...prev.exercisePreferences,
         referral_source: item.option,
       },
@@ -52,7 +52,7 @@ export default function ExercisePreference({
   const handleRadioChange = (item: number) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exercisePreference: {
+      exercisePreferences: {
         ...prev.exercisePreferences,
         exercise_level: item,
       },
@@ -62,7 +62,7 @@ export default function ExercisePreference({
   const handleMultiSelectChange = (selectedGoals: string[]) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exercisePreference: {
+      exercisePreferences: {
         ...prev.exercisePreferences,
         exercise_goal: selectedGoals.join(','),
       },
@@ -72,7 +72,7 @@ export default function ExercisePreference({
   const handlePerformanceLevelChange = (item: DropdownOption) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
-      exercisePreference: {
+      exercisePreferences: {
         ...prev.exercisePreferences,
         exercise_performance_level: item.option,
       },

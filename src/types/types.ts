@@ -8,16 +8,16 @@ export interface UserInfoFormData {
 }
 
 export interface ExerciseConcernFormData {
-  exercise_concern: string;
+  exercise_concern?: string;
 }
 
 export interface ExercisePreferenceType {
   exercisePreferences: {
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level: string;
-    referral_source: string;
-    exercise_concern: string;
+    exercise_performance_level?: string;
+    referral_source?: string;
+    exercise_concern?: string;
   };
 }
 

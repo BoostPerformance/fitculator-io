@@ -21,19 +21,22 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const exercisePreferences = await prisma.exercisepreferences.create({
+    const exercisePreferenceInfo = await prisma.exercisepreferences.create({
       data: {
         user_id: userInfo.id,
-        exercise_level: body.exercisePreference.exercise_level,
-        exercise_goal: body.exercisePreference.exercise_goal,
+        exercise_level: body.exercisePreferences.exercise_level,
+        exercise_goal: body.exercisePreferences.exercise_goal,
         exercise_performance_level:
-          body.exercisePreference.exercise_performance_level,
-        exercise_concern: body.exercisePreference.exercise_concern,
-        referral_source: body.exercisePreference.referral_source,
+          body.exercisePreferences.exercise_performance_level,
+        exercise_concern: body.exercisePreferences.exercise_concern,
+        referral_source: body.exercisePreferences.referral_source,
       },
     });
 
-    return Response.json({ user: userInfo, preferences: exercisePreferences });
+    return Response.json({
+      user: userInfo,
+      exercisepreferences: exercisePreferenceInfo,
+    });
   } catch (error) {
     console.error('Prisma error:', error);
 
