@@ -2,16 +2,25 @@
 import Button from '@/components/button';
 import { useState } from 'react';
 import React from 'react';
-// import { RegisterFormData, ApiResponse } from '@/types/types';
+import { RegisterFormData, ApiResponse } from '@/types/types';
 import RefundPolicy from './refundPolicy';
 import UserInformation from './register-sections/userInformation';
+import ExercisePreference from './register-sections/exercisePreference';
+import ExerciseConcern from './register-sections/exerciseConcern';
 
 const RegisterForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterFormData>({
     user: {
       name: '',
       email: '',
       phone_number: '',
+    },
+    exercisePreferences: {
+      exercise_level: 1,
+      exercise_goal: '',
+      exercise_performance_level: '',
+      exercise_concern: '',
+      referral_source: '',
     },
   });
 
@@ -40,7 +49,8 @@ const RegisterForm = () => {
       noValidate
     >
       <UserInformation formData={formData} setFormData={setFormData} />
-
+      <ExercisePreference formData={formData} setFormData={setFormData} />
+      <ExerciseConcern formData={formData} setFormData={setFormData} />
       <Button
         className="mt-0"
         text={`결제하기`}

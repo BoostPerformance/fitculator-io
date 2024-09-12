@@ -8,32 +8,25 @@ export interface UserInfoFormData {
 }
 
 export interface ExerciseConcernFormData {
-  exercise_concern: string;
+  exercise_concern?: string;
 }
 
 export interface ExercisePreferenceType {
-  exercise_level: number;
-  exercise_goal: string[];
-  exercise_performance_level: string;
-  referral_source: string;
-}
-
-export interface RegisterFormData extends UserInfoFormData {
-  userSubscription: {
-    batchId: number | null;
-    programId: number | null;
-    start_date: string;
-    end_date: string;
-  };
-  program: {
-    name: string;
-  };
-  exercisePreference: {
+  exercisePreferences: {
     exercise_level: number;
-    exercise_goal: any;
+    exercise_goal: string;
     exercise_performance_level?: string;
     referral_source?: string;
     exercise_concern?: string;
+  };
+}
+
+export interface RegisterFormData extends ExercisePreferenceType {
+  user: {
+    name: string;
+    email: string;
+    phone_number: string;
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
 }
 
@@ -44,7 +37,7 @@ export interface RequestItemsType {
     phone_number: string;
     gender: '남성' | '여성' | '기타' | '비공개';
   };
-  exercisePreference: {
+  exercisePreferences: {
     exercise_level: number;
     exercise_goal: string;
     exercise_performance_level?: string;
@@ -91,7 +84,7 @@ export interface ApiResponse {
       end_date: string;
     };
   };
-  exercisePreference: {
+  exercisePreferences: {
     id: number;
     userId: number;
     exercise_level: number;
@@ -102,8 +95,8 @@ export interface ApiResponse {
   };
 }
 export interface UserInformationProps {
-  formData: UserInfoFormData;
-  setFormData: React.Dispatch<React.SetStateAction<UserInfoFormData>>;
+  formData: RegisterFormData;
+  setFormData: React.Dispatch<React.SetStateAction<RegisterFormData>>;
 }
 
 export interface ExercisePreferenceProps {
