@@ -8,8 +8,8 @@ const NavLogo = () => {
         className="w-[15rem] sm:w-[7.125rem] sm:h-[1.625rem]"
         src="/images/logo.png"
         alt="main "
-        width={200}
-        height={200}
+        width={500}
+        height={500}
       />
     </Link>
   );
