@@ -25,7 +25,7 @@ export default function SlideSection() {
           </>
         }
         imageSrc="/images/graph.png"
-        imgeSize={350}
+        className="w-[20rem]"
         title2_5700
         description1_75500
       />
@@ -39,7 +39,7 @@ export default function SlideSection() {
           </>
         }
         imageSrc="/svg/section-image1.svg"
-        imgeSize={400}
+        className="w-[20rem]"
         reverseX
         textAlign
         title2_5700
@@ -59,7 +59,7 @@ export default function SlideSection() {
           </>
         }
         imageSrc="/svg/section-image2.svg"
-        imgeSize={400}
+        className="w-[20rem]"
         title2_5700
         description1_75500
       />
@@ -88,7 +88,7 @@ export default function SlideSection() {
           </>
         }
         imageSrc="/svg/section-image3.svg"
-        imgeSize={400}
+        className="w-[20rem]"
         reverseX
         textAlign
         pro

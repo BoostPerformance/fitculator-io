@@ -28,6 +28,10 @@ export interface RegisterFormData extends ExercisePreferenceType {
     phone_number: string;
     gender?: '남성' | '여성' | '기타' | '비공개';
   };
+  programs: {
+    type: string;
+    duration_in_months: number;
+  };
 }
 
 export interface RequestItemsType {
@@ -52,7 +56,7 @@ export interface RequestItemsType {
   };
   program: {
     id: number;
-    name: string;
+    type: string;
   };
 
   batch_number: number;

@@ -7,8 +7,15 @@ import RefundPolicy from './refundPolicy';
 import UserInformation from './register-sections/userInformation';
 import ExercisePreference from './register-sections/exercisePreference';
 import ExerciseConcern from './register-sections/exerciseConcern';
+import RegisterTitle from './registerTitle';
+import { useSearchParams } from 'next/navigation';
 
 const RegisterForm = () => {
+  const searchParams = useSearchParams();
+  const period: string | null = searchParams.get('period');
+
+  const title = searchParams.get('title');
+
   const [formData, setFormData] = useState<RegisterFormData>({
     user: {
       name: '',
@@ -21,6 +28,10 @@ const RegisterForm = () => {
       exercise_performance_level: '',
       exercise_concern: '',
       referral_source: '',
+    },
+    programs: {
+      type: `${title}`,
+      duration_in_months: parseInt(`${period}`),
     },
   });
 
@@ -48,6 +59,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
+      <RegisterTitle title={title} period={period} />
       <UserInformation formData={formData} setFormData={setFormData} />
       <ExercisePreference formData={formData} setFormData={setFormData} />
       <ExerciseConcern formData={formData} setFormData={setFormData} />

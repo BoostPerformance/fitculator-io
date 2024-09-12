@@ -30,8 +30,8 @@ export default function RegisterSection() {
           src="/images/landing-running.png"
           alt="woman running"
           width={2300}
-          height={10}
-          objectFit="cover"
+          height={200}
+          priority={true}
         />
         <div className="absolute inset-0 h-[40%] bg-gradient-to-t from-white to-transparent top-[60%] sm:top-[62%] md:top-[60%]" />
       </div>
