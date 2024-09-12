@@ -22,6 +22,7 @@ const RegisterForm = () => {
       name: '',
       email: '',
       phone_number: '',
+      gender: '남성',
     },
     exercisePreferences: {
       exercise_level: 1,

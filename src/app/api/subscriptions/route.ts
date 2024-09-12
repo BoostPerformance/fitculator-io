@@ -13,11 +13,13 @@ export async function POST(req: NextRequest) {
       update: {
         name: body.user.name,
         phone_number: body.user.phone_number,
+        gender: body.user.gender,
       },
       create: {
         email: body.user.email,
         name: body.user.name,
         phone_number: body.user.phone_number,
+        gender: body.user.gender,
       },
     });
 
