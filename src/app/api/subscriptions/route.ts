@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     if (body.subscriptions.batch_id) {
       // 배치가 존재하면 연결
       programBatchInfo = await prisma.programbatches.findUnique({
-        where: { id: body.subscriptions.batch_number },
+        where: { id: body.subscriptions.batch_id },
       });
     }
 
@@ -61,11 +61,16 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const programStartDate = programInfo.start_date;
+    const programEndDate = programInfo.end_date;
+
     const userSubscriptionInfo = await prisma.usersubscriptions.create({
       data: {
         users: { connect: { id: userInfo.id } },
         programs: { connect: { id: programInfo.id } },
         programbatches: { connect: { id: programBatchInfo.id } },
+        start_date: programStartDate || null,
+        end_date: programEndDate || null,
       },
     });
 
