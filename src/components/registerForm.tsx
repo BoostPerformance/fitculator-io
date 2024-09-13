@@ -1,6 +1,6 @@
 'use client';
 import Button from '@/components/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData, ApiResponse } from '@/types/types';
 import RefundPolicy from './refundPolicy';
@@ -40,8 +40,34 @@ const RegisterForm = () => {
     },
   });
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  // 필수 항목이 모두 입력되었는지 확인하는 useEffect
+  useEffect(() => {
+    const { name, email, phone_number } = formData.user;
+    const { exercise_goal } = formData.exercisePreferences;
+    const { duration_in_months } = formData.programs;
+
+    // 필수 항목들이 모두 채워졌는지 확인
+    if (
+      name.trim() !== '' &&
+      email.trim() !== '' &&
+      phone_number.trim() !== '' &&
+      exercise_goal.trim() !== '' &&
+      duration_in_months > 0
+    ) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [formData]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isButtonDisabled) {
+      return;
+    }
     try {
       const response = await fetch('/api/subscriptions', {
         method: 'POST',
@@ -80,7 +106,13 @@ const RegisterForm = () => {
           size="lg"
           variant="default"
           type="submit"
+          disabled={isButtonDisabled}
         />
+        {isButtonDisabled ? (
+          <div className="text-red">필수 항목을 입력해주세요</div>
+        ) : (
+          <></>
+        )}
         <p className="sm:text-0.75-500 sm:text-center  text-gray-7 ">
           약관 및 주문 내용을 확인했으며, <br className="hidden sm:block" />
           정보 제공등에 동의합니다.

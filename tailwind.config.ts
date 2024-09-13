@@ -51,6 +51,9 @@ const config: Config = {
           10: '#BDBDBD',
           11: '#A1A1A1',
         },
+        red: {
+          DEFAULT: '#DD204E',
+        },
       },
     },
     fontSize: {
