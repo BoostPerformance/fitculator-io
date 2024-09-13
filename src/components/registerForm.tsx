@@ -68,6 +68,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+
     const tossPayments = await loadTossPayments(
       process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
     );
@@ -83,6 +84,7 @@ const RegisterForm = () => {
       successUrl: `${window.location.origin}/api/payments`,
       failUrl: `${window.location.origin}/api/payments/fail`,
     });
+
 
     if (isButtonDisabled) {
       return;
