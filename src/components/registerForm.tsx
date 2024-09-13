@@ -9,6 +9,7 @@ import ExercisePreference from './register-sections/exercisePreference';
 import ExerciseConcern from './register-sections/exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -16,6 +17,8 @@ const RegisterForm = () => {
   const router = useRouter();
 
   const title = searchParams.get('title');
+  const priceParam = searchParams.get('price');
+  const price = priceParam ? Number(priceParam.replace(/,/g, '')) : 0;
 
   const [formData, setFormData] = useState<RegisterFormData>({
     user: {
@@ -64,6 +67,24 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+
+    const tossPayments = await loadTossPayments(
+      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
+    );
+
+    if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
+      throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
+    }
+
+    await tossPayments.requestPayment('카드', {
+      amount: Number(`${price}`),
+      orderId: Math.random().toString(36).slice(2),
+      orderName: `${title} ${period}`,
+      successUrl: `${window.location.origin}/api/payments`,
+      failUrl: `${window.location.origin}/api/payments/fail`,
+    });
+
 
     if (isButtonDisabled) {
       return;
