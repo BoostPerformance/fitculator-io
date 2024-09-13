@@ -45,18 +45,16 @@ export async function POST(req: NextRequest) {
     let programBatchInfo;
 
     if (body.subscriptions.batch_id) {
-      // 배치가 존재하면 연결
       programBatchInfo = await prisma.programbatches.findUnique({
         where: { id: body.subscriptions.batch_id },
       });
     }
 
     if (!programBatchInfo) {
-      // 배치가 없으면 생성 (필요 시 batch_number 등 필수 값 추가)
       programBatchInfo = await prisma.programbatches.create({
         data: {
-          program_id: programInfo.id, // 프로그램과 연결
-          batch_number: body.subscriptions.id || 11, // batch_number가 필요하면 사용
+          program_id: programInfo.id,
+          batch_number: body.subscriptions.id || 11,
         },
       });
     }

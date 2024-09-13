@@ -17,7 +17,8 @@ const RegisterForm = () => {
   const router = useRouter();
 
   const title = searchParams.get('title');
-  const price = searchParams.get('price');
+  const priceParam = searchParams.get('price');
+  const price = priceParam ? Number(priceParam.replace(/,/g, '')) : 0;
 
   const [formData, setFormData] = useState<RegisterFormData>({
     user: {
@@ -68,8 +69,12 @@ const RegisterForm = () => {
     e.preventDefault();
 
     const tossPayments = await loadTossPayments(
-      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY
+      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
     );
+
+    if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
+      throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
+    }
 
     await tossPayments.requestPayment('카드', {
       amount: Number(`${price}`),
