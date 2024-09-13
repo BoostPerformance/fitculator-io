@@ -145,7 +145,7 @@ export default function UserInformation({
               type="text"
             />
             {errors.name && (
-              <span className="text-red-500 text-sm">{errors.name}</span>
+              <span className="text-red text-sm">{errors.name}</span>
             )}
           </div>
 
@@ -228,7 +228,7 @@ export default function UserInformation({
               type="email"
             />
             {errors.email && (
-              <span className="text-red-500 text-sm">{errors.email}</span>
+              <span className="text-red text-sm">{errors.email}</span>
             )}
           </div>
 
@@ -251,9 +251,7 @@ export default function UserInformation({
               type="tel"
             />
             {errors.phone_number && (
-              <span className="text-red-500 text-sm">
-                {errors.phone_number}
-              </span>
+              <span className="text-red text-sm">{errors.phone_number}</span>
             )}
           </div>
         </div>

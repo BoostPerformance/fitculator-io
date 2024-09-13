@@ -11,12 +11,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  disabled?: boolean; // 추가
 }
 const Button: React.FC<ButtonProps> = ({
   text,
   variant = 'default',
   size = 'md',
   className,
+  disabled = false,
   ...props
 }) => {
   const baseStyles = 'flex justify-center items-center bg-blue-1';
@@ -33,16 +35,18 @@ const Button: React.FC<ButtonProps> = ({
     md: 'w-[29rem] text-blue-2 rounded-[0.75rem] mt-[6.25rem] md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[17rem] sm:py-[1rem] sm:ml-[2.5rem] text-1.75-900 md:text-1.5-900 sm:text-1.125-700 py-[1.75rem] px-[4.25rem]',
     lg: 'w-[29rem] text-white rounded-[0.75rem] text-1.75-900 md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[18rem] sm:py-[1.25rem] md:text-1.5-900 sm:text-1.125-900 py-[1.75rem] px-[4.25rem]',
   };
+  const disabledStyles = 'bg-gray-400 cursor-not-allowed';
 
   const buttonClassName = classNames(
     baseStyles,
     variantStyles[variant],
     sizeStyles[size],
+    disabled ? disabledStyles : '',
     className || ''
   );
 
   return (
-    <button className={buttonClassName} {...props}>
+    <button className={buttonClassName} disabled={disabled} {...props}>
       {text}
     </button>
   );
