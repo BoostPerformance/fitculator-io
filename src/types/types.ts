@@ -32,6 +32,9 @@ export interface RegisterFormData extends ExercisePreferenceType {
     type: string;
     duration_in_months: number;
   };
+  subscriptions: {
+    batch_id: number | null;
+  };
 }
 
 export interface RequestItemsType {

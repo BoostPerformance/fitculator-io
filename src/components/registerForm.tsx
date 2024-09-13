@@ -35,6 +35,9 @@ const RegisterForm = () => {
       type: `${title}`,
       duration_in_months: parseInt(`${period}`),
     },
+    subscriptions: {
+      batch_id: null,
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {

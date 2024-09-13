@@ -42,16 +42,31 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    let programBatchInfo;
+
+    if (body.subscriptions.batch_id) {
+      // 배치가 존재하면 연결
+      programBatchInfo = await prisma.programbatches.findUnique({
+        where: { id: body.subscriptions.batch_number },
+      });
+    }
+
+    if (!programBatchInfo) {
+      // 배치가 없으면 생성 (필요 시 batch_number 등 필수 값 추가)
+      programBatchInfo = await prisma.programbatches.create({
+        data: {
+          program_id: programInfo.id, // 프로그램과 연결
+          batch_number: body.subscriptions.id || 11, // batch_number가 필요하면 사용
+        },
+      });
+    }
+
     const userSubscriptionInfo = await prisma.usersubscriptions.create({
       data: {
-        user_id: userInfo.id,
-        program_id: programInfo.id,
-        batch_id: body.batch?.id || null,
-        event_id: body.event?.id || null,
-        start_date: body.program.start_date,
-        end_date: body.program.end_date,
-        status: body.usersubScriptions.status,
-      }, //이부분 어디서 데이터 가져올지 수정해야해. program batches 도 여기 이 파일에 작성해야하나.. ?
+        users: { connect: { id: userInfo.id } },
+        programs: { connect: { id: programInfo.id } },
+        programbatches: { connect: { id: programBatchInfo.id } },
+      },
     });
 
     return Response.json({
