@@ -32,6 +32,9 @@ export interface RegisterFormData extends ExercisePreferenceType {
     type: string;
     duration_in_months: number;
   };
+  subscriptions: {
+    batch_id: number | null;
+  };
 }
 
 export interface RequestItemsType {
@@ -39,7 +42,7 @@ export interface RequestItemsType {
     name: string;
     email: string;
     phone_number: string;
-    gender: '남성' | '여성' | '기타' | '비공개';
+    gender: string;
   };
   exercisePreferences: {
     exercise_level: number;

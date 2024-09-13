@@ -105,8 +105,8 @@ export default function UserInformation({
   const handleBatchesChange = (item: DropdownOption) => {
     setFormData((prev: any) => ({
       ...prev,
-      subscription: {
-        batchId: item.id,
+      subscriptions: {
+        batch_id: item.id,
       },
     }));
 
