@@ -176,11 +176,11 @@ export default function UserInformation({
           ) : (
             <div className="flex flex-col gap-[0.75rem]">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700 ">성별</h1>
-              <div className="flex gap-[1.06rem]">
+              <div className="flex gap-[1.06rem] sm:text-0.75-500">
                 <button
                   onClick={() => handleSelectGender('남성')}
                   type="button"
-                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1 "
                 >
                   남성
                 </button>
