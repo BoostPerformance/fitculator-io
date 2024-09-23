@@ -13,16 +13,16 @@ const config: Config = {
     },
     extend: {
       animation: {
-        marquee: 'marquee 140s linear infinite',
+        marquee: 'marquee 130s linear infinite',
         marquee2: 'marquee2 130s linear infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-60%)' },
         },
         marquee2: {
-          '0%': { transform: 'translateX(-50%)' },
+          '0%': { transform: 'translateX(-60%)' },
           '100%': { transform: 'translateX(0%)' },
         },
       },

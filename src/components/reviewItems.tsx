@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 export default function ReviewItems() {
   return (
-    <div className=" w-max grid gap-4 sm:grid-cols-3 sm:grid-flow-col sm:grid-rows-2 sm:gap-[0.94rem]">
-      <div className="grid grid-rows-1 grid-cols-10 gap-5 animate-marquee">
-        {[...reviewItems].map((it, index) => (
+    <div className=" w-full overflow-hidden flex flex-col gap-[2rem]">
+      <div className="flex w-max gap-5 animate-marquee">
+        {[...reviewItems, ...reviewItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
@@ -34,11 +34,11 @@ export default function ReviewItems() {
         ))}
       </div>
 
-      <div className="grid grid-rows-1 grid-cols-10 gap-5 animate-marquee2">
-        {[...reviewItems].map((it, index) => (
+      <div className="flex w-max gap-5 animate-marquee2 ">
+        {[...reviewItems, ...reviewItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
-            className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] animate-marquee2 sm:pl-[1.19rem] sm:pt-[1.94rem]`}
+            className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
           >
             <Image
               className="sm:w-[1.6rem] sm:mt-0"
