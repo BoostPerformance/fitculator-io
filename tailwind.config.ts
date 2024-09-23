@@ -86,7 +86,7 @@ const config: Config = {
       '4.25-500': ['4.25rem', { fontWeight: 500 }],
     },
     screens: {
-      md: { max: '1024px' },
+      md: { max: '1073px' },
       sm: { max: '768px' },
     },
   },

@@ -12,6 +12,13 @@ const pretendard = localFont({
   weight: '45 920',
   variable: '--font-pretendard',
 });
+export const metadata = {
+  title: 'Fitculator',
+  description: 'fitculator io',
+  icons: {
+    icon: '/images/logo-favicon.png',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -21,8 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scrollbar-hide sm:bg-gray-2">
       <Head>
-        {' '}
-        {/* Next.js의 Head 컴포넌트 사용 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body className={`${pretendard.variable} font-pretendard`}>
