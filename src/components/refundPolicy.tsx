@@ -21,13 +21,14 @@ const refundPolicyItems: RefundPolicyItems = {
 
 export default function RefundPolicy({ items }: any) {
   return (
-    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem] ">
+    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem] py-0">
       <AccordionItem
         path={false}
         title={refundPolicyItems.title}
         content={refundPolicyItems.content}
         svgColor="#9E9E9E"
         titleFontWeight="text-1-500"
+        gap="gap-0"
       />
     </div>
   );

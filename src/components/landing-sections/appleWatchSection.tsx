@@ -20,7 +20,7 @@ export default function AppleWatchSection() {
         description={
           <>
             핏큘레이터의 포인트 시스템은
-            <span className="hidden sm:inline">
+            <span className="hidden md:inline sm:inline">
               <br />
             </span>
             세계보건기구(WHO)의

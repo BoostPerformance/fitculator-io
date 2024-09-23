@@ -28,6 +28,7 @@ export default function SlideSection() {
         className="w-[20rem]"
         title2_5700
         description1_75500
+        textCenter
       />
       <Section
         title={<>운동량그래프, 피로도 분석</>}
@@ -44,6 +45,7 @@ export default function SlideSection() {
         textAlign
         title2_5700
         description1_75500
+        textCenter
       />
       <Section
         title={

@@ -8,6 +8,7 @@ type AccordionItemProps = {
   path?: boolean;
   titleFontWeight?: string;
   svgColor?: string;
+  gap?: string;
 };
 
 function AccordionItem({
@@ -16,6 +17,7 @@ function AccordionItem({
   path,
   titleFontWeight = 'text-1.25-700',
   svgColor = 'currentColor',
+  gap,
 }: AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,6 +26,7 @@ function AccordionItem({
       <button
         className="flex justify-between w-full py-4 text-left"
         onClick={() => setIsOpen(!isOpen)}
+        type="button"
       >
         <span
           className={`py-2 w-auto sm:text-1-500 sm:py-0 ${titleFontWeight}`}
@@ -48,7 +51,9 @@ function AccordionItem({
         </svg>
       </button>
       {isOpen && (
-        <div className="text-gray-1 text-1-500 pb-[2.75rem] flex flex-col gap-[1.69rem]">
+        <div
+          className={`text-gray-1 text-1-500 pb-[2.75rem] flex flex-col ${gap}`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="100%"
@@ -73,9 +78,10 @@ type AccordionProps = {
     titleFontWeight?: string;
     svgColor?: string;
   }[];
+  gap?: string;
 };
 
-function Accordion({ items }: AccordionProps) {
+function Accordion({ items, gap = 'gap-[1.69rem]' }: AccordionProps) {
   return (
     <div className="w-full max-w-[55rem] mx-auto px-[1.37rem]">
       {items.map((item) => (
@@ -86,6 +92,7 @@ function Accordion({ items }: AccordionProps) {
           content={item.content}
           titleFontWeight={item.titleFontWeight}
           svgColor={item.svgColor}
+          gap={gap}
         />
       ))}
     </div>
