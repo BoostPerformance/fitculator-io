@@ -50,6 +50,7 @@ const config: Config = {
           9: '#E0E0E0',
           10: '#BDBDBD',
           11: '#A1A1A1',
+          12: '#767676',
         },
         red: {
           DEFAULT: '#DD204E',
@@ -79,6 +80,7 @@ const config: Config = {
       '1.875-500': ['1.875rem', { fontWeight: 500 }],
       '2-700': ['2rem', { fontWeight: 700 }],
       '2-900': ['2rem', { fontWeight: 900 }],
+      '2.25-700': ['2.25rem', { fontWeight: 700 }],
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
       '2.5-900': ['2.5rem', { fontWeight: 900 }],
       '3-700': ['3rem', { fontWeight: 700 }],

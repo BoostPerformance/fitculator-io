@@ -11,6 +11,8 @@ interface SectionProps {
   reverseY?: boolean;
   textCenter?: boolean;
   className?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
   textAlign?: boolean;
   pro?: ReactNode;
   title3700?: boolean;
@@ -28,6 +30,8 @@ const Section: React.FC<SectionProps> = ({
   textCenter = false,
   imageSrc,
   className,
+  titleClassName,
+  descriptionClassName,
   description,
   description1_75500 = false,
   description1_75700 = false,
@@ -58,15 +62,17 @@ const Section: React.FC<SectionProps> = ({
             title2_5700 && 'text-2.5-700'
           } ${
             title2_5900 && 'text-2.5-900'
-          } mb-2 md:text-2-900 sm:text-1.75-900 sm:text-center`}
+          } mb-2 md:text-2-900 sm:text-1.75-900 sm:text-center ${titleClassName}`}
         >
           {title}
         </h2>
         {description && (
           <p
-            className={`${description1_75500 && 'text-1.5-500'} ${
+            className={` text-gray-12 ${
+              description1_75500 && 'text-1.75-500'
+            } ${
               description1_75700 && 'text-1.5-700'
-            } text-gray-5 md:text-1.5-700 sm:text-1.125-700 `}
+            } text-gray-5 md:text-1.5-700 sm:text-1.125-700 ${descriptionClassName}`}
           >
             {description}
           </p>
