@@ -12,6 +12,12 @@ const config: Config = {
       padding: '2rem',
     },
     extend: {
+      scale: {
+        '175': '1.75',
+        '200': '2.00',
+        '220': '2.20',
+        '250': '2.50',
+      },
       animation: {
         marquee: 'marquee 130s linear infinite',
         marquee2: 'marquee2 130s linear infinite',
@@ -79,6 +85,7 @@ const config: Config = {
       '1.875-500': ['1.875rem', { fontWeight: 500 }],
       '2-700': ['2rem', { fontWeight: 700 }],
       '2-900': ['2rem', { fontWeight: 900 }],
+      '2.25-700': ['2.25rem', { fontWeight: 700 }],
       '2.5-700': ['2.5rem', { fontWeight: 700 }],
       '2.5-900': ['2.5rem', { fontWeight: 900 }],
       '3-700': ['3rem', { fontWeight: 700 }],

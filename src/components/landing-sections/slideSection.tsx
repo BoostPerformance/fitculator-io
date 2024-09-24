@@ -24,7 +24,7 @@ export default function SlideSection() {
             피드백을 받을 수 있어요.
           </>
         }
-        imageSrc="/images/graph.png"
+        imageSrc="/svg/slide-graph.svg"
         className="w-[20rem]"
         title2_5700
         description1_75500
@@ -39,7 +39,7 @@ export default function SlideSection() {
             친절하게 답변을 남겨요.
           </>
         }
-        imageSrc="/svg/section-image1.svg"
+        imageSrc="/images/section-image1.png"
         className="w-[20rem]"
         reverseX
         textAlign
