@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const NavLogo = () => {
+interface NavLogoProps {
+  smWidth: string;
+}
+
+const NavLogo: React.FC<NavLogoProps> = ({ smWidth }) => {
   return (
     <Link className="p-2 sm:pl-0" href="./">
       <Image
-        className="w-[15rem] sm:w-[7.125rem] sm:h-[1.625rem]"
+        className={`w-[15rem] ${smWidth}`}
         src="/images/logo.png"
         alt="main "
         width={1000}
