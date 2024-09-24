@@ -10,6 +10,7 @@ import ExerciseConcern from './register-sections/exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { useMutation } from '@tanstack/react-query';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -45,13 +46,11 @@ const RegisterForm = () => {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  // 필수 항목이 모두 입력되었는지 확인하는 useEffect
   useEffect(() => {
     const { name, email, phone_number } = formData.user;
     const { exercise_goal } = formData.exercisePreferences;
     const { duration_in_months } = formData.programs;
 
-    // 필수 항목들이 모두 채워졌는지 확인
     if (
       name.trim() !== '' &&
       email.trim() !== '' &&
@@ -64,6 +63,29 @@ const RegisterForm = () => {
       setIsButtonDisabled(true);
     }
   }, [formData]);
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('폼 제출에 실패했습니다.');
+      }
+
+      return response.json();
+    },
+    onSuccess: (data) => {
+      console.log('성공적으로 전송되었습니다', data);
+      router.push('/payment');
+    },
+    onError: (error) => {
+      console.error('폼 제출 중 에러 발생:', error);
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,23 +109,8 @@ const RegisterForm = () => {
     if (isButtonDisabled) {
       return;
     }
-    try {
-      const response = await fetch('/api/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
 
-      const responseData = await response.json();
-      console.log('리스폰스 받기 성공', responseData);
-      if (response.ok) {
-        router.push('/payment');
-      }
-      return responseData;
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      throw error;
-    }
+    mutation.mutate();
   };
 
   return (
