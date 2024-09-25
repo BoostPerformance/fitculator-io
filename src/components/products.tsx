@@ -30,22 +30,6 @@ const Product = () => {
 
       <div className="flex flex-row h-auto gap-[3rem] sm:flex-col">
         <ProductItem
-          title="LITE"
-          descriptions={[
-            '운동량 계산 및 분석',
-            '피로도 관리',
-            <>
-              <div>피트니스 특화 챗봇</div>
-              <div>• 질문답변, 프로그램 피드백</div>
-            </>,
-            '커뮤니티 활동',
-          ]}
-          price={20000}
-          perMonth="1개월"
-          selectedPeriod={selectedPeriod}
-        />
-
-        <ProductItem
           title="PRO"
           descriptions={[
             '운동량 계산 및 분석',
@@ -75,6 +59,21 @@ const Product = () => {
           price={70000}
           perMonth="1개월"
           pro
+          selectedPeriod={selectedPeriod}
+        />
+        <ProductItem
+          title="LIFE"
+          descriptions={[
+            '운동량 계산 및 분석',
+            '피로도 관리',
+            <>
+              <div>피트니스 특화 챗봇</div>
+              <div>• 질문답변, 프로그램 피드백</div>
+            </>,
+            '커뮤니티 활동',
+          ]}
+          price={150000}
+          perMonth="1개월"
           selectedPeriod={selectedPeriod}
         />
       </div>
