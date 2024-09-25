@@ -21,7 +21,9 @@ const Product = () => {
         <h1 className="text-2.5-900 sm:text-1.75-900">
           비대면 운동관리 프로그램
         </h1>
-        <h1 className="text-2.5-900 sm:text-1.75-900">'핏큘레이터' 신청하기</h1>
+        <h1 className="text-2.5-900 sm:text-1.75-900">
+          &nbsp;'핏큘레이터' 신청하기
+        </h1>
       </div>
       <Toggle
         handleToggleProduct={handleToggleProduct}
@@ -72,7 +74,7 @@ const Product = () => {
             </>,
             '커뮤니티 활동',
           ]}
-          price={150000}
+          price={135000}
           perMonth="1개월"
           selectedPeriod={selectedPeriod}
         />
