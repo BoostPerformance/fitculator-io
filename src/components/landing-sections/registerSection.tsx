@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 export default function RegisterSection() {
   return (
-    <section className="relative mb-10 sm:mb-[5rem]">
-      <div className="absolute flex items-center justify-center w-full h-[30rem] mt-[8rem] md:h-[38rem] md:mt-[5rem] md:ml-[4rem] sm:top-[5rem] sm:ml-auto z-10 md:items-start md:justify-start sm:items-start sm:justify-start">
+    <section className="relative">
+      <div className="absolute flex items-center justify-center w-full h-[30rem] mt-[8rem] md:h-[38rem] md:mt-[5rem] md:ml-[4rem] sm:top-[1rem] sm:ml-auto z-10 md:items-start md:justify-start sm:items-start sm:justify-start">
         <div className="flex flex-col gap-[2.5rem]">
           <div>
             <div className="text-3-700 sm:text-left sm:px-[2rem] sm:pb-[0.3rem] sm:text-1.25-700 leading-tight">
@@ -47,7 +47,7 @@ export default function RegisterSection() {
               text="핏큘레이터 신청하기"
               size="xs"
               variant="default"
-              className="sm:py-[1.2rem] sm:w-[10.2rem] sm:px-[1rem]"
+              className="sm:py-[1.3rem] sm:w-[10rem] sm:px-[0.7rem]"
             />
           </Link>
         </div>
@@ -58,17 +58,17 @@ export default function RegisterSection() {
           alt="woman running"
           width={2300}
           height={600}
-          className="sm:top-[10rem] sm:scale-200 md:scale-150 sm:transform sm:translate-x-[-6rem] sm:translate-y-[10rem] md:translate-x-[-6rem] md:translate-y-[4rem]"
+          className="sm:top-[10rem] sm:scale-200 md:scale-150 sm:transform sm:translate-x-[-6rem] sm:translate-y-[6rem] md:translate-x-[-6rem] md:translate-y-[4rem]"
           priority={true}
         />
         <div
-          className="absolute inset-0 w-[55%] h-full"
+          className="absolute inset-0 w-[55%]"
           style={{
             background:
               'linear-gradient(270deg, rgba(219, 226, 228, 0.00) 0%, rgba(219, 226, 228, 0.90) 16.32%)',
           }}
         />
-        <div className="absolute inset-0 h-[60%] sm:h-[69%] bg-gradient-to-t from-white  via-white to-transparent top-[61%] sm:top-[66%] md:top-[60%]" />
+        <div className="absolute inset-0 h-[43%] sm:h-[69%] bg-gradient-to-t from-white  via-white to-transparent top-[66%] sm:top-[50%] md:top-[60%]" />
       </div>
     </section>
   );
