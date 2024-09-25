@@ -13,15 +13,15 @@ const Product = () => {
 
   return (
     <div
-      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full"
+      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full leading-tight"
       id="product-section"
     >
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
       <div className="flex-row gap-0 flex sm:flex-col sm:items-center sm:mb-[3rem]">
         <h1 className="text-2.5-900 sm:text-1.75-900">
-          비대면 운동관리 프로젝트
+          비대면 운동관리 프로그램
         </h1>
-        <h1 className="text-2.5-900 sm:text-1.75-900">핏큘레이터 신청하기</h1>
+        <h1 className="text-2.5-900 sm:text-1.75-900">'핏큘레이터' 신청하기</h1>
       </div>
       <Toggle
         handleToggleProduct={handleToggleProduct}
@@ -41,7 +41,7 @@ const Product = () => {
             '커뮤니티 활동',
           ]}
           price={20000}
-          perMonth="1달"
+          perMonth="1개월"
           selectedPeriod={selectedPeriod}
         />
 
@@ -73,7 +73,7 @@ const Product = () => {
             </>,
           ]}
           price={70000}
-          perMonth="1달"
+          perMonth="1개월"
           pro
           selectedPeriod={selectedPeriod}
         />

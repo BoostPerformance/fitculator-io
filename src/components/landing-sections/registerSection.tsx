@@ -1,4 +1,4 @@
-import Section from './section';
+//import Section from './section';
 import Button from '../button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,23 +7,26 @@ export default function RegisterSection() {
   return (
     <section className="relative mb-10 sm:mb-[5rem]">
       <div className="absolute flex items-center justify-center w-full h-[30rem] mt-[8rem] md:h-[38rem] md:mt-[5rem] md:ml-[4rem] sm:top-[2rem] sm:ml-auto z-10 md:items-start md:justify-start sm:items-start sm:justify-start">
-        <div className="flex flex-col gap-[1rem]">
+        <div className="flex flex-col gap-[2.5rem]">
           <div>
-            <div className="text-3-700 sm:text-left sm:px-[2rem] sm:pb-[0.6rem] sm:text-1.25-700">
-              <span>
-                정확한 운동량을 알려주는
-                <br />
-              </span>
+            <div className="text-3-700 sm:text-left sm:px-[2rem] sm:pb-[0.3rem] sm:text-1.25-700 leading-tight ">
+              <div className="sm:pb-[0.7rem]">
+                <span>
+                  정확한 운동량을 알려주는
+                  <br />
+                </span>
 
-              <span>
-                나만의 피트니스 가이드,
-                <br />
+                <span>
+                  나만의 피트니스 가이드,
+                  <br />
+                </span>
+              </div>
+              <span className="sm:text-2.25-700 sm:pb-[0.6rem]">
+                핏큘레이터
               </span>
-
-              <span className="sm:text-2.25-700">핏큘레이터</span>
             </div>
 
-            <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12">
+            <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12 sm:pt-[0.6rem]">
               핏큘레이터와 함께
               <span className="sm:inline hidden">
                 <br />
@@ -40,7 +43,12 @@ export default function RegisterSection() {
             href="#product-section"
             className="hidden sm:inline sm:pl-[2rem]"
           >
-            <Button text="핏큘레이터 신청하기" size="xs" variant="default" />
+            <Button
+              text="핏큘레이터 신청하기"
+              size="xs"
+              variant="default"
+              className="sm:py-[1.15rem] sm:w-[10rem] sm:"
+            />
           </Link>
         </div>
       </div>

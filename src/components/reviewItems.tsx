@@ -2,10 +2,13 @@ import reviewItems from '@/data/reviewItems';
 import Image from 'next/image';
 
 export default function ReviewItems() {
+  const firstRowItems = reviewItems.slice(0, 5);
+  const secondRowItems = reviewItems.slice(5, 10);
+
   return (
     <div className=" w-full overflow-hidden flex flex-col gap-[2rem]">
       <div className="flex w-max gap-5 animate-marquee">
-        {[...reviewItems, ...reviewItems].map((it, index) => (
+        {[...firstRowItems, ...firstRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
@@ -35,7 +38,7 @@ export default function ReviewItems() {
       </div>
 
       <div className="flex w-max gap-5 animate-marquee2 ">
-        {[...reviewItems, ...reviewItems].map((it, index) => (
+        {[...secondRowItems, ...secondRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}

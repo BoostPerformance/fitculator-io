@@ -18,7 +18,7 @@ export default function AppleWatchSection() {
           </>
         }
         description={
-          <div className="text-gray-12">
+          <>
             핏큘레이터의 포인트 시스템은 세계보건기구
             <span className="hidden md:inline sm:inline">
               <br />
@@ -34,7 +34,7 @@ export default function AppleWatchSection() {
               <br />
             </span>
             누구나 사용할 수 있어요.
-          </div>
+          </>
         }
         reverseY
         textCenter

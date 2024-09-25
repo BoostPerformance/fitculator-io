@@ -12,7 +12,7 @@ export default function Reviews() {
           실제 참가자들의 다양한 후기
         </h1>
       </div>
-      <div className="py-4 overflow-x-hidden w-full md:w-[50rem] sm:h-auto scrollbar-hide relative ">
+      <div className="py-4 overflow-x-hidden w-full md:w-[50rem] sm:w-[100%] sm:h-auto scrollbar-hide relative ">
         <ReviewItems />
       </div>
     </div>
