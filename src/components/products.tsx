@@ -21,9 +21,7 @@ const Product = () => {
         <h1 className="text-2.5-900 sm:text-1.75-900">
           비대면 운동관리 프로젝트
         </h1>
-        <h1 className="text-2.5-900 sm:text-1.75-900 sm:mt-2">
-          핏큘레이터 신청하기
-        </h1>
+        <h1 className="text-2.5-900 sm:text-1.75-900">핏큘레이터 신청하기</h1>
       </div>
       <Toggle
         handleToggleProduct={handleToggleProduct}

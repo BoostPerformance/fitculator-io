@@ -29,7 +29,7 @@ function AccordionItem({
         type="button"
       >
         <span
-          className={`py-2 w-auto sm:text-1-500 sm:py-0 ${titleFontWeight}`}
+          className={`py-2 w-auto sm:text-0.875-700 sm:py-0 ${titleFontWeight}`}
         >
           {title}
         </span>
@@ -52,7 +52,7 @@ function AccordionItem({
       </button>
       {isOpen && (
         <div
-          className={`text-gray-1 text-1-500 pb-[2.75rem] flex flex-col ${gap}`}
+          className={`text-gray-1 text-1-500 pb-[2.75rem] flex flex-col ${gap} sm:gap-[0.7rem]`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

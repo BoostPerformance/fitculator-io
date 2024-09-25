@@ -37,6 +37,10 @@ const config: Config = {
         theJamsil: ['TheJamsil', 'sans-serif'],
       },
       colors: {
+        black: {
+          DEFAULT: '#131313',
+          1: '#111212',
+        },
         blue: {
           DEFAULT: '#EBF8FF',
           1: '#0066FF',
@@ -56,6 +60,7 @@ const config: Config = {
           9: '#E0E0E0',
           10: '#BDBDBD',
           11: '#A1A1A1',
+          12: '#767676',
         },
         red: {
           DEFAULT: '#DD204E',
@@ -64,16 +69,19 @@ const config: Config = {
     },
     fontSize: {
       '0.625-500': [' 0.625rem', { fontWeight: 500 }],
+      '0.875-400': [' 0.875rem', { fontWeight: 400 }],
       '0.875-500': [' 0.875rem', { fontWeight: 500 }],
       '0.875-700': [' 0.875rem', { fontWeight: 700 }],
       '0.7-700': ['0.7rem', { fontWeight: 700 }],
       '0.75-500': ['0.75rem', { fontWeight: 500 }],
       '1-500': ['1rem', { fontWeight: 500 }],
+      '1-600': ['1rem', { fontWeight: 600 }],
       '1-700': ['1rem', { fontWeight: 700 }],
+      '1-900': ['1rem', { fontWeight: 900 }],
       '1.125-700': ['1.125rem', { fontWeight: 700 }],
       '1.25-500': ['1.25rem', { fontWeight: 500 }],
-      '1.25-700': ['1.125rem', { fontWeight: 700 }],
-      '1.25-900': ['1.125rem', { fontWeight: 900 }],
+      '1.25-700': ['1.25rem', { fontWeight: 700 }],
+      '1.25-900': ['1.25rem', { fontWeight: 900 }],
       '1.5-500': ['1.5rem', { fontWeight: 500 }],
       '1.5-700': ['1.5rem', { fontWeight: 700 }],
       '1.5-900': ['1.5rem', { fontWeight: 900 }],

@@ -33,7 +33,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body className={`${pretendard.variable} font-pretendard`}>
-        <Nav />
+        <Nav smWidth="sm:w-[7rem]" />
         <Template>
           <Providers>{children}</Providers>
         </Template>

@@ -21,6 +21,7 @@ export default function FaqSection() {
         reverseY
         title2_5900
         description1_75700
+        titleClassName="sm:text-1.25-900"
       />
       <Accordion items={faqItems} />
     </section>

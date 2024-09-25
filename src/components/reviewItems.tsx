@@ -17,8 +17,8 @@ export default function ReviewItems() {
               height={20}
               alt="quotation-mark"
             />
-            <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
-              <div className="flex flex-col gap-[1rem]">
+            <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full text-black">
+              <div className="flex flex-col gap-[1rem] sm:gap-[0.75rem]">
                 <h1 className="text-1.5-900 w-auto md:w-[20rem] md:text-1.5-700 sm:text-0.875-700 ">
                   {it.title}
                 </h1>
