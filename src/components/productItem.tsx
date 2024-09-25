@@ -57,7 +57,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
                     />
                   )}
                 </div>
-                <div className="text-1.25-500 sm:text-1-500">{description}</div>
+                <div
+                  className={`text-1.25-500 sm:text-1-500 ${
+                    pro ? '' : 'text-gray-1'
+                  } `}
+                >
+                  {description}
+                </div>
               </li>
             ))}
           </ul>

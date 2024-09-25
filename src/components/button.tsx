@@ -26,11 +26,11 @@ const Button: React.FC<ButtonProps> = ({
   const variantStyles: Record<ButtonVariant, string> = {
     default: 'text-white',
     outline: 'border border-blue-2',
-    white: 'bg-white text-blue-1 border-blue-1 border border-[0.075rem]',
+    white: 'bg-white text-blue-1',
   };
 
   const sizeStyles: Record<ButtonSize, string> = {
-    xs: 'h-[2.75rem] w-[15.5rem] rounded-[0.375rem] text-1.25-900  sm:w-[8.625rem] sm:h-[1.875rem] sm:py-[1rem] sm:px-[0rem] sm:text-0.875-700',
+    xs: 'h-[2.75rem] w-[15.5rem] rounded-[0.375rem] text-1.25-900  sm:w-[9rem] sm:h-[1.875rem] sm:py-[1rem] sm:px-0 sm:text-0.875-700',
     sm: 'w-[22rem] h-[3.5rem] sm:w-[17rem] items-center rounded-[0.375rem] text-1.25-900 py-[1.75rem] px-[4.25rem]',
     md: 'w-[29rem] text-blue-2 rounded-[0.75rem] mt-[6.25rem] md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[17rem] sm:py-[1rem] sm:ml-[2.5rem] text-1.75-900 md:text-1.5-900 sm:text-1.125-700 py-[1.75rem] px-[4.25rem]',
     lg: 'w-[29rem] text-white rounded-[0.75rem] text-1.75-900 md:w-[20rem] md:mt-[2rem] md:py-[1rem] md:px-[2rem] sm:w-[18rem] sm:py-[1.25rem] md:text-1.5-900 sm:text-1.125-900 py-[1.75rem] px-[4.25rem]',
