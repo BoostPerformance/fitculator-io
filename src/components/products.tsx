@@ -64,7 +64,7 @@ const Product = () => {
           selectedPeriod={selectedPeriod}
         />
         <ProductItem
-          title="LIFE"
+          title="HEALTH"
           descriptions={[
             '운동량 계산 및 분석',
             '피로도 관리',
