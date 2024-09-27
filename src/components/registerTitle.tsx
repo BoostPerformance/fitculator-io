@@ -12,7 +12,7 @@ const RegisterTitle: React.FC<RegisterTitleProps> = ({ title, period }) => {
     <>
       <div className="w-[56.4375rem] sm:w-[20rem] sm:mb-[2rem]">
         <h1 className="text-3-700 sm:text-1.5-700">
-          FITCULATOR
+          Fitculator
           <span className="text-blue-1 ">{` ${title} ${period} `}</span>
           신청
         </h1>
