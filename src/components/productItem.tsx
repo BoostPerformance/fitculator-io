@@ -48,7 +48,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
                 key={index}
                 className="flex flex-row gap-2 items-start sm:text-1-500 relative"
               >
-                <div className="relative w-[1.125rem] h-[1.125rem]">
+                <div className="relative w-[1.125rem] h-[1.125rem] top-[0.2rem]">
                   {pro ? (
                     <Image
                       src="/svg/checkbox-white.svg"
