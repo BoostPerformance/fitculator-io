@@ -15,6 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 const RegisterForm = () => {
   const searchParams = useSearchParams();
   const period: string | null = searchParams.get('period');
+
   const router = useRouter();
 
   const title = searchParams.get('title');
@@ -120,7 +121,10 @@ const RegisterForm = () => {
       noValidate
     >
       <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
-        <RegisterTitle title={title} period={period} />
+        <RegisterTitle
+          title={title}
+          period={`${title !== 'Health' ? '1개월' : period}`}
+        />
         <UserInformation formData={formData} setFormData={setFormData} />
         <ExercisePreference formData={formData} setFormData={setFormData} />
         <ExerciseConcern formData={formData} setFormData={setFormData} />
