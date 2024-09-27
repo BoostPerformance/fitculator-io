@@ -78,6 +78,7 @@ const config: Config = {
       '1-600': ['1rem', { fontWeight: 600 }],
       '1-700': ['1rem', { fontWeight: 700 }],
       '1-900': ['1rem', { fontWeight: 900 }],
+      '1.125-500': ['1.125rem', { fontWeight: 500 }],
       '1.125-700': ['1.125rem', { fontWeight: 700 }],
       '1.25-500': ['1.25rem', { fontWeight: 500 }],
       '1.25-700': ['1.25rem', { fontWeight: 700 }],
@@ -102,7 +103,7 @@ const config: Config = {
     },
     screens: {
       md: { max: '1024px' },
-      sm: { max: '768px' },
+      sm: { max: '767px' },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],

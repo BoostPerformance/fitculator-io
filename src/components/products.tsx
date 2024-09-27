@@ -31,7 +31,7 @@ const Product = () => {
         selectedPeriod={selectedPeriod}
       />
 
-      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:w-auto sm:w-[16rem] justify-center sm:flex-col">
+      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:gap-[1.3rem] md:w-[95%] justify-center sm:flex-col">
         <ProductItem
           title="Basic"
           descriptions={[
@@ -72,16 +72,14 @@ const Product = () => {
                 </div>
                 <div className="flex items-center sm:flex-row gap-1">
                   <div>• 개별 운동 루틴, 데일리 피드백</div>
-                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 sm:text-0.7-700 sm:hidden">
+                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] md:px-[0.2rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 md:text-0.7-700 sm:text-0.7-700 sm:hidden">
                     인기
                   </span>
                 </div>
               </div>
             </>,
-            <div>
-              <div>추천대상: </div> 혼자 운동하지만, 전문가의 가이드가 필요한 분
-            </div>,
           ]}
+          targetCustomer="혼자 운동하지만, 전문가의 가이드가 필요한 분"
           price={70000}
           perMonth="1개월"
           pro
@@ -105,11 +103,8 @@ const Product = () => {
               <div>• 식단 데일리 피드백</div>
               <div>• 생활습관 관리 (수면시간 등)</div>
             </div>,
-            <div className="text-gray-6">
-              <div>추천대상: </div>
-              <div>건강검진에서 이상지질혈증 의심 판정을 받은 분</div>
-            </div>,
           ]}
+          targetCustomer="건강검진에서 이상지질혈증 의심 판정을 받은 분"
           price={135000}
           perMonth={perMonth}
           selectedPeriod={selectedPeriod}
