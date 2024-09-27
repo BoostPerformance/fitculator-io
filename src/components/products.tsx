@@ -14,7 +14,7 @@ const Product = () => {
 
   return (
     <div
-      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full leading-tight"
+      className="h-auto bg-gray-2 w-full md:w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full leading-tight"
       id="product-section"
     >
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />

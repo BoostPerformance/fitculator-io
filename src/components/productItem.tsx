@@ -76,11 +76,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
       </div>
       {(pro || health) && (
-        <div className={`md:px-[1rem] ${pro ? `text-white` : `text-gray-1`}`}>
-          <h1 className="text-1.125-700 md:md:text-1-500 sm:md:text-1-500">
+        <div
+          className={`md:px-[1rem] pt-[2rem] ${
+            pro ? `text-white` : `text-gray-1`
+          }`}
+        >
+          <h1 className="text-1.125-700 md:text-0.875-700 sm:text-0.875-700">
             추천대상:
           </h1>
-          <span className="text-1.125-500 md:md:text-1-500 sm:md:text-1-500">
+          <span className="text-1.125-500 md:text-0.875-500 sm:text-0.875-500">
             {targetCustomer}
           </span>
         </div>

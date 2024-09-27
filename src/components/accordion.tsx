@@ -52,7 +52,7 @@ function AccordionItem({
       </button>
       {isOpen && (
         <div
-          className={`text-gray-1 text-1-500 pb-[2.75rem] flex flex-col ${gap} sm:gap-[0.7rem]`}
+          className={`text-gray-1 text-1-500 md:text-0.75-500 pb-[2.75rem] flex flex-col ${gap} sm:gap-[0.7rem]`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ type AccordionProps = {
 
 function Accordion({ items, gap = 'gap-[1.69rem]' }: AccordionProps) {
   return (
-    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem]">
+    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem] md:px-[2.5rem]">
       {items.map((item) => (
         <AccordionItem
           path={true}

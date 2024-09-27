@@ -2,7 +2,7 @@ import Section from './section';
 
 export default function SlideSection() {
   return (
-    <div className=" bg-white w-full flex flex-col items-center py-[6.25rem] gap-[8.75rem] sm:px-[1.8rem] sm:gap-[5.44rem] leading-tight">
+    <div className=" bg-white w-full flex flex-col items-center py-[6.25rem] gap-[8.75rem] md:px-[1.8rem] sm:px-[1.8rem] sm:gap-[5.44rem] leading-tight">
       <Section
         title={
           <>
