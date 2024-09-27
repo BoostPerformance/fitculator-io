@@ -13,6 +13,10 @@ import {
 } from '@/types/types';
 import { useState, useEffect } from 'react';
 import ExerciseModal from '../exerciseModal';
+import DropdownMenu from '../dropdown';
+import HealthInformation from '../exercisePreference/healthInformation';
+import ExerciseGoal from '../exercisePreference/exerciseGoal';
+import ExercisePerformanceLevel from '../exercisePreference/exercisePerformanceLevel';
 
 export default function ExercisePreference({
   formData,
@@ -20,8 +24,10 @@ export default function ExercisePreference({
 }: ExercisePreferenceProps) {
   const searchParams = useSearchParams();
 
-  const pro: string | null = searchParams.get('pro');
-  const proQuestions: boolean = pro === 'true' ? true : false;
+  const title: string | null = searchParams.get('title');
+  const proQuestions: boolean = title === 'PRO' ? true : false;
+  const healthQuestions: boolean = title === 'Health' ? true : false;
+
   const [showModal, setShowModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -89,36 +95,25 @@ export default function ExercisePreference({
     }
   };
 
+  const handleHealthinfoChange = () => {};
+
   return (
     <div>
       <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-auto sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
-        <RegisterItemTitle title="운동정보" required />
+        {healthQuestions ? (
+          <RegisterItemTitle title="검진정보" required />
+        ) : (
+          <RegisterItemTitle title="운동정보" required />
+        )}
 
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
-          <div className="flex flex-col">
-            <div className="flex gap-[0.5rem] items-end sm:flex-col sm:items-start">
-              <h1 className="text-1.25-700 text-gray-1 sm:text-1-700">
-                운동 목표
-              </h1>
-              <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                운동 목표를 선택 해 주세요. (복수 선택 가능)
-              </p>
-            </div>
-            <MultiSelectionButtons onChange={handleMultiSelectChange} />
-          </div>
-
-          <div className="flex flex-col gap-[3rem]">
-            <div className="flex items-end gap-1 sm:flex-col sm:items-start sm:mt-[5rem]">
-              <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
-                운동 수행 능력(1-7)
-              </h1>
-              <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                본인이 생각하는 운동 수행력을 선택해주세요
-              </p>
-            </div>
-
-            <RadioButtonSlide onChange={handleRadioChange} />
-          </div>
+          {healthQuestions ? (
+            <HealthInformation onChange={handleHealthinfoChange} />
+          ) : (
+            <></>
+          )}
+          <ExerciseGoal onChange={handleMultiSelectChange} />
+          <ExercisePerformanceLevel onChange={handleRadioChange} />
           {proQuestions ? (
             <div className="flex flex-col gap-[0.7rem]">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
@@ -134,7 +129,7 @@ export default function ExercisePreference({
                 </span>
               </div>
 
-              <Dropdown
+              <DropdownMenu
                 data={GoalPercentage}
                 onChange={handlePerformanceLevelChange}
                 title="목표운동량을"

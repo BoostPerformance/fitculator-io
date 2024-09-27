@@ -37,8 +37,9 @@ export default function UserInformation({
 
   const searchParams = useSearchParams();
 
-  const pro: string | null = searchParams.get('pro');
-  const proQuestions: boolean = pro === 'true' ? true : false;
+  const title: string | null = searchParams.get('title');
+  const proQuestions: boolean = title === 'PRO' ? true : false;
+  const healthQuestions: boolean = title === 'Health' ? true : false;
 
   const handleSelectGender = (gender: '남성' | '여성' | '기타' | '비공개') => {
     setFormData((prev) => ({
@@ -62,6 +63,7 @@ export default function UserInformation({
     }
     return '';
   };
+
   const nameValidation = (name: string) => {
     if (name.length < 2) {
       return '* 이름은 최소 두글자 이상이어야 합니다.';
@@ -148,7 +150,32 @@ export default function UserInformation({
               <span className="text-red text-sm">{errors.name}</span>
             )}
           </div>
-
+          {healthQuestions && (
+            <>
+              <div className="flex flex-col sm:gap-[0.1rem]">
+                <div className="flex gap-[0.5rem] items-end sm:items-center">
+                  <div className="text-1.25-700 text-gray-1 sm:text-1-700">
+                    나이
+                  </div>
+                  <p className="text-1-500 text-gray-7 sm:text-0.75-500">
+                    생년월일을 적어주세요
+                  </p>
+                </div>
+                <Input
+                  name="name"
+                  placeholder="1991.08.06"
+                  width="21.25rem"
+                  value={formData?.user?.name || ''}
+                  onChange={handleInputChange}
+                  onBlur={handleBlurChange}
+                  type="text"
+                />
+                {errors.name && (
+                  <span className="text-red text-sm">{errors.name}</span>
+                )}
+              </div>
+            </>
+          )}
           {proQuestions ? (
             <div className="flex flex-col">
               <div>
