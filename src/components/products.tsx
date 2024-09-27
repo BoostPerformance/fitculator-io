@@ -10,6 +10,7 @@ const Product = () => {
   const handleToggleProduct = (period: string) => {
     setSelectedPeriod(period);
   };
+  const perMonth = selectedPeriod;
 
   return (
     <div
@@ -30,9 +31,9 @@ const Product = () => {
         selectedPeriod={selectedPeriod}
       />
 
-      <div className="flex flex-row h-auto gap-[3rem] sm:flex-col">
+      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:w-auto sm:w-[16rem] justify-center sm:flex-col">
         <ProductItem
-          title="PRO"
+          title="Basic"
           descriptions={[
             '운동량 계산 및 분석',
             '피로도 관리',
@@ -41,6 +42,26 @@ const Product = () => {
               <div>• 질문답변, 프로그램 피드백</div>
             </>,
             '커뮤니티 활동',
+          ]}
+          price={0}
+          selectedPeriod={selectedPeriod}
+        />
+        <ProductItem
+          title="PRO"
+          descriptions={[
+            '운동량 계산 및 분석',
+            '피로도 관리',
+            <>
+              <div>헬스케어 AI 어시스턴트</div>
+              <div>• 실시간 질문답변, 프로그램 피드백</div>
+            </>,
+            '커뮤니티 활동',
+            '운동 전담 코치 1인 배정',
+            <>
+              <div>맞춤형 운동 프로그램 제공</div>
+              <div>• 운동 데일리 피드백</div>
+            </>,
+
             <>
               <div className="flex flex-col items-start">
                 <div className="flex items-center sm:gap-1">
@@ -57,6 +78,9 @@ const Product = () => {
                 </div>
               </div>
             </>,
+            <div>
+              <div>추천대상: </div> 혼자 운동하지만, 전문가의 가이드가 필요한 분
+            </div>,
           ]}
           price={70000}
           perMonth="1개월"
@@ -64,19 +88,32 @@ const Product = () => {
           selectedPeriod={selectedPeriod}
         />
         <ProductItem
-          title="HEALTH"
+          title="Health"
           descriptions={[
             '운동량 계산 및 분석',
             '피로도 관리',
             <>
-              <div>피트니스 특화 챗봇</div>
-              <div>• 질문답변, 프로그램 피드백</div>
+              <div>헬스케어 AI 어시스턴트</div>
+              <div>• 실시간 질문답변, 프로그램 피드백</div>
             </>,
             '커뮤니티 활동',
+            '운동 전담 코치 1인 배정',
+            '맞춤형 운동 프로그램 제공',
+            '운동 데일리 피드백',
+            <div className="text-blue-1">
+              <div>식단 전담 코치 1인 배정</div>
+              <div>• 식단 데일리 피드백</div>
+              <div>• 생활습관 관리 (수면시간 등)</div>
+            </div>,
+            <div className="text-gray-6">
+              <div>추천대상: </div>
+              <div>건강검진에서 이상지질혈증 의심 판정을 받은 분</div>
+            </div>,
           ]}
           price={135000}
-          perMonth="1개월"
+          perMonth={perMonth}
           selectedPeriod={selectedPeriod}
+          health
         />
       </div>
     </div>

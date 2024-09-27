@@ -7,8 +7,9 @@ interface ProductItemProps {
   title: string;
   descriptions: (string | ReactNode)[];
   price: number;
-  perMonth: string;
+  perMonth?: string;
   pro?: boolean | ReactNode;
+  health?: boolean | ReactNode;
   selectedPeriod: string;
 }
 
@@ -18,9 +19,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
   price,
   perMonth,
   pro,
+  health,
   selectedPeriod,
 }) => {
-  const calcPrice = selectedPeriod === '3개월' ? price * 3 : price;
+  const calcPrice = selectedPeriod === '3개월' ? 360000 : price;
   const buttonVariant = pro ? 'white' : 'default';
   const priceString = calcPrice.toLocaleString();
 
@@ -77,9 +79,11 @@ const ProductItem: React.FC<ProductItemProps> = ({
               pro ? 'text-white' : 'text-blue-1'
             }`}
           >
-            {priceString} 원
+            {pro ? '70,000 원' : health ? `${priceString} 원` : 'Free'}
           </p>
-          <p className="text-1.25-500">/ {perMonth}</p>
+          <p className="text-1.25-500">
+            {pro || health ? `/ ${perMonth}` : ''}
+          </p>
         </div>
       </div>
 
