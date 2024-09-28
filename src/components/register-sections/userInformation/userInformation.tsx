@@ -74,9 +74,9 @@ export default function UserInformation({
   };
 
   const handleSelectGender = (item: '남성' | '여성' | '기타' | '비공개') => {
-    setFormData((prev) => ({
-      ...prev,
-      user: { ...prev.user, item },
+    setFormData((prevData) => ({
+      ...prevData,
+      user: { ...prevData.user, gender: item },
     }));
   };
 
@@ -260,28 +260,44 @@ export default function UserInformation({
                 <button
                   onClick={() => handleSelectGender('남성')}
                   type="button"
-                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1 "
+                  className={`px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] ${
+                    formData.user.gender === '남성'
+                      ? 'border-blue-1 text-blue-1'
+                      : 'border-gray-7 text-gray-7'
+                  }`}
                 >
                   남성
                 </button>
                 <button
                   onClick={() => handleSelectGender('여성')}
                   type="button"
-                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                  className={`px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] ${
+                    formData.user.gender === '여성'
+                      ? 'border-blue-1 text-blue-1'
+                      : 'border-gray-7 text-gray-7'
+                  }`}
                 >
                   여성
                 </button>
                 <button
                   onClick={() => handleSelectGender('기타')}
                   type="button"
-                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                  className={`px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] ${
+                    formData.user.gender === '기타'
+                      ? 'border-blue-1 text-blue-1'
+                      : 'border-gray-7 text-gray-7'
+                  }`}
                 >
                   기타
                 </button>
                 <button
                   onClick={() => handleSelectGender('비공개')}
                   type="button"
-                  className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
+                  className={`px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] ${
+                    formData.user.gender === '비공개'
+                      ? 'border-blue-1 text-blue-1'
+                      : 'border-gray-7 text-gray-7'
+                  }`}
                 >
                   비공개
                 </button>

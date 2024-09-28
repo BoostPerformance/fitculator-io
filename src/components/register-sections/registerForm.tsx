@@ -28,7 +28,7 @@ const RegisterForm = () => {
       email: '',
       birthday: '',
       phone_number: '',
-      gender: '남성',
+      gender: '',
     },
     exercisePreferences: {
       exercise_level: 1,
@@ -36,6 +36,8 @@ const RegisterForm = () => {
       exercise_performance_level: '',
       exercise_concern: '',
       referral_source: '',
+      total_cholesterol: '',
+      ldl_cholesterol: '',
     },
     programs: {
       type: `${title}`,
@@ -49,15 +51,19 @@ const RegisterForm = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
-    const { name, email, phone_number, birthday } = formData.user;
-    const { exercise_goal } = formData.exercisePreferences;
+    const { name, email, phone_number } = formData.user;
+    const { exercise_goal, total_cholesterol, ldl_cholesterol } =
+      formData.exercisePreferences;
     const { duration_in_months } = formData.programs;
+
+    const isHealthQuestionComplete =
+      total_cholesterol.trim() !== '' && ldl_cholesterol.trim() !== '';
 
     if (
       name.trim() !== '' &&
       email.trim() !== '' &&
       phone_number.trim() !== '' &&
-      exercise_goal.trim() !== '' &&
+      (exercise_goal.trim() !== '' || isHealthQuestionComplete) &&
       duration_in_months > 0
     ) {
       setIsButtonDisabled(false);
@@ -82,7 +88,7 @@ const RegisterForm = () => {
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
-      // router.push('/payment');
+      router.push('/payment');
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
@@ -94,21 +100,26 @@ const RegisterForm = () => {
 
     console.log('Form Data:', formData);
 
-    // const tossPayments = await loadTossPayments(
-    //   process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
-    // );
+    if (title === 'Basic') {
+      router.push(`/payment-success?title=${title}`);
+      return;
+    }
 
-    // if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
-    //   throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
-    // }
+    const tossPayments = await loadTossPayments(
+      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
+    );
 
-    // await tossPayments.requestPayment('카드', {
-    //   amount: Number(`${price}`),
-    //   orderId: Math.random().toString(36).slice(2),
-    //   orderName: `${title} ${period}`,
-    //   successUrl: `${window.location.origin}/api/payments`,
-    //   failUrl: `${window.location.origin}/api/payments/fail`,
-    // });
+    if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
+      throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
+    }
+
+    await tossPayments.requestPayment('카드', {
+      amount: Number(`${price}`),
+      orderId: Math.random().toString(36).slice(2),
+      orderName: `${title} ${period}`,
+      successUrl: `${window.location.origin}/api/payments`,
+      failUrl: `${window.location.origin}/api/payments/fail`,
+    });
 
     if (isButtonDisabled) {
       return;

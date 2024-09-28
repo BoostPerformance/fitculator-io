@@ -19,7 +19,7 @@ export interface ExercisePreferenceType {
     exercise_performance_level?: string;
     referral_source?: string;
     exercise_concern?: string;
-    total_cholesterole?: string;
+    total_cholesterol?: string;
     ldl_cholesterol?: string;
   };
 }
@@ -30,7 +30,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     email: string;
     birthday?: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개';
+    gender?: '남성' | '여성' | '기타' | '비공개' | '';
   };
   programs: {
     type: string;
@@ -55,7 +55,7 @@ export interface RequestItemsType {
     exercise_performance_level?: string;
     exercise_concern?: string;
     referral_source?: string;
-    total_cholesterole?: string;
+    total_cholesterol?: string;
     ldl_cholesterol?: string;
   };
   userSubscription: {
@@ -107,6 +107,8 @@ export interface ApiResponse {
     exercise_performance_level?: string;
     exercise_concern: string;
     referral_source?: string;
+    total_cholesterol?: string;
+    ldl_cholesterol?: string;
   };
 }
 export interface UserInformationProps {

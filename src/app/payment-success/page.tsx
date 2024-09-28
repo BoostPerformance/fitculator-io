@@ -1,8 +1,14 @@
+'use client';
 import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-export default function Error() {
+export default function PaymentSuccess() {
+  const searchParams = useSearchParams();
+  const title = searchParams.get('title');
+  const basic: boolean = title === 'Basic' ? true : false;
+
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image
@@ -23,13 +29,13 @@ export default function Error() {
         />
         <div className="flex flex-col sm:items-center sm:justify-center ">
           <h1 className="text-1.875-300 font-theJamsil">
-            결제를 완료했습니다.
+            {`${basic ? '신청' : '결제'}를 완료했습니다.`}
           </h1>
           <h2 className="text-1.875-500 pt-[1rem] font-theJamsil">
             이제 핏큘레이터와 <br /> 함께 운동해요!
           </h2>
           <p className="text-1.5-400 sm:text-center sm:text-[1.7rem]">
-            <br /> 곧 디스코드로 입장 링크를
+            <br /> 곧 디스코드 입장 링크를
             <br />
             휴대폰으로 전송 드릴게요!
           </p>

@@ -2,9 +2,7 @@ import Dropdown from '../dropdown';
 import GoalPercentage from '@/data/goalPercentage';
 import ReferralSource from '@/data/referralSource';
 import RegisterItemTitle from './registerItemTitle';
-import MultiSelectionButtons from '../multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
-import RadioButtonSlide from '../radioButtonSlide';
 import ExerciseGuideline from './exerciseGuideline';
 import {
   RegisterFormData,
@@ -100,10 +98,11 @@ export default function ExercisePreference({
       ...prev,
       exercisePreferences: {
         ...prev.exercisePreferences,
-        total_cholesterole: item.option,
+        total_cholesterol: item.option,
       },
     }));
   };
+
   const onChangeLDLChol = (item: DropdownOption) => {
     setFormData((prev: RegisterFormData) => ({
       ...prev,
@@ -117,11 +116,10 @@ export default function ExercisePreference({
   return (
     <div>
       <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-auto sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
-        {healthQuestions ? (
-          <RegisterItemTitle title="검진정보" required />
-        ) : (
-          <RegisterItemTitle title="운동정보" required />
-        )}
+        <RegisterItemTitle
+          title={`${healthQuestions ? '건강' : '운동'} 정보`}
+          required
+        />
 
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
           {healthQuestions ? (

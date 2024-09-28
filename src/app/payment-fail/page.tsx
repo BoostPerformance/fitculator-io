@@ -2,7 +2,7 @@ import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Error() {
+export default function PaymentFail() {
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image
