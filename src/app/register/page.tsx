@@ -1,4 +1,4 @@
-import RegisterForm from '@/components/registerForm';
+import RegisterForm from '@/components/register-sections/registerForm';
 import React, { Suspense } from 'react';
 
 const Register = () => {

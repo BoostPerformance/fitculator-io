@@ -24,7 +24,7 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
   };
 
   return (
-    <div className="w-auto mb-[4rem] z-0">
+    <div className="w-auto mt-[3rem] mb-[5rem] z-0">
       <div className="relative flex w-full">
         <div className="absolute inset-0 flex items-center justify-center sm:w-[18rem] sm:left-3">
           <div className="w-[38rem] h-[0.2rem] bg-blue-500"></div>
@@ -54,7 +54,7 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
                   <Image
                     src="/svg/checkbox-blue.svg"
                     alt="Checked"
-                    className="w-6 h-6 absolute inset-0 m-auto sm:ml-[0.02rem]"
+                    className="w-6 h-6 absolute inset-0 m-auto ml-[0.02rem]"
                     width={50}
                     height={50}
                   />

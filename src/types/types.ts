@@ -1,6 +1,7 @@
 export interface UserInfoFormData {
   user: {
     name: string;
+    birthDate?: string;
     email: string;
     phone_number: string;
     gender?: '남성' | '여성' | '기타' | '비공개';
@@ -18,6 +19,8 @@ export interface ExercisePreferenceType {
     exercise_performance_level?: string;
     referral_source?: string;
     exercise_concern?: string;
+    total_cholesterol?: string;
+    ldl_cholesterol?: string;
   };
 }
 
@@ -25,8 +28,9 @@ export interface RegisterFormData extends ExercisePreferenceType {
   user: {
     name: string;
     email: string;
+    birthday?: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개';
+    gender?: '남성' | '여성' | '기타' | '비공개' | '';
   };
   programs: {
     type: string;
@@ -41,8 +45,9 @@ export interface RequestItemsType {
   user: {
     name: string;
     email: string;
+    birthday?: string;
     phone_number: string;
-    gender: string;
+    gender?: string;
   };
   exercisePreferences: {
     exercise_level: number;
@@ -50,6 +55,8 @@ export interface RequestItemsType {
     exercise_performance_level?: string;
     exercise_concern?: string;
     referral_source?: string;
+    total_cholesterol?: string;
+    ldl_cholesterol?: string;
   };
   userSubscription: {
     batchId: number | null;
@@ -75,8 +82,9 @@ export interface ApiResponse {
     id: number;
     name: string;
     email: string;
+    birthday?: string;
     phone_number: string;
-    gender: '남성' | '여성' | '기타' | '비공개';
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
   program: {
     id: number;
@@ -99,6 +107,8 @@ export interface ApiResponse {
     exercise_performance_level?: string;
     exercise_concern: string;
     referral_source?: string;
+    total_cholesterol?: string;
+    ldl_cholesterol?: string;
   };
 }
 export interface UserInformationProps {

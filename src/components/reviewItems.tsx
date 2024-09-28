@@ -17,7 +17,7 @@ export default function ReviewItems() {
               className="sm:w-[1.6rem] sm:mt-0"
               src="/svg/quotation-mark.svg"
               width={35}
-              height={20}
+              height={350}
               alt="quotation-mark"
             />
             <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full text-black">

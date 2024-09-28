@@ -3,10 +3,10 @@ import Button from '@/components/button';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData, ApiResponse } from '@/types/types';
-import RefundPolicy from './refundPolicy';
-import UserInformation from './register-sections/userInformation';
-import ExercisePreference from './register-sections/exercisePreference';
-import ExerciseConcern from './register-sections/exerciseConcern';
+import RefundPolicy from '../refundPolicy';
+import UserInformation from './userInformation/userInformation';
+import ExercisePreference from './exercisePreference';
+import ExerciseConcern from './exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
@@ -15,6 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 const RegisterForm = () => {
   const searchParams = useSearchParams();
   const period: string | null = searchParams.get('period');
+
   const router = useRouter();
 
   const title = searchParams.get('title');
@@ -25,8 +26,9 @@ const RegisterForm = () => {
     user: {
       name: '',
       email: '',
+      birthday: '',
       phone_number: '',
-      gender: '남성',
+      gender: '',
     },
     exercisePreferences: {
       exercise_level: 1,
@@ -34,6 +36,8 @@ const RegisterForm = () => {
       exercise_performance_level: '',
       exercise_concern: '',
       referral_source: '',
+      total_cholesterol: '',
+      ldl_cholesterol: '',
     },
     programs: {
       type: `${title}`,
@@ -48,14 +52,18 @@ const RegisterForm = () => {
 
   useEffect(() => {
     const { name, email, phone_number } = formData.user;
-    const { exercise_goal } = formData.exercisePreferences;
+    const { exercise_goal, total_cholesterol, ldl_cholesterol } =
+      formData.exercisePreferences;
     const { duration_in_months } = formData.programs;
 
+    const isHealthQuestionComplete =
+      total_cholesterol?.trim() !== '' && ldl_cholesterol?.trim() !== '';
+
     if (
-      name.trim() !== '' &&
-      email.trim() !== '' &&
-      phone_number.trim() !== '' &&
-      exercise_goal.trim() !== '' &&
+      name?.trim() !== '' &&
+      email?.trim() !== '' &&
+      phone_number?.trim() !== '' &&
+      (exercise_goal?.trim() !== '' || isHealthQuestionComplete) &&
       duration_in_months > 0
     ) {
       setIsButtonDisabled(false);
@@ -90,6 +98,13 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log('Form Data:', formData);
+
+    if (title === 'Basic') {
+      router.push(`/payment-success?title=${title}`);
+      return;
+    }
+
     const tossPayments = await loadTossPayments(
       process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
     );
@@ -120,7 +135,10 @@ const RegisterForm = () => {
       noValidate
     >
       <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
-        <RegisterTitle title={title} period={period} />
+        <RegisterTitle
+          title={title}
+          period={`${title !== 'Health' ? '1개월' : period}`}
+        />
         <UserInformation formData={formData} setFormData={setFormData} />
         <ExercisePreference formData={formData} setFormData={setFormData} />
         <ExerciseConcern formData={formData} setFormData={setFormData} />
@@ -128,7 +146,7 @@ const RegisterForm = () => {
       <div className="flex flex-col gap-[0.5rem] items-center">
         <Button
           className="mt-0"
-          text={`결제하기`}
+          text={`${title === 'Basic' ? '신청하기' : '결제하기'}`}
           size="lg"
           variant="default"
           type="submit"
