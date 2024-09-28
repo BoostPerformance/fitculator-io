@@ -1,5 +1,5 @@
 'use client';
-import RegisterItemTitle from '../registerItemTitle';
+import RegisterItemTitle from './registerItemTitle';
 import Input from '../input';
 import { ExercisePreferenceProps } from '@/types/types';
 import { useState } from 'react';

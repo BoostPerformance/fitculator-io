@@ -1,7 +1,7 @@
 import Dropdown from '../dropdown';
 import GoalPercentage from '@/data/goalPercentage';
 import ReferralSource from '@/data/referralSource';
-import RegisterItemTitle from '../registerItemTitle';
+import RegisterItemTitle from './registerItemTitle';
 import MultiSelectionButtons from '../multiselectionButtons';
 import { useSearchParams } from 'next/navigation';
 import RadioButtonSlide from '../radioButtonSlide';

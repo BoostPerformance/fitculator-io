@@ -1,8 +1,8 @@
-import Input from '../input';
+import Input from '../../input';
 import RegisterItemTitle from '../registerItemTitle';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import BatchesDropdown from '../\bbatchesDropdown';
+import BatchesDropdown from '@/components/\bbatchesDropdown';
 import { UserInformationProps, DropdownOption } from '@/types/types';
 
 export default function UserInformation({
@@ -73,15 +73,11 @@ export default function UserInformation({
     return '';
   };
 
-  const handleSelectGender = (gender: '남성' | '여성' | '기타' | '비공개') => {
+  const handleSelectGender = (item: '남성' | '여성' | '기타' | '비공개') => {
     setFormData((prev) => ({
       ...prev,
-      user: {
-        ...prev.user,
-        gender,
-      },
+      user: { ...prev.user, item },
     }));
-    console.log(gender);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,7 +228,7 @@ export default function UserInformation({
               </div>
             </>
           )}
-          {proQuestions ? (
+          {proQuestions && (
             <div className="flex flex-col">
               <div>
                 <div className="flex gap-[0.3rem] items-end sm:items-center sm:gap-[0.1rem]">
@@ -256,7 +252,8 @@ export default function UserInformation({
                 />
               </div>
             </div>
-          ) : (
+          )}
+          {!proQuestions && (
             <div className="flex flex-col gap-[0.75rem]">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700 ">성별</h1>
               <div className="flex gap-[1.06rem] sm:gap-[0.7rem] sm:text-0.75-500">
@@ -275,14 +272,14 @@ export default function UserInformation({
                   여성
                 </button>
                 <button
-                  onClick={() => handleSelectGender('여성')}
+                  onClick={() => handleSelectGender('기타')}
                   type="button"
                   className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
                 >
                   기타
                 </button>
                 <button
-                  onClick={() => handleSelectGender('여성')}
+                  onClick={() => handleSelectGender('비공개')}
                   type="button"
                   className="px-[1.25rem] py-[0.625rem] rounded-[0.375rem] border-[0.1rem] border-gray-7 text-gray-7 focus:border-blue-1 focus:text-blue-1"
                 >
@@ -291,7 +288,6 @@ export default function UserInformation({
               </div>
             </div>
           )}
-
           <div className="flex flex-col">
             <div className="flex gap-[0.5rem] items-end sm:items-center">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
@@ -314,7 +310,6 @@ export default function UserInformation({
               <span className="text-red text-sm">{errors.email}</span>
             )}
           </div>
-
           <div className="flex flex-col sm:gap-[0.75rem]">
             <div className="flex gap-[0.5rem] items-end sm:items-center">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">

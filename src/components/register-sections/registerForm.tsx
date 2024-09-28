@@ -3,10 +3,10 @@ import Button from '@/components/button';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData, ApiResponse } from '@/types/types';
-import RefundPolicy from './refundPolicy';
-import UserInformation from './register-sections/userInformation';
-import ExercisePreference from './register-sections/exercisePreference';
-import ExerciseConcern from './register-sections/exerciseConcern';
+import RefundPolicy from '../refundPolicy';
+import UserInformation from './userInformation/userInformation';
+import ExercisePreference from './exercisePreference';
+import ExerciseConcern from './exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
@@ -28,7 +28,7 @@ const RegisterForm = () => {
       email: '',
       birthday: '',
       phone_number: '',
-      gender: '',
+      gender: '남성',
     },
     exercisePreferences: {
       exercise_level: 1,
@@ -82,7 +82,7 @@ const RegisterForm = () => {
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
-      router.push('/payment');
+      // router.push('/payment');
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);

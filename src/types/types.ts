@@ -4,7 +4,7 @@ export interface UserInfoFormData {
     birthDate?: string;
     email: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | '';
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
 }
 
@@ -30,7 +30,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     email: string;
     birthday?: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | '';
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
   programs: {
     type: string;
@@ -84,7 +84,7 @@ export interface ApiResponse {
     email: string;
     birthday?: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | '';
+    gender?: '남성' | '여성' | '기타' | '비공개';
   };
   program: {
     id: number;

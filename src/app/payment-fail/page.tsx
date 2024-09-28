@@ -14,7 +14,7 @@ export default function Error() {
       />
       <div className="flex flex-col gap-[1rem] w-[40rem] sm:w-auto sm:px-[3rem]">
         <Image
-          src="/svg/logo.svg"
+          src="/images/logo.png"
           width={200}
           height={0}
           alt="logo"
