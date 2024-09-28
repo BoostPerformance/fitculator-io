@@ -3,11 +3,19 @@ import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense, useState, useEffect } from 'react';
 
 export default function PaymentSuccess() {
+  const [title, setTitle] = useState<string | null>(null);
   const searchParams = useSearchParams();
-  const title = searchParams.get('title');
-  const basic: boolean = title === 'Basic' ? true : false;
+
+  useEffect(() => {
+    // 클라이언트 측에서만 searchParams를 사용해서 title 설정
+    const param = searchParams.get('title');
+    setTitle(param);
+  }, [searchParams]);
+
+  const basic: boolean = title === 'Basic';
 
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
