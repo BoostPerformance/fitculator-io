@@ -14,6 +14,7 @@ const NavLogo: React.FC<NavLogoProps> = ({ smWidth }) => {
         alt="main "
         width={1000}
         height={1000}
+        priority
       />
     </Link>
   );

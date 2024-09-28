@@ -30,7 +30,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   return (
     <div
-      className={`min-h-auto w-[51%] md:w-[40%] sm:w-full border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[2.5rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
+      className={`min-h-auto w-[52%] md:w-[40%] sm:w-full border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[1rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
         pro ? 'from-blue-2 bg-gradient-to-tl to-blue-1 from-17% text-white' : ''
       }`}
     >
@@ -53,13 +53,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
                     <Image
                       src="/svg/checkbox-white.svg"
                       alt="check"
-                      layout="fill"
+                      width={40}
+                      height={40}
                     />
                   ) : (
                     <Image
                       src="/svg/checkbox-blue.svg"
                       alt="check"
-                      layout="fill"
+                      width={40}
+                      height={40}
                     />
                   )}
                 </div>

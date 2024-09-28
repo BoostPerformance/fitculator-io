@@ -26,8 +26,9 @@ const RegisterForm = () => {
     user: {
       name: '',
       email: '',
+      birthday: '',
       phone_number: '',
-      gender: '남성',
+      gender: '',
     },
     exercisePreferences: {
       exercise_level: 1,
@@ -48,7 +49,7 @@ const RegisterForm = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
-    const { name, email, phone_number } = formData.user;
+    const { name, email, phone_number, birthday } = formData.user;
     const { exercise_goal } = formData.exercisePreferences;
     const { duration_in_months } = formData.programs;
 
@@ -91,21 +92,23 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const tossPayments = await loadTossPayments(
-      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
-    );
+    console.log('Form Data:', formData);
 
-    if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
-      throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
-    }
+    // const tossPayments = await loadTossPayments(
+    //   process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
+    // );
 
-    await tossPayments.requestPayment('카드', {
-      amount: Number(`${price}`),
-      orderId: Math.random().toString(36).slice(2),
-      orderName: `${title} ${period}`,
-      successUrl: `${window.location.origin}/api/payments`,
-      failUrl: `${window.location.origin}/api/payments/fail`,
-    });
+    // if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
+    //   throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
+    // }
+
+    // await tossPayments.requestPayment('카드', {
+    //   amount: Number(`${price}`),
+    //   orderId: Math.random().toString(36).slice(2),
+    //   orderName: `${title} ${period}`,
+    //   successUrl: `${window.location.origin}/api/payments`,
+    //   failUrl: `${window.location.origin}/api/payments/fail`,
+    // });
 
     if (isButtonDisabled) {
       return;
@@ -132,7 +135,7 @@ const RegisterForm = () => {
       <div className="flex flex-col gap-[0.5rem] items-center">
         <Button
           className="mt-0"
-          text={`결제하기`}
+          text={`${title === 'Basic' ? '신청하기' : '결제하기'}`}
           size="lg"
           variant="default"
           type="submit"

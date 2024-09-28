@@ -1,12 +1,16 @@
 import DropdownMenu from '../dropdown';
-import { totalColesterole, LDLColesterole } from '@/data/healthItems';
+import { totalCholesterol, LDLCholesterol } from '@/data/healthItems';
 import { DropdownOption } from '@/types/types';
 
+interface HealthInfoProps {
+  onChangeTotalChol: (item: DropdownOption) => void;
+  onChangeLDLChol: (item: DropdownOption) => void;
+}
+
 export default function HealthInformation({
-  onChange,
-}: {
-  onChange: (item: DropdownOption) => void;
-}) {
+  onChangeTotalChol,
+  onChangeLDLChol,
+}: HealthInfoProps) {
   return (
     <>
       <div className="flex flex-col gap-0">
@@ -14,8 +18,8 @@ export default function HealthInformation({
           총 콜레스테롤 수치를 선택해주세요
         </h1>
         <DropdownMenu
-          data={totalColesterole}
-          onChange={onChange}
+          data={totalCholesterol}
+          onChange={onChangeTotalChol}
           title="수치를"
         />
       </div>
@@ -25,8 +29,8 @@ export default function HealthInformation({
           LDL 콜레스테롤 수치를 선택해주세요
         </h1>
         <DropdownMenu
-          data={LDLColesterole}
-          onChange={onChange}
+          data={LDLCholesterol}
+          onChange={onChangeLDLChol}
           title="수치를"
         />
       </div>

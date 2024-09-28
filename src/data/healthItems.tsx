@@ -1,6 +1,6 @@
 import { DropdownOption } from '@/types/types';
 
-const totalColesterole: DropdownOption[] = [
+const totalCholesterol: DropdownOption[] = [
   {
     id: 1,
     option: '정상: 200 mg/dL 미만',
@@ -9,7 +9,7 @@ const totalColesterole: DropdownOption[] = [
   { id: 3, option: '높음: 240 mg/dL 이상' },
 ];
 
-const LDLColesterole = [
+const LDLCholesterol = [
   {
     id: 1,
     option: '정상 : 130 mg/dL 미만',
@@ -19,4 +19,4 @@ const LDLColesterole = [
   { id: 4, option: '매우 높음: 190 mg/dL 이상' },
 ];
 
-export { totalColesterole, LDLColesterole };
+export { totalCholesterol, LDLCholesterol };
