@@ -57,13 +57,13 @@ const RegisterForm = () => {
     const { duration_in_months } = formData.programs;
 
     const isHealthQuestionComplete =
-      total_cholesterol.trim() !== '' && ldl_cholesterol.trim() !== '';
+      total_cholesterol?.trim() !== '' && ldl_cholesterol?.trim() !== '';
 
     if (
-      name.trim() !== '' &&
-      email.trim() !== '' &&
-      phone_number.trim() !== '' &&
-      (exercise_goal.trim() !== '' || isHealthQuestionComplete) &&
+      name?.trim() !== '' &&
+      email?.trim() !== '' &&
+      phone_number?.trim() !== '' &&
+      (exercise_goal?.trim() !== '' || isHealthQuestionComplete) &&
       duration_in_months > 0
     ) {
       setIsButtonDisabled(false);
