@@ -112,15 +112,15 @@ const RegisterForm = () => {
       amount: Number(`${price}`),
       orderId: Math.random().toString(36).slice(2),
       orderName: `${title} ${period}`,
-      successUrl: `${window.location.origin}/api/payments`,
-      failUrl: `${window.location.origin}/api/payments/fail`,
+      successUrl: `${window.location.origin}/payment/complete`,
+      failUrl: `${window.location.origin}/payment-fail`,
     });
+
+    mutation.mutate();
 
     if (isButtonDisabled) {
       return;
     }
-
-    mutation.mutate();
   };
 
   return (

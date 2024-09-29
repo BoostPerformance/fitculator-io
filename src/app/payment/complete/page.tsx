@@ -1,4 +1,3 @@
-'use client';
 import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,17 +7,6 @@ interface CompleteProps {
 }
 
 export default async function Payment({ searchParams }: CompleteProps) {
-  const secretKey = process.env.TOSS_SECRET_KEY || '';
-  const basicToken = Buffer.from(`${secretKey}:`, `utf-8`).toString('base64');
-
-  const url = `https://api.tosspayments.com/v1/payments/orders/${searchParams.orderId}`;
-  const payments = await fetch(url, {
-    headers: {
-      Authorization: `Basic ${basicToken}`,
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => res.json());
-
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image
@@ -50,11 +38,13 @@ export default async function Payment({ searchParams }: CompleteProps) {
             휴대폰으로 전송 드릴게요!
           </p>
           <ul>
-            <li>주문번호 {payments.orderId}</li>
+            <li className="text-1.5-400 py-[1rem]">
+              주문번호: {searchParams.orderId}
+            </li>
           </ul>
         </div>
 
-        <Link href="./">
+        <Link href="/">
           <Button
             text="홈으로 가기"
             size="sm"
