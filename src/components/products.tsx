@@ -56,24 +56,15 @@ const Product = () => {
               <div>• 실시간 질문답변, 프로그램 피드백</div>
             </>,
             '커뮤니티',
-
-            <>
-              <div>운동 전담 코치 1인 배정</div>
-              <div>• 맞춤형 운동 프로그램 제공</div>
-              <div>• 운동 피드백</div>
-            </>,
-
             <>
               <div className="flex flex-col items-start">
-                <div className="flex items-center sm:gap-1">
-                  <div>전담 코치 배정</div>
-                  <span className="rounded-[1.125rem] py-0 px-[0.5rem] border-[0.1rem] border-white text-white bg-transparent sm:text-0.75-500 2 hidden sm:inline">
-                    인기
-                  </span>
+                <div className="flex flex-col items-start sm:gap-1">
+                  <div>전담 코치 1인 배정</div>
+                  <div>• 맞춤형 운동 프로그램 제공</div>
                 </div>
                 <div className="flex items-center sm:flex-row gap-1">
-                  <div>• 개별 운동 루틴, 데일리 피드백</div>
-                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] md:px-[0.2rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 md:text-0.7-700 sm:text-0.7-700 sm:hidden">
+                  <div>• 운동 피드백</div>
+                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] md:px-[0.2rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 md:text-0.7-700 sm:text-0.7-700 ">
                     인기
                   </span>
                 </div>
