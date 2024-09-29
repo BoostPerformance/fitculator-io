@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: any) {
   try {
-    const { orderId, paymentKey, amount } = await req.json();
+    const { amount, orderId, paymentKey } = await req.json();
 
     const secretKey = process.env.TOSS_SECRET_KEY;
     const url = 'https://api.tosspayments.com/v1/payments/confirm';
@@ -22,6 +22,7 @@ export async function POST(req: any) {
     });
 
     const responseData = await response.json();
+    console.log('POST Api 리스폰스', responseData);
 
     if (response.ok) {
       // 결제 성공 시 클라이언트에 성공 응답 반환
