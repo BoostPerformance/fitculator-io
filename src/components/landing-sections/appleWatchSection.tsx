@@ -10,6 +10,7 @@ export default function AppleWatchSection() {
         alt="smart-watch"
         width={10}
         height={10}
+        priority
       />
       <Section
         title={

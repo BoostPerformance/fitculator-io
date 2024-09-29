@@ -14,10 +14,10 @@ export default function ReviewItems() {
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
           >
             <Image
-              className="sm:w-[1.6rem] sm:mt-0"
+              className="sm:w-[1.2rem] sm:mt-0 sm:object-contain"
               src="/svg/quotation-mark.svg"
               width={35}
-              height={20}
+              height={35}
               alt="quotation-mark"
             />
             <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
@@ -44,10 +44,10 @@ export default function ReviewItems() {
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
           >
             <Image
-              className="sm:w-[1.6rem] sm:mt-0"
+              className="sm:w-[1.2rem] sm:mt-0 sm:object-contain"
               src="/svg/quotation-mark.svg"
               width={35}
-              height={20}
+              height={35}
               alt="quotation-mark"
             />
             <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
