@@ -1,16 +1,18 @@
+'use client';
 import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-interface CompleteProps {
-  searchParams: Record<string, string | string[] | undefined>;
-}
+// interface CompleteProps {
+//   searchParams: Record<string, string | string[] | undefined>;
+// }
 
-export default async function Payment() {
+export default function Payment() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [responseData, setResponseData] = useState(null);
 
   useEffect(() => {
     const requestData = {
@@ -19,26 +21,34 @@ export default async function Payment() {
       paymentKey: searchParams.get('paymentKey'),
     };
 
-    async function confirm() {
-      const response = await fetch('/confirm', {
+    function confirm() {
+      fetch('/api/payments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestData),
-      });
-
-      const json = await response.json();
-      console.log(json);
-
-      if (!response.ok) {
-        router.push(`/payment-fail?message=${json.message}&code=${json.code}`);
-        return;
-      }
-      // 결제 성공 비즈니스 로직을 구현하세요.
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.error) {
+            // 결제 실패 시, 실패 페이지로 이동
+            router.push(
+              `/payment-fail?message=${json.message}&code=${json.code}`
+            );
+            return;
+          }
+          setResponseData(json);
+          router.push(`/payment/complete?orderId=${requestData.orderId}`);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          router.push(`/payment-fail?message=Unknown error`);
+        });
     }
+
     confirm();
-  }, []);
+  }, [searchParams, router]);
 
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
@@ -49,6 +59,7 @@ export default async function Payment() {
         height={40}
         alt="신발이미지
         "
+        priority
       />
       <div className="flex flex-col gap-[3rem] w-[40rem] sm:w-auto sm:px-[3rem]">
         <Image
