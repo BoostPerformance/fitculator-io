@@ -36,6 +36,15 @@ export interface RegisterFormData extends ExercisePreferenceType {
     type: string;
     duration_in_months: number;
   };
+  paymentInfo: {
+    amount: number;
+    orderId: string;
+    paymentKey: string;
+    orderName: string;
+    cardType: string;
+    ownerType: string;
+    currency: string;
+  };
   subscriptions: {
     batch_id: number | null;
   };
@@ -89,6 +98,17 @@ export interface ApiResponse {
   program: {
     id: number;
     name: string;
+  };
+  paymentInfo: {
+    id: number;
+    amount: number;
+    orderId: string;
+    paymentKey: string;
+    orderName: string;
+    cardType: string;
+    ownerType: string;
+    currency: string;
+    payment_date: string;
   };
   userSubscription: {
     id: number;

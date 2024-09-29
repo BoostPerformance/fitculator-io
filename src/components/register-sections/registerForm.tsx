@@ -2,7 +2,7 @@
 import Button from '@/components/button';
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { RegisterFormData, ApiResponse } from '@/types/types';
+import { RegisterFormData } from '@/types/types';
 import RefundPolicy from '../refundPolicy';
 import UserInformation from './userInformation/userInformation';
 import ExercisePreference from './exercisePreference';
@@ -10,7 +10,6 @@ import ExerciseConcern from './exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
-import { useMutation } from '@tanstack/react-query';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -42,6 +41,16 @@ const RegisterForm = () => {
     programs: {
       type: `${title}`,
       duration_in_months: parseInt(`${period}`),
+    },
+    paymentInfo: {
+      // 새로운 결제 정보 추가
+      amount: 0,
+      orderId: '',
+      paymentKey: '',
+      orderName: `${title} ${period}`,
+      cardType: '',
+      ownerType: '',
+      currency: 'KRW',
     },
     subscriptions: {
       batch_id: null,
@@ -77,29 +86,6 @@ const RegisterForm = () => {
     }
   }, [formData]);
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      const response = await fetch('/api/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('폼 제출에 실패했습니다.');
-      }
-
-      return response.json();
-    },
-    onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
-      router.push('/payment');
-    },
-    onError: (error) => {
-      console.error('폼 제출 중 에러 발생:', error);
-    },
-  });
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -107,11 +93,7 @@ const RegisterForm = () => {
       process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
     );
 
-    // TossPayments 클라이언트 키가 설정되지 않은 경우 에러를 발생시킵니다.
-    if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
-      throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
-    }
-    console.log('Form Data:', formData);
+    // console.log('Form Data:', formData);
 
     const orderId = Math.random().toString(36).slice(2);
     console.log('새로운 주문번호 생성:', orderId);
@@ -124,7 +106,7 @@ const RegisterForm = () => {
       failUrl: `${window.location.origin}/payment-fail`,
     });
 
-    mutation.mutate();
+    localStorage.setItem('formData', JSON.stringify(formData));
 
     if (isButtonDisabled) {
       return;

@@ -72,11 +72,25 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const paymentInfo = await prisma.paymentinfo.create({
+      data: {
+        user_subscription_id: userSubscriptionInfo.id,
+        amount: body.payment.amount,
+        payment_date: new Date(body.payment.payment_date),
+        payment_key: body.payment.payment_key,
+        order_id: body.payment.order_id,
+        order_name: body.payment.order_name || null,
+        card_type: body.payment.card_type || null,
+        owner_type: body.payment.owner_type || null,
+        currency: body.payment.currency || 'USD',
+      },
+    });
     return Response.json({
       user: userInfo,
       exercisepreferences: exercisePreferenceInfo,
       programs: programInfo,
       usersubscriptions: userSubscriptionInfo,
+      paymentinfo: paymentInfo,
     });
   } catch (error) {
     console.error('Prisma error:', error);

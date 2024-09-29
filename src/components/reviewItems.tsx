@@ -19,6 +19,7 @@ export default function ReviewItems() {
               width={30}
               height={30}
               alt="quotation-mark"
+              priority
             />
             <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
               <div className="flex flex-col gap-[1rem]">
@@ -49,6 +50,7 @@ export default function ReviewItems() {
               width={30}
               height={30}
               alt="quotation-mark"
+              priority
             />
             <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
               <div className="flex flex-col gap-[1rem]">
