@@ -6,8 +6,8 @@ export default function ReviewItems() {
   const secondRowItems = reviewItems.slice(5, 10);
 
   return (
-    <div className=" w-full overflow-hidden flex flex-col gap-[2rem]">
-      <div className="flex w-max gap-5 animate-marquee">
+    <div className="w-full overflow-hidden flex flex-col gap-[2rem]">
+      <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee">
         {[...firstRowItems, ...firstRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
@@ -37,7 +37,7 @@ export default function ReviewItems() {
         ))}
       </div>
 
-      <div className="flex w-max gap-5 animate-marquee2 ">
+      <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee2 ">
         {[...secondRowItems, ...secondRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
