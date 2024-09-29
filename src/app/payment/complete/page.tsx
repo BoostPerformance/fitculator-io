@@ -19,7 +19,6 @@ export default async function Payment({ searchParams }: CompleteProps) {
     },
   }).then((res) => res.json());
 
-  const { card } = payments;
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image

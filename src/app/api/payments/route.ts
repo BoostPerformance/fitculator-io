@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: any, res: any) {
   try {
@@ -8,8 +8,8 @@ export async function POST(req: any, res: any) {
     const url = 'https://api.tosspayments.com/v1/payments/confirm';
     const basicToken = Buffer.from(`${secretKey}:`, 'utf-8').toString('base64');
 
-    await fetch(url, {
-      method: 'post',
+    const paymentResponse = await fetch(url, {
+      method: 'POST',
       body: JSON.stringify({
         amount,
         orderId,
@@ -19,7 +19,11 @@ export async function POST(req: any, res: any) {
         Authorization: `Basic ${basicToken}`,
         'Content-Type': 'application/json',
       },
-    }).then((res) => res.json());
+    });
+    console.log('Payment API Response Status:', paymentResponse.status); // 상태 코드 출력
+
+    const paymentData = await paymentResponse.json();
+    console.log('Payment API Response Data:', paymentData); // 응답 내용 출력
 
     // TODO: DB 처리
     res.redirect(`/payment/complete?orderId=${orderId}`);
