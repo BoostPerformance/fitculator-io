@@ -14,7 +14,7 @@ export default function FaqSection() {
         description={
           <>
             자주 물어보신 질문들만 <br />
-            모아 둔 FAQ를 참고해 주세요.
+            모아둔 FAQ를 참고해 주세요.
           </>
         }
         textCenter

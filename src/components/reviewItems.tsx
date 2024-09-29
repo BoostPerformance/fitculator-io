@@ -6,7 +6,7 @@ export default function ReviewItems() {
   const secondRowItems = reviewItems.slice(5, 10);
 
   return (
-    <div className="w-full overflow-hidden flex flex-col gap-[2rem]">
+    <div className="w-max grid gap-4 sm:grid-cols-3 sm:grid-flow-col sm:grid-rows-2 sm:gap-[0.94rem]">
       <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee">
         {[...firstRowItems, ...firstRowItems].map((it, index) => (
           <div
