@@ -7,8 +7,8 @@ export default function ReviewItems() {
 
   return (
     <div className="w-max grid gap-4 sm:grid-cols-3 sm:grid-flow-col sm:grid-rows-2 sm:gap-[0.94rem]">
-      <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee">
-        {[...reviewItems].map((it, index) => (
+      <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee ">
+        {[...firstRowItems, ...firstRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}
@@ -17,11 +17,11 @@ export default function ReviewItems() {
               className="sm:w-[1.6rem] sm:mt-0"
               src="/svg/quotation-mark.svg"
               width={35}
-              height={350}
+              height={20}
               alt="quotation-mark"
             />
-            <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full text-black">
-              <div className="flex flex-col gap-[1rem] sm:gap-[0.75rem]">
+            <div className="flex flex-col justify-between h-full sm:gap-2 sm:w-full">
+              <div className="flex flex-col gap-[1rem]">
                 <h1 className="text-1.5-900 w-auto md:w-[20rem] md:text-1.5-700 sm:text-0.875-700 ">
                   {it.title}
                 </h1>
@@ -38,7 +38,7 @@ export default function ReviewItems() {
       </div>
 
       <div className="grid grid-rows-1 grid-cols-10 w-max gap-5 animate-marquee2 ">
-        {[...reviewItems].map((it, index) => (
+        {[...secondRowItems, ...secondRowItems].map((it, index) => (
           <div
             key={`${it.id}-${index}`}
             className={`flex flex-col gap-6 justify-between p-10 w-[37rem] h-[25rem] md:w-[27rem] rounded-[0.6rem] border-gray-3 border-solid border-[0.1rem] sm:h-[15.3rem] sm:w-[20.375rem] sm:gap-[0.75rem] sm:pl-[1.19rem] sm:pt-[1.94rem]`}

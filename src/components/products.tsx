@@ -72,7 +72,7 @@ const Product = () => {
             </>,
           ]}
           targetCustomer="혼자 운동하지만, 전문가의 가이드가 필요한 분"
-          price={1}
+          price={70000}
           perMonth="1개월"
           pro
           selectedPeriod={selectedPeriod}
