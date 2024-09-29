@@ -1,12 +1,45 @@
 import Button from '@/components/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface CompleteProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-export default async function Payment({ searchParams }: CompleteProps) {
+export default async function Payment() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const requestData = {
+      orderId: searchParams.get('orderId'),
+      amount: searchParams.get('amount'),
+      paymentKey: searchParams.get('paymentKey'),
+    };
+
+    async function confirm() {
+      const response = await fetch('/confirm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const json = await response.json();
+      console.log(json);
+
+      if (!response.ok) {
+        router.push(`/payment-fail?message=${json.message}&code=${json.code}`);
+        return;
+      }
+      // 결제 성공 비즈니스 로직을 구현하세요.
+    }
+    confirm();
+  }, []);
+
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">
       <Image
@@ -39,7 +72,7 @@ export default async function Payment({ searchParams }: CompleteProps) {
           </p>
           <ul>
             <li className="text-1.5-400 py-[1rem]">
-              주문번호: {searchParams.orderId}
+              주문번호: ${searchParams.get('orderId')}
             </li>
           </ul>
         </div>
