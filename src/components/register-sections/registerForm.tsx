@@ -52,8 +52,12 @@ const RegisterForm = () => {
 
   useEffect(() => {
     const { name, email, phone_number } = formData.user;
-    const { exercise_goal, total_cholesterol, ldl_cholesterol } =
-      formData.exercisePreferences;
+    const {
+      exercise_goal,
+      total_cholesterol,
+      ldl_cholesterol,
+      referral_source,
+    } = formData.exercisePreferences;
     const { duration_in_months } = formData.programs;
 
     const isHealthQuestionComplete =
@@ -63,6 +67,7 @@ const RegisterForm = () => {
       name?.trim() !== '' &&
       email?.trim() !== '' &&
       phone_number?.trim() !== '' &&
+      referral_source?.trim() !== '' &&
       (exercise_goal?.trim() !== '' || isHealthQuestionComplete) &&
       duration_in_months > 0
     ) {
@@ -98,21 +103,24 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log('Form Data:', formData);
-
     const tossPayments = await loadTossPayments(
       process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
     );
 
+    // TossPayments 클라이언트 키가 설정되지 않은 경우 에러를 발생시킵니다.
     if (!process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY) {
       throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
     }
+    console.log('Form Data:', formData);
+
+    const orderId = Math.random().toString(36).slice(2);
+    console.log('새로운 주문번호 생성:', orderId);
 
     await tossPayments.requestPayment('카드', {
       amount: Number(`${price}`),
-      orderId: Math.random().toString(36).slice(2),
+      orderId,
       orderName: `${title} ${period}`,
-      successUrl: `${window.location.origin}/payment/complete`,
+      successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
       failUrl: `${window.location.origin}/payment-fail`,
     });
 

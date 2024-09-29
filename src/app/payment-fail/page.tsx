@@ -11,6 +11,7 @@ export default function PaymentFail() {
         className="sm:w-[15rem] hidden sm:inline z-0 sm:relative mr-[5rem] pb-[2rem]"
         height={40}
         alt="404 이미지"
+        priority
       />
       <div className="flex flex-col gap-[1rem] w-[40rem] sm:w-auto sm:px-[3rem]">
         <Image

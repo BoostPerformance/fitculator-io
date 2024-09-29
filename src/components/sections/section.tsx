@@ -29,7 +29,9 @@ const Section: React.FC<SectionProps> = ({
       <div
         className={`flex flex-row w-[56rem] sm:w-[27rem] sm:flex-col ${
           reverseX ? 'flex-row-reverse' : ''
-        } h-auto ${reverseY ? 'flex-col' : ''} gap-[5rem] sm:flex-col-reverse sm:items-center sm:w-full`}
+        } h-auto ${
+          reverseY ? 'flex-col' : ''
+        } gap-[5rem] sm:flex-col-reverse sm:items-center sm:w-full`}
       >
         <div
           className={`${textAlign ? 'text-right' : 'text-left'} ${
@@ -46,7 +48,7 @@ const Section: React.FC<SectionProps> = ({
             {title}
           </h2>
           {description && (
-            <p className="text-1.75-500 text-gray-700 sm:text-1.125-700 sm:text-1.5-500">
+            <p className="text-1.75-500 text-gray-700 sm:text-1.5-500">
               {description}
             </p>
           )}

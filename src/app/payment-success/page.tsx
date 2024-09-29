@@ -12,6 +12,7 @@ export default function PaymentSuccess() {
         height={40}
         alt="신발이미지
         "
+        priority
       />
       <div className="flex flex-col gap-[3rem] w-[40rem] sm:w-auto sm:px-[3rem]">
         <Image
