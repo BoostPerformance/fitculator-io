@@ -41,7 +41,7 @@ const Product = () => {
               <div>피트니스 특화 챗봇</div>
               <div>• 질문답변, 프로그램 피드백</div>
             </>,
-            '커뮤니티 활동',
+            '커뮤니티',
           ]}
           price={0}
           selectedPeriod={selectedPeriod}
@@ -55,11 +55,12 @@ const Product = () => {
               <div>헬스케어 AI 어시스턴트</div>
               <div>• 실시간 질문답변, 프로그램 피드백</div>
             </>,
-            '커뮤니티 활동',
-            '운동 전담 코치 1인 배정',
+            '커뮤니티',
+
             <>
-              <div>맞춤형 운동 프로그램 제공</div>
-              <div>• 운동 데일리 피드백</div>
+              <div>운동 전담 코치 1인 배정</div>
+              <div>• 맞춤형 운동 프로그램 제공</div>
+              <div>• 운동 피드백</div>
             </>,
 
             <>
@@ -94,10 +95,12 @@ const Product = () => {
               <div>헬스케어 AI 어시스턴트</div>
               <div>• 실시간 질문답변, 프로그램 피드백</div>
             </>,
-            '커뮤니티 활동',
-            '운동 전담 코치 1인 배정',
-            '맞춤형 운동 프로그램 제공',
-            '운동 데일리 피드백',
+            '커뮤니티',
+            <>
+              <div>운동 전담 코치 1인 배정</div>
+              <div>• 맞춤형 운동 프로그램 제공</div>
+              <div>• 운동 데일리 피드백</div>
+            </>,
             <div className="text-blue-1">
               <div>식단 전담 코치 1인 배정</div>
               <div>• 식단 데일리 피드백</div>
@@ -105,7 +108,7 @@ const Product = () => {
             </div>,
           ]}
           targetCustomer="건강검진에서 이상지질혈증 의심 판정을 받은 분"
-          price={1}
+          price={135000}
           perMonth={perMonth}
           selectedPeriod={selectedPeriod}
           health
