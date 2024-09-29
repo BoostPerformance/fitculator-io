@@ -112,12 +112,15 @@ const RegisterForm = () => {
       throw new Error('TOSS_CLIENT_KEY가 설정되지 않았습니다.');
     }
     console.log('Form Data:', formData);
+
     const orderId = Math.random().toString(36).slice(2);
+    console.log('새로운 주문번호 생성:', orderId);
+
     await tossPayments.requestPayment('카드', {
       amount: Number(`${price}`),
       orderId,
       orderName: `${title} ${period}`,
-      successUrl: `${window.location.origin}/payment/complete`,
+      successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
       failUrl: `${window.location.origin}/payment-fail`,
     });
 
