@@ -80,7 +80,7 @@ const Product = () => {
             </>,
           ]}
           targetCustomer="혼자 운동하지만, 전문가의 가이드가 필요한 분"
-          price={70000}
+          price={1}
           perMonth="1개월"
           pro
           selectedPeriod={selectedPeriod}
@@ -105,7 +105,7 @@ const Product = () => {
             </div>,
           ]}
           targetCustomer="건강검진에서 이상지질혈증 의심 판정을 받은 분"
-          price={135000}
+          price={1}
           perMonth={perMonth}
           selectedPeriod={selectedPeriod}
           health
