@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     console.log('Request body:', body);
+    console.log('Payment information:', body.paymentInfo);
 
     const userInfo = await prisma.users.upsert({
       where: { email: body.user.email },
@@ -75,14 +76,14 @@ export async function POST(req: NextRequest) {
     const paymentInfo = await prisma.paymentinfo.create({
       data: {
         user_subscription_id: userSubscriptionInfo.id,
-        amount: body.payment.amount,
-        payment_date: new Date(body.payment.payment_date),
-        payment_key: body.payment.payment_key,
-        order_id: body.payment.order_id,
-        order_name: body.payment.order_name || null,
-        card_type: body.payment.card_type || null,
-        owner_type: body.payment.owner_type || null,
-        currency: body.payment.currency || 'USD',
+        amount: body.paymentInfo.amount,
+        payment_date: new Date(body.paymentInfo.payment_date),
+        payment_key: body.paymentInfo.payment_key,
+        order_id: body.paymentInfo.order_id,
+        order_name: body.paymentInfo.order_name || null,
+        card_type: body.paymentInfo.card_type || null,
+        owner_type: body.paymentInfo.owner_type || null,
+        currency: body.paymentInfo.currency || 'KRW',
       },
     });
     return Response.json({
