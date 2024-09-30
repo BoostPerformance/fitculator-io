@@ -4,18 +4,22 @@ export default function ExerciseGuideline() {
       <div className=" bg-gray-8 relative m-[0.5rem] w-[47rem] rounded-[0.625rem] p-[2rem] text-left inset-0 sm:flex sm:flex-col sm:items-end sm:overflow-y-auto sm:w-[21rem] sm:h-auto sm:p-[1rem]">
         <div className="w-[42.875rem] flex flex-col items-center gap-[0.625rem] text-gray-6 sm:w-auto">
           <div>
-            <p className="text-1-500 sm:text-0.625-500">
-              핏큘레이터는 세계보건기구(WHO)의 글로벌 신체활동 가이드라인을
-              기반으로 한 운동량 계산 서비스를 제공합니다. 기본적인 건강을
-              유지하기 위해서는 일정 수준의 유산소 운동이 꼭 필요합니다. 이를
-              쉽게 이해하고 실천할 수 있도록, 저희는 운동량을
-              &apos;포인트&apos;로 환산하여 관리할 수 있는 시스템을
+            <p className="text-1-500 sm:text-0.75-500">
+              핏큘레이터는 세계보건기구(WHO)의 글로벌 신체활동{' '}
+              <br className="hidden sm:inline" />
+              가이드라인을 기반으로 한 운동량 계산 서비스를 제공합니다.{' '}
+              <br className="hidden sm:inline" />
+              기본적인 건강을 유지하기 위해서는 일정 수준의 유산소 운동이 꼭
+              필요합니다. 이를 쉽게 이해하고 실천할 수 있도록, 저희는{' '}
+              <br className="hidden sm:inline" />
+              운동량을 &apos;포인트&apos;로 환산하여 관리할 수 있는 시스템을
+              <br className="hidden sm:inline" />
               만들었습니다.
             </p>
           </div>
 
           <div className="flex flex-col gap-[1rem]">
-            <h1 className="text-1.125-700 sm:text-0.75-500">유산소 Point</h1>
+            <h1 className="text-1.125-700 sm:text-0.875-700 ">유산소 Point</h1>
             <li className="sm:text-0.75-500">
               100 포인트 / 1주: 기본적인 건강을 유지하기 위한 운동량입니다.
               일주일 동안 이 포인트를 채우면, WHO가 권장하는 최소한의 신체활동을
@@ -34,10 +38,10 @@ export default function ExerciseGuideline() {
           </div>
 
           <div className="flex flex-col gap-[1rem]">
-            <h1 className="text-1.125-700 sm:text-0.75-500">근력운동</h1>
+            <h1 className="text-1.125-700 sm:text-0.875-700">근력운동</h1>
             <div>
               <p className="text-1-500 sm:text-0.75-500">
-                주 2회 이상 근력운동을 해야 합니다. 한 번의
+                주 2회 이상 근력운동을 해야 합니다. 한 번의&nbsp;
                 <u>근력운동이 30분 이상이어야 1회</u>로 인정됩니다.
               </p>
             </div>

@@ -15,7 +15,7 @@ export default function HealthInformation({
     <>
       <div className="flex flex-col gap-0">
         <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
-          총 콜레스테롤 수치를 선택해주세요
+          총 콜레스테롤 수치를 선택해주세요.
         </h1>
         <DropdownMenu
           data={totalCholesterol}
@@ -26,7 +26,7 @@ export default function HealthInformation({
 
       <div className="flex flex-col gap-0">
         <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
-          LDL 콜레스테롤 수치를 선택해주세요
+          LDL 콜레스테롤 수치를 주세요.
         </h1>
         <DropdownMenu
           data={LDLCholesterol}

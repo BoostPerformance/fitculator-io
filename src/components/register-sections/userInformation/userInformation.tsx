@@ -45,7 +45,7 @@ export default function UserInformation({
   const emailValidation = (email: string) => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     if (!emailRegex.test(email)) {
-      return '* 이메일을 입력해주세요.';
+      return '* 이메일을 입력해 주세요.';
     }
     return '';
   };
@@ -53,7 +53,7 @@ export default function UserInformation({
   const phoneValidation = (phone_number: string) => {
     const phoneRegex = /^010[0-9]{8}$/;
     if (!phoneRegex.test(phone_number)) {
-      return '* 전화번호만 입력해주세요.';
+      return '* 전화번호만 입력해 주세요.';
     }
     return '';
   };
@@ -61,7 +61,7 @@ export default function UserInformation({
   const birthdayValidation = (birthday: string) => {
     const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (!birthdayRegex.test(birthday)) {
-      return '* 올바른 생년월일을 입력해주세요.';
+      return '* 올바른 생년월일을 입력해 주세요.';
     }
     return '';
   };
@@ -186,7 +186,7 @@ export default function UserInformation({
                 이름
               </div>
               <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                본명을 적어주세요
+                본명을 적어주세요.
               </p>
             </div>
             <Input
@@ -236,7 +236,7 @@ export default function UserInformation({
                     참여기수
                   </h1>
                   <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                    시작일은 {batchStartDate}월 1일입니다
+                    시작일은 {batchStartDate}월 1일 입니다.
                   </p>
                 </div>
 
@@ -332,7 +332,7 @@ export default function UserInformation({
                 연락처
               </h1>
               <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                전화번호만 입력해주세요
+                번호만 입력해 주세요.
               </p>
             </div>
             <Input

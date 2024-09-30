@@ -12,7 +12,7 @@ const faqItems: FAQItem[] = [
     title: '스마트 워치 브랜드는 상관없나요?',
     content: (
       <>
-        네! 심박 측정이 가능한 워치라면 브랜드 상관없이 모두 핏큘레이터를 사용할
+        네. 심박 측정이 가능한 워치라면 브랜드 상관없이 모두 핏큘레이터를 사용할
         수 있어요.
         <br />
         (애플워치, 갤럭시워치, 미밴드, 핏빗, 가민, 순토 등)
@@ -27,7 +27,7 @@ const faqItems: FAQItem[] = [
     title: '운동이 처음이라면 어떤 플랜이 좋을까요?',
     content: (
       <>
-        운동이 처음이라면, PRO 를 추천해요. <br />한 달 정도 PRO 를 사용하면서
+        운동이 처음이라면, PRO를 추천해요. <br />한 달 정도 PRO 를 사용하면서
         코치님과 함께 나에게 맞는 운동 습관을 만들어보세요!
       </>
     ),
@@ -40,8 +40,8 @@ const faqItems: FAQItem[] = [
         아닙니다.
         <br />
         Fitculator Health는 이상지질혈증 의심단계인 분들에게 꼭 필요한 식습관
-        개선과 <br className="hidden md:inline" /> 올바른 운동 습관 만들기를
-        위한 서비스 입니다.
+        개선과 <br className="sm:hidden md:inline" /> 올바른 운동 습관 만들기를
+        위한 서비스입니다.
       </>
     ),
   },

@@ -24,7 +24,7 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
   };
 
   return (
-    <div className="w-auto mt-[3rem] mb-[5rem] z-0">
+    <div className="w-auto mt-[3rem] mb-[5rem] z-0 sm:mt-[2rem] ">
       <div className="relative flex w-full">
         <div className="absolute inset-0 flex items-center justify-center sm:w-[18rem] sm:left-3">
           <div className="w-[38rem] h-[0.2rem] bg-blue-500"></div>

@@ -137,7 +137,7 @@ export default function ExercisePreference({
           {proQuestions ? (
             <div className="flex flex-col gap-[0.7rem]">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
-                나의 이번 기수 목표운동량을 선택해주세요
+                나의 이번 기수 목표운동량을 선택해주세요.
               </h1>
               <div>
                 <p className="text-1-500 text-gray-7 sm:text-0.875-500">
@@ -174,7 +174,7 @@ export default function ExercisePreference({
             <div>
               <div>
                 <h1 className="text-1.25-700 text-gray-6">
-                  FITCULATOR를 알게된 경로
+                  Fitculator를 알게된 경로
                 </h1>
                 <p className="text-1-500 text-gray-7">
                   저희를 어떻게 알게 되셨나요?

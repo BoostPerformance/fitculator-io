@@ -197,7 +197,7 @@ const RegisterForm = () => {
           disabled={isButtonDisabled}
         />
         {isButtonDisabled ? (
-          <div className="text-red">필수 항목을 입력해주세요</div>
+          <div className="text-red">필수 항목을 입력해 주세요.</div>
         ) : (
           <></>
         )}
