@@ -69,17 +69,17 @@ const RegisterForm = () => {
 
       return response.json();
     },
-    // onSuccess: (data) => {
-    //   console.log('성공적으로 전송되었습니다', data);
-    //   // 결제 완료 후 이동 처리
-    //   router.push('/payment-success');
-    //   return;
-    // },
-    // onError: (error) => {
-    //   console.error('폼 제출 중 에러 발생:', error);
-    //   // 결제 실패 시 처리
-    //   router.push('/payment-fail');
-    // },
+    onSuccess: (data) => {
+      console.log('성공적으로 전송되었습니다', data);
+      // 결제 완료 후 이동 처리
+      router.push('/payment-success');
+      return;
+    },
+    onError: (error) => {
+      console.error('폼 제출 중 에러 발생:', error);
+      // 결제 실패 시 처리
+      router.push('/payment-fail');
+    },
   });
 
   useEffect(() => {
