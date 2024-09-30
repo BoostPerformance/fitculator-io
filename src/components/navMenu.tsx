@@ -7,7 +7,9 @@ const NavMenu = () => {
         CONTACT US
       </Link>
 
-      <Link href="/team">TEAM</Link>
+      <Link href="https://fitculator.notion.site/Team-Fitculator-e403f49b2528426fb2447835567eadd0">
+        TEAM
+      </Link>
 
       <Link href="https://airtable.com/apprBZkCTk4gpMmSW/pagWPcKsiuiwaS8zs/form">
         FAQ

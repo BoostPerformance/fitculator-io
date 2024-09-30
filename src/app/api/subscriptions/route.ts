@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     console.log('Request body:', body);
+    console.log('Payment information:', body.paymentInfo);
 
     const userInfo = await prisma.users.upsert({
       where: { email: body.user.email },
@@ -72,11 +73,29 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    let paymentDate = new Date(body.paymentInfo.payment_date);
+    if (isNaN(paymentDate.getTime())) {
+      paymentDate = new Date();
+    }
+    const paymentInfo = await prisma.paymentinfo.create({
+      data: {
+        user_subscription_id: userSubscriptionInfo.id,
+        amount: body.paymentInfo.amount,
+        payment_date: paymentDate,
+        payment_key: body.paymentInfo.payment_key,
+        order_id: body.paymentInfo.order_id,
+        order_name: body.paymentInfo.order_name || null,
+        card_type: body.paymentInfo.card_type || null,
+        owner_type: body.paymentInfo.owner_type || null,
+        currency: body.paymentInfo.currency || 'KRW',
+      },
+    });
     return Response.json({
       user: userInfo,
       exercisepreferences: exercisePreferenceInfo,
       programs: programInfo,
       usersubscriptions: userSubscriptionInfo,
+      paymentinfo: paymentInfo,
     });
   } catch (error) {
     console.error('Prisma error:', error);

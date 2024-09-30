@@ -115,7 +115,7 @@ export default function ExercisePreference({
 
   return (
     <div>
-      <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-auto sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
+      <div className="flex gap-[5.19rem] w-[56.8rem] mb-[5rem] sm:w-auto sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
         <RegisterItemTitle
           title={`${healthQuestions ? '건강' : '운동'} 정보`}
           required
