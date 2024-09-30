@@ -30,7 +30,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     email: string;
     birthday?: string;
     phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | '';
+    gender?: '남성' | '여성' | '기타' | '비공개' | null;
   };
   programs: {
     type: string;

@@ -25,7 +25,7 @@ const RegisterForm = () => {
       email: '',
       birthday: '',
       phone_number: '',
-      gender: '',
+      gender: null,
     },
     exercisePreferences: {
       exercise_level: 1,
