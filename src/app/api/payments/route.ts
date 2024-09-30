@@ -22,7 +22,7 @@ export async function POST(req: any) {
     });
 
     const responseData = await response.json();
-    console.log('POST Api 리스폰스', responseData);
+    // console.log('POST Api 리스폰스', responseData);
 
     if (response.ok) {
       // 결제 성공 시 클라이언트에 성공 응답 반환
