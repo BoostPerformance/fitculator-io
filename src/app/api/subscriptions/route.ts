@@ -73,11 +73,15 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    let paymentDate = new Date(body.paymentInfo.payment_date);
+    if (isNaN(paymentDate.getTime())) {
+      paymentDate = new Date();
+    }
     const paymentInfo = await prisma.paymentinfo.create({
       data: {
         user_subscription_id: userSubscriptionInfo.id,
         amount: body.paymentInfo.amount,
-        payment_date: new Date(body.paymentInfo.payment_date),
+        payment_date: paymentDate,
         payment_key: body.paymentInfo.payment_key,
         order_id: body.paymentInfo.order_id,
         order_name: body.paymentInfo.order_name || null,

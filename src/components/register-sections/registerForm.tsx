@@ -10,17 +10,15 @@ import ExerciseConcern from './exerciseConcern';
 import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { useMutation } from '@tanstack/react-query';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
   const period: string | null = searchParams.get('period');
-
   const router = useRouter();
-
   const title = searchParams.get('title');
   const priceParam = searchParams.get('price');
   const price = priceParam ? Number(priceParam.replace(/,/g, '')) : 0;
-
   const [formData, setFormData] = useState<RegisterFormData>({
     user: {
       name: '',
@@ -43,7 +41,6 @@ const RegisterForm = () => {
       duration_in_months: parseInt(`${period}`),
     },
     paymentInfo: {
-      // 새로운 결제 정보 추가
       amount: 0,
       orderId: '',
       paymentKey: '',
@@ -59,57 +56,114 @@ const RegisterForm = () => {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+  const mutation = useMutation({
+    mutationFn: async (formData: RegisterFormData) => {
+      const response = await fetch('/api/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error('폼 제출에 실패했습니다.');
+      }
+
+      return response.json();
+    },
+    onSuccess: (data) => {
+      console.log('성공적으로 전송되었습니다', data);
+      // 결제 완료 후 이동 처리
+      router.push('/payment-success');
+      return;
+    },
+    onError: (error) => {
+      console.error('폼 제출 중 에러 발생:', error);
+      // 결제 실패 시 처리
+      router.push('/payment-fail');
+    },
+  });
+
   useEffect(() => {
-    const { name, email, phone_number } = formData.user;
+    const { batch_id } = formData.subscriptions;
+    const { name, gender, email, phone_number } = formData.user;
     const {
       exercise_goal,
+      exercise_performance_level,
+      exercise_level,
       total_cholesterol,
       ldl_cholesterol,
       referral_source,
     } = formData.exercisePreferences;
-    const { duration_in_months } = formData.programs;
 
     const isHealthQuestionComplete =
       total_cholesterol?.trim() !== '' && ldl_cholesterol?.trim() !== '';
 
-    if (
-      name?.trim() !== '' &&
-      email?.trim() !== '' &&
-      phone_number?.trim() !== '' &&
-      referral_source?.trim() !== '' &&
-      (exercise_goal?.trim() !== '' || isHealthQuestionComplete) &&
-      duration_in_months > 0
-    ) {
-      setIsButtonDisabled(false);
+    if (title === 'Health') {
+      if (
+        name?.trim() !== '' &&
+        email?.trim() !== '' &&
+        phone_number?.trim() !== '' &&
+        referral_source?.trim() !== '' &&
+        isHealthQuestionComplete
+      ) {
+        setIsButtonDisabled(false); // 조건이 충족되면 버튼 활성화
+      }
+    } else if (title === 'PRO') {
+      if (
+        name?.trim() !== '' &&
+        email?.trim() !== '' &&
+        phone_number?.trim() !== '' &&
+        batch_id != null &&
+        exercise_goal?.trim() !== '' &&
+        exercise_level != null &&
+        exercise_performance_level?.trim() !== ''
+      ) {
+        setIsButtonDisabled(false);
+      }
+    } else if (title === 'Basic') {
+      if (
+        name?.trim() !== '' &&
+        email?.trim() !== '' &&
+        phone_number?.trim() !== '' &&
+        gender?.trim() !== '' &&
+        exercise_goal?.trim() !== '' &&
+        exercise_level != null &&
+        referral_source?.trim() !== ''
+      ) {
+        setIsButtonDisabled(false); // 조건이 충족되면 버튼 활성화
+      }
     } else {
       setIsButtonDisabled(true);
     }
-  }, [formData]);
+  }, [formData, title]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const tossPayments = await loadTossPayments(
-      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
-    );
-
-    // console.log('Form Data:', formData);
-
-    const orderId = Math.random().toString(36).slice(2);
-    console.log('새로운 주문번호 생성:', orderId);
-
-    await tossPayments.requestPayment('카드', {
-      amount: Number(`${price}`),
-      orderId,
-      orderName: `${title} ${period}`,
-      successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
-      failUrl: `${window.location.origin}/payment-fail`,
-    });
-
-    localStorage.setItem('formData', JSON.stringify(formData));
-
     if (isButtonDisabled) {
       return;
+    }
+
+    if (title === 'Basic') {
+      mutation.mutate(formData);
+    } else {
+      const tossPayments = await loadTossPayments(
+        process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
+      );
+
+      console.log('Form Data:', formData);
+
+      const orderId = Math.random().toString(36).slice(2);
+      console.log('새로운 주문번호 생성:', orderId);
+
+      await tossPayments.requestPayment('카드', {
+        amount: Number(`${price}`),
+        orderId,
+        orderName: `${title} ${period}`,
+        successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
+        failUrl: `${window.location.origin}/payment-fail`,
+      });
+
+      localStorage.setItem('formData', JSON.stringify(formData));
     }
   };
 
