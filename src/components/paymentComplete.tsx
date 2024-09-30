@@ -49,8 +49,8 @@ export default function PaymentComplete() {
     if (isConfirmed) return;
 
     const formData = JSON.parse(savedFormData);
-    console.log('폼 데이터:', formData);
-    console.log('Form data loaded:', savedFormData);
+    // console.log('폼 데이터:', formData);
+    // console.log('Form data loaded:', savedFormData);
 
     const requestData = {
       orderId: searchParams.get('orderId'),

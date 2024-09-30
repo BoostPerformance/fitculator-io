@@ -23,7 +23,7 @@ const Product = () => {
           비대면 운동관리 프로그램
         </h1>
         <h1 className="text-2.5-900 sm:text-1.75-900">
-          &nbsp;'핏큘레이터' 신청하기
+          &nbsp;핏큘레이터 신청하기
         </h1>
       </div>
       <Toggle
@@ -72,7 +72,7 @@ const Product = () => {
             </>,
           ]}
           targetCustomer="혼자 운동하지만, 전문가의 가이드가 필요한 분"
-          price={70000}
+          price={100}
           perMonth="1개월"
           pro
           selectedPeriod={selectedPeriod}
@@ -92,14 +92,14 @@ const Product = () => {
               <div>• 맞춤형 운동 프로그램 제공</div>
               <div>• 운동 데일리 피드백</div>
             </>,
-            <div className="text-blue-1">
-              <div>식단 전담 코치 1인 배정</div>
-              <div>• 식단 데일리 피드백</div>
-              <div>• 생활습관 관리 (수면시간 등)</div>
-            </div>,
+            <>
+              <div className="text-blue-1">식단 전담 코치 1인 배정</div>
+              <div className="text-blue-1">• 식단 데일리 피드백</div>
+              <div className="text-blue-1">• 생활습관 관리 (수면시간 등)</div>
+            </>,
           ]}
           targetCustomer="건강검진에서 이상지질혈증 의심 판정을 받은 분"
-          price={100}
+          price={135000}
           perMonth={perMonth}
           selectedPeriod={selectedPeriod}
           health

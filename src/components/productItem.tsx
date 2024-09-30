@@ -99,7 +99,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               pro ? 'text-white' : 'text-blue-1'
             }`}
           >
-            {pro ? '70,000 원' : health ? `${priceString} 원` : 'Free'}
+            {pro ? '100 원' : health ? `${priceString} 원` : 'Free'}
           </p>
           <p className={`text-1.25-500 ${health ? 'text-gray-1' : '*:'}`}>
             {pro || health ? `/ ${perMonth}` : ''}
