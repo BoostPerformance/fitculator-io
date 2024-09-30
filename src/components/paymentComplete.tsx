@@ -27,20 +27,31 @@ export default function PaymentComplete() {
 
       return response.json();
     },
-    onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
-      // 결제 완료 후 이동 처리
-      router.push('/success');
-    },
-    onError: (error) => {
-      console.error('폼 제출 중 에러 발생:', error);
-      // 결제 실패 시 처리
-      router.push('/failure');
-    },
+    // onSuccess: (data) => {
+    //   console.log('성공적으로 전송되었습니다', data);
+    //   // 결제 완료 후 이동 처리
+    //   router.push('/payment-success');
+    // },
+    // onError: (error) => {
+    //   console.error('폼 제출 중 에러 발생:', error);
+    //   // 결제 실패 시 처리
+    //   router.push('/paypemt-fail');
+    // },
   });
 
   useEffect(() => {
+    const savedFormData = localStorage.getItem('formData');
+    if (!savedFormData) {
+      // console.error('신청 폼 데이터가 없습니다.');
+      return;
+    }
+
     if (isConfirmed) return;
+
+    const formData = JSON.parse(savedFormData);
+    console.log('폼 데이터:', formData);
+    console.log('Form data loaded:', savedFormData);
+
     const requestData = {
       orderId: searchParams.get('orderId'),
       amount: searchParams.get('amount'),
@@ -69,13 +80,6 @@ export default function PaymentComplete() {
           setIsConfirmed(true);
 
           // 2. 신청 폼 데이터 가져오기 및 결제 정보와 함께 mutation 호출
-          const savedFormData = localStorage.getItem('formData');
-          if (!savedFormData) {
-            console.error('신청 폼 데이터가 없습니다.');
-            return;
-          }
-
-          const formData = JSON.parse(savedFormData); // 신청 폼 데이터 파싱
 
           if (
             requestData.orderId &&
@@ -102,7 +106,7 @@ export default function PaymentComplete() {
     }
 
     confirm(); // 1. confirm 함수 호출
-  }, [searchParams, router, mutation]);
+  }, [searchParams, router, mutation, isConfirmed]);
 
   return (
     <div className="flex py-[8rem] justify-center relative sm:items-center sm:flex-col sm:py-[6rem] sm:left-0">

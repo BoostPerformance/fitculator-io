@@ -69,17 +69,17 @@ const RegisterForm = () => {
 
       return response.json();
     },
-    onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
-      // 결제 완료 후 이동 처리
-      router.push('/payment-success');
-      return;
-    },
-    onError: (error) => {
-      console.error('폼 제출 중 에러 발생:', error);
-      // 결제 실패 시 처리
-      router.push('/payment-fail');
-    },
+    // onSuccess: (data) => {
+    //   console.log('성공적으로 전송되었습니다', data);
+    //   // 결제 완료 후 이동 처리
+    //   router.push('/payment-success');
+    //   return;
+    // },
+    // onError: (error) => {
+    //   console.error('폼 제출 중 에러 발생:', error);
+    //   // 결제 실패 시 처리
+    //   router.push('/payment-fail');
+    // },
   });
 
   useEffect(() => {
@@ -150,10 +150,13 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      console.log('Form Data:', formData);
+      // console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
-      console.log('새로운 주문번호 생성:', orderId);
+      // console.log('새로운 주문번호 생성:', orderId);
+      localStorage.setItem('formData', JSON.stringify(formData));
+
+      // console.log('Form data saved:', JSON.stringify(formData));
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),
@@ -163,7 +166,9 @@ const RegisterForm = () => {
         failUrl: `${window.location.origin}/payment-fail`,
       });
 
-      localStorage.setItem('formData', JSON.stringify(formData));
+      setTimeout(() => {
+        window.location.href = '/payment-complete';
+      }, 100); // 약간의 지연을 준 후 페이지 이동
     }
   };
 
