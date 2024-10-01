@@ -6,6 +6,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading';
 import { useMutation } from '@tanstack/react-query';
+import PaymentSuccess from '@/app/payment-success/page';
 
 export default function PaymentComplete() {
   const router = useRouter();
@@ -88,8 +89,8 @@ export default function PaymentComplete() {
               amount: requestData.amount,
               order_id: requestData.orderId,
               payment_key: requestData.paymentKey,
-              cardType: json.card?.cardType || '카드 타입', // 결제 응답에서 받아옴
-              ownerType: json.card?.ownerType || '개인', // 결제 응답에서 받아옴
+              card_type: json.card?.cardType || '카드 타입', // 결제 응답에서 받아옴
+              owner_type: json.card?.ownerType || '개인', // 결제 응답에서 받아옴
               currency: json.currency || 'undefined', // 고정된 값 또는 응답에서 받아옴
             },
           });
@@ -103,13 +104,5 @@ export default function PaymentComplete() {
     confirm(); // 1. confirm 함수 호출
   }, [searchParams, router, mutation, isConfirmed]);
 
-  return (
-    <Suspense
-      fallback={
-        <div>
-          <Loading />
-        </div>
-      }
-    ></Suspense>
-  );
+  return <Loading ismessage />;
 }

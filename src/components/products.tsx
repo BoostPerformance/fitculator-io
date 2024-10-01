@@ -99,7 +99,7 @@ const Product = () => {
             </>,
           ]}
           targetCustomer="건강검진에서 이상지질혈증 의심 판정을 받은 분"
-          price={100}
+          price={135000}
           perMonth={perMonth}
           selectedPeriod={selectedPeriod}
           health
