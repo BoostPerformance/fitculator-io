@@ -24,13 +24,16 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
   };
 
   return (
-    <div className="w-auto mt-[3rem] mb-[5rem] z-0 sm:mt-[2rem] ">
+    <div className="w-auto mb-[5rem] z-0 sm:mt-[3rem]">
       <div className="relative flex w-full">
-        <div className="absolute inset-0 flex items-center justify-center sm:w-[18rem] sm:left-3">
-          <div className="w-[38rem] h-[0.2rem] bg-blue-500"></div>
+        <div className="absolute inset-0 flex items-center justify-center sm:w-[18rem] sm:left-[0.2rem] right-[5rem]">
+          <div className="w-[38rem] h-[0.2rem] bg-blue-500 right-[5rem]"></div>
         </div>
         {debtAmounts.map((amount) => (
-          <div key={amount.id} className="relative flex-1">
+          <div
+            key={amount.id}
+            className="relative flex-1 right-[2.4rem] sm:right-[0.6rem]"
+          >
             <input
               type="radio"
               id={`amount-${amount.id}`}
@@ -63,11 +66,11 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
             </label>
           </div>
         ))}
-        <div className="absolute top-full my-[2rem] left-[2.8rem] text-gray-7 text-1-700 sm:text-0.75-500 sm:left-[0.8rem]">
+        <div className="absolute top-full my-[2rem] left-[0.3rem] text-gray-7 text-1-700 sm:text-0.75-500 sm:left-[0.6rem]">
           <h1>1</h1>
           <p>많은 노력이 필요해요!</p>
         </div>
-        <div className="absolute top-full my-[2rem] right-[2.9rem] text-end text-gray-7 text-1-700 sm:text-0.75-500 sm:right-[1.2rem]">
+        <div className="absolute top-full my-[2rem] right-[5rem] text-end text-gray-7 text-1-700 sm:text-0.75-500 sm:right-[1.7rem]">
           <h1>7</h1>
           <p>매우 수월해요!</p>
         </div>
