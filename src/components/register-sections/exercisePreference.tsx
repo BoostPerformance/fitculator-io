@@ -31,12 +31,12 @@ export default function ExercisePreference({
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 768); // 모바일 기준 너비 설정 (예: 768px 이하를 모바일로 간주)
+      setIsMobile(window.innerWidth <= 768);
     };
 
-    checkIsMobile(); // 초기 로드 시 모바일 감지
+    checkIsMobile();
 
-    window.addEventListener('resize', checkIsMobile); // 윈도우 크기 변경 시 감지
+    window.addEventListener('resize', checkIsMobile);
 
     return () => {
       window.removeEventListener('resize', checkIsMobile);
@@ -115,13 +115,13 @@ export default function ExercisePreference({
 
   return (
     <div>
-      <div className="flex gap-[5.19rem] w-[56.8rem] mb-[5rem] sm:w-auto sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
+      <div className="flex gap-[5.19rem] w-full mb-[5rem] sm:w-[10rem] sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
         <RegisterItemTitle
           title={`${healthQuestions ? '건강' : '운동'} 정보`}
           required
         />
 
-        <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
+        <div className="flex flex-col md:w-[30rem] gap-[3.12rem] sm:w-full">
           {healthQuestions ? (
             <HealthInformation
               onChangeTotalChol={onChangeTotalChol}
@@ -135,7 +135,7 @@ export default function ExercisePreference({
           )}
 
           {proQuestions ? (
-            <div className="flex flex-col gap-[0.7rem]">
+            <div className="flex flex-col gap-[0.7rem] sm:w-[18rem]">
               <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
                 나의 이번 기수 목표운동량을 선택해주세요.
               </h1>
@@ -154,7 +154,7 @@ export default function ExercisePreference({
                 onChange={handlePerformanceLevelChange}
                 title="목표운동량을"
               />
-              <div className="w-[34.81rem] sm:w-auto ">
+              <div className="lg:relative w-[34.81rem] sm:w-auto ">
                 <span
                   onMouseEnter={() => !isMobile && setShowModal(true)}
                   onMouseLeave={() => !isMobile && setShowModal(false)}

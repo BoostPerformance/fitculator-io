@@ -1,7 +1,7 @@
 export default function ExerciseGuideline() {
   return (
     <>
-      <div className=" bg-gray-8 relative m-[0.5rem] w-[47rem] rounded-[0.625rem] p-[2rem] text-left inset-0 sm:flex sm:flex-col sm:items-end sm:overflow-y-auto sm:w-[21rem] sm:h-auto sm:p-[1rem]">
+      <div className="bg-gray-8 lg:absolute h-[33rem] lg:m-[2rem] m-[0.2rem] w-[47rem] rounded-[0.625rem] p-[2rem] text-left inset-0 sm:flex sm:flex-col sm:items-end sm:overflow-y-auto sm:w-[21rem] sm:h-auto sm:p-[1rem]">
         <div className="w-[42.875rem] flex flex-col items-center gap-[0.625rem] text-gray-6 sm:w-auto">
           <div>
             <p className="text-1-500 sm:text-0.75-500">

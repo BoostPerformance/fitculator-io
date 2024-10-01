@@ -25,13 +25,13 @@ const MultiSelectionButtons = ({ onChange }: MultiSelect) => {
   };
 
   return (
-    <div className=" w-[42.9rem] h-[5.9rem] sm:flex sm:flex-wrap sm:w-[20rem]">
+    <div className=" w-[42.9rem] md:w-auto md:h-auto h-[5.9rem] sm:flex sm:flex-wrap sm:w-[20rem]">
       {goals.map((goal) => (
         <button
           key={goal}
           onClick={() => toggleGoal(goal)}
           type="button"
-          className={`mt-[1.06rem] mr-[1.06rem] px-[1.25rem] py-[0.62rem] rounded-[0.375rem] border-[0.1rem]  sm:w-auto sm:text-center sm:flex-2 sm:text-0.875-500  ${
+          className={`mt-[1.06rem] mr-[1.06rem] px-[1.25rem] py-[0.62rem] rounded-[0.375rem] border-[0.1rem]  md:text-0.875-500  sm:w-auto sm:text-center sm:flex-2 sm:text-0.875-500  ${
             selectedGoals.includes(goal)
               ? 'bg-blue-500 text-white'
               : 'border-gray-7 text-gray-7'

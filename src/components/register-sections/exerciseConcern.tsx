@@ -27,11 +27,13 @@ export default function ExerciseConcern({
   };
 
   return (
-    <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-[20rem] sm:flex-col sm:gap-[1rem] sm:mt-[3.75rem]">
-      <RegisterItemTitle
-        title={`${healthQuestions ? '건강' : '운동'} 고민`}
-        required={false}
-      />
+    <div className="flex gap-[5.19rem] w-full mb-[5rem] sm:w-[20rem] sm:flex-col sm:gap-[1rem]">
+      <div className="md:w-[8rem] md:pl-[0.2rem]">
+        <RegisterItemTitle
+          title={`${healthQuestions ? '건강' : '운동'} 고민`}
+          required={false}
+        />
+      </div>
 
       <div className="w-auto flex flex-col gap-[0.75rem]">
         <h1 className="text-1.25-700 text-gray-1 sm:text-1-700">

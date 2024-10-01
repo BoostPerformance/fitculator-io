@@ -178,7 +178,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
+      <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-[47rem] md:p-[1rem] md:m-0 sm:w-full sm:gap-[0.4rem] sm:bg-white sm:m-0 sm:p-[2rem]">
         <RegisterTitle
           title={title}
           period={`${title !== 'Health' ? '1개월' : period}`}

@@ -8,8 +8,8 @@ const ExercisePerformanceLevel: React.FC<ExerciseGoalProps> = ({
   onChange,
 }) => {
   return (
-    <div className="flex flex-col gap-[3rem] sm:gap-0 md:mt-[1rem]">
-      <div className="flex items-end gap-1 sm:flex-col sm:items-start sm:mt-[5rem]">
+    <div className="flex flex-col gap-[3rem] sm:gap-0 md:mt-[1rem] sm:mt-0">
+      <div className="flex items-end gap-1 sm:flex-col sm:items-start sm:mt-[1rem]">
         <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">
           운동 수행 능력(1-7)
         </h1>

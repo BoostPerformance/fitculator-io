@@ -10,7 +10,7 @@ interface RegisterTitleProps {
 const RegisterTitle: React.FC<RegisterTitleProps> = ({ title, period }) => {
   return (
     <>
-      <div className="w-[56.4375rem] sm:w-[20rem] sm:mb-[2rem]">
+      <div className="w-full md:mt-[2rem] sm:w-[20rem] sm:mb-[2rem]">
         <h1 className="text-3-700 sm:text-1.5-700">
           Fitculator
           <span className="text-blue-1 ">{` ${title} ${period} `}</span>

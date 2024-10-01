@@ -176,7 +176,7 @@ export default function UserInformation({
 
   return (
     <div>
-      <div className="flex gap-[5.19rem] w-[56.5625rem] mb-[5rem] sm:w-[20rem] sm:flex-col sm:gap-[1rem]">
+      <div className="flex gap-[5.19rem] w-full mb-[5rem] sm:w-[20rem] sm:flex-col sm:gap-[1rem]">
         <RegisterItemTitle title="개인정보" required />
 
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
