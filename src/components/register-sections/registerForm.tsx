@@ -42,11 +42,11 @@ const RegisterForm = () => {
     },
     paymentInfo: {
       amount: 0,
-      orderId: '',
-      paymentKey: '',
-      orderName: `${title} ${period}`,
-      cardType: '',
-      ownerType: '',
+      order_id: '',
+      payment_key: '',
+      order_name: `${title} ${period}`,
+      card_type: '',
+      owner_type: '',
       currency: 'KRW',
     },
     subscriptions: {
@@ -150,7 +150,7 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      // console.log('Form Data:', formData);
+      console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);
