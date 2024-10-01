@@ -1,8 +1,10 @@
 import Image from 'next/image';
-
-export default function Loading() {
+interface LoadingProps {
+  ismessage?: boolean;
+}
+export default function Loading({ ismessage }: LoadingProps) {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen">
       <Image
         src="/images/logo-2.png"
         alt="로딩중 로고"
@@ -10,6 +12,9 @@ export default function Loading() {
         height={100}
         className="animate-spin"
       />
+      {ismessage && (
+        <div className="py-[2rem] text-1.5-400">결제가 진행중입니다.</div>
+      )}
     </div>
   );
 }

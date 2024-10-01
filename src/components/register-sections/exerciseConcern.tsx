@@ -39,13 +39,13 @@ export default function ExerciseConcern({
         </h1>
         <p className="text-1-500 text-gray-7 sm:text-0.75-500">
           평소 갖고 있었던 {`${healthQuestions ? '건강' : '운동'}`}
-          관련 고민, 또는 저희 FITCULATOR 팀에게 하고 싶은 말이 있다면
-          작성해주세요. <br />이 내용을 최대한 반영하여 더 좋은 서비스를
+          관련 고민, 또는 저희 Fitculator 팀에게 하고 싶은 말이 있다면 작성해
+          주세요. <br />이 내용을 최대한 반영하여 더 좋은 서비스를
           제공해드릴게요.
         </p>
         <Input
           name="text"
-          placeholder="자유롭게 작성해주세요."
+          placeholder="자유롭게 작성해 주세요."
           width="42.75rem"
           value={formData.exercisePreferences.exercise_concern || ''}
           onChange={handleConcernChange}

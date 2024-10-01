@@ -38,11 +38,11 @@ export interface RegisterFormData extends ExercisePreferenceType {
   };
   paymentInfo: {
     amount: number;
-    orderId: string;
-    paymentKey: string;
-    orderName: string;
-    cardType: string;
-    ownerType: string;
+    order_id: string;
+    payment_key: string;
+    order_name: string;
+    card_type: string;
+    owner_type: string;
     currency: string;
   };
   subscriptions: {

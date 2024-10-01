@@ -42,11 +42,11 @@ const RegisterForm = () => {
     },
     paymentInfo: {
       amount: 0,
-      orderId: '',
-      paymentKey: '',
-      orderName: `${title} ${period}`,
-      cardType: '',
-      ownerType: '',
+      order_id: '',
+      payment_key: '',
+      order_name: `${title} ${period}`,
+      card_type: '',
+      owner_type: '',
       currency: 'KRW',
     },
     subscriptions: {
@@ -69,17 +69,17 @@ const RegisterForm = () => {
 
       return response.json();
     },
-    // onSuccess: (data) => {
-    //   console.log('성공적으로 전송되었습니다', data);
-    //   // 결제 완료 후 이동 처리
-    //   router.push('/payment-success');
-    //   return;
-    // },
-    // onError: (error) => {
-    //   console.error('폼 제출 중 에러 발생:', error);
-    //   // 결제 실패 시 처리
-    //   router.push('/payment-fail');
-    // },
+    onSuccess: (data) => {
+      console.log('성공적으로 전송되었습니다', data);
+      // 결제 완료 후 이동 처리
+      router.push('/payment-success');
+      return;
+    },
+    onError: (error) => {
+      console.error('폼 제출 중 에러 발생:', error);
+      // 결제 실패 시 처리
+      router.push('/payment-fail');
+    },
   });
 
   useEffect(() => {
@@ -150,7 +150,7 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      // console.log('Form Data:', formData);
+      console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);
@@ -197,7 +197,7 @@ const RegisterForm = () => {
           disabled={isButtonDisabled}
         />
         {isButtonDisabled ? (
-          <div className="text-red">필수 항목을 입력해주세요</div>
+          <div className="text-red">필수 항목을 입력해 주세요.</div>
         ) : (
           <></>
         )}

@@ -17,7 +17,7 @@ const RegisterTitle: React.FC<RegisterTitleProps> = ({ title, period }) => {
           신청
         </h1>
         <p className="text-1.25-700 text-gray-1 sm:text-0.875-700">
-          WHO 표준운동량에 맞게 운동해보세요!
+          WHO 표준운동량에 맞게 운동해보세요.
         </p>
       </div>
     </>

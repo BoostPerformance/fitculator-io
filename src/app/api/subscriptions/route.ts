@@ -14,13 +14,13 @@ export async function POST(req: NextRequest) {
       update: {
         name: body.user.name,
         phone_number: body.user.phone_number,
-        gender: body.user.gender,
       },
       create: {
         email: body.user.email,
         name: body.user.name,
         phone_number: body.user.phone_number,
         gender: body.user.gender,
+        birthday: body.user.birthday,
       },
     });
 
@@ -33,6 +33,8 @@ export async function POST(req: NextRequest) {
           body.exercisePreferences.exercise_performance_level,
         exercise_concern: body.exercisePreferences.exercise_concern || null,
         referral_source: body.exercisePreferences.referral_source || null,
+        ldl_cholesterol: body.exercisePreferences.ldl_cholesterol || null,
+        total_cholesterol: body.exercisePreferences.total_cholesterol || null,
       },
     });
 

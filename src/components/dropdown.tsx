@@ -49,7 +49,6 @@ export default function DropdownMenu({
   data,
   label,
   onChange,
-
   title,
 }: DropdownMenuProps) {
   const [selected, setSelected] = useState<DropdownOption | null>(null);
@@ -68,7 +67,7 @@ export default function DropdownMenu({
 
   const handleDropdownBlur = () => {
     if (!selected) {
-      setError(`${title} 선택 해 주세요.`);
+      setError(`${title} 선택해주세요.`);
     }
   };
   return (
@@ -83,7 +82,7 @@ export default function DropdownMenu({
           <ListboxButton className="relative w-[15rem] h-[3rem] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-10 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
             <span className="flex items-center">
               <span className="ml-3 block truncate">
-                {selected ? selected.option : `${title} 선택해주세요`}
+                {selected ? selected.option : `${title} 선택해주세요.`}
               </span>
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">

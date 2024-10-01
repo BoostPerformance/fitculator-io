@@ -14,7 +14,7 @@ const ExercisePerformanceLevel: React.FC<ExerciseGoalProps> = ({
           운동 수행 능력(1-7)
         </h1>
         <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-          본인이 생각하는 운동 수행력을 선택해주세요
+          본인이 생각하는 운동 수행력을 선택해주세요.
         </p>
       </div>
 
