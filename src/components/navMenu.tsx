@@ -15,7 +15,7 @@ const NavMenu = () => {
         FAQ
       </Link>
 
-      <Link href="/privacy-policy">개인정보 처리방침</Link>
+      <Link href="/privacy-policy">개인정보처리방침</Link>
     </div>
   );
 };

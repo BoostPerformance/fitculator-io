@@ -27,7 +27,7 @@ export default function RegisterSection() {
             </div>
 
             <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12 sm:pt-[0.6rem]">
-              핏큘레이터와 함께
+              핏큘레이터와 함께&nbsp;
               <span className="sm:inline hidden">
                 <br />
               </span>

@@ -24,13 +24,13 @@ export default function AppleWatchSection() {
             <span className="hidden md:inline sm:inline">
               <br />
             </span>
-            (WHO)의 신체활동 가이드라인에
+            (WHO)의 신체활동 가이드라인에&nbsp;
             <span className="hidden sm:inline">
               <br />
             </span>
             근거해 만들어졌어요.
             <br />
-            스마트워치를 가지고 있다면
+            스마트워치를 가지고 있다면&nbsp;
             <span className="hidden sm:inline">
               <br />
             </span>

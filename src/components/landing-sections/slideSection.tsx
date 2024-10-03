@@ -37,7 +37,7 @@ export default function SlideSection() {
       <Section
         title={
           <>
-            운동량그래프와
+            운동량그래프와&nbsp;
             <span className="hidden sm:inline">
               <br />
             </span>
@@ -48,7 +48,7 @@ export default function SlideSection() {
           <>
             요일별, 주제별 그래프를 통해
             <br /> 나의 운동 패턴을 이해하고, <br />
-            건디션에 맞게 조절할 수 있어요.
+            컨디션에 맞게 조절할 수 있어요.
           </>
         }
         imageSrc="/images/section-image1.png"
@@ -96,7 +96,7 @@ export default function SlideSection() {
         }
         description={
           <>
-            코치님이 직업 짜주는
+            코치님이 직업 짜주는&nbsp;
             <span className="hidden sm:inline">
               <br />
             </span>

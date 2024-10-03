@@ -31,7 +31,7 @@ const reviewItems: ReviewItems = [
     id: 3,
     title: (
       <>
-        운동 할당량만 채웠을 분인데 <br /> 몸무게 감량이 돼서 놀랐습니다.
+        운동 할당량만 채웠을 뿐인데 <br /> 몸무게 감량이 돼서 놀랐습니다.
       </>
     ),
     content:
