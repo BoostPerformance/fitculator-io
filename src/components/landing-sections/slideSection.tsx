@@ -96,7 +96,7 @@ export default function SlideSection() {
         }
         description={
           <>
-            코치님이 직업 짜주는&nbsp;
+            코치님이 직접 짜주는&nbsp;
             <span className="hidden sm:inline">
               <br />
             </span>
