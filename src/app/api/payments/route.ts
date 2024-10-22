@@ -22,15 +22,15 @@ export async function POST(req: any) {
     });
 
     const responseData = await response.json();
-    console.log('POST Api 리스폰스', responseData);
+    //console.log('POST Api 리스폰스', responseData);
 
     if (response.ok) {
       // 결제 성공 시 클라이언트에 성공 응답 반환
-      console.log('결제 성공:', responseData);
+      // console.log('결제 성공:', responseData);
       return NextResponse.json(responseData, { status: 200 });
     } else {
       // 결제 실패 시 클라이언트에 실패 응답 반환
-      console.error('결제 실패:', responseData);
+      //console.error('결제 실패:', responseData);
       return NextResponse.json(
         { message: responseData.message, code: response.status },
         { status: response.status }

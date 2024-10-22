@@ -72,7 +72,7 @@ const RegisterForm = () => {
       return response.json();
     },
     onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
+      //console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
       router.push('/payment-success');
       return;
@@ -153,7 +153,7 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      console.log('Form Data:', formData);
+      //console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);

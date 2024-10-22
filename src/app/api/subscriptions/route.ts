@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log('Request body:', body);
-    console.log('Payment information:', body.paymentInfo);
+    //console.log('Request body:', body);
+    //console.log('Payment information:', body.paymentInfo);
 
     const userInfo = await prisma.users.upsert({
       where: { email: body.user.email },
