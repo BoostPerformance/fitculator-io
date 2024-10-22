@@ -1,12 +1,8 @@
 'use client';
-import Button from '@/components/button';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading';
 import { useMutation } from '@tanstack/react-query';
-import PaymentSuccess from '@/app/payment-success/page';
 
 export default function PaymentComplete() {
   const router = useRouter();
@@ -29,13 +25,11 @@ export default function PaymentComplete() {
       return response.json();
     },
     onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
-      // 결제 완료 후 이동 처리
+      // console.log('성공적으로 전송되었습니다', data);
       router.push('/payment-success');
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
-      // 결제 실패 시 처리
       router.push('/payment-fail');
     },
   });
@@ -50,7 +44,7 @@ export default function PaymentComplete() {
     if (isConfirmed) return;
 
     const formData = JSON.parse(savedFormData);
-    console.log('폼 데이터:', formData);
+    //console.log('폼 데이터:', formData);
     // console.log('Form data loaded:', savedFormData);
 
     const requestData = {
@@ -59,7 +53,7 @@ export default function PaymentComplete() {
       paymentKey: searchParams.get('paymentKey'),
     };
 
-    // 1. 결제 성공 확인 함수 호출
+    // 결제 성공 확인 함수 호출
     function confirm() {
       fetch('/api/payments', {
         method: 'POST',
@@ -80,8 +74,8 @@ export default function PaymentComplete() {
           setResponseData(json); // 결제 성공 응답 저장
           setIsConfirmed(true);
 
-          console.log('requestData:', requestData);
-          // 2. 신청 폼 데이터 가져오기 및 결제 정보와 함께 mutation 호출
+          //console.log('requestData:', requestData);
+          // 신청 폼 데이터 가져오기 및 결제 정보와 함께 mutation 호출
 
           mutation.mutate({
             ...formData, // 신청 폼 데이터
@@ -101,7 +95,7 @@ export default function PaymentComplete() {
         });
     }
 
-    confirm(); // 1. confirm 함수 호출
+    confirm(); //confirm 함수 호출
   }, [searchParams, router, mutation, isConfirmed]);
 
   return <Loading ismessage />;

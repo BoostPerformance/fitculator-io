@@ -11,6 +11,7 @@ import RegisterTitle from './registerTitle';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { useMutation } from '@tanstack/react-query';
+import Image from 'next/image';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -53,6 +54,7 @@ const RegisterForm = () => {
       batch_id: null,
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -70,14 +72,14 @@ const RegisterForm = () => {
       return response.json();
     },
     onSuccess: (data) => {
-      console.log('성공적으로 전송되었습니다', data);
-      // 결제 완료 후 이동 처리
+      //console.log('성공적으로 전송되었습니다', data);
+      setIsLoading(false);
       router.push('/payment-success');
       return;
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
-      // 결제 실패 시 처리
+      setIsLoading(false);
       router.push('/payment-fail');
     },
   });
@@ -105,7 +107,7 @@ const RegisterForm = () => {
         referral_source?.trim() !== '' &&
         isHealthQuestionComplete
       ) {
-        setIsButtonDisabled(false); // 조건이 충족되면 버튼 활성화
+        setIsButtonDisabled(false);
       }
     } else if (title === 'PRO') {
       if (
@@ -129,7 +131,7 @@ const RegisterForm = () => {
         exercise_level != null &&
         referral_source?.trim() !== ''
       ) {
-        setIsButtonDisabled(false); // 조건이 충족되면 버튼 활성화
+        setIsButtonDisabled(false);
       }
     } else {
       setIsButtonDisabled(true);
@@ -144,13 +146,14 @@ const RegisterForm = () => {
     }
 
     if (title === 'Basic') {
+      setIsLoading(true);
       mutation.mutate(formData);
     } else {
       const tossPayments = await loadTossPayments(
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      console.log('Form Data:', formData);
+      //console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);
@@ -173,43 +176,56 @@ const RegisterForm = () => {
   };
 
   return (
-    <form
-      className="flex flex-col items-center"
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
-        <RegisterTitle
-          title={title}
-          period={`${title !== 'Health' ? '1개월' : period}`}
-        />
-        <UserInformation formData={formData} setFormData={setFormData} />
-        <ExercisePreference formData={formData} setFormData={setFormData} />
-        <ExerciseConcern formData={formData} setFormData={setFormData} />
-      </div>
-      <div className="flex flex-col gap-[0.5rem] items-center">
-        <Button
-          className="mt-0"
-          text={`${title === 'Basic' ? '신청하기' : '결제하기'}`}
-          size="lg"
-          variant="default"
-          type="submit"
-          disabled={isButtonDisabled}
-        />
-        {isButtonDisabled ? (
-          <div className="text-red">필수 항목을 입력해 주세요.</div>
-        ) : (
-          <></>
-        )}
-        <p className="sm:text-0.75-500 sm:text-center  text-gray-7 ">
-          약관 및 주문 내용을 확인했으며, <br className="hidden sm:block" />
-          정보 제공등에 동의합니다.
-        </p>
-      </div>
-      <div className="w-[29rem] text-gray-7 sm:w-[20rem] pb-[5rem]">
-        <RefundPolicy />
-      </div>
-    </form>
+    <div>
+      {isLoading && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+          <Image
+            src="/images/logo-2.png"
+            alt="로딩중 로고"
+            width={100}
+            height={100}
+            className="animate-spin"
+          />
+        </div>
+      )}
+      <form
+        className="flex flex-col items-center"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
+          <RegisterTitle
+            title={title}
+            period={`${title !== 'Health' ? '1개월' : period}`}
+          />
+          <UserInformation formData={formData} setFormData={setFormData} />
+          <ExercisePreference formData={formData} setFormData={setFormData} />
+          <ExerciseConcern formData={formData} setFormData={setFormData} />
+        </div>
+        <div className="flex flex-col gap-[0.5rem] items-center">
+          <Button
+            className="mt-0"
+            text={`${title === 'Basic' ? '신청하기' : '결제하기'}`}
+            size="lg"
+            variant="default"
+            type="submit"
+            disabled={isButtonDisabled}
+          />
+          {isButtonDisabled ? (
+            <div className="text-red">필수 항목을 입력해 주세요.</div>
+          ) : (
+            <></>
+          )}
+          <p className="sm:text-0.75-500 sm:text-center  text-gray-7 ">
+            약관 및 주문 내용을 확인했으며, <br className="hidden sm:block" />
+            정보 제공등에 동의합니다.
+          </p>
+        </div>
+        <div className="w-[29rem] text-gray-7 sm:w-[20rem] pb-[5rem]">
+          <RefundPolicy />
+        </div>
+      </form>
+    </div>
   );
 };
 
