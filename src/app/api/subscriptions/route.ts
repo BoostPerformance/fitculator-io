@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
 
     const exercisePreferenceInfo = await prisma.exercisepreferences.create({
       data: {
+        id: nanoid(),
         user_id: userInfo.id,
         exercise_level: body.exercisePreferences.exercise_level,
         exercise_goal: body.exercisePreferences.exercise_goal,
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
 
     const programInfo = await prisma.programs.create({
       data: {
+        id: nanoid(),
         type: body.programs.type,
         duration_in_months: body.programs.duration_in_months,
       },
@@ -51,13 +53,14 @@ export async function POST(req: NextRequest) {
 
     if (body.subscriptions.batch_id) {
       programBatchInfo = await prisma.programbatches.findUnique({
-        where: { id: body.subscriptions.batch_id },
+        where: { id: String(body.subscriptions.batch_id) },
       });
     }
 
     if (!programBatchInfo) {
       programBatchInfo = await prisma.programbatches.create({
         data: {
+          id: nanoid(),
           program_id: programInfo.id,
           batch_number: body.subscriptions.id || 11,
         },
@@ -69,6 +72,7 @@ export async function POST(req: NextRequest) {
 
     const userSubscriptionInfo = await prisma.usersubscriptions.create({
       data: {
+        id: nanoid(),
         users: { connect: { id: userInfo.id } },
         programs: { connect: { id: programInfo.id } },
         programbatches: { connect: { id: programBatchInfo.id } },
@@ -83,6 +87,7 @@ export async function POST(req: NextRequest) {
     }
     const paymentInfo = await prisma.paymentinfo.create({
       data: {
+        id: nanoid(),
         user_subscription_id: userSubscriptionInfo.id,
         amount: body.paymentInfo.amount,
         payment_date: paymentDate,
