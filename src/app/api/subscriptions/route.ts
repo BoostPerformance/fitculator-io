@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
+import { nanoid } from 'nanoid';
 
 const prisma = new PrismaClient();
 
@@ -16,6 +17,7 @@ export async function POST(req: NextRequest) {
         phone_number: body.user.phone_number,
       },
       create: {
+        id: nanoid(),
         email: body.user.email,
         name: body.user.name,
         phone_number: body.user.phone_number,
@@ -102,6 +104,10 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Prisma error:', error);
 
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.error('Error code:', error.code); // Prisma 관련 오류 코드 확인
+      console.error('Meta:', error.meta); // 오류 메타 정보 확인
+    }
     return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
   }
 }
