@@ -26,6 +26,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
 }) => {
   const calcPrice = selectedPeriod === '3개월' ? 360000 : price;
   const buttonVariant = pro ? 'white' : 'default';
+  const buttonText = pro ? '신청하기' : '12월 2일 부터 신청 시작';
   const priceString = calcPrice.toLocaleString();
 
   return (
@@ -118,7 +119,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
           },
         }}
       >
-        <Button text="신청하기" variant={buttonVariant} size="sm" />
+        {/* <Button text="신청하기" variant={buttonVariant} size="sm" /> */}
+        <Button text={buttonText} variant={buttonVariant} size="sm" />
       </Link>
     </div>
   );
