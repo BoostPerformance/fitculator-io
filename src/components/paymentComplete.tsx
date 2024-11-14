@@ -25,7 +25,7 @@ export default function PaymentComplete() {
       return response.json();
     },
     onSuccess: (data) => {
-      // console.log('성공적으로 전송되었습니다', data);
+      console.log('성공적으로 전송되었습니다', data);
       router.push('/payment-success');
     },
     onError: (error) => {
@@ -44,8 +44,8 @@ export default function PaymentComplete() {
     if (isConfirmed) return;
 
     const formData = JSON.parse(savedFormData);
-    //console.log('폼 데이터:', formData);
-    // console.log('Form data loaded:', savedFormData);
+    console.log('폼 데이터:', formData);
+    console.log('Form data loaded:', savedFormData);
 
     const requestData = {
       orderId: searchParams.get('orderId'),
@@ -74,7 +74,7 @@ export default function PaymentComplete() {
           setResponseData(json); // 결제 성공 응답 저장
           setIsConfirmed(true);
 
-          //console.log('requestData:', requestData);
+          console.log('requestData:', requestData);
           // 신청 폼 데이터 가져오기 및 결제 정보와 함께 mutation 호출
 
           mutation.mutate({
