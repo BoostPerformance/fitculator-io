@@ -88,18 +88,20 @@ const Product = () => {
               <div>실시간 질문답변, 프로그램 피드백</div>
             </>,
             '커뮤니티',
-            <>  
+            <>
               <div>운동 전담 코치 1인 배정</div>
               <div>개인의 체력과 목표에 맞춘 데일리 피드백</div>
             </>,
             <>
               <div className="text-blue-1">식단 전담 코치 1인 배정</div>
-              <div className="text-blue-1">개인의 일상에 맞춘 꼼꼼한 데일리 피드백</div>
+              <div className="text-blue-1">
+                개인의 일상에 맞춘 꼼꼼한 데일리 피드백
+              </div>
             </>,
           ]}
           targetCustomer="식습관 및 운동습관을 점검받아보고 싶으신 분"
           price={59000}
-          perMonth="1개월"
+          perMonth="2주"
           selectedPeriod={selectedPeriod}
           health
         />

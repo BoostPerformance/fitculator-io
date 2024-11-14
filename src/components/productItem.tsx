@@ -25,8 +25,19 @@ const ProductItem: React.FC<ProductItemProps> = ({
   selectedPeriod,
 }) => {
   const calcPrice = selectedPeriod === '3개월' ? 360000 : price;
+  const registerDate = new Date();
+  const currentYear = registerDate.getFullYear();
+  const currentMonth = registerDate.getMonth();
+  const currentDay = registerDate.getDate();
+  const isRegistrationPeriod = currentDay >= 25 || currentDay === 1; // 25일부터 말일까지, 또는 매월 1일 신청 가능
+
   const buttonVariant = pro ? 'white' : 'default';
-  const buttonText = pro ? '신청하기' : '12월 2일 부터 신청 시작';
+  const buttonText =
+    isRegistrationPeriod || (!pro && !health)
+      ? '신청하기'
+      : `${currentMonth + 1}월 25일부터 신청 가능`;
+  const buttonDisabled = !(isRegistrationPeriod || (!pro && !health)); // 베이직 플랜은 항상 활성화
+
   const priceString = calcPrice.toLocaleString();
 
   return (
@@ -119,10 +130,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
           },
         }}
       >
-        {/* <Button text="신청하기" variant={buttonVariant} size="sm" /> */}
-        <Button text={buttonText} variant={buttonVariant} size="sm" />
+        <Button
+          text={buttonText}
+          variant={buttonVariant}
+          size="sm"
+          disabled={buttonDisabled}
+        />
       </Link>
     </div>
   );
 };
+
 export default ProductItem;
