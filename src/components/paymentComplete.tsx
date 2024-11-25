@@ -4,11 +4,20 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading';
 import { useMutation } from '@tanstack/react-query';
 
+const validateFormData = (formData: any) => {
+  try {
+    const requiredFields = ['user', 'exercisePreferences', 'programs', 'subscriptions'];
+    return requiredFields.every(field => formData[field]);
+  } catch (error) {
+    return false;
+  }
+};
+
 export default function PaymentComplete() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [responseData, setResponseData] = useState(null);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
@@ -25,78 +34,83 @@ export default function PaymentComplete() {
       return response.json();
     },
     onSuccess: (data) => {
-      // console.log('성공적으로 전송되었습니다', data);
+      localStorage.removeItem('formData');
+      setIsProcessing(false);
       router.push('/payment-success');
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
+      setIsProcessing(false);
       router.push('/payment-fail');
     },
   });
 
   useEffect(() => {
-    const savedFormData = localStorage.getItem('formData');
-    if (!savedFormData) {
-      console.error('신청 폼 데이터가 없습니다.');
-      return;
-    }
+    if (isProcessing) return;
+    setIsProcessing(true);
 
-    if (isConfirmed) return;
+    const confirmPayment = async () => {
+      try {
+        const savedFormData = localStorage.getItem('formData');
+        if (!savedFormData) {
+          throw new Error('신청 폼 데이터가 없습니다');
+        }
+        
+        const formData = JSON.parse(savedFormData);
+        if (!validateFormData(formData)) {
+          throw new Error('필수 데이터가 누락되었습니다');
+        }
 
-    const formData = JSON.parse(savedFormData);
-    //console.log('폼 데이터:', formData);
-    // console.log('Form data loaded:', savedFormData);
+        const requestData = {
+          orderId: searchParams.get('orderId'),
+          amount: searchParams.get('amount'),
+          paymentKey: searchParams.get('paymentKey'),
+        };
 
-    const requestData = {
-      orderId: searchParams.get('orderId'),
-      amount: searchParams.get('amount'),
-      paymentKey: searchParams.get('paymentKey'),
+        if (!requestData.orderId || !requestData.amount || !requestData.paymentKey) {
+          throw new Error('결제 정보가 누락되었습니다');
+        }
+
+        const paymentResponse = await fetch('/api/payments', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify(requestData),
+        });
+        
+        const json = await paymentResponse.json();
+        
+        if (!paymentResponse.ok || json.error) {
+          throw new Error(json.message || '결제 확인에 실패했습니다');
+        }
+
+        setResponseData(json);
+        
+        mutation.mutate({
+          ...formData,
+          paymentInfo: {
+            amount: requestData.amount,
+            order_id: requestData.orderId,
+            payment_key: requestData.paymentKey,
+            card_type: json.card?.cardType || '카드 타입',
+            owner_type: json.card?.ownerType || '개인',
+            currency: json.currency || 'KRW',
+          },
+        });
+
+      } catch (error: Error | any) {
+        const errorMessage = error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다';
+        console.error('Payment confirmation error:', error);
+        setIsProcessing(false);
+        router.push(`/payment-fail?message=${encodeURIComponent(errorMessage)}`);
+      } finally {
+        setTimeout(() => setIsProcessing(false), 5000);
+      }
     };
 
-    // 결제 성공 확인 함수 호출
-    function confirm() {
-      fetch('/api/payments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.error) {
-            // 결제 실패 시, 실패 페이지로 이동
-            router.push(
-              `/payment-fail?message=${json.message}&code=${json.code}`
-            );
-            return;
-          }
-          setResponseData(json); // 결제 성공 응답 저장
-          setIsConfirmed(true);
-
-          //console.log('requestData:', requestData);
-          // 신청 폼 데이터 가져오기 및 결제 정보와 함께 mutation 호출
-
-          mutation.mutate({
-            ...formData, // 신청 폼 데이터
-            paymentInfo: {
-              amount: requestData.amount,
-              order_id: requestData.orderId,
-              payment_key: requestData.paymentKey,
-              card_type: json.card?.cardType || '카드 타입', // 결제 응답에서 받아옴
-              owner_type: json.card?.ownerType || '개인', // 결제 응답에서 받아옴
-              currency: json.currency || 'undefined', // 고정된 값 또는 응답에서 받아옴
-            },
-          });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          router.push(`/payment-fail?message=Unknown error`);
-        });
-    }
-
-    confirm(); //confirm 함수 호출
-  }, [searchParams, router, mutation, isConfirmed]);
+    confirmPayment();
+  }, [searchParams, router, mutation, isProcessing]);
 
   return <Loading ismessage />;
 }

@@ -10,21 +10,40 @@ export async function POST(req: NextRequest) {
     //console.log('Request body:', body);
     //console.log('Payment information:', body.paymentInfo);
 
-    const userInfo = await prisma.users.upsert({
-      where: { email: body.user.email },
-      update: {
-        name: body.user.name,
-        phone_number: body.user.phone_number,
-      },
-      create: {
-        id: nanoid(),
-        email: body.user.email,
-        name: body.user.name,
-        phone_number: body.user.phone_number,
-        gender: body.user.gender,
-        birthday: body.user.birthday,
-      },
+    // 먼저 이메일이나 전화번호로 기존 사용자 확인
+    const existingUser = await prisma.users.findFirst({
+      where: {
+        OR: [
+          { email: body.user.email },
+          { phone_number: body.user.phone_number }
+        ]
+      }
     });
+
+    let userInfo;
+    if (existingUser) {
+      // 기존 사용자 업데이트
+      userInfo = await prisma.users.update({
+        where: { id: existingUser.id },
+        data: {
+          name: body.user.name,
+          email: body.user.email,
+          phone_number: body.user.phone_number,
+        },
+      });
+    } else {
+      // 새 사용자 생성
+      userInfo = await prisma.users.create({
+        data: {
+          id: nanoid(),
+          email: body.user.email,
+          name: body.user.name,
+          phone_number: body.user.phone_number,
+          gender: body.user.gender,
+          birthday: body.user.birthday,
+        },
+      });
+    }
 
     const exercisePreferenceInfo = await prisma.exercisepreferences.create({
       data: {
