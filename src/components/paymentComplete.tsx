@@ -62,8 +62,7 @@ export default function PaymentComplete() {
 
       return response.json();
     },
-    onSuccess: (data) => {
-      localStorage.removeItem('formData');
+    onSuccess: async (data) => {
       window.location.href = '/payment-success';
     },
     onError: (error) => {
