@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading';
 import { useMutation } from '@tanstack/react-query';
@@ -13,11 +13,40 @@ const validateFormData = (formData: any) => {
   }
 };
 
+interface PaymentRequestData {
+  orderId: string | null;
+  amount: string | null;
+  paymentKey: string | null;
+ }
+
+const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
+  let attempts = 0;
+  while (attempts < 3) {
+    const paymentResponse = await fetch('/api/payments', {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestData)
+    });
+    
+    if (paymentResponse.ok) {
+      const json = await paymentResponse.json();
+      if (json.error) {
+        throw new Error(json.message || '결제 확인에 실패했습니다');
+      }
+      return json;
+    }
+
+    await new Promise(r => setTimeout(r, 1000));
+    attempts++;
+  }
+  
+  throw new Error('결제 확인이 실패했습니다. 잠시 후 다시 시도해주세요.');
+};
+
 export default function PaymentComplete() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [responseData, setResponseData] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const isProcessingRef = useRef(false);
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
@@ -35,19 +64,17 @@ export default function PaymentComplete() {
     },
     onSuccess: (data) => {
       localStorage.removeItem('formData');
-      setIsProcessing(false);
-      router.push('/payment-success');
+      window.location.href = '/payment-success';
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
-      setIsProcessing(false);
-      router.push('/payment-fail');
+      window.location.href = '/payment-fail';
     },
   });
 
   useEffect(() => {
-    if (isProcessing) return;
-    setIsProcessing(true);
+    if (isProcessingRef.current) return;
+    isProcessingRef.current = true;
 
     const confirmPayment = async () => {
       try {
@@ -71,21 +98,7 @@ export default function PaymentComplete() {
           throw new Error('결제 정보가 누락되었습니다');
         }
 
-        const paymentResponse = await fetch('/api/payments', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json' 
-          },
-          body: JSON.stringify(requestData),
-        });
-        
-        const json = await paymentResponse.json();
-        
-        if (!paymentResponse.ok || json.error) {
-          throw new Error(json.message || '결제 확인에 실패했습니다');
-        }
-
-        setResponseData(json);
+        const paymentResult = await attemptPaymentConfirmation(requestData);
         
         mutation.mutate({
           ...formData,
@@ -93,24 +106,21 @@ export default function PaymentComplete() {
             amount: requestData.amount,
             order_id: requestData.orderId,
             payment_key: requestData.paymentKey,
-            card_type: json.card?.cardType || '카드 타입',
-            owner_type: json.card?.ownerType || '개인',
-            currency: json.currency || 'KRW',
+            card_type: paymentResult.card?.cardType || '카드 타입',
+            owner_type: paymentResult.card?.ownerType || '개인',
+            currency: paymentResult.currency || 'KRW',
           },
         });
 
       } catch (error: Error | any) {
         const errorMessage = error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다';
         console.error('Payment confirmation error:', error);
-        setIsProcessing(false);
-        router.push(`/payment-fail?message=${encodeURIComponent(errorMessage)}`);
-      } finally {
-        setTimeout(() => setIsProcessing(false), 5000);
+        window.location.href = `/payment-fail?message=${encodeURIComponent(errorMessage)}`;
       }
     };
 
     confirmPayment();
-  }, [searchParams, router, mutation, isProcessing]);
+  }, [searchParams, router, mutation]);
 
   return <Loading ismessage />;
 }

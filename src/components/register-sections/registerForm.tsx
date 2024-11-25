@@ -168,10 +168,6 @@ const RegisterForm = () => {
         successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
         failUrl: `${window.location.origin}/payment-fail`,
       });
-
-      setTimeout(() => {
-        window.location.href = '/payment-complete';
-      }, 100); // 약간의 지연을 준 후 페이지 이동
     }
   };
 
