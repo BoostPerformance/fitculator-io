@@ -23,16 +23,14 @@ export default function PaymentSuccess() {
           className="sm:hidden"
         />
         <div className="flex flex-col sm:items-center sm:justify-center ">
-          <h1 className="text-1.875-300 font-theJamsil">
-            신청을 완료했습니다.
+          <h1 className="text-1.875-300 font-theJamsil font-bold">
+            신청이 완료되었습니다.
           </h1>
-          <h2 className="text-1.875-500 pt-[1rem] font-theJamsil">
-            이제 핏큘레이터와 <br /> 함께 운동해요!
-          </h2>
-          <p className="text-1.5-400 sm:text-center sm:text-[1.7rem]">
-            <br /> 곧 디스코드로 입장 링크를
+          <p className="text-1.5-400 sm:text-center sm:text-base">
             <br />
-            휴대폰으로 전송 드릴게요!
+            곧 디스코드 입장 링크를<br />
+            작성하신 연락처로<br /> 
+            보내드릴게요!
           </p>
         </div>
 
