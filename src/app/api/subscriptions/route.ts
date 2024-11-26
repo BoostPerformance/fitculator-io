@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
          data: {
            id: nanoid(),
            program_id: programInfo.id,
-           batch_number: body.subscriptions.id || 11,
+           batch_number: body.subscriptions.id || 13,
          }
        });
 
