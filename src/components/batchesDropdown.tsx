@@ -15,8 +15,6 @@ export default function BatchesDropdown({
   const Batches: DropdownOption[] = [
     { id: 1, option: `13기` },
     // { id: 1, option: `${rowNO}기` },
-    // { id: 2, option: `${rowNO + 1}기` },
-    // { id: 3, option: `${rowNO + 2}기` },
   ];
 
   return <DropdownMenu data={Batches} onChange={onChange} title={title} />;
