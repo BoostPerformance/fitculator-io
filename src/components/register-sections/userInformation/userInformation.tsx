@@ -236,7 +236,7 @@ export default function UserInformation({
                     참여기수
                   </h1>
                   <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                    시작일은 {batchStartDate}월 1일 입니다.
+                    시작일은 12월 1일 입니다.
                   </p>
                 </div>
 
