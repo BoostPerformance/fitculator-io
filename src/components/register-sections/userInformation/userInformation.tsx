@@ -12,12 +12,12 @@ export default function UserInformation({
   const now = new Date();
   const koreanTimezoneOffset = 9 * 60; // 한국 시간대는 UTC+9
   now.setMinutes(now.getMinutes() + koreanTimezoneOffset);
-  const startMonth = now.getMonth() + 2; // getMonth()는 0부터 시작하므로 +1, 다음 달을 받아야 하니 +2
+  const currentMonth = now.getMonth() + 1;
+  const startMonth = currentMonth === 12 ? 1 : currentMonth + 1;
   const startDay = now.getDate();
 
-  // 기본 기수 설정 (예: 9기는 2024년 8월)
-  const baseMonth = 9; // 9월이 기준
-  const baseBatch = 10; // 10기가 기본
+  const baseMonth = now.getMonth();
+  const baseBatch = baseMonth + 1;
 
   const [batchStartDate, setBatchStartDate] = useState(`${startMonth}`);
   const [errors, setErrors] = useState({
@@ -164,14 +164,20 @@ export default function UserInformation({
       },
     }));
 
-    const dropdownBatchStartedMonth =
-      baseMonth + (parseInt(item.option) - baseBatch);
-    const month =
-      dropdownBatchStartedMonth > 12
-        ? dropdownBatchStartedMonth - 12
-        : dropdownBatchStartedMonth;
+    const selectedBatch = parseInt(item.option);
 
-    setBatchStartDate(`${month}`);
+    // 현재 기수와의 차이만큼 월 증가
+    const monthDiff = selectedBatch - rowNO;
+    let newMonth = startMonth + monthDiff;
+
+    // 12월을 넘어가는 경우 처리
+    if (newMonth > 12) {
+      newMonth = newMonth - 12;
+    } else if (newMonth < 1) {
+      newMonth = newMonth + 12;
+    }
+
+    setBatchStartDate(`${newMonth}`);
   };
 
   return (
@@ -236,7 +242,7 @@ export default function UserInformation({
                     참여기수
                   </h1>
                   <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-                    시작일은 12월 1일 입니다.
+                    시작일은 {batchStartDate}월 1일 입니다.
                   </p>
                 </div>
 

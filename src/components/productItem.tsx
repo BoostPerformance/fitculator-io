@@ -31,12 +31,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const currentDay = registerDate.getDate();
   const isRegistrationPeriod = currentDay >= 25 || currentDay === 1; // 25일부터 말일까지, 또는 매월 1일 신청 가능
 
-  const buttonVariant = pro ? 'white' : 'default';
+  const buttonVariant = pro ? 'bg-gray-3' : 'default';
   const buttonText =
     isRegistrationPeriod || (!pro && !health)
       ? '신청하기'
       : `${currentMonth + 1}월 25일부터 신청 가능`;
-  const buttonDisabled = !(isRegistrationPeriod || (!pro && !health)); // 베이직 플랜은 항상 활성화
+  const buttonDisabled = !(isRegistrationPeriod || (!pro && !health));
 
   const priceString = calcPrice.toLocaleString();
 
