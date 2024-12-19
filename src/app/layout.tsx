@@ -55,14 +55,6 @@ export const metadata: Metadata = {
     description: '핏큘레이터와 함께 요요 없는 지속가능한 다이어트를 하세요',
     type: 'website',
     locale: 'ko_KR',
-    images: [
-      {
-        url: '/logo-favicon.png',
-        width: 800,
-        height: 600,
-        alt: 'Fitculator 로고',
-      },
-    ],
     siteName: 'Fitculator',
   },
 
@@ -100,6 +92,7 @@ export default function RootLayout({
     <html lang="en" className="scrollbar-hide">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/logo-favicon.png" sizes="any" />
       </head>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-04DBE6VNLV"
