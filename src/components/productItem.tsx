@@ -137,7 +137,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           }}
         >
           {' '}
-          <Button text="신청하기" variant="white" size="sm" basic={basic} />
+          <Button text="신청하기" variant="basic" size="sm" basic={basic} />
         </Link>
       ) : (
         <Link href="https://tally.so/r/3x9kAG">
