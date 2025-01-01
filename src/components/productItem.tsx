@@ -12,6 +12,7 @@ interface ProductItemProps {
   thirdCard?: boolean | ReactNode;
   selectedPeriod: string;
   targetCustomer?: string;
+  basic?: boolean;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -23,6 +24,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   thirdCard,
   targetCustomer,
   selectedPeriod,
+  basic,
 }) => {
   const calcPrice = selectedPeriod === '3개월' ? 360000 : price;
   const registerDate = new Date();
@@ -42,13 +44,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   return (
     <div
-      className={`min-h-auto w-[52%] md:w-[40%] sm:w-full border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[1rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
+      className={`min-h-auto w-[52%] md:w-[40%] sm:w-[80%] border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[2rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
         secondCard &&
         'from-blue-2 bg-gradient-to-tl to-blue-1 from-17% text-white'
-      } ${
-        thirdCard &&
-        'from-[#00159E] bg-gradient-to-br to-[#25ACFF] from-70% text-white'
-      } `}
+      } ${thirdCard && 'bg-pro-gradient text-white'} `}
     >
       <div className="w-[22rem] md:w-[90%] sm:w-[17rem] h-auto flex flex-col justify-start flex-grow sm:grow-0 gap-[1.88rem]">
         <div>
@@ -125,25 +124,26 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </p>
         </div>
       </div>
-
-      <Link
-        href={{
-          pathname: './register',
-          query: {
-            title: title,
-            period: selectedPeriod,
-            price: priceString,
-            secondCard: secondCard ? true : false,
-          },
-        }}
-      >
-        <Button
-          text={buttonText}
-          variant={buttonVariant}
-          size="sm"
-          disabled={buttonDisabled}
-        />
-      </Link>
+      {basic ? (
+        <Link
+          href={{
+            pathname: './register',
+            query: {
+              title: title,
+              period: selectedPeriod,
+              price: priceString,
+              secondCard: secondCard ? true : false,
+            },
+          }}
+        >
+          {' '}
+          <Button text="신청하기" variant="white" size="sm" basic={basic} />
+        </Link>
+      ) : (
+        <Link href="https://tally.so/r/3x9kAG">
+          <Button text="신청하기" variant="white" size="sm" basic={basic} />
+        </Link>
+      )}
     </div>
   );
 };

@@ -36,6 +36,10 @@ const config: Config = {
         pretendard: ['var(--pretendard)'],
         theJamsil: ['TheJamsil', 'sans-serif'],
       },
+      backgroundImage: {
+        'pro-gradient':
+          'linear-gradient(156deg, #00159E 16.29%, #25ACFF 117.95%)',
+      },
       colors: {
         black: {
           DEFAULT: '#131313',

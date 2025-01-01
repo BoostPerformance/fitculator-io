@@ -12,6 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   disabled?: boolean; // 추가
+  basic?: boolean;
 }
 const Button: React.FC<ButtonProps> = ({
   text,
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   size = 'md',
   className,
   disabled = false,
+  basic,
   ...props
 }) => {
   const baseStyles = 'flex justify-center items-center bg-blue-1';
@@ -42,7 +44,8 @@ const Button: React.FC<ButtonProps> = ({
     variantStyles[variant],
     sizeStyles[size],
     disabled ? disabledStyles : '',
-    className || ''
+    className || '',
+    basic ? 'bg-[#0066FF] text-white' : ''
   );
 
   return (

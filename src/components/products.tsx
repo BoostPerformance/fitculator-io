@@ -31,7 +31,7 @@ const Product = () => {
         selectedPeriod={selectedPeriod}
       /> */}
 
-      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:gap-[1.3rem] md:w-[95%] justify-center sm:flex-col">
+      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:gap-[1.3rem] md:w-[95%] justify-center sm:flex-col sm:items-center">
         <ProductItem
           title="Basic"
           descriptions={[
@@ -45,6 +45,7 @@ const Product = () => {
           ]}
           price={0}
           selectedPeriod={selectedPeriod}
+          basic
         />
         <ProductItem
           title="PLUS"
@@ -53,14 +54,18 @@ const Product = () => {
             '피로도 관리',
             <>
               <div>피트니스 특화 챗봇</div>
-              <div>질문답변, 프로그램 피드백</div>
+              <ol className="list-disc list-inside">
+                <li>질문답변, 프로그램 피드백</li>
+              </ol>
             </>,
             '커뮤니티 활동',
             <>
               <div className="flex flex-col items-start">
                 <div className="flex flex-col items-start sm:gap-1">
                   <div>전담 코치 배정</div>
-                  <div>・ 개별 운동 루틴, 데일리 피드백</div>
+                  <ol className="list-disc list-inside">
+                    <li>개별 운동 루틴, 데일리 피드백</li>
+                  </ol>
                 </div>
               </div>
             </>,
@@ -77,12 +82,16 @@ const Product = () => {
             '피로도 관리',
             <>
               <div>피트니스 특화 챗봇</div>
-              <div>질문답변, 프로그램 피드백</div>
+              <ol className="list-disc list-inside">
+                <li>질문답변, 프로그램 피드백</li>
+              </ol>
             </>,
             '커뮤니티 활동',
             <>
               <div>전담 코치 배정</div>
-              <div>・ 개별 운동 루틴, 데일리 피드백</div>
+              <ol className="list-disc list-inside">
+                <li>개별 운동 루틴, 데일리 피드백</li>
+              </ol>
             </>,
           ]}
           targetCustomer="식습관 및 운동습관을 점검받아보고 싶으신 분"
