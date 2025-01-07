@@ -82,7 +82,7 @@ const Product = () => {
             <>
               <div>전담 코치 배정</div>
               <ol className="list-disc list-inside">
-                <li>개별 운동 프로그램 제공 (근력, Hyrox)</li>
+                <li>개별 운동 프로그램 제공<br/>(근력, Hyrox)</li>
                 <li>프로그램 피드백</li>
               </ol>
             </>,
