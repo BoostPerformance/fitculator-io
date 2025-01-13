@@ -19,8 +19,8 @@ export default function ExerciseConcern({
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      exercisePreferences: {
-        ...prevData.exercisePreferences,
+      exercise_preferences: {
+        ...prevData.exercise_preferences,
         exercise_concern: value,
       },
     }));
@@ -47,7 +47,7 @@ export default function ExerciseConcern({
           name="text"
           placeholder="자유롭게 작성해 주세요."
           width="42.75rem"
-          value={formData.exercisePreferences.exercise_concern || ''}
+          value={formData.exercise_preferences.exercise_concern || ''}
           onChange={handleConcernChange}
           type="text"
         />

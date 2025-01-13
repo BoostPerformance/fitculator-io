@@ -12,6 +12,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
+import NewUserInformation from './newUserInformation';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -27,19 +28,17 @@ const RegisterForm = () => {
       birthday: '',
       phone_number: '',
       gender: null,
+      start_date: '',
     },
-    exercisePreferences: {
+    exercise_preferences: {
       exercise_level: 1,
       exercise_goal: '',
-      exercise_performance_level: '',
       exercise_concern: '',
       referral_source: '',
-      total_cholesterol: '',
-      ldl_cholesterol: '',
+      wearable_device: '',
     },
     programs: {
-      type: `${title}`,
-      duration_in_months: parseInt(`${period}`),
+      name: `${title}`,
     },
     paymentInfo: {
       amount: 0,
@@ -49,9 +48,6 @@ const RegisterForm = () => {
       card_type: '',
       owner_type: '',
       currency: 'KRW',
-    },
-    subscriptions: {
-      batch_id: null,
     },
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -85,57 +81,25 @@ const RegisterForm = () => {
   });
 
   useEffect(() => {
-    const { batch_id } = formData.subscriptions;
-    const { name, gender, email, phone_number } = formData.user;
-    const {
-      exercise_goal,
-      exercise_performance_level,
-      exercise_level,
-      total_cholesterol,
-      ldl_cholesterol,
-      referral_source,
-    } = formData.exercisePreferences;
+    const { name, gender, birthday, start_date } = formData.user;
+    const { exercise_goal, exercise_level, referral_source, wearable_device } =
+      formData.exercise_preferences;
 
-    const isHealthQuestionComplete =
-      total_cholesterol?.trim() !== '' && ldl_cholesterol?.trim() !== '';
+    const isFormValid =
+      name?.trim() !== '' &&
+      gender?.trim() !== '' &&
+      birthday?.trim() !== '' &&
+      (title === 'Basic' ? true : start_date?.trim() !== '') &&
+      wearable_device?.trim() !== '' &&
+      exercise_goal?.trim() !== '' &&
+      exercise_level != null &&
+      referral_source?.trim() !== '';
 
-    if (title === 'Health') {
-      if (
-        name?.trim() !== '' &&
-        email?.trim() !== '' &&
-        phone_number?.trim() !== '' &&
-        referral_source?.trim() !== '' &&
-        isHealthQuestionComplete
-      ) {
-        setIsButtonDisabled(false);
-      }
-    } else if (title === 'PRO') {
-      if (
-        name?.trim() !== '' &&
-        email?.trim() !== '' &&
-        phone_number?.trim() !== '' &&
-        batch_id != null &&
-        exercise_goal?.trim() !== '' &&
-        exercise_level != null &&
-        exercise_performance_level?.trim() !== ''
-      ) {
-        setIsButtonDisabled(false);
-      }
-    } else if (title === 'Basic') {
-      if (
-        name?.trim() !== '' &&
-        email?.trim() !== '' &&
-        phone_number?.trim() !== '' &&
-        gender?.trim() !== '' &&
-        exercise_goal?.trim() !== '' &&
-        exercise_level != null &&
-        referral_source?.trim() !== ''
-      ) {
-        setIsButtonDisabled(false);
-      }
-    } else {
-      setIsButtonDisabled(true);
-    }
+    console.log('formData', formData);
+
+    console.log(isFormValid);
+
+    setIsButtonDisabled(!isFormValid);
   }, [formData, title]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -190,15 +154,17 @@ const RegisterForm = () => {
         noValidate
       >
         <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
-          <RegisterTitle
-            title={title}
-            period={`${title !== 'Health' ? '1개월' : period}`}
-          />
-          <UserInformation formData={formData} setFormData={setFormData} />
+          <RegisterTitle title={title} period="1개월" />
+          <NewUserInformation formData={formData} setFormData={setFormData} />
           <ExercisePreference formData={formData} setFormData={setFormData} />
           <ExerciseConcern formData={formData} setFormData={setFormData} />
+          {/*  <UserInformation formData={formData} setFormData={setFormData} />
+           */}
         </div>
         <div className="flex flex-col gap-[0.5rem] items-center">
+          {title === 'Basic' && (
+            <div>Basic 플랜은 신청하신 날부터 사용 가능합니다.</div>
+          )}
           <Button
             className="mt-0"
             text={`${title === 'Basic' ? '신청하기' : '결제하기'}`}
