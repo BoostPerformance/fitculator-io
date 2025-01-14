@@ -2,9 +2,7 @@ export interface UserInfoFormData {
   user: {
     name: string;
     birthday?: string;
-    email: string;
-    phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | null;
+    gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
 }
@@ -25,7 +23,6 @@ export interface ExercisePreferenceType {
   exercise_preferences: {
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     referral_source?: string;
     exercise_concern?: string;
     wearable_device: string;
@@ -35,19 +32,20 @@ export interface ExercisePreferenceType {
 export interface RegisterFormData extends ExercisePreferenceType {
   user: {
     name: string;
-    email: string;
     birthday?: string;
-    phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | null;
+    gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
   programs: {
     name: string;
   };
-  paymentInfo: {
+  paymentInfo?: {
     amount: number;
-    order_id: string;
+    paymet_date: string;
+    paymet_method: string;
     payment_key: string;
+    status: string;
+    order_id: string;
     order_name: string;
     card_type: string;
     owner_type: string;
@@ -58,28 +56,24 @@ export interface RegisterFormData extends ExercisePreferenceType {
 export interface RequestItemsType {
   user: {
     name: string;
-    email: string;
     birthday?: string;
-    phone_number: string;
     gender?: string;
     start_day: string;
   };
   exercise_preferences: {
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     exercise_concern?: string;
     referral_source?: string;
     wearable_device: string;
   };
   userSubscription: {
-    programId: number | null;
     start_date: string;
     end_date: string;
   };
   program: {
     id: number;
-    type: string;
+    name: string;
   };
 
   paymentInfo: {
@@ -92,10 +86,8 @@ export interface ApiResponse {
   user: {
     id: number;
     name: string;
-    email: string;
     birthday: string;
-    phone_number: string;
-    gender: '남성' | '여성' | '기타' | '비공개' | null;
+    gender: 'male' | 'female' | 'undisclosed' | null;
     start_date: string;
   };
   program: {
@@ -126,7 +118,6 @@ export interface ApiResponse {
     userId: number;
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     exercise_concern: string;
     referral_source?: string;
     wearable_device: string;

@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterFormData } from '@/types/types';
 import RefundPolicy from '../refundPolicy';
-import UserInformation from './userInformation/userInformation';
 import ExercisePreference from './exercisePreference';
 import ExerciseConcern from './exerciseConcern';
 import RegisterTitle from './registerTitle';
@@ -24,9 +23,7 @@ const RegisterForm = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
     user: {
       name: '',
-      email: '',
       birthday: '',
-      phone_number: '',
       gender: null,
       start_date: '',
     },
@@ -42,8 +39,11 @@ const RegisterForm = () => {
     },
     paymentInfo: {
       amount: 0,
-      order_id: '',
+      paymet_date: '',
+      paymet_method: '',
       payment_key: '',
+      status: '',
+      order_id: '',
       order_name: `${title} ${period}`,
       card_type: '',
       owner_type: '',
@@ -68,7 +68,7 @@ const RegisterForm = () => {
       return response.json();
     },
     onSuccess: (data) => {
-      //console.log('성공적으로 전송되었습니다', data);
+      console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
       router.push('/payment-success');
       return;
@@ -117,13 +117,13 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      //console.log('Form Data:', formData);
+      console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
-      // console.log('새로운 주문번호 생성:', orderId);
+      console.log('새로운 주문번호 생성:', orderId);
       localStorage.setItem('formData', JSON.stringify(formData));
 
-      // console.log('Form data saved:', JSON.stringify(formData));
+      console.log('Form data saved:', JSON.stringify(formData));
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),

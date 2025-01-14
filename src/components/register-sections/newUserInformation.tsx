@@ -18,9 +18,7 @@ export default function NewUserInformation({
   const title = searchParams.get('title');
   const [errors, setErrors] = useState({
     name: '',
-    email: '',
     birthday: '',
-    phone_number: '',
     start_date: '',
   });
 
@@ -35,7 +33,7 @@ export default function NewUserInformation({
   };
 
   const handleGenderSelect = (
-    gender: '남성' | '여성' | '기타' | '비공개' | null
+    gender: 'male' | 'female' | 'other' | 'undisclosed' | null
   ) => {
     setFormData((prevData) => ({
       ...prevData,
