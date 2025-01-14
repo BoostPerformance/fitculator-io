@@ -124,6 +124,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </p>
         </div>
       </div>
+
       {basic ? (
         <Link
           href={{
@@ -153,6 +154,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Button text="신청하기" variant="white" size="sm" basic={basic} />
         </Link>
       )}
+
     </div>
   );
 };

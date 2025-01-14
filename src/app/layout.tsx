@@ -17,11 +17,16 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://fitculator.io'),
-  description: '핏큘레이터와 함께 요요 없는 지속가능한 다이어트를 하세요',
+  description: '운동에 진심인 당신을 위한 운동량 계산기',
   keywords: [
-    '다이어트',
     '핏큘레이터',
     'fitculator',
+    '운동',
+    '달리기',
+    '러닝',
+    '마라톤',
+    '트레일러닝',
+    '다이어트',
     '체중 관리',
     '식단관리',
     '운동관리',
@@ -52,7 +57,7 @@ export const metadata: Metadata = {
   title: { default: 'Fitculator', template: `%s | Fitculator` },
   openGraph: {
     title: 'Fitculator',
-    description: '핏큘레이터와 함께 요요 없는 지속가능한 다이어트를 하세요',
+    description: '운동에 진심인 당신을 위한 운동량 계산기',
     type: 'website',
     locale: 'ko_KR',
     siteName: 'Fitculator',
@@ -62,7 +67,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Fitculator',
-    description: '핏큘레이터와 함께 요요 없는 지속가능한 다이어트를 하세요',
+    description: '운동에 진심인 당신을 위한 운동량 계산기',
     images: ['/logo-favicon.png'],
   },
 
@@ -115,7 +120,7 @@ export default function RootLayout({
             '@type': 'WebApplication',
             name: 'Fitculator',
             description:
-              '핏큘레이터와 함께 요요 없는 지속가능한 다이어트를 하세요',
+              '운동에 진심인 당신을 위한 운동량 계산기',
             applicationCategory: 'HealthApplication',
             operatingSystem: 'Web',
             offers: {

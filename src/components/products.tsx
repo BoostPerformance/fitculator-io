@@ -59,16 +59,7 @@ const Product = () => {
               </ol>
             </>,
             '커뮤니티 활동',
-            <>
-              <div className="flex flex-col items-start">
-                <div className="flex flex-col items-start sm:gap-1">
-                  <div>전담 코치 배정</div>
-                  <ol className="list-disc list-inside">
-                    <li>개별 운동 루틴, 데일리 피드백</li>
-                  </ol>
-                </div>
-              </div>
-            </>,
+            '코치님의 매주 위클리 피드백 & 모니터링'
           ]}
           price={24900}
           perMonth="1개월"
@@ -87,10 +78,12 @@ const Product = () => {
               </ol>
             </>,
             '커뮤니티 활동',
+            '코치님의 매주 위클리 피드백 & 모니터링',
             <>
               <div>전담 코치 배정</div>
               <ol className="list-disc list-inside">
-                <li>개별 운동 루틴, 데일리 피드백</li>
+                <li>개별 운동 프로그램 제공<br/>(근력, Hyrox)</li>
+                <li>프로그램 피드백</li>
               </ol>
             </>,
           ]}
