@@ -26,7 +26,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
   selectedPeriod,
   basic,
 }) => {
-  const calcPrice = selectedPeriod === '3개월' ? 360000 : price;
   const registerDate = new Date();
   const currentYear = registerDate.getFullYear();
   const currentMonth = registerDate.getMonth();
@@ -34,13 +33,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const isRegistrationPeriod = currentDay >= 25 || currentDay === 1; // 25일부터 말일까지, 또는 매월 1일 신청 가능
 
   const buttonVariant = secondCard ? 'bg-gray-3' : 'default';
-  const buttonText =
-    isRegistrationPeriod || (!secondCard && !thirdCard)
-      ? '신청하기'
-      : `${currentMonth + 1}월 25일부터 신청 가능`;
-  const buttonDisabled = !(isRegistrationPeriod || (!secondCard && !thirdCard));
+  // const buttonText =
+  //   isRegistrationPeriod || (!secondCard && !thirdCard)
+  //     ? '신청하기'
+  //     : `${currentMonth + 1}월 25일부터 신청 가능`;
+  // const buttonDisabled = !(isRegistrationPeriod || (!secondCard && !thirdCard));
 
-  const priceString = calcPrice.toLocaleString();
+  const priceString = price.toLocaleString();
 
   return (
     <div
@@ -131,7 +130,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             pathname: './register',
             query: {
               title: title,
-              period: selectedPeriod,
+              period: '',
               price: priceString,
               secondCard: secondCard ? true : false,
             },

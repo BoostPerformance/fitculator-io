@@ -20,7 +20,7 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
 
   const handleChange = (id: number) => {
     setSelectedAmount(id);
-    onChange!(id);
+    onChange?.(id);
   };
 
   return (
@@ -34,9 +34,11 @@ const RadioButtonSlide = ({ onChange }: RadioButtonSlideProps) => {
             <input
               type="radio"
               id={`amount-${amount.id}`}
+              name="debt-amount"
               value={amount.id}
               required
               className="hidden"
+              checked={selectedAmount === amount.id}
               onChange={() => handleChange(amount.id)}
             />
             <label

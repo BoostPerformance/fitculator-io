@@ -56,7 +56,7 @@ export default function RegisterSection() {
         <Image
           src="/images/landing-running.png"
           alt="woman running"
-          width={2300}
+          width={2600}
           height={600}
           className="sm:top-[10rem] sm:scale-200 md:scale-150 sm:transform sm:translate-x-[-6rem] sm:translate-y-[6rem] md:translate-x-[-6rem] md:translate-y-[4rem]"
           priority={true}
@@ -68,7 +68,7 @@ export default function RegisterSection() {
               'linear-gradient(270deg, rgba(219, 226, 228, 0.00) 0%, rgba(219, 226, 228, 0.90) 16.32%)',
           }}
         />
-        <div className="absolute inset-0 h-[43%] sm:h-[69%] bg-gradient-to-t from-white  via-white to-transparent top-[66%] sm:top-[50%] md:top-[60%]" />
+        <div className="absolute inset-0 h-[40%] sm:h-[69%] bg-gradient-to-t from-white  via-white to-transparent top-[66%] sm:top-[50%] md:top-[60%]" />
       </div>
     </section>
   );
