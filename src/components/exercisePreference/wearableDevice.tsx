@@ -7,7 +7,7 @@ interface WearableDeviceProps {
 
 const WearableDeviceChoice: React.FC<WearableDeviceProps> = ({ onChange }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col sm:py-[4rem]">
       <div className="flex gap-[0.5rem] items-end sm:flex-col sm:items-start">
         <h1 className="text-1.25-700 text-gray-1 sm:text-1-700">
           사용 중인 웨어러블 디바이스
