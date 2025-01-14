@@ -95,9 +95,9 @@ const RegisterForm = () => {
       exercise_level != null &&
       referral_source?.trim() !== '';
 
-    console.log('formData', formData);
+    // console.log('formData', formData);
 
-    console.log(isFormValid);
+    // console.log(isFormValid);
 
     setIsButtonDisabled(!isFormValid);
   }, [formData, title]);
