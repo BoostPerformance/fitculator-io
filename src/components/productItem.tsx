@@ -44,7 +44,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   return (
     <div
-      className={`min-h-auto w-[52%] md:w-[40%] sm:w-[80%] border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[2rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
+      className={`min-h-auto w-[52%] md:w-[40%] sm:w-[95%] border-2 border-gray-3 rounded-[1.25rem] px-[2.44rem] md:px-[0.3rem] py-[2rem] sm:pt-[1.19rem] sm:pb-[1.5rem] sm:px-[1.38rem] sm:gap-[1rem] flex flex-col justify-around items-center gap-[1.8rem] shadow-lg bg-white ${
         secondCard &&
         'from-blue-2 bg-gradient-to-tl to-blue-1 from-17% text-white'
       } ${thirdCard && 'bg-pro-gradient text-white'} `}
@@ -154,7 +154,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Button text="신청하기" variant="white" size="sm" basic={basic} />
         </Link>
       )}
-
     </div>
   );
 };
