@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { nanoid } from 'nanoid';
-import { parse } from 'date-fns';
+import prisma from '@/lib/prisma';
 import { addDays } from 'date-fns';
-
-const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,7 +10,6 @@ export async function POST(req: NextRequest) {
     console.log('Received body:', body);
     console.log('보이니?');
     if (!body.user) {
-      // users가 아닌 user인지 확인
       throw new Error('User data is missing');
     }
 
@@ -24,22 +21,13 @@ export async function POST(req: NextRequest) {
       //   },
       // });
 
-      enum Gender {
-        male = 'male',
-        female = 'female',
-        other = 'other',
-        undisclosed = 'undisclosed',
-      }
-
       const birthDate = new Date(`${body.user.birthday}`);
-
       console.log(birthDate);
-
       const userInfo = await tx.users.create({
         data: {
           id: nanoid(),
           name: body.user.name,
-          gender: body.user.gender as Gender, // enum 타입으로 캐스팅
+          gender: body.user.gender.toLowerCase(),
           birth: birthDate,
         },
       });
@@ -120,10 +108,25 @@ export async function POST(req: NextRequest) {
     return Response.json(result);
   } catch (error) {
     console.error('Prisma error:', error);
+    let errorMessage = 'Unknown error occurred';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.error('Error code:', error.code);
       console.error('Meta:', error.meta);
     }
-    return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
+
+    await prisma.$disconnect();
+    return NextResponse.json(
+      {
+        error: 'Error creating user',
+        details: errorMessage,
+      },
+      { status: 500 }
+    );
+  } finally {
+    await prisma.$disconnect();
   }
 }
