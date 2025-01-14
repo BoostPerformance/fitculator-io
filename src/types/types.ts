@@ -1,11 +1,18 @@
 export interface UserInfoFormData {
   user: {
     name: string;
-    birthDate?: string;
-    email: string;
-    phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개';
+    birthday?: string;
+    gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
+    start_date: string;
   };
+}
+
+export interface FormErrors {
+  name: string;
+  email: string;
+  birthday: string;
+  phone_number: string;
+  start_date: string;
 }
 
 export interface ExerciseConcernFormData {
@@ -13,72 +20,61 @@ export interface ExerciseConcernFormData {
 }
 
 export interface ExercisePreferenceType {
-  exercisePreferences: {
+  exercise_preferences: {
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     referral_source?: string;
     exercise_concern?: string;
-    total_cholesterol?: string;
-    ldl_cholesterol?: string;
+    wearable_device: string;
   };
 }
 
 export interface RegisterFormData extends ExercisePreferenceType {
   user: {
     name: string;
-    email: string;
     birthday?: string;
-    phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개' | null;
+    gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
+    start_date: string;
   };
   programs: {
-    type: string;
-    duration_in_months: number;
+    name: string;
   };
-  paymentInfo: {
+  paymentInfo?: {
     amount: number;
-    order_id: string;
+    paymet_date: string;
+    paymet_method: string;
     payment_key: string;
+    status: string;
+    order_id: string;
     order_name: string;
     card_type: string;
     owner_type: string;
     currency: string;
-  };
-  subscriptions: {
-    batch_id: number | null;
   };
 }
 
 export interface RequestItemsType {
   user: {
     name: string;
-    email: string;
     birthday?: string;
-    phone_number: string;
     gender?: string;
+    start_day: string;
   };
-  exercisePreferences: {
+  exercise_preferences: {
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     exercise_concern?: string;
     referral_source?: string;
-    total_cholesterol?: string;
-    ldl_cholesterol?: string;
+    wearable_device: string;
   };
   userSubscription: {
-    batchId: number | null;
-    programId: number | null;
     start_date: string;
     end_date: string;
   };
   program: {
     id: number;
-    type: string;
+    name: string;
   };
-
-  batch_number: number;
 
   paymentInfo: {
     payment_method: string;
@@ -90,10 +86,9 @@ export interface ApiResponse {
   user: {
     id: number;
     name: string;
-    email: string;
-    birthday?: string;
-    phone_number: string;
-    gender?: '남성' | '여성' | '기타' | '비공개';
+    birthday: string;
+    gender: 'male' | 'female' | 'undisclosed' | null;
+    start_date: string;
   };
   program: {
     id: number;
@@ -113,22 +108,19 @@ export interface ApiResponse {
   userSubscription: {
     id: number;
     userSubscription: {
-      batchId: number | null;
       programId: number | null;
       start_date: string;
       end_date: string;
     };
   };
-  exercisePreferences: {
+  exercise_preferences: {
     id: number;
     userId: number;
     exercise_level: number;
     exercise_goal: string;
-    exercise_performance_level?: string;
     exercise_concern: string;
     referral_source?: string;
-    total_cholesterol?: string;
-    ldl_cholesterol?: string;
+    wearable_device: string;
   };
 }
 export interface UserInformationProps {

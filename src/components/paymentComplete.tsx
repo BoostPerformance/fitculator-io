@@ -6,8 +6,13 @@ import { useMutation } from '@tanstack/react-query';
 
 const validateFormData = (formData: any) => {
   try {
-    const requiredFields = ['user', 'exercisePreferences', 'programs', 'subscriptions'];
-    return requiredFields.every(field => formData[field]);
+    const requiredFields = [
+      'user',
+      'exercise_preferences',
+      'programs',
+      'subscriptions',
+    ];
+    return requiredFields.every((field) => formData[field]);
   } catch (error) {
     return false;
   }
@@ -17,17 +22,17 @@ interface PaymentRequestData {
   orderId: string | null;
   amount: string | null;
   paymentKey: string | null;
- }
+}
 
 const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
   let attempts = 0;
   while (attempts < 3) {
     const paymentResponse = await fetch('/api/payments', {
-      method: 'POST', 
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestData)
+      body: JSON.stringify(requestData),
     });
-    
+
     if (paymentResponse.ok) {
       const json = await paymentResponse.json();
       if (json.error) {
@@ -36,10 +41,10 @@ const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
       return json;
     }
 
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 1000));
     attempts++;
   }
-  
+
   throw new Error('결제 확인이 실패했습니다. 잠시 후 다시 시도해주세요.');
 };
 
@@ -81,7 +86,7 @@ export default function PaymentComplete() {
         if (!savedFormData) {
           throw new Error('신청 폼 데이터가 없습니다');
         }
-        
+
         const formData = JSON.parse(savedFormData);
         if (!validateFormData(formData)) {
           throw new Error('필수 데이터가 누락되었습니다');
@@ -93,12 +98,16 @@ export default function PaymentComplete() {
           paymentKey: searchParams.get('paymentKey'),
         };
 
-        if (!requestData.orderId || !requestData.amount || !requestData.paymentKey) {
+        if (
+          !requestData.orderId ||
+          !requestData.amount ||
+          !requestData.paymentKey
+        ) {
           throw new Error('결제 정보가 누락되었습니다');
         }
 
         const paymentResult = await attemptPaymentConfirmation(requestData);
-        
+
         mutation.mutate({
           ...formData,
           paymentInfo: {
@@ -110,11 +119,15 @@ export default function PaymentComplete() {
             currency: paymentResult.currency || 'KRW',
           },
         });
-
       } catch (error: Error | any) {
-        const errorMessage = error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다';
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : '알 수 없는 에러가 발생했습니다';
         console.error('Payment confirmation error:', error);
-        window.location.href = `/payment-fail?message=${encodeURIComponent(errorMessage)}`;
+        window.location.href = `/payment-fail?message=${encodeURIComponent(
+          errorMessage
+        )}`;
       }
     };
 

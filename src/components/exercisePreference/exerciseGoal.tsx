@@ -1,7 +1,7 @@
 import MultiSelectionButtons from '../multiselectionButtons';
-
+import exerciseGoal from '@/data/exerciseGoal';
 interface ExerciseGoalProps {
-  onChange: (item: string[]) => void; // onChange의 타입을 명시
+  onChange: (item: string[]) => void;
 }
 
 const ExerciseGoal: React.FC<ExerciseGoalProps> = ({ onChange }) => {
@@ -13,7 +13,7 @@ const ExerciseGoal: React.FC<ExerciseGoalProps> = ({ onChange }) => {
           운동 목표를 선택해주세요. (복수 선택 가능)
         </p>
       </div>
-      <MultiSelectionButtons onChange={onChange} />
+      <MultiSelectionButtons onChange={onChange} data={exerciseGoal} />
     </div>
   );
 };

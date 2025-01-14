@@ -1,124 +1,129 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { nanoid } from 'nanoid';
+import { parse } from 'date-fns';
+import { addDays } from 'date-fns';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
- try {
-   const body = await req.json();
+  try {
+    const body = await req.json();
+    console.log('Received body:', body);
+    console.log('보이니?');
+    if (!body.user) {
+      // users가 아닌 user인지 확인
+      throw new Error('User data is missing');
+    }
 
-   const result = await prisma.$transaction(async (tx) => {
-     // User handling
-     const existingUser = await tx.users.findFirst({
-       where: {
-         OR: [
-           { email: body.user.email },
-           { phone_number: body.user.phone_number }
-         ]
-       }
-     });
+    const result = await prisma.$transaction(async (tx) => {
+      // User handling
+      // const existingUser = await tx.users.findFirst({
+      //   where: {
+      //     OR: [{ name: body.user.name }, { birth: body.user.birth }],
+      //   },
+      // });
 
-     const userInfo = existingUser ? 
-       await tx.users.update({
-         where: { id: existingUser.id },
-         data: {
-           name: body.user.name,
-           email: body.user.email,
-           phone_number: body.user.phone_number,
-         },
-       }) :
-       await tx.users.create({
-         data: {
-           id: nanoid(),
-           email: body.user.email,
-           name: body.user.name,
-           phone_number: body.user.phone_number,
-           gender: body.user.gender,
-           birthday: body.user.birthday,
-         },
-       });
+      enum Gender {
+        male = 'male',
+        female = 'female',
+        other = 'other',
+        undisclosed = 'undisclosed',
+      }
 
-     // Program creation
-     const programInfo = await tx.programs.create({
-       data: {
-         id: nanoid(),
-         type: body.programs.type,
-         duration_in_months: body.programs.duration_in_months,
-       }
-     });
+      const birthDate = new Date(`${body.user.birthday}`);
 
-     // Program batch handling
-     let programBatchInfo = (body.subscriptions.batch_id ?
-       await tx.programbatches.findUnique({
-         where: { id: String(body.subscriptions.batch_id) }
-       }) : null) ?? await tx.programbatches.create({
-         data: {
-           id: nanoid(),
-           program_id: programInfo.id,
-           batch_number: body.subscriptions.id || 13,
-         }
-       });
+      console.log(birthDate);
 
-     // Exercise preferences creation
-     const exercisePreferenceInfo = await tx.exercisepreferences.create({
-       data: {
-         id: nanoid(),
-         user_id: userInfo.id,
-         exercise_level: body.exercisePreferences.exercise_level,
-         exercise_goal: body.exercisePreferences.exercise_goal,
-         exercise_performance_level: body.exercisePreferences.exercise_performance_level,
-         exercise_concern: body.exercisePreferences.exercise_concern || null,
-         referral_source: body.exercisePreferences.referral_source || null,
-         ldl_cholesterol: body.exercisePreferences.ldl_cholesterol || null,
-         total_cholesterol: body.exercisePreferences.total_cholesterol || null,
-       }
-     });
+      const userInfo = await tx.users.create({
+        data: {
+          id: nanoid(),
+          name: body.user.name,
+          gender: body.user.gender as Gender, // enum 타입으로 캐스팅
+          birth: birthDate,
+        },
+      });
 
-     const userSubscriptionInfo = await tx.usersubscriptions.create({
-       data: {
-         id: nanoid(),
-         users: { connect: { id: userInfo.id } },
-         programs: { connect: { id: programInfo.id } },
-         programbatches: { connect: { id: programBatchInfo.id } },
-         start_date: programInfo.start_date || null,
-         end_date: programInfo.end_date || null,
-       }
-     });
+      // Program creation
+      const programInfo = await tx.programs.create({
+        data: {
+          id: nanoid(),
+          name: body.programs.name,
+        },
+      });
 
-     const paymentDate = new Date(body.paymentInfo.payment_date || Date.now());
-     const paymentInfo = await tx.paymentinfo.create({
-       data: {
-         id: nanoid(),
-         user_subscription_id: userSubscriptionInfo.id,
-         amount: body.paymentInfo.amount,
-         payment_date: paymentDate,
-         payment_key: body.paymentInfo.payment_key,
-         order_id: body.paymentInfo.order_id,
-         order_name: body.paymentInfo.order_name || null,
-         card_type: body.paymentInfo.card_type || null,
-         owner_type: body.paymentInfo.owner_type || null,
-         currency: body.paymentInfo.currency || 'KRW',
-       }
-     });
+      // Exercise preferences creation
+      const exercise_preferencesInfo = await tx.exercise_preferences.create({
+        data: {
+          id: nanoid(),
+          user_id: userInfo.id,
+          wearable_device: body.exercise_preferences.wearable_device,
+          exercise_level: body.exercise_preferences.exercise_level,
+          exercise_goal: body.exercise_preferences.exercise_goal,
+          exercise_concern: body.exercise_preferences.exercise_concern || null,
+          referral_source: body.exercise_preferences.referral_source || null,
+        },
+      });
 
-     return {
-       user: userInfo,
-       exercisepreferences: exercisePreferenceInfo,
-       programs: programInfo,
-       usersubscriptions: userSubscriptionInfo,
-       paymentinfo: paymentInfo,
-     };
-   });
+      const end_date = (
+        start_date: Date | string,
+        programs_name: string
+      ): Date | null => {
+        if (programs_name === 'Basic' && !start_date) {
+          return null;
+        }
+        return addDays(new Date(start_date), 30);
+      };
 
-   return Response.json(result);
+      const userSubscriptionInfo = await tx.user_subscriptions.create({
+        data: {
+          id: nanoid(),
+          users: { connect: { id: userInfo.id } },
+          programs: { connect: { id: programInfo.id } },
+          start_date: body.user.start_date || null,
+          end_date: end_date(body.user.start_date, body.programs.name),
+        },
+      });
 
- } catch (error) {
-   console.error('Prisma error:', error);
-   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-     console.error('Error code:', error.code);
-     console.error('Meta:', error.meta);
-   }
-   return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
- }
+      let paymentInfo = null;
+      if (body.programs.name !== 'Basic') {
+        const paymentDate = new Date(
+          body.paymentInfo.payment_date || Date.now()
+        );
+        paymentInfo = await tx.payment_info.create({
+          data: {
+            id: nanoid(),
+            user_subscription_id: userSubscriptionInfo.id,
+            amount: body.paymentInfo.amount,
+            payment_date: paymentDate,
+            payment_method: body.paymentInfo.payment_method,
+            payment_key: body.paymentInfo.payment_key,
+            status: body.paymentInfo.status,
+            order_id: body.paymentInfo.order_id,
+            order_name: body.paymentInfo.order_name || null,
+            card_type: body.paymentInfo.card_type || null,
+            owner_type: body.paymentInfo.owner_type || null,
+            currency: body.paymentInfo.currency || 'KRW',
+          },
+        });
+      }
+
+      return {
+        user: userInfo,
+        exercisepreferences: exercise_preferencesInfo,
+        programs: programInfo,
+        usersubscriptions: userSubscriptionInfo,
+        paymentinfo: paymentInfo,
+      };
+    });
+
+    return Response.json(result);
+  } catch (error) {
+    console.error('Prisma error:', error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.error('Error code:', error.code);
+      console.error('Meta:', error.meta);
+    }
+    return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
+  }
 }

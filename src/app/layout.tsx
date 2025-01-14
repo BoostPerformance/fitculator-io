@@ -131,6 +131,7 @@ export default function RootLayout({
           }),
         }}
       />
+
       <body className={`${pretendard.variable} font-pretendard`}>
         <Nav smWidth="sm:w-[7rem]" />
         <Template>
