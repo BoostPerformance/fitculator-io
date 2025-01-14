@@ -44,7 +44,7 @@ const Product = () => {
             '커뮤니티 활동',
           ]}
           price={0}
-          selectedPeriod={selectedPeriod}
+          selectedPeriod=""
           basic
         />
         <ProductItem

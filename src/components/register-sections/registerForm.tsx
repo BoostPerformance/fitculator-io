@@ -154,7 +154,10 @@ const RegisterForm = () => {
         noValidate
       >
         <div className="flex flex-col items-center gap-[5rem] p-[6.88rem] md:w-auto sm:w-auto sm:gap-[0.4rem] sm:bg-white sm:m-[1.25rem] sm:p-[2rem]">
-          <RegisterTitle title={title} period="1개월" />
+          <RegisterTitle
+            title={title}
+            period={title === 'Basic' ? '' : '1개월'}
+          />
           <NewUserInformation formData={formData} setFormData={setFormData} />
           <ExercisePreference formData={formData} setFormData={setFormData} />
           <ExerciseConcern formData={formData} setFormData={setFormData} />
@@ -163,7 +166,9 @@ const RegisterForm = () => {
         </div>
         <div className="flex flex-col gap-[0.5rem] items-center">
           {title === 'Basic' && (
-            <div>Basic 플랜은 신청하신 날부터 사용 가능합니다.</div>
+            <div className="sm:text-0.75-500 sm:text-center  text-gray-7 ">
+              Basic 플랜은 신청하신 날부터 사용 가능합니다.
+            </div>
           )}
           <Button
             className="mt-0"
