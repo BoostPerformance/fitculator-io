@@ -39,7 +39,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
   programs: {
     name: string;
   };
-  paymentInfo?: {
+  payment_info?: {
     amount: number;
     paymet_date: string;
     paymet_method: string;
@@ -76,26 +76,34 @@ export interface RequestItemsType {
     name: string;
   };
 
-  paymentInfo: {
-    payment_method: string;
+  payment_info: {
     amount: number;
+    paymet_date: string;
+    paymet_method: string;
+    payment_key: string;
+    status: string;
+    order_id: string;
+    order_name: string;
+    card_type: string;
+    owner_type: string;
+    currency: string;
   };
 }
 
 export interface ApiResponse {
   user: {
-    id: number;
+    id: string;
     name: string;
     birthday: string;
     gender: 'male' | 'female' | 'undisclosed' | null;
     start_date: string;
   };
   program: {
-    id: number;
+    id: string;
     name: string;
   };
-  paymentInfo: {
-    id: number;
+  payment_info: {
+    id: string;
     amount: number;
     orderId: string;
     paymentKey: string;
@@ -106,16 +114,16 @@ export interface ApiResponse {
     payment_date: string;
   };
   userSubscription: {
-    id: number;
+    id: string;
     userSubscription: {
-      programId: number | null;
+      programId: string | null;
       start_date: string;
       end_date: string;
     };
   };
   exercise_preferences: {
-    id: number;
-    userId: number;
+    id: string;
+    userId: string;
     exercise_level: number;
     exercise_goal: string;
     exercise_concern: string;

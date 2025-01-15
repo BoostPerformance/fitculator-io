@@ -37,7 +37,7 @@ const RegisterForm = () => {
     programs: {
       name: `${title}`,
     },
-    paymentInfo: {
+    payment_info: {
       amount: 0,
       paymet_date: '',
       paymet_method: '',
@@ -64,13 +64,14 @@ const RegisterForm = () => {
       if (!response.ok) {
         throw new Error('폼 제출에 실패했습니다.');
       }
-
+      console.log(response.json());
       return response.json();
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
-      router.push('/payment-success');
+
+      // router.push('/payment-success');
       return;
     },
     onError: (error) => {
@@ -129,7 +130,7 @@ const RegisterForm = () => {
         amount: Number(`${price}`),
         orderId,
         orderName: `${title} ${period}`,
-        successUrl: `${window.location.origin}/payment/complete?orderId=${orderId}&amount=${price}`,
+        successUrl: `${window.location.origin}/payment-success`,
         failUrl: `${window.location.origin}/payment-fail`,
       });
     }
