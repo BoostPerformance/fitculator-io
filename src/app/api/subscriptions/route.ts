@@ -4,66 +4,66 @@ import { nanoid } from 'nanoid';
 import prisma from '@/lib/prisma';
 import { addDays } from 'date-fns';
 
-async function sendSlackNotification(webhookUrl: string, data: any) {
-  try {
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `*핏큘레이터:*\n${data.programs.name}\n*신청:*`,
-            },
-          },
-          {
-            type: 'section',
-            fields: [
-              {
-                type: 'mrkdwn',
-                text: `*이름:*\n${data.user.name}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*생년월일:*\n${data.user.birthday}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*연락처:*\n${data.user.phone_number}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*이메일:*\n${data.user.email}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*시작날짜:*\n${
-                  data.usersubscriptions.start_date || '미정'
-                }`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*결제금액:*\n${
-                  data.paymentinfo?.amount && `${data.paymentinfo.amount}원`
-                }`,
-              },
-            ],
-          },
-        ],
-      }),
-    });
+// async function sendSlackNotification(webhookUrl: string, data: any) {
+//   try {
+//     const response = await fetch(webhookUrl, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         blocks: [
+//           {
+//             type: 'section',
+//             text: {
+//               type: 'mrkdwn',
+//               text: `*핏큘레이터:*\n${data.programs.name}\n*신청:*`,
+//             },
+//           },
+//           {
+//             type: 'section',
+//             fields: [
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*이름:*\n${data.user.name}`,
+//               },
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*생년월일:*\n${data.user.birthday}`,
+//               },
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*연락처:*\n${data.user.phone_number}`,
+//               },
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*이메일:*\n${data.user.email}`,
+//               },
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*시작날짜:*\n${
+//                   data.usersubscriptions.start_date || '미정'
+//                 }`,
+//               },
+//               {
+//                 type: 'mrkdwn',
+//                 text: `*결제금액:*\n${
+//                   data.paymentinfo?.amount && `${data.paymentinfo.amount}원`
+//                 }`,
+//               },
+//             ],
+//           },
+//         ],
+//       }),
+//     });
 
-    if (!response.ok) {
-      console.error('Slack notification failed:', await response.text());
-    }
-  } catch (error) {
-    console.error('Error sending Slack notification:', error);
-  }
-}
+//     if (!response.ok) {
+//       console.error('Slack notification failed:', await response.text());
+//     }
+//   } catch (error) {
+//     console.error('Error sending Slack notification:', error);
+//   }
+// }
 
 export async function POST(req: NextRequest) {
   try {
@@ -165,10 +165,10 @@ export async function POST(req: NextRequest) {
         paymentinfo: paymentInfo,
       };
     });
-    const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
-    if (SLACK_WEBHOOK_URL) {
-      await sendSlackNotification(SLACK_WEBHOOK_URL, result);
-    }
+    // const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
+    // if (SLACK_WEBHOOK_URL) {
+    //   await sendSlackNotification(SLACK_WEBHOOK_URL, result);
+    // }
     return Response.json(result);
   } catch (error) {
     console.error('Prisma error:', error);
