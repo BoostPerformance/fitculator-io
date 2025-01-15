@@ -83,11 +83,13 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
+
         if (!savedFormData) {
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
         const formData = JSON.parse(savedFormData);
+
         if (!validateFormData(formData)) {
           throw new Error('필수 데이터가 누락되었습니다');
         }
@@ -110,7 +112,7 @@ export default function PaymentComplete() {
 
         mutation.mutate({
           ...formData,
-          paymentInfo: {
+          payment_info: {
             amount: requestData.amount,
             order_id: requestData.orderId,
             payment_key: requestData.paymentKey,
