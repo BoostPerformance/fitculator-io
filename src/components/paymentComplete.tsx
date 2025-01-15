@@ -6,15 +6,19 @@ import { useMutation } from '@tanstack/react-query';
 
 const validateFormData = (formData: any) => {
   try {
-    const requiredFields = [
-      'user',
-      'exercise_preferences',
-      'programs',
-      'subscriptions',
-    ];
-    return requiredFields.every((field) => formData[field]);
+    const requiredFields = ['user', 'exercise_preferences', 'programs'];
+
+    const missingFields = requiredFields.filter((field) => !formData[field]);
+
+    return {
+      isValid: missingFields.length === 0,
+      missingFields,
+    };
   } catch (error) {
-    return false;
+    return {
+      isValid: false,
+      missingFields: [],
+    };
   }
 };
 
@@ -35,6 +39,8 @@ const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
 
     if (paymentResponse.ok) {
       const json = await paymentResponse.json();
+      console.log('Payment response:', json); // 응답 로깅 추가
+
       if (json.error) {
         throw new Error(json.message || '결제 확인에 실패했습니다');
       }
@@ -83,15 +89,22 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
+        console.log(savedFormData);
 
         if (!savedFormData) {
+          console.log(savedFormData);
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
         const formData = JSON.parse(savedFormData);
+        const validation = validateFormData(formData);
 
-        if (!validateFormData(formData)) {
-          throw new Error('필수 데이터가 누락되었습니다');
+        if (!validation.isValid) {
+          throw new Error(
+            `필수 데이터가 누락되었습니다: ${validation.missingFields.join(
+              ', '
+            )}`
+          );
         }
 
         const requestData = {
@@ -114,6 +127,7 @@ export default function PaymentComplete() {
           ...formData,
           payment_info: {
             amount: requestData.amount,
+            paymet_method: paymentResult.method,
             order_id: requestData.orderId,
             payment_key: requestData.paymentKey,
             card_type: paymentResult.card?.cardType || '카드 타입',

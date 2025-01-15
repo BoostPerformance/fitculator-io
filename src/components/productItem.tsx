@@ -13,6 +13,8 @@ interface ProductItemProps {
   selectedPeriod: string;
   targetCustomer?: string;
   basic?: boolean;
+  pro?: boolean;
+  plus?: boolean;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -25,6 +27,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
   targetCustomer,
   selectedPeriod,
   basic,
+  pro,
+  plus,
 }) => {
   const registerDate = new Date();
   const currentYear = registerDate.getFullYear();
@@ -140,15 +144,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </Link>
       ) : (
         <Link
-          href={{
-            pathname: './register',
-            query: {
-              title: title,
-              period: selectedPeriod,
-              price: priceString,
-              secondCard: secondCard ? true : false,
-            },
-          }}
+          href={
+            pro
+              ? 'https://tally.so/r/3x9kAG'
+              : plus
+              ? 'https://tally.so/r/3qobN9'
+              : ''
+          }
         >
           <Button text="신청하기" variant="white" size="sm" basic={basic} />
         </Link>

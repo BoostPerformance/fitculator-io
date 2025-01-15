@@ -24,6 +24,8 @@ const RegisterForm = () => {
     user: {
       name: '',
       birthday: '',
+      email: '',
+      phone_number: '',
       gender: null,
       start_date: '',
     },
@@ -39,14 +41,14 @@ const RegisterForm = () => {
     },
     payment_info: {
       amount: 0,
-      paymet_date: '',
       paymet_method: '',
       payment_key: '',
-      status: '',
       order_id: '',
       order_name: `${title} ${period}`,
+      status: '',
       card_type: '',
       owner_type: '',
+      paymet_date: '',
       currency: 'KRW',
     },
   });
@@ -64,14 +66,13 @@ const RegisterForm = () => {
       if (!response.ok) {
         throw new Error('폼 제출에 실패했습니다.');
       }
-      console.log(response.json());
+
       return response.json();
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
-
-      // router.push('/payment-success');
+      router.push('/payment-success');
       return;
     },
     onError: (error) => {
@@ -81,14 +82,22 @@ const RegisterForm = () => {
     },
   });
 
+  const isEmailValid = (email: string) => {
+    const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    return emailRegex.test(email);
+  };
   useEffect(() => {
-    const { name, gender, birthday, start_date } = formData.user;
+    const { name, gender, email, phone_number, birthday, start_date } =
+      formData.user;
     const { exercise_goal, exercise_level, referral_source, wearable_device } =
       formData.exercise_preferences;
 
     const isFormValid =
       name?.trim() !== '' &&
       gender?.trim() !== '' &&
+      email?.trim() !== '' &&
+      isEmailValid(email) &&
+      phone_number?.trim() !== '' &&
       birthday?.trim() !== '' &&
       (title === 'Basic' ? true : start_date?.trim() !== '') &&
       wearable_device?.trim() !== '' &&
@@ -130,7 +139,7 @@ const RegisterForm = () => {
         amount: Number(`${price}`),
         orderId,
         orderName: `${title} ${period}`,
-        successUrl: `${window.location.origin}/payment-success`,
+        successUrl: `${window.location.origin}/payment/complete`,
         failUrl: `${window.location.origin}/payment-fail`,
       });
     }

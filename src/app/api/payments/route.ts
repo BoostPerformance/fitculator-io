@@ -2,48 +2,31 @@ import { NextResponse } from 'next/server';
 
 interface PaymentConfirmRequest {
   amount: string;
-  paymetDate: string;
-  method: string;
-  paymentKey: string;
-  status: string;
+  paymetDate?: string;
+  method?: string;
+  paymentKey?: string;
+  status?: string;
   orderId: string;
   orderName: string;
-  cardType: string;
-  ownerType: string;
-  currency: string;
+  cardType?: string;
+  ownerType?: string;
+  currency?: string;
 }
 
 export async function POST(req: Request) {
   try {
-    const {
-      amount,
-      paymetDate,
-      method,
-      paymentKey,
-      status,
-      orderId,
-      orderName,
-      cardType,
-      ownerType,
-      currency,
-    }: PaymentConfirmRequest = await req.json();
+    const { amount, orderId, paymentKey }: PaymentConfirmRequest =
+      await req.json();
 
-    console.log('Request body:', {
-      amount,
-      paymetDate,
-      method,
-      paymentKey,
-      status,
-      orderId,
-      orderName,
-      cardType,
-      ownerType,
-      currency,
-    });
-
-    const secretKey = process.env.TOSS_SECRET_KEY;
     const url = 'https://api.tosspayments.com/v1/payments/confirm';
-    const basicToken = Buffer.from(`${secretKey}:`, 'utf-8').toString('base64');
+
+    const secretKey = process.env.TOSS_SECRET_KEY?.trim();
+    if (!secretKey) {
+      throw new Error(
+        'TOSS_SECRET_KEY is not defined in environment variables'
+      );
+    }
+    const basicToken = Buffer.from(secretKey + ':', 'utf-8').toString('base64');
 
     const response = await fetch(url, {
       method: 'POST',
@@ -54,17 +37,21 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         amount,
         orderId,
-        orderName,
+        paymentKey,
       }),
     });
     console.log('리스폰스', response);
+    console.log('Raw Secret Key:', secretKey);
+    console.log('Encoded Token:', basicToken);
 
     const responseData = await response.json();
+    console.log('Toss API response:', responseData);
 
     if (!response.ok || responseData.status === 'FAILED') {
+      console.error('Toss API error:', responseData);
       return NextResponse.json(
         {
-          message: responseData.message || '결제 확인 실패',
+          message: responseData.message || '결제 확인 실패 route.ts',
           code: response.status,
         },
         { status: response.status }

@@ -2,6 +2,8 @@ export interface UserInfoFormData {
   user: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -33,6 +35,8 @@ export interface RegisterFormData extends ExercisePreferenceType {
   user: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -57,6 +61,8 @@ export interface RequestItemsType {
   user: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
     gender?: string;
     start_day: string;
   };
@@ -95,6 +101,8 @@ export interface ApiResponse {
     id: string;
     name: string;
     birthday: string;
+    email: string;
+    phone_number: string;
     gender: 'male' | 'female' | 'undisclosed' | null;
     start_date: string;
   };
