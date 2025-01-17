@@ -1,9 +1,16 @@
-import RegisterForm from '@/components/registerForm';
+import RegisterForm from '@/components/register-sections/registerForm';
 import React, { Suspense } from 'react';
+import Loading from '@/components/loading';
 
 const Register = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div>
+          <Loading />
+        </div>
+      }
+    >
       <RegisterForm />
     </Suspense>
   );

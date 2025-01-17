@@ -14,13 +14,14 @@ export default function FaqSection() {
         description={
           <>
             자주 물어보신 질문들만 <br />
-            모아 둔 FAQ를 참고해 주세요.
+            모아둔 FAQ를 참고해 주세요.
           </>
         }
         textCenter
         reverseY
         title2_5900
         description1_75700
+        titleClassName="sm:text-1.25-900"
       />
       <Accordion items={faqItems} />
     </section>

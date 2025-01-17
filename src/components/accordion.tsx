@@ -6,9 +6,19 @@ type AccordionItemProps = {
   title?: string;
   content?: ReactNode;
   path?: boolean;
+  titleFontWeight?: string;
+  svgColor?: string;
+  gap?: string;
 };
 
-function AccordionItem({ title, content, path }: AccordionItemProps) {
+function AccordionItem({
+  title,
+  content,
+  path,
+  titleFontWeight = 'text-1.25-700',
+  svgColor = 'currentColor',
+  gap,
+}: AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,8 +26,11 @@ function AccordionItem({ title, content, path }: AccordionItemProps) {
       <button
         className="flex justify-between w-full py-4 text-left"
         onClick={() => setIsOpen(!isOpen)}
+        type="button"
       >
-        <span className="py-2 text-1.25-700 w-auto sm:text-1-500 sm:py-0">
+        <span
+          className={`py-2 w-auto sm:text-0.875-700 sm:py-0 ${titleFontWeight}`}
+        >
           {title}
         </span>
         <svg
@@ -27,7 +40,7 @@ function AccordionItem({ title, content, path }: AccordionItemProps) {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor"
+          stroke={`${svgColor}`}
         >
           <path
             strokeLinecap="round"
@@ -38,7 +51,9 @@ function AccordionItem({ title, content, path }: AccordionItemProps) {
         </svg>
       </button>
       {isOpen && (
-        <div className="text-gray-1 text-1-500 pb-[2.75rem] flex flex-col gap-[1.69rem]">
+        <div
+          className={`text-gray-1 text-1-500 md:text-0.75-500 pb-[2.75rem] flex flex-col ${gap} sm:gap-[0.7rem]`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="100%"
@@ -60,18 +75,24 @@ type AccordionProps = {
     id: number;
     title?: string;
     content: ReactNode;
+    titleFontWeight?: string;
+    svgColor?: string;
   }[];
+  gap?: string;
 };
 
-function Accordion({ items }: AccordionProps) {
+function Accordion({ items, gap = 'gap-[1.69rem]' }: AccordionProps) {
   return (
-    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem]">
+    <div className="w-full max-w-[55rem] mx-auto px-[1.37rem] md:px-[2.5rem]">
       {items.map((item) => (
         <AccordionItem
           path={true}
           key={item.id}
           title={item.title}
           content={item.content}
+          titleFontWeight={item.titleFontWeight}
+          svgColor={item.svgColor}
+          gap={gap}
         />
       ))}
     </div>

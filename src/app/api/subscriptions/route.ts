@@ -1,105 +1,162 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient, Prisma } from '@prisma/client';
-import { RequestItemsType } from '@/types/types';
-
-const prisma = new PrismaClient();
+import { Prisma } from '@prisma/client';
+import { nanoid } from 'nanoid';
+import prisma from '@/lib/prisma';
+import { addDays } from 'date-fns';
+import { SlackWebhookProPlus } from '@/lib/slackWebhookProPlus';
 
 export async function POST(req: NextRequest) {
   try {
-    const {
-      user,
-      userSubscription,
-      program,
-      paymentInfo,
-      batch_number,
-      exercisePreference,
-    }: RequestItemsType = await req.json();
-    //지금 내가 리퀘스트에서 필요한것
-    // 1. 아이디, 고유넘버
-    // 2. 기존 고객이면, 수정된 내용. 새로운 고객이면, 1
+    const body = await req.json();
+    console.log('Received body:', body);
+    console.log('보이니?');
+    if (!body.users) {
+      throw new Error('User data is missing');
+    }
 
     const result = await prisma.$transaction(
-      async (tx: Prisma.TransactionClient) => {
-        const userInfo = await tx.user.upsert({
-          where: { email: user.email }, // 유저는 이메일을 기준으로 확인
-          update: {
-            name: user.name,
-            phone_number: user.phone_number,
-            gender: user.gender,
-          },
-          create: {
-            name: user.name,
-            email: user.email,
-            phone_number: user.phone_number,
-            gender: user.gender,
-          },
-        });
-        // program은 일단 lite면 batch가 없고, pro면 여러개batch 생김. program에서 programbatch갈일은 없는가?
-
-        const programId = program.name === 'LITE' ? 1 : 2;
-        let batchId: bigint | null = null;
-
-        if (programId === 2) {
-          const programBatch = await tx.programBatch.create({
-            data: {
-              programId: programId,
-              batch_number: batch_number,
-              start_date: userSubscription.start_date,
-              end_date: userSubscription.end_date,
-            },
-          });
-          batchId = programBatch.id;
-        }
-
-        const newSubscription = await tx.userSubscription.create({
-          data: {
-            userId: userInfo.id,
-            programId: program.id,
-            batchId: batchId,
-            start_date: userSubscription.start_date,
-            end_date: userSubscription.end_date ? new Date() : null,
-            status: 'active',
-          },
-        });
-
-        // 결제 정보 생성
-        // const paymentInformation = await tx.paymentInfo.create({
-        //   data: {
-        //     userSubscriptionId: newSubscription.id,
-        //     payment_method: paymentInfo.payment_method,
-        //     amount: paymentInfo.amount,
-        //     payment_date: new Date(),
+      async (tx) => {
+        // User handling
+        // const existingUser = await tx.users.findFirst({
+        //   where: {
+        //     OR: [{ name: body.user.name }, { birth: body.user.birth }],
         //   },
         // });
 
-        // 운동 선호도 생성 또는 업데이트
-        const exercisePref = await tx.exercisePreference.create({
+        const birthDate = new Date(`${body.users.birthday}`);
+        console.log(birthDate);
+        const userInfo = await tx.users.create({
           data: {
-            userId: userInfo.id,
-            exercise_level: exercisePreference.exercise_level,
-            exercise_goal: exercisePreference.exercise_goal,
-            exercise_concern: exercisePreference.exercise_concern,
-            exercise_performance_level:
-              program.name === 'PRO'
-                ? exercisePreference.exercise_performance_level
-                : null,
-            referral_source:
-              program.name === 'LITE'
-                ? exercisePreference.referral_source
-                : null,
+            id: nanoid(),
+            name: body.users.name,
+            gender: body.users.gender.toLowerCase(),
+            birth: birthDate,
           },
         });
 
-        return { user, newSubscription, paymentInfo, exercisePref };
+        // Program creation
+        const programInfo = await tx.programs.create({
+          data: {
+            id: nanoid(),
+            name: body.programs.name,
+          },
+        });
+
+        // Exercise preferences creation
+        const exercise_preferencesInfo = await tx.exercise_preferences.create({
+          data: {
+            id: nanoid(),
+            user_id: userInfo.id,
+            wearable_device: body.exercise_preferences.wearable_device,
+            exercise_level: body.exercise_preferences.exercise_level,
+            exercise_goal: body.exercise_preferences.exercise_goal,
+            exercise_concern:
+              body.exercise_preferences.exercise_concern || null,
+            referral_source: body.exercise_preferences.referral_source || null,
+          },
+        });
+
+        const end_date = (
+          start_date: Date | string,
+          programs_name: string
+        ): Date | null => {
+          if (programs_name === 'Basic' && !start_date) {
+            return null;
+          }
+          return addDays(new Date(start_date), 30);
+        };
+
+        const userSubscriptionInfo = await tx.user_subscriptions.create({
+          data: {
+            id: nanoid(),
+            users: { connect: { id: userInfo.id } },
+            programs: { connect: { id: programInfo.id } },
+            start_date:
+              body.users.start_date && new Date(body.users.start_date),
+            end_date: end_date(body.users.start_date, body.programs.name),
+          },
+        });
+
+        let paymentInfo = null;
+
+        if (body.programs.name !== 'Basic') {
+          console.log('Creating payment_info with:', body.payment_info);
+
+          const paymentDate = body.payment_info.payment_date || Date.now();
+
+          console.log('body', body);
+
+          paymentInfo = await tx.payment_info.create({
+            data: {
+              id: nanoid(),
+              user_subscription_id: userSubscriptionInfo.id,
+              amount: body.payment_info.amount,
+              payment_date: paymentDate,
+              payment_method: body.payment_info.payment_method,
+              payment_key: body.payment_info.payment_key,
+              status: body.payment_info.status,
+              order_id: body.payment_info.order_id,
+              order_name: body.payment_info.order_name || null,
+              card_type: body.payment_info.card_type || null,
+              owner_type: body.payment_info.owner_type || null,
+              currency: body.payment_info.currency || 'KRW',
+            },
+          });
+
+          console.log('paymentInfo:', paymentInfo);
+        }
+
+        return {
+          users: userInfo,
+          exercise_preferences: exercise_preferencesInfo,
+          programs: programInfo,
+          user_subscriptions: userSubscriptionInfo,
+          payment_info: paymentInfo,
+        };
+      },
+      {
+        timeout: 10000, // 타임아웃을 10초로 증가
+        maxWait: 7000, // 선택적: 트랜잭션 시작 대기 시간
+        isolationLevel: 'Serializable',
       }
     );
+    const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
+    const SLACK_WEBHOOK_UR_PRO = process.env.SLACK_WEBHOOK_UR_PRO;
 
-    return NextResponse.json(result, { status: 200 });
+    if (body.programs.name === 'PLUS') {
+      console.log(SLACK_WEBHOOK_URL_PLUS);
+      if (SLACK_WEBHOOK_URL_PLUS) {
+        await SlackWebhookProPlus(SLACK_WEBHOOK_URL_PLUS, result);
+      }
+    } else if (body.programs.name === 'PRO') {
+      console.log(SLACK_WEBHOOK_UR_PRO);
+      if (SLACK_WEBHOOK_UR_PRO) {
+        await SlackWebhookProPlus(SLACK_WEBHOOK_UR_PRO, result);
+      }
+    }
+
+    return Response.json(result);
   } catch (error) {
-    console.error('Error creating subscription:', error);
+    console.error('Prisma error:', error);
+    let errorMessage = 'Unknown error occurred';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.error('Error code:', error.code);
+      console.error('Meta:', error.meta);
+    }
+
+    await prisma.$disconnect();
     return NextResponse.json(
-      { error: 'Error creating subscription' },
+      {
+        error: 'Error creating user',
+        details: errorMessage,
+      },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }

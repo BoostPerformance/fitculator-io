@@ -3,91 +3,96 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id               BigInt               @id @default(autoincrement())
-  discord_id       String?              @unique
-  nickname         String?
-  name             String
-  email            String               @unique
-  phone_number     String               @unique
-  gender           String?
-  birth            DateTime?
-  restingHeartRate Int?
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
-  exercisePrefs    ExercisePreference[]
-  subscriptions    UserSubscription[]
-
+model exercise_preferences {
+  id               String    @id
+  user_id          String?
+  wearable_device  String
+  exercise_level   Int
+  exercise_goal    String
+  referral_source  String
+  exercise_concern String?
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  updated_at       DateTime? @default(now()) @db.Timestamp(6)
+  users            users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Program {
-  id            BigInt             @id @default(autoincrement())
-  name          String
-  description   String?
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  batches       ProgramBatch[]
-  subscriptions UserSubscription[]
+model payment_info {
+  id                   String              @id
+  user_subscription_id String?
+  payment_method       String              @db.VarChar(50)
+  payment_key          String?             @db.VarChar(100)
+  order_id             String?             @db.VarChar(100)
+  order_name           String?             @db.VarChar(100)
+  status               String?             @db.VarChar(50)
+  card_type            String?             @db.VarChar(100)
+  owner_type           String?             @db.VarChar(100)
+  amount               Decimal             @db.Decimal(10, 2)
+  payment_date         DateTime            @db.Timestamp(6)
+  currency             String?             @db.VarChar(100)
+  created_at           DateTime?           @default(now()) @db.Timestamp(6)
+  updated_at           DateTime?           @default(now()) @db.Timestamp(6)
+  user_subscriptions   user_subscriptions? @relation(fields: [user_subscription_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model ProgramBatch {
-  id            BigInt             @id @default(autoincrement())
-  programId     BigInt?
-  batch_number  Int?
-  start_date    DateTime
-  end_date      DateTime
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  program       Program            @relation(fields: [programId], references: [id], onDelete: Cascade)
-  subscriptions UserSubscription[]
+model programs {
+  id                 String               @id
+  name               String               @db.VarChar(50)
+  description        String?
+  created_at         DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?            @default(now()) @db.Timestamp(6)
+  user_subscriptions user_subscriptions[]
 }
 
-model Event {
-  id            BigInt             @id @default(autoincrement())
-  name          String
-  description   String?
-  duration      Int
-  start_date    DateTime
-  end_date      DateTime
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  subscriptions UserSubscription[]
+model user_subscriptions {
+  id           String               @id
+  user_id      String?
+  program_id   String?
+  start_date   DateTime?            @db.Date
+  end_date     DateTime?            @db.Date
+  status       subscription_status?
+  created_at   DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at   DateTime?            @default(now()) @db.Timestamp(6)
+  payment_info payment_info[]
+  programs     programs?            @relation(fields: [program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users        users?               @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model UserSubscription {
-  id         BigInt        @id @default(autoincrement())
-  userId     BigInt
-  programId  BigInt
-  batchId    BigInt?
-  eventId    BigInt?
-  start_date DateTime
-  end_date   DateTime?
-  status     String
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
-  payments   PaymentInfo[]
-  batch      ProgramBatch? @relation(fields: [batchId], references: [id])
-  event      Event?        @relation(fields: [eventId], references: [id])
-  program    Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
-  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+model users {
+  id                   String                 @id
+  discord_id           String?                @unique @db.VarChar(255)
+  display_name         String?                @db.VarChar(50)
+  name                 String                 @db.VarChar(100)
+  email                String?                @unique @db.VarChar(255)
+  phone_number         String?                @unique @db.VarChar(20)
+  gender               gender
+  birth                DateTime               @db.Date
+  resting_heart_rate   Int?
+  created_at           DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at           DateTime?              @default(now()) @db.Timestamp(6)
+  exercise_preferences exercise_preferences[]
+  user_subscriptions   user_subscriptions[]
 }
 
-model ExercisePreference {
-  id                         BigInt   @id @default(autoincrement())
-  userId                     BigInt
-  exercise_level             Int
-  exercise_goal              String
-  exercise_concern           String?
-  referral_source            String
-  exercise_performance_level String?
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
-  user                       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+enum gender {
+  male
+  female
+  other
+  undisclosed
 }
 
+enum program_type {
+  basic
+  pro
+  plus
+}
+
+enum subscription_status {
+  active
+  inactive
+  completed
+}

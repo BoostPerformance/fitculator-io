@@ -62,7 +62,7 @@ export default function SlideSection() {
         }
         description={
           <>
-            코치님이 직업 짜주는 프로그램도
+            코치님이 직접 짜주는 프로그램도
             <br /> 받아볼 수 있어요.
           </>
         }

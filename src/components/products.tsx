@@ -10,43 +10,62 @@ const Product = () => {
   const handleToggleProduct = (period: string) => {
     setSelectedPeriod(period);
   };
+  const perMonth = selectedPeriod;
 
   return (
     <div
-      className="h-auto bg-gray-2 w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full"
+      className="h-auto bg-gray-2 w-full md:w-full py-[6.25rem] flex flex-col items-center gap-[3rem] sm:gap-[1rem] sm:mx-[1.3rem] sm:w-full leading-tight"
       id="product-section"
     >
       <Image src="/images/logo-2.png" alt="logo" width={50} height={50} />
       <div className="flex-row gap-0 flex sm:flex-col sm:items-center sm:mb-[3rem]">
         <h1 className="text-2.5-900 sm:text-1.75-900">
-          비대면 운동관리 프로젝트
+          비대면 운동관리 프로그램
         </h1>
-        <h1 className="text-2.5-900 sm:text-1.75-900 sm:mt-2">
-          핏큘레이터 신청하기
+        <h1 className="text-2.5-900 sm:text-1.75-900">
+          &nbsp;핏큘레이터 신청하기
         </h1>
       </div>
-      <Toggle
+      {/* <Toggle
         handleToggleProduct={handleToggleProduct}
         selectedPeriod={selectedPeriod}
-      />
+      /> */}
 
-      <div className="flex flex-row h-auto gap-[3rem] sm:flex-col">
+      <div className="flex flex-row h-auto gap-[3rem] w-[50rem] md:gap-[1.3rem] md:w-[95%] justify-center sm:flex-col sm:items-center">
         <ProductItem
-          title="LITE"
+          title="Basic"
           descriptions={[
             '운동량 계산 및 분석',
             '피로도 관리',
             <>
               <div>피트니스 특화 챗봇</div>
-              <div>• 질문답변, 프로그램 피드백</div>
+              <div>(질문답변, 프로그램 피드백 등)</div>
             </>,
             '커뮤니티 활동',
           ]}
-          price={20000}
-          perMonth="1달"
+          price={0}
+          selectedPeriod=""
+          basic
+        />
+        <ProductItem
+          title="PLUS"
+          descriptions={[
+            '운동량 계산 및 분석',
+            '피로도 관리',
+            <>
+              <div>피트니스 특화 챗봇</div>
+              <ol className="list-disc list-inside">
+                <li>질문답변, 프로그램 피드백</li>
+              </ol>
+            </>,
+            '커뮤니티 활동',
+            '코치님의 매주 위클리 피드백 & 모니터링',
+          ]}
+          price={24900}
+          perMonth="1개월"
+          secondCard
           selectedPeriod={selectedPeriod}
         />
-
         <ProductItem
           title="PRO"
           descriptions={[
@@ -54,30 +73,29 @@ const Product = () => {
             '피로도 관리',
             <>
               <div>피트니스 특화 챗봇</div>
-              <div>• 질문답변, 프로그램 피드백</div>
+              <ol className="list-disc list-inside">
+                <li>질문답변, 프로그램 피드백</li>
+              </ol>
             </>,
             '커뮤니티 활동',
+            '코치님의 매주 위클리 피드백 & 모니터링',
             <>
-              <div className="flex flex-col items-start">
-                <div className="flex items-center sm:gap-1">
-                  <div>전담 코치 배정</div>
-                  <span className="rounded-[1.125rem] py-0 px-[0.5rem] border-[0.1rem] border-white text-white bg-transparent sm:text-0.75-500 2 hidden sm:inline">
-                    인기
-                  </span>
-                </div>
-                <div className="flex items-center sm:flex-row gap-1">
-                  <div>• 개별 운동 루틴, 데일리 피드백</div>
-                  <span className="rounded-[1.125rem] py-[0.1rem] px-[0.625rem] border-[0.1rem] border-white text-white bg-transparent text-0.875-700 sm:text-0.7-700 sm:hidden">
-                    인기
-                  </span>
-                </div>
-              </div>
+              <div>전담 코치 배정</div>
+              <ol className="list-disc list-inside">
+                <li>
+                  개별 운동 프로그램 제공
+                  <br />
+                  (근력, Hyrox)
+                </li>
+                <li>프로그램 피드백</li>
+              </ol>
             </>,
           ]}
-          price={70000}
-          perMonth="1달"
-          pro
+          targetCustomer="식습관 및 운동습관을 점검받아보고 싶으신 분"
+          price={74900}
+          perMonth="1개월"
           selectedPeriod={selectedPeriod}
+          thirdCard
         />
       </div>
     </div>
