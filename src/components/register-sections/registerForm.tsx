@@ -68,27 +68,30 @@ const RegisterForm = () => {
         throw new Error('폼 제출에 실패했습니다.');
       }
 
-      const responseDate = response.json();
+      const responseData = response.json();
 
       const SLACK_WEBHOOK_URL_BASIC =
         process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
       console.log(SLACK_WEBHOOK_URL_BASIC);
+
       try {
         if (SLACK_WEBHOOK_URL_BASIC) {
           console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
-          await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseDate);
+
+          await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseData);
         }
       } catch (error) {
         if (SLACK_WEBHOOK_URL_BASIC === null) {
           console.log(error, '웹훅 작동안됨');
         }
       }
-      return responseDate;
+      console.log('responseData:', responseData);
+      return responseData;
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
-      router.push('/payment-success');
+      // router.push('/payment-success');
       return;
     },
     onError: (error) => {

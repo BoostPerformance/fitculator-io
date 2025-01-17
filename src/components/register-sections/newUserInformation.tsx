@@ -45,7 +45,7 @@ export default function NewUserInformation({
   };
 
   const handleDateChange = (start_date: string) => {
-    console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
+    // console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
     setFormData((prevData) => ({
       ...prevData,
       users: {

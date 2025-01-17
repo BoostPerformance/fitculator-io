@@ -40,13 +40,13 @@ export async function POST(req: Request) {
         paymentKey,
       }),
     });
-    console.log('리스폰스', response);
+    //console.log('리스폰스', response);
 
     const responseData = await response.json();
-    console.log('Toss API response:', responseData);
+    //console.log('Toss API response:', responseData);
 
     if (!response.ok || responseData.status === 'FAILED') {
-      console.error('Toss API error:', responseData);
+      //console.error('Toss API error:', responseData);
 
       return NextResponse.json(
         {
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
-    console.error('Payments error:', error);
+    //console.error('Payments error:', error);
     return NextResponse.json(
       { error: 'Error processing payment' },
       { status: 500 }
