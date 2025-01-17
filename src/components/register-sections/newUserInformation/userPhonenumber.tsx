@@ -2,7 +2,7 @@ import Input from '../../input';
 import { UserInfoFormData, FormErrors } from '@/types/types';
 
 interface UserNameProps {
-  value: UserInfoFormData['user'];
+  value: UserInfoFormData['users'];
   errors: Pick<FormErrors, 'phone_number'>;
   onInputChange: (name: string, value: string) => void;
   onBlur: (name: string, value: string) => void;

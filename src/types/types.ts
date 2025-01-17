@@ -1,5 +1,5 @@
 export interface UserInfoFormData {
-  user: {
+  users: {
     name: string;
     birthday?: string;
     email: string;
@@ -32,7 +32,7 @@ export interface ExercisePreferenceType {
 }
 
 export interface RegisterFormData extends ExercisePreferenceType {
-  user: {
+  users: {
     name: string;
     birthday?: string;
     email: string;
@@ -45,8 +45,8 @@ export interface RegisterFormData extends ExercisePreferenceType {
   };
   payment_info?: {
     amount: number;
-    paymet_date: string;
-    paymet_method: string;
+    payment_date: string;
+    payment_method: string;
     payment_key: string;
     status: string;
     order_id: string;
@@ -58,7 +58,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
 }
 
 export interface RequestItemsType {
-  user: {
+  users: {
     name: string;
     birthday?: string;
     email: string;
@@ -84,8 +84,8 @@ export interface RequestItemsType {
 
   payment_info: {
     amount: number;
-    paymet_date: string;
-    paymet_method: string;
+    payment_date: string;
+    payment_method: string;
     payment_key: string;
     status: string;
     order_id: string;
@@ -97,7 +97,7 @@ export interface RequestItemsType {
 }
 
 export interface ApiResponse {
-  user: {
+  users: {
     id: string;
     name: string;
     birthday: string;

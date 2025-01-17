@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 
 const validateFormData = (formData: any) => {
   try {
-    const requiredFields = ['user', 'exercise_preferences', 'programs'];
+    const requiredFields = ['users', 'exercise_preferences', 'programs'];
 
     const missingFields = requiredFields.filter((field) => !formData[field]);
 
@@ -123,18 +123,25 @@ export default function PaymentComplete() {
 
         const paymentResult = await attemptPaymentConfirmation(requestData);
 
-        mutation.mutate({
+        console.log('arrovedAt:', paymentResult.approvedAt);
+        console.log('card.amount:', paymentResult.card.amount);
+
+        const mutationData = {
           ...formData,
           payment_info: {
-            amount: requestData.amount,
-            paymet_method: paymentResult.method,
+            amount: paymentResult.card.amount,
+            payment_date: paymentResult.approvedAt || new Date().toISOString(),
+            payment_method: paymentResult.method,
             order_id: requestData.orderId,
             payment_key: requestData.paymentKey,
             card_type: paymentResult.card?.cardType || '카드 타입',
             owner_type: paymentResult.card?.ownerType || '개인',
             currency: paymentResult.currency || 'KRW',
+            status: paymentResult.status || 'status?',
           },
-        });
+        };
+        console.log('mutationDate', mutationData);
+        mutation.mutate(mutationData);
       } catch (error: Error | any) {
         const errorMessage =
           error instanceof Error

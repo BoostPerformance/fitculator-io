@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 interface PaymentConfirmRequest {
   amount: string;
-  paymetDate?: string;
+  approvedAt?: string;
   method?: string;
   paymentKey?: string;
   status?: string;
@@ -41,14 +41,13 @@ export async function POST(req: Request) {
       }),
     });
     console.log('리스폰스', response);
-    console.log('Raw Secret Key:', secretKey);
-    console.log('Encoded Token:', basicToken);
 
     const responseData = await response.json();
     console.log('Toss API response:', responseData);
 
     if (!response.ok || responseData.status === 'FAILED') {
       console.error('Toss API error:', responseData);
+
       return NextResponse.json(
         {
           message: responseData.message || '결제 확인 실패 route.ts',
@@ -57,6 +56,13 @@ export async function POST(req: Request) {
         { status: response.status }
       );
     }
+
+    // const paymentInfo = {
+    //   ...responseData,
+    //   payment_date: responseData.approvedAt
+    //     ? new Date(responseData.approvedAt).toISOString()
+    //     : 'data 찾을수없음',
+    // };
 
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {

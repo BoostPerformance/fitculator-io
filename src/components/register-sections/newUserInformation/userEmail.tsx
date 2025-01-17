@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { UserInfoFormData, FormErrors } from '@/types/types';
 
 interface UserNameProps {
-  value: UserInfoFormData['user'];
+  value: UserInfoFormData['users'];
   errors: Pick<FormErrors, 'email'>;
   onInputChange: (name: string, value: string) => void;
   onBlur: (name: string, value: string) => void;

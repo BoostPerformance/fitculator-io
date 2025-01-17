@@ -12,6 +12,7 @@ import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import NewUserInformation from './newUserInformation';
+import { SlackWebhookBasic } from '@/lib/slackWebhookBasic';
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -21,7 +22,7 @@ const RegisterForm = () => {
   const priceParam = searchParams.get('price');
   const price = priceParam ? Number(priceParam.replace(/,/g, '')) : 0;
   const [formData, setFormData] = useState<RegisterFormData>({
-    user: {
+    users: {
       name: '',
       birthday: '',
       email: '',
@@ -41,14 +42,14 @@ const RegisterForm = () => {
     },
     payment_info: {
       amount: 0,
-      paymet_method: '',
+      payment_method: '',
       payment_key: '',
       order_id: '',
       order_name: `${title} ${period}`,
       status: '',
       card_type: '',
       owner_type: '',
-      paymet_date: '',
+      payment_date: '',
       currency: 'KRW',
     },
   });
@@ -67,7 +68,22 @@ const RegisterForm = () => {
         throw new Error('폼 제출에 실패했습니다.');
       }
 
-      return response.json();
+      const responseDate = response.json();
+
+      const SLACK_WEBHOOK_URL_BASIC =
+        process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
+      console.log(SLACK_WEBHOOK_URL_BASIC);
+      try {
+        if (SLACK_WEBHOOK_URL_BASIC) {
+          console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+          await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseDate);
+        }
+      } catch (error) {
+        if (SLACK_WEBHOOK_URL_BASIC === null) {
+          console.log(error, '웹훅 작동안됨');
+        }
+      }
+      return responseDate;
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
@@ -78,7 +94,7 @@ const RegisterForm = () => {
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
       setIsLoading(false);
-      router.push('/payment-fail');
+      // router.push('/payment-fail');
     },
   });
 
@@ -88,7 +104,7 @@ const RegisterForm = () => {
   };
   useEffect(() => {
     const { name, gender, email, phone_number, birthday, start_date } =
-      formData.user;
+      formData.users;
     const { exercise_goal, exercise_level, referral_source, wearable_device } =
       formData.exercise_preferences;
 

@@ -28,8 +28,8 @@ export default function NewUserInformation({
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
-      user: {
-        ...prevData.user,
+      users: {
+        ...prevData.users,
         [name]: value,
       },
     }));
@@ -40,7 +40,7 @@ export default function NewUserInformation({
   ) => {
     setFormData((prevData) => ({
       ...prevData,
-      user: { ...prevData.user, gender },
+      users: { ...prevData.users, gender },
     }));
   };
 
@@ -48,8 +48,8 @@ export default function NewUserInformation({
     console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
     setFormData((prevData) => ({
       ...prevData,
-      user: {
-        ...prevData.user,
+      users: {
+        ...prevData.users,
         start_date,
       },
     }));
@@ -112,37 +112,37 @@ export default function NewUserInformation({
 
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
           <UserName
-            value={formData.user}
+            value={formData.users}
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
           <UserBDay
-            value={formData.user}
+            value={formData.users}
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
           <UserEmail
-            value={formData.user}
+            value={formData.users}
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
           <UserPhonenumber
-            value={formData.user}
+            value={formData.users}
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
           <UserGender
-            value={formData.user}
+            value={formData.users}
             onGenderSelect={handleGenderSelect}
           />
 
           {title !== 'Basic' && (
             <DatePicker
-              value={formData.user.start_date || ''}
+              value={formData.users.start_date || ''}
               onChange={handleDateChange}
               placeholder="날짜를 선택하세요"
               minDate={new Date()}

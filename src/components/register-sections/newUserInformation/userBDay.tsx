@@ -3,7 +3,7 @@ import { UserInfoFormData, FormErrors } from '@/types/types';
 import Input from '@/components/input';
 
 interface UserBDayProps {
-  value: UserInfoFormData['user'];
+  value: UserInfoFormData['users'];
   errors: Pick<FormErrors, 'birthday'>;
   onInputChange: any;
   onBlur: any;

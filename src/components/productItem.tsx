@@ -143,14 +143,25 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Button text="신청하기" variant="basic" size="sm" basic={basic} />
         </Link>
       ) : (
+        // <Link
+        //   href={
+        //     pro
+        //       ? 'https://tally.so/r/3x9kAG'
+        //       : plus
+        //       ? 'https://tally.so/r/3qobN9'
+        //       : ''
+        //   }
+        // >
         <Link
-          href={
-            pro
-              ? 'https://tally.so/r/3x9kAG'
-              : plus
-              ? 'https://tally.so/r/3qobN9'
-              : ''
-          }
+          href={{
+            pathname: './register',
+            query: {
+              title: title,
+              period: '',
+              price: priceString,
+              secondCard: secondCard ? true : false,
+            },
+          }}
         >
           <Button text="신청하기" variant="white" size="sm" basic={basic} />
         </Link>
