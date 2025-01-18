@@ -68,22 +68,25 @@ const RegisterForm = () => {
         throw new Error('폼 제출에 실패했습니다.');
       }
 
-      const responseDate = response.json();
+      const responseData = response.json();
+      //console.log('responseData:', responseData);
+      // const SLACK_WEBHOOK_URL_BASIC =
+      //   process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
+      // console.log(SLACK_WEBHOOK_URL_BASIC);
 
-      const SLACK_WEBHOOK_URL_BASIC =
-        process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
-      console.log(SLACK_WEBHOOK_URL_BASIC);
-      try {
-        if (SLACK_WEBHOOK_URL_BASIC) {
-          console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
-          await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseDate);
-        }
-      } catch (error) {
-        if (SLACK_WEBHOOK_URL_BASIC === null) {
-          console.log(error, '웹훅 작동안됨');
-        }
-      }
-      return responseDate;
+      // try {
+      //   if (SLACK_WEBHOOK_URL_BASIC) {
+      //     console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+
+      //     await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseData);
+      //   }
+      // } catch (error) {
+      //   if (SLACK_WEBHOOK_URL_BASIC === null) {
+      //     console.log(error, '웹훅 작동안됨');
+      //   }
+      // }
+
+      return responseData;
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
@@ -94,7 +97,7 @@ const RegisterForm = () => {
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
       setIsLoading(false);
-      // router.push('/payment-fail');
+      //router.push('/payment-fail');
     },
   });
 
@@ -121,9 +124,9 @@ const RegisterForm = () => {
       exercise_level != null &&
       referral_source?.trim() !== '';
 
-    // console.log('formData', formData);
+    console.log('formData', formData);
 
-    // console.log(isFormValid);
+    console.log(isFormValid);
 
     setIsButtonDisabled(!isFormValid);
   }, [formData, title]);
@@ -143,13 +146,13 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      console.log('Form Data:', formData);
+      // console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
-      console.log('새로운 주문번호 생성:', orderId);
-      localStorage.setItem('formData', JSON.stringify(formData));
+      // console.log('새로운 주문번호 생성:', orderId);
+      // localStorage.setItem('formData', JSON.stringify(formData));
 
-      console.log('Form data saved:', JSON.stringify(formData));
+      //console.log('Form data saved:', JSON.stringify(formData));
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),

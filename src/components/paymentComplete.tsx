@@ -39,7 +39,7 @@ const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
 
     if (paymentResponse.ok) {
       const json = await paymentResponse.json();
-      console.log('Payment response:', json); // 응답 로깅 추가
+      // console.log('Payment response:', json); // 응답 로깅 추가
 
       if (json.error) {
         throw new Error(json.message || '결제 확인에 실패했습니다');
@@ -89,10 +89,10 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
-        console.log(savedFormData);
+        // console.log(savedFormData);
 
         if (!savedFormData) {
-          console.log(savedFormData);
+          // console.log(savedFormData);
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
@@ -123,8 +123,8 @@ export default function PaymentComplete() {
 
         const paymentResult = await attemptPaymentConfirmation(requestData);
 
-        console.log('arrovedAt:', paymentResult.approvedAt);
-        console.log('card.amount:', paymentResult.card.amount);
+        //console.log('arrovedAt:', paymentResult.approvedAt);
+        //console.log('card.amount:', paymentResult.card.amount);
 
         const mutationData = {
           ...formData,
@@ -140,7 +140,7 @@ export default function PaymentComplete() {
             status: paymentResult.status || 'status?',
           },
         };
-        console.log('mutationDate', mutationData);
+        // console.log('mutationDate', mutationData);
         mutation.mutate(mutationData);
       } catch (error: Error | any) {
         const errorMessage =

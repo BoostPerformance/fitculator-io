@@ -67,8 +67,8 @@ model users {
   discord_id           String?                @unique @db.VarChar(255)
   display_name         String?                @db.VarChar(50)
   name                 String                 @db.VarChar(100)
-  email                String?                @unique @db.VarChar(255)
-  phone_number         String?                @unique @db.VarChar(20)
+  email                String                 @unique @db.VarChar(255)
+  phone_number         String                 @unique @db.VarChar(20)
   gender               gender
   birth                DateTime               @db.Date
   resting_heart_rate   Int?
