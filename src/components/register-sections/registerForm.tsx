@@ -69,35 +69,35 @@ const RegisterForm = () => {
       }
 
       const responseData = response.json();
-
-      const SLACK_WEBHOOK_URL_BASIC =
-        process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
-      console.log(SLACK_WEBHOOK_URL_BASIC);
-
-      try {
-        if (SLACK_WEBHOOK_URL_BASIC) {
-          console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
-
-          await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseData);
-        }
-      } catch (error) {
-        if (SLACK_WEBHOOK_URL_BASIC === null) {
-          console.log(error, '웹훅 작동안됨');
-        }
-      }
       console.log('responseData:', responseData);
+      // const SLACK_WEBHOOK_URL_BASIC =
+      //   process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
+      // console.log(SLACK_WEBHOOK_URL_BASIC);
+
+      // try {
+      //   if (SLACK_WEBHOOK_URL_BASIC) {
+      //     console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+
+      //     await SlackWebhookBasic(SLACK_WEBHOOK_URL_BASIC, responseData);
+      //   }
+      // } catch (error) {
+      //   if (SLACK_WEBHOOK_URL_BASIC === null) {
+      //     console.log(error, '웹훅 작동안됨');
+      //   }
+      // }
+
       return responseData;
     },
     onSuccess: (data) => {
       console.log('성공적으로 전송되었습니다', data);
       setIsLoading(false);
-      // router.push('/payment-success');
+      router.push('/payment-success');
       return;
     },
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
       setIsLoading(false);
-      // router.push('/payment-fail');
+      router.push('/payment-fail');
     },
   });
 
@@ -124,9 +124,9 @@ const RegisterForm = () => {
       exercise_level != null &&
       referral_source?.trim() !== '';
 
-    // console.log('formData', formData);
+    console.log('formData', formData);
 
-    // console.log(isFormValid);
+    console.log(isFormValid);
 
     setIsButtonDisabled(!isFormValid);
   }, [formData, title]);

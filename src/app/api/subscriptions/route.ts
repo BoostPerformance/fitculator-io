@@ -24,12 +24,14 @@ export async function POST(req: NextRequest) {
         // });
 
         const birthDate = new Date(`${body.users.birthday}`);
-        //console.log(birthDate);
+        console.log(body.users.phone_number, body.users.email);
         const userInfo = await tx.users.create({
           data: {
             id: nanoid(),
             name: body.users.name,
             gender: body.users.gender.toLowerCase(),
+            phone_number: body.users.phone_number,
+            email: body.users.email,
             birth: birthDate,
           },
         });
@@ -120,22 +122,23 @@ export async function POST(req: NextRequest) {
         isolationLevel: 'Serializable',
       }
     );
-    const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
-    const SLACK_WEBHOOK_UR_PRO = process.env.SLACK_WEBHOOK_UR_PRO;
+    // const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
+    // const SLACK_WEBHOOK_UR_PRO = process.env.SLACK_WEBHOOK_UR_PRO;
 
-    if (body.programs.name === 'PLUS') {
-      console.log(SLACK_WEBHOOK_URL_PLUS);
-      if (SLACK_WEBHOOK_URL_PLUS) {
-        await SlackWebhookProPlus(SLACK_WEBHOOK_URL_PLUS, result);
-      }
-    } else if (body.programs.name === 'PRO') {
-      console.log(SLACK_WEBHOOK_UR_PRO);
-      if (SLACK_WEBHOOK_UR_PRO) {
-        await SlackWebhookProPlus(SLACK_WEBHOOK_UR_PRO, result);
-      }
-    }
-
-    return Response.json(result);
+    // if (body.programs.name === 'PLUS') {
+    //   console.log(SLACK_WEBHOOK_URL_PLUS);
+    //   if (SLACK_WEBHOOK_URL_PLUS) {
+    //     await SlackWebhookProPlus(SLACK_WEBHOOK_URL_PLUS, result);
+    //   }
+    // } else if (body.programs.name === 'PRO') {
+    //   console.log(SLACK_WEBHOOK_UR_PRO);
+    //   if (SLACK_WEBHOOK_UR_PRO) {
+    //     await SlackWebhookProPlus(SLACK_WEBHOOK_UR_PRO, result);
+    //   }
+    // }
+    const response = Response.json(result);
+    console.log('response', response);
+    return response;
   } catch (error) {
     //console.error('Prisma error:', error);
     let errorMessage = 'Unknown error occurred';
