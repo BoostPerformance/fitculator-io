@@ -81,7 +81,7 @@ const RegisterForm = () => {
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
       setIsLoading(false);
-      //router.push('/payment-fail');
+      router.push('/payment-fail');
     },
   });
 
@@ -108,8 +108,6 @@ const RegisterForm = () => {
       exercise_level != null &&
       referral_source?.trim() !== '';
 
-    console.log('formData', formData);
-
     //console.log(isFormValid);
 
     setIsButtonDisabled(!isFormValid);
@@ -130,7 +128,7 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      // console.log('Form Data:', formData);
+      console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);

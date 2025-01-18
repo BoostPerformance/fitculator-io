@@ -8,8 +8,8 @@ import { SlackWebhook } from '@/lib/slackWebhook';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    //console.log('Received body:', body);
-    //console.log('보이니?');
+    console.log('Received body:', body);
+    console.log('보이니?');
     if (!body.users) {
       throw new Error('User data is missing');
     }
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 
           const paymentDate = body.payment_info.payment_date || Date.now();
 
-          // console.log('body', body);
+          console.log('body', body);
 
           paymentInfo = await tx.payment_info.create({
             data: {

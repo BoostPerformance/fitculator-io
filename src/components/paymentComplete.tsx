@@ -92,7 +92,7 @@ export default function PaymentComplete() {
         console.log('savedFormData', savedFormData);
 
         if (!savedFormData) {
-          // console.log(savedFormData);
+          console.log(savedFormData);
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
@@ -128,7 +128,6 @@ export default function PaymentComplete() {
 
         const mutationData = {
           ...formData,
-          users: formData.user,
           payment_info: {
             amount: paymentResult.card.amount,
             payment_date: paymentResult.approvedAt || new Date().toISOString(),
