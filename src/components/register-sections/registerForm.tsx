@@ -131,9 +131,10 @@ const RegisterForm = () => {
       console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
-      // console.log('새로운 주문번호 생성:', orderId);
+
       localStorage.setItem('formData', JSON.stringify(formData));
 
+      // console.log('새로운 주문번호 생성:', orderId);
       //console.log('Form data saved:', JSON.stringify(formData));
 
       await tossPayments.requestPayment('카드', {
