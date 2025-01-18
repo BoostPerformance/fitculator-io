@@ -1,4 +1,9 @@
 export async function SlackWebhook(webhookUrl: string, data: any) {
+  const formatDate = (date: Date) => {
+    if (!date) return '베이직플랜';
+    return date.toISOString().split('T')[0];
+  };
+
   try {
     const response = await fetch(webhookUrl, {
       method: 'POST',
@@ -23,7 +28,7 @@ export async function SlackWebhook(webhookUrl: string, data: any) {
               },
               {
                 type: 'mrkdwn',
-                text: `*생년월일:*\n${data.users.birth}`,
+                text: `*생년월일:*\n${formatDate(data.users.birth)}`,
               },
               {
                 type: 'mrkdwn',
@@ -36,7 +41,7 @@ export async function SlackWebhook(webhookUrl: string, data: any) {
               {
                 type: 'mrkdwn',
                 text: `*시작날짜:*\n${
-                  data.user_subscriptions.start_date || '미정'
+                  formatDate(data.user_subscriptions.start_date) || '베이직플랜'
                 }`,
               },
               {
