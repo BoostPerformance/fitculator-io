@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { nanoid } from 'nanoid';
 import prisma from '@/lib/prisma';
 import { addDays } from 'date-fns';
-import { SlackWebhookProPlus } from '@/lib/slackWebhookProPlus';
+import { SlackWebhook } from '@/lib/slackWebhook';
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         // });
 
         const birthDate = new Date(`${body.users.birthday}`);
-        //    console.log(body.users.phone_number, body.users.email);
+        console.log(body);
 
         const userInfo = await tx.users.create({
           data: {
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
             programs: { connect: { id: programInfo.id } },
             start_date:
               body.programs.name !== 'Basic' && body.users.start_date
-                ? new Date(body.users.start_date)
+                ? body.users.start_date
                 : null,
             end_date: end_date(body.users.start_date, body.programs.name),
           },
@@ -125,22 +125,53 @@ export async function POST(req: NextRequest) {
         isolationLevel: 'Serializable',
       }
     );
+    // const SLACK_WEBHOOK_URL_BASIC = process.env.SLACK_WEBHOOK_URL_BASIC;
     // const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
-    // const SLACK_WEBHOOK_UR_PRO = process.env.SLACK_WEBHOOK_UR_PRO;
+    // const SLACK_WEBHOOK_URL_PRO = process.env.SLACK_WEBHOOK_URL_PRO;
+    // console.log('Webhook URLs:', {
+    //   basic: SLACK_WEBHOOK_URL_BASIC,
+    //   plus: SLACK_WEBHOOK_URL_PLUS,
+    //   pro: SLACK_WEBHOOK_URL_PRO,
+    // });
 
-    // if (body.programs.name === 'PLUS') {
-    //   console.log(SLACK_WEBHOOK_URL_PLUS);
-    //   if (SLACK_WEBHOOK_URL_PLUS) {
-    //     await SlackWebhookProPlus(SLACK_WEBHOOK_URL_PLUS, result);
-    //   }
-    // } else if (body.programs.name === 'PRO') {
-    //   console.log(SLACK_WEBHOOK_UR_PRO);
-    //   if (SLACK_WEBHOOK_UR_PRO) {
-    //     await SlackWebhookProPlus(SLACK_WEBHOOK_UR_PRO, result);
-    //   }
-    // }
+    const SLACK_WEBHOOK_URL_TEST = process.env.SLACK_WEBHOOK_URL_BASIC;
+    try {
+      // switch (body.programs.name) {
+      //   case 'Basic':
+      //     if (SLACK_WEBHOOK_URL_BASIC) {
+      //       console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+      //       await SlackWebhook(SLACK_WEBHOOK_URL_BASIC, result);
+      //     }
+      //     break;
+      //   case 'PLUS':
+      //     if (SLACK_WEBHOOK_URL_PLUS) {
+      //       console.log('webhook', SLACK_WEBHOOK_URL_PLUS);
+      //       await SlackWebhook(SLACK_WEBHOOK_URL_PLUS, result);
+      //     }
+      //     break;
+      //   case 'PRO':
+      //     if (SLACK_WEBHOOK_URL_PRO) {
+      //       await SlackWebhook(SLACK_WEBHOOK_URL_PRO, result);
+      //     }
+      //     break;
+      //   default:
+      //     console.log('Unknown program name:', body.programs.name);
+      //     console.log(result);
+      // }
+
+      console.log(SLACK_WEBHOOK_URL_TEST);
+      if (SLACK_WEBHOOK_URL_TEST) {
+        console.log(SLACK_WEBHOOK_URL_TEST);
+        await SlackWebhook(SLACK_WEBHOOK_URL_TEST, result);
+      } else {
+        console.log('Webhook URL is not defined');
+      }
+    } catch (error) {
+      console.log(error, '웹훅 작동안됨');
+    }
+
     const response = Response.json(result);
-    //  console.log('response', response);
+    console.log('response', response);
     return response;
   } catch (error) {
     console.error('Prisma error:', error);

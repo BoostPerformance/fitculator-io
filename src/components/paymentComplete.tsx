@@ -89,7 +89,7 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
-        // console.log(savedFormData);
+        console.log('savedFormData', savedFormData);
 
         if (!savedFormData) {
           // console.log(savedFormData);
@@ -128,6 +128,7 @@ export default function PaymentComplete() {
 
         const mutationData = {
           ...formData,
+          users: formData.user,
           payment_info: {
             amount: paymentResult.card.amount,
             payment_date: paymentResult.approvedAt || new Date().toISOString(),
@@ -140,7 +141,7 @@ export default function PaymentComplete() {
             status: paymentResult.status || 'status?',
           },
         };
-        // console.log('mutationDate', mutationData);
+        console.log('mutationDate', mutationData);
         mutation.mutate(mutationData);
       } catch (error: Error | any) {
         const errorMessage =
