@@ -97,7 +97,7 @@ const RegisterForm = () => {
     onError: (error) => {
       console.error('폼 제출 중 에러 발생:', error);
       setIsLoading(false);
-      router.push('/payment-fail');
+      //router.push('/payment-fail');
     },
   });
 
@@ -139,6 +139,7 @@ const RegisterForm = () => {
     }
 
     if (title === 'Basic') {
+      formData.users.start_date = null;
       setIsLoading(true);
       mutation.mutate(formData);
     } else {
@@ -149,8 +150,8 @@ const RegisterForm = () => {
       console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
-      console.log('새로운 주문번호 생성:', orderId);
-      localStorage.setItem('formData', JSON.stringify(formData));
+      // console.log('새로운 주문번호 생성:', orderId);
+      // localStorage.setItem('formData', JSON.stringify(formData));
 
       console.log('Form data saved:', JSON.stringify(formData));
 

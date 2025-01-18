@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
 
         const birthDate = new Date(`${body.users.birthday}`);
         console.log(body.users.phone_number, body.users.email);
+
         const userInfo = await tx.users.create({
           data: {
             id: nanoid(),
@@ -74,7 +75,9 @@ export async function POST(req: NextRequest) {
             users: { connect: { id: userInfo.id } },
             programs: { connect: { id: programInfo.id } },
             start_date:
-              body.users.start_date && new Date(body.users.start_date),
+              body.programs.name !== 'Basic' && body.users.start_date
+                ? new Date(body.users.start_date)
+                : null,
             end_date: end_date(body.users.start_date, body.programs.name),
           },
         });
@@ -82,11 +85,11 @@ export async function POST(req: NextRequest) {
         let paymentInfo = null;
 
         if (body.programs.name !== 'Basic') {
-          //console.log('Creating payment_info with:', body.payment_info);
+          console.log('Creating payment_info with:', body.payment_info);
 
           const paymentDate = body.payment_info.payment_date || Date.now();
 
-          //console.log('body', body);
+          console.log('body', body);
 
           paymentInfo = await tx.payment_info.create({
             data: {
@@ -105,7 +108,7 @@ export async function POST(req: NextRequest) {
             },
           });
 
-          // console.log('paymentInfo:', paymentInfo);
+          console.log('paymentInfo:', paymentInfo);
         }
 
         return {
