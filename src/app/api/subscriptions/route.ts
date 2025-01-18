@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         // });
 
         const birthDate = new Date(`${body.users.birthday}`);
-        console.log(body.users.phone_number, body.users.email);
+        //    console.log(body.users.phone_number, body.users.email);
 
         const userInfo = await tx.users.create({
           data: {
@@ -85,11 +85,11 @@ export async function POST(req: NextRequest) {
         let paymentInfo = null;
 
         if (body.programs.name !== 'Basic') {
-          console.log('Creating payment_info with:', body.payment_info);
+          // console.log('Creating payment_info with:', body.payment_info);
 
           const paymentDate = body.payment_info.payment_date || Date.now();
 
-          console.log('body', body);
+          // console.log('body', body);
 
           paymentInfo = await tx.payment_info.create({
             data: {
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
             },
           });
 
-          console.log('paymentInfo:', paymentInfo);
+          //   console.log('paymentInfo:', paymentInfo);
         }
 
         return {
@@ -140,10 +140,10 @@ export async function POST(req: NextRequest) {
     //   }
     // }
     const response = Response.json(result);
-    console.log('response', response);
+    //  console.log('response', response);
     return response;
   } catch (error) {
-    //console.error('Prisma error:', error);
+    console.error('Prisma error:', error);
     let errorMessage = 'Unknown error occurred';
     if (error instanceof Error) {
       errorMessage = error.message;

@@ -69,7 +69,7 @@ const RegisterForm = () => {
       }
 
       const responseData = response.json();
-      console.log('responseData:', responseData);
+      //console.log('responseData:', responseData);
       // const SLACK_WEBHOOK_URL_BASIC =
       //   process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL_BASIC;
       // console.log(SLACK_WEBHOOK_URL_BASIC);
@@ -139,7 +139,6 @@ const RegisterForm = () => {
     }
 
     if (title === 'Basic') {
-      formData.users.start_date = null;
       setIsLoading(true);
       mutation.mutate(formData);
     } else {
@@ -147,13 +146,13 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-      console.log('Form Data:', formData);
+      // console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);
       // localStorage.setItem('formData', JSON.stringify(formData));
 
-      console.log('Form data saved:', JSON.stringify(formData));
+      //console.log('Form data saved:', JSON.stringify(formData));
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),
