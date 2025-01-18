@@ -132,7 +132,7 @@ const RegisterForm = () => {
 
       const orderId = Math.random().toString(36).slice(2);
       // console.log('새로운 주문번호 생성:', orderId);
-      // localStorage.setItem('formData', JSON.stringify(formData));
+      localStorage.setItem('formData', JSON.stringify(formData));
 
       //console.log('Form data saved:', JSON.stringify(formData));
 
