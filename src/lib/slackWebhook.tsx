@@ -16,41 +16,20 @@ export async function SlackWebhook(webhookUrl: string, data: any) {
             type: 'section',
             text: {
               type: 'mrkdwn',
-              text: `*핏큘레이터:*\n${data.programs.name}\n*신청:*`,
+              text: `*플랜:* ${data.programs.name}\n*이름:* ${
+                data.users.name
+              }\n*생년월일:* ${formatDate(data.users.birth)}\n*연락처:* ${
+                data.users.phone_number
+              }\n*이메일:* ${data.users.email}\n*시작날짜:* ${
+                data.programs.name === 'Basic'
+                  ? new Date().toISOString().split('T')[0]
+                  : formatDate(data.user_subscriptions.start_date)
+              }\n*결제금액:* ${
+                data.payment_info?.amount
+                  ? `${data.payment_info.amount}원`
+                  : '0원'
+              }`,
             },
-          },
-          {
-            type: 'section',
-            fields: [
-              {
-                type: 'mrkdwn',
-                text: `*이름:*\n${data.users.name}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*생년월일:*\n${formatDate(data.users.birth)}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*연락처:*\n${data.users.phone_number}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*이메일:*\n${data.users.email}`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*시작날짜:*\n${
-                  formatDate(data.user_subscriptions.start_date) || '베이직플랜'
-                }`,
-              },
-              {
-                type: 'mrkdwn',
-                text: `*결제금액:*\n${
-                  data.payment_info?.amount && `${data.payment_info.amount}원`
-                }`,
-              },
-            ],
           },
         ],
       }),

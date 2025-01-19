@@ -125,45 +125,37 @@ export async function POST(req: NextRequest) {
         isolationLevel: 'Serializable',
       }
     );
-    // const SLACK_WEBHOOK_URL_BASIC = process.env.SLACK_WEBHOOK_URL_BASIC;
-    // const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
-    // const SLACK_WEBHOOK_URL_PRO = process.env.SLACK_WEBHOOK_URL_PRO;
-    // console.log('Webhook URLs:', {
-    //   basic: SLACK_WEBHOOK_URL_BASIC,
-    //   plus: SLACK_WEBHOOK_URL_PLUS,
-    //   pro: SLACK_WEBHOOK_URL_PRO,
-    // });
+    const SLACK_WEBHOOK_URL_BASIC = process.env.SLACK_WEBHOOK_URL_BASIC;
+    const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
+    const SLACK_WEBHOOK_URL_PRO = process.env.SLACK_WEBHOOK_URL_PRO;
+    console.log('Webhook URLs:', {
+      basic: SLACK_WEBHOOK_URL_BASIC,
+      plus: SLACK_WEBHOOK_URL_PLUS,
+      pro: SLACK_WEBHOOK_URL_PRO,
+    });
 
     try {
-      // switch (body.programs.name) {
-      //   case 'Basic':
-      //     if (SLACK_WEBHOOK_URL_BASIC) {
-      //       console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
-      //       await SlackWebhook(SLACK_WEBHOOK_URL_BASIC, result);
-      //     }
-      //     break;
-      //   case 'PLUS':
-      //     if (SLACK_WEBHOOK_URL_PLUS) {
-      //       console.log('webhook', SLACK_WEBHOOK_URL_PLUS);
-      //       await SlackWebhook(SLACK_WEBHOOK_URL_PLUS, result);
-      //     }
-      //     break;
-      //   case 'PRO':
-      //     if (SLACK_WEBHOOK_URL_PRO) {
-      //       await SlackWebhook(SLACK_WEBHOOK_URL_PRO, result);
-      //     }
-      //     break;
-      //   default:
-      //     console.log('Unknown program name:', body.programs.name);
-      //     console.log(re
-      // sult);
-      // }
-      const SLACK_WEBHOOK_URL_TEST = process.env.SLACK_WEBHOOK_URL_TEST;
-      if (SLACK_WEBHOOK_URL_TEST) {
-        console.log(SLACK_WEBHOOK_URL_TEST);
-        await SlackWebhook(SLACK_WEBHOOK_URL_TEST, result);
-      } else {
-        console.log('Webhook URL is not defined');
+      switch (body.programs.name) {
+        case 'Basic':
+          if (SLACK_WEBHOOK_URL_BASIC) {
+            console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+            await SlackWebhook(SLACK_WEBHOOK_URL_BASIC, result);
+          }
+          break;
+        case 'PLUS':
+          if (SLACK_WEBHOOK_URL_PLUS) {
+            console.log('webhook', SLACK_WEBHOOK_URL_PLUS);
+            await SlackWebhook(SLACK_WEBHOOK_URL_PLUS, result);
+          }
+          break;
+        case 'PRO':
+          if (SLACK_WEBHOOK_URL_PRO) {
+            await SlackWebhook(SLACK_WEBHOOK_URL_PRO, result);
+          }
+          break;
+        default:
+          console.log('Unknown program name:', body.programs.name);
+          console.log(result);
       }
     } catch (error) {
       console.log(error, '웹훅 작동안됨');
