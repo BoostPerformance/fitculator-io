@@ -36,6 +36,7 @@ model payment_info {
   currency             String?             @db.VarChar(100)
   created_at           DateTime?           @default(now()) @db.Timestamp(6)
   updated_at           DateTime?           @default(now()) @db.Timestamp(6)
+  approve_no           String              @db.VarChar(100)
   user_subscriptions   user_subscriptions? @relation(fields: [user_subscription_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 

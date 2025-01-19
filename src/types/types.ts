@@ -54,6 +54,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     card_type: string;
     owner_type: string;
     currency: string;
+    approve_no: string;
   };
 }
 

@@ -123,7 +123,7 @@ export default function PaymentComplete() {
 
         const paymentResult = await attemptPaymentConfirmation(requestData);
 
-        //console.log('arrovedAt:', paymentResult.approvedAt);
+        //console.log('approvedAt:', paymentResult.approvedAt);
         //console.log('card.amount:', paymentResult.card.amount);
 
         const mutationData = {
@@ -138,6 +138,7 @@ export default function PaymentComplete() {
             owner_type: paymentResult.card?.ownerType || '개인',
             currency: paymentResult.currency || 'KRW',
             status: paymentResult.status || 'status?',
+            approve_no: paymentResult.card?.approveNo || '승인번호',
           },
         };
         console.log('mutationDate', mutationData);

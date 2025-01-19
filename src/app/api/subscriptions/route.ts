@@ -105,6 +105,7 @@ export async function POST(req: NextRequest) {
               card_type: body.payment_info.card_type || null,
               owner_type: body.payment_info.owner_type || null,
               currency: body.payment_info.currency || 'KRW',
+              approve_no: body.payment_info.approve_no,
             },
           });
 
