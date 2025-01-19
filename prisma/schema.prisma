@@ -36,6 +36,8 @@ model payment_info {
   currency             String?             @db.VarChar(100)
   created_at           DateTime?           @default(now()) @db.Timestamp(6)
   updated_at           DateTime?           @default(now()) @db.Timestamp(6)
+  approve_no           String              @db.VarChar(100)
+
   user_subscriptions   user_subscriptions? @relation(fields: [user_subscription_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -67,8 +69,9 @@ model users {
   discord_id           String?                @unique @db.VarChar(255)
   display_name         String?                @db.VarChar(50)
   name                 String                 @db.VarChar(100)
-  email                String?                @unique @db.VarChar(255)
-  phone_number         String?                @unique @db.VarChar(20)
+  email                String                 @unique @db.VarChar(255)
+  phone_number         String                 @unique @db.VarChar(20)
+
   gender               gender
   birth                DateTime               @db.Date
   resting_heart_rate   Int?

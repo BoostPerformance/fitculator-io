@@ -2,7 +2,8 @@ import Input from '../input';
 import RegisterItemTitle from './registerItemTitle';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-//import BatchesDropdown from '@/components/batchesDropdown';
+import UserEmail from './newUserInformation/userEmail';
+import UserPhonenumber from './newUserInformation/userPhonenumber';
 import { UserInformationProps, DropdownOption } from '@/types/types';
 import DatePicker from '../utils/datePicker';
 import Router from 'next/router';
@@ -19,14 +20,18 @@ export default function NewUserInformation({
   const [errors, setErrors] = useState({
     name: '',
     birthday: '',
+    email: '',
+    phone_number: '',
+
     start_date: '',
   });
 
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
-      user: {
-        ...prevData.user,
+      users: {
+        ...prevData.users,
+
         [name]: value,
       },
     }));
@@ -37,23 +42,72 @@ export default function NewUserInformation({
   ) => {
     setFormData((prevData) => ({
       ...prevData,
-      user: { ...prevData.user, gender },
+      users: { ...prevData.users, gender },
+
     }));
   };
 
   const handleDateChange = (start_date: string) => {
-    console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
+    // console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
     setFormData((prevData) => ({
       ...prevData,
-      user: {
-        ...prevData.user,
+      users: {
+        ...prevData.users,
+
         start_date,
       },
     }));
   };
 
-  const handleBlurChange = (name: any) => {
+  const emailValidation = (email: string) => {
+    const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if (!emailRegex.test(email)) {
+      return '* 이메일을 입력해 주세요.';
+    }
+    return '';
+  };
+
+  const phoneValidation = (phone_number: string) => {
+    const phoneRegex = /^010[0-9]{8}$/;
+    if (!phoneRegex.test(phone_number)) {
+      return '* 전화번호만 입력해 주세요.';
+    }
+    return '';
+  };
+
+  const birthdayValidation = (birthday: string) => {
+    const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!birthdayRegex.test(birthday)) {
+      return '* 올바른 생년월일을 입력해 주세요.';
+    }
+    return '';
+  };
+
+  const nameValidation = (name: string) => {
+    if (name.length < 2) {
+      return '* 이름은 최소 두글자 이상이어야 합니다.';
+    }
+    return '';
+  };
+  const handleBlurChange = (name: string, value: string) => {
     let error = '';
+
+    switch (name) {
+      case 'email':
+        error = emailValidation(value);
+        break;
+      case 'phone_number':
+        error = phoneValidation(value);
+        break;
+      case 'birthday':
+        error = birthdayValidation(value);
+        break;
+      case 'name':
+        error = nameValidation(value);
+        break;
+    }
+
+
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
@@ -64,24 +118,41 @@ export default function NewUserInformation({
 
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
           <UserName
-            value={formData.user}
+            value={formData.users}
+
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
+
+          <UserBDay
+            value={formData.users}
+            errors={errors}
+            onInputChange={handleInputChange}
+            onBlur={handleBlurChange}
+          />
+          <UserEmail
+            value={formData.users}
+            errors={errors}
+            onInputChange={handleInputChange}
+            onBlur={handleBlurChange}
+          />
+          <UserPhonenumber
+            value={formData.users}
+            errors={errors}
+            onInputChange={handleInputChange}
+            onBlur={handleBlurChange}
+          />
+
           <UserGender
-            value={formData.user}
+            value={formData.users}
             onGenderSelect={handleGenderSelect}
           />
-          <UserBDay
-            value={formData.user}
-            errors={errors}
-            onInputChange={handleInputChange}
-            onBlur={handleBlurChange}
-          />
+
           {title !== 'Basic' && (
             <DatePicker
-              value={formData.user.start_date || ''}
+              value={formData.users.start_date || ''}
+
               onChange={handleDateChange}
               placeholder="날짜를 선택하세요"
               minDate={new Date()}

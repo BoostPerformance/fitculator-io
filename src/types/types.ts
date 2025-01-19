@@ -1,7 +1,10 @@
 export interface UserInfoFormData {
-  user: {
+  users: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
+
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -30,9 +33,11 @@ export interface ExercisePreferenceType {
 }
 
 export interface RegisterFormData extends ExercisePreferenceType {
-  user: {
+  users: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -41,8 +46,8 @@ export interface RegisterFormData extends ExercisePreferenceType {
   };
   payment_info?: {
     amount: number;
-    paymet_date: string;
-    paymet_method: string;
+    payment_date: string;
+    payment_method: string;
     payment_key: string;
     status: string;
     order_id: string;
@@ -50,13 +55,18 @@ export interface RegisterFormData extends ExercisePreferenceType {
     card_type: string;
     owner_type: string;
     currency: string;
+    approve_no: string;
+
   };
 }
 
 export interface RequestItemsType {
-  user: {
+  users: {
     name: string;
     birthday?: string;
+    email: string;
+    phone_number: string;
+
     gender?: string;
     start_day: string;
   };
@@ -78,8 +88,8 @@ export interface RequestItemsType {
 
   payment_info: {
     amount: number;
-    paymet_date: string;
-    paymet_method: string;
+    payment_date: string;
+    payment_method: string;
     payment_key: string;
     status: string;
     order_id: string;
@@ -91,10 +101,12 @@ export interface RequestItemsType {
 }
 
 export interface ApiResponse {
-  user: {
+  users: {
     id: string;
     name: string;
     birthday: string;
+    email: string;
+    phone_number: string;
     gender: 'male' | 'female' | 'undisclosed' | null;
     start_date: string;
   };

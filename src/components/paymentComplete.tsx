@@ -6,15 +6,20 @@ import { useMutation } from '@tanstack/react-query';
 
 const validateFormData = (formData: any) => {
   try {
-    const requiredFields = [
-      'user',
-      'exercise_preferences',
-      'programs',
-      'subscriptions',
-    ];
-    return requiredFields.every((field) => formData[field]);
+    const requiredFields = ['users', 'exercise_preferences', 'programs'];
+
+    const missingFields = requiredFields.filter((field) => !formData[field]);
+
+    return {
+      isValid: missingFields.length === 0,
+      missingFields,
+    };
   } catch (error) {
-    return false;
+    return {
+      isValid: false,
+      missingFields: [],
+    };
+
   }
 };
 
@@ -35,6 +40,10 @@ const attemptPaymentConfirmation = async (requestData: PaymentRequestData) => {
 
     if (paymentResponse.ok) {
       const json = await paymentResponse.json();
+
+      // console.log('Payment response:', json); // 응답 로깅 추가
+
+
       if (json.error) {
         throw new Error(json.message || '결제 확인에 실패했습니다');
       }
@@ -83,15 +92,25 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
+        //('savedFormData', savedFormData);
 
         if (!savedFormData) {
+          //  console.log(savedFormData);
+
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
         const formData = JSON.parse(savedFormData);
 
-        if (!validateFormData(formData)) {
-          throw new Error('필수 데이터가 누락되었습니다');
+        const validation = validateFormData(formData);
+
+        if (!validation.isValid) {
+          throw new Error(
+            `필수 데이터가 누락되었습니다: ${validation.missingFields.join(
+              ', '
+            )}`
+          );
+
         }
 
         const requestData = {
@@ -110,17 +129,28 @@ export default function PaymentComplete() {
 
         const paymentResult = await attemptPaymentConfirmation(requestData);
 
-        mutation.mutate({
+
+        //console.log('approvedAt:', paymentResult.approvedAt);
+        //console.log('card.amount:', paymentResult.card.amount);
+
+        const mutationData = {
           ...formData,
           payment_info: {
-            amount: requestData.amount,
+            amount: paymentResult.card.amount,
+            payment_date: paymentResult.approvedAt || new Date().toISOString(),
+            payment_method: paymentResult.method,
             order_id: requestData.orderId,
             payment_key: requestData.paymentKey,
             card_type: paymentResult.card?.cardType || '카드 타입',
             owner_type: paymentResult.card?.ownerType || '개인',
             currency: paymentResult.currency || 'KRW',
+            status: paymentResult.status || 'status?',
+            approve_no: paymentResult.card?.approveNo || '승인번호',
           },
-        });
+        };
+        console.log('mutationDate', mutationData);
+        mutation.mutate(mutationData);
+
       } catch (error: Error | any) {
         const errorMessage =
           error instanceof Error

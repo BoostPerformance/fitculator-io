@@ -2,7 +2,7 @@
 import { UserInfoFormData } from '@/types/types';
 
 interface UserGenderProps {
-  value: UserInfoFormData['user'];
+  value: UserInfoFormData['users'];
   onGenderSelect: (
     gender: 'male' | 'female' | 'other' | 'undisclosed' | null
   ) => void;

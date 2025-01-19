@@ -2,7 +2,7 @@ import Input from '../input';
 
 interface Recommander {
   formData: {
-    user?: {
+    users?: {
       name?: string;
     };
   };
@@ -20,7 +20,7 @@ export default function Recommander({ formData, setFormData }: Recommander) {
         name="name"
         placeholder="홍길동"
         width="21.25rem"
-        value={formData?.user?.name || ''}
+        value={formData?.users?.name || ''}
         onChange={() => console.log('onchange')}
         onBlur={() => console.log('onBlur')}
         type="text"
