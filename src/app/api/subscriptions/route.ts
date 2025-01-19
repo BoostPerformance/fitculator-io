@@ -27,11 +27,67 @@ const getSlackWebhookUrl = (programName: string): string | undefined => {
   return webhooks[programName as keyof typeof webhooks];
 };
 
+const sendErrorToSlack = async (error: any, requestBody?: any) => {
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL_TEST;
+  if (!webhookUrl) return;
+
+  const errorMessage = {
+    text: '❌ 등록 프로세스 에러 발생',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: '*❌ 등록 프로세스 에러 발생*'
+        }
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*에러 메시지:*\n${error.message || error}`
+        }
+      }
+    ]
+  };
+
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    errorMessage.blocks.push({
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*Prisma 에러 코드:* ${error.code}\n*메타 정보:* ${JSON.stringify(error.meta)}`
+      }
+    });
+  }
+
+  if (requestBody) {
+    errorMessage.blocks.push({
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*요청 데이터:*\n\`\`\`${JSON.stringify(requestBody, null, 2)}\`\`\``
+      }
+    });
+  }
+
+  try {
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(errorMessage)
+    });
+  } catch (slackError) {
+    console.error('Error sending to Slack:', slackError);
+  }
+};
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     
     if (!body.users) {
+      await sendErrorToSlack(new Error('User data is missing'), body);
       return NextResponse.json(
         { error: 'User data is missing' },
         { status: 400 }
@@ -127,19 +183,19 @@ export async function POST(req: NextRequest) {
       }
     } catch (error) {
       console.error('[Slack Notification Error]:', error);
-      // Slack 알림 실패는 전체 트랜잭션의 실패로 이어지지 않음
+      await sendErrorToSlack(error, { slackWebhookError: true, programName: body.programs.name });
     }
 
     return NextResponse.json(result);
 
   } catch (error) {
     console.error('[Registration Error]:', error);
+    await sendErrorToSlack(error, req.body);
     
     let status = 500;
     let errorMessage = 'Internal server error';
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      // Prisma 에러 처리
       switch (error.code) {
         case 'P2002':
           status = 409;
