@@ -5,49 +5,6 @@ import { addDays } from 'date-fns';
 import prisma from '@/lib/prisma';
 import { SlackWebhook } from '@/lib/slackWebhook';
 
-// 타입 정의
-interface UserData {
-  name: string;
-  gender: string;
-  phone_number: string;
-  email: string;
-  birthday: string;
-  start_date?: string;
-}
-
-interface ProgramData {
-  name: 'Basic' | 'PLUS' | 'PRO';
-}
-
-interface ExercisePreferences {
-  wearable_device: string;
-  exercise_level: string;
-  exercise_goal: string;
-  exercise_concern?: string | null;
-  referral_source?: string | null;
-}
-
-interface PaymentInfo {
-  amount: number;
-  payment_date?: number;
-  payment_method: string;
-  payment_key: string;
-  status: string;
-  order_id: string;
-  order_name?: string;
-  card_type?: string;
-  owner_type?: string;
-  currency?: string;
-  approve_no: string;
-}
-
-interface RequestBody {
-  users: UserData;
-  programs: ProgramData;
-  exercise_preferences: ExercisePreferences;
-  payment_info?: PaymentInfo;
-}
-
 // 상수 정의
 const TRANSACTION_TIMEOUT = 10000;
 const TRANSACTION_MAX_WAIT = 7000;
@@ -72,12 +29,11 @@ const getSlackWebhookUrl = (programName: string): string | undefined => {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json() as RequestBody;
+    const body = await req.json();
     
-    // 입력 데이터 검증
-    if (!body.users || !body.programs || !body.exercise_preferences) {
+    if (!body.users) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'User data is missing' },
         { status: 400 }
       );
     }
@@ -108,7 +64,11 @@ export async function POST(req: NextRequest) {
         data: {
           id: nanoid(),
           user_id: userInfo.id,
-          ...body.exercise_preferences,
+          wearable_device: body.exercise_preferences.wearable_device,
+          exercise_level: body.exercise_preferences.exercise_level,
+          exercise_goal: body.exercise_preferences.exercise_goal,
+          exercise_concern: body.exercise_preferences.exercise_concern || null,
+          referral_source: body.exercise_preferences.referral_source || null,
         },
       });
 
@@ -137,9 +97,9 @@ export async function POST(req: NextRequest) {
             payment_key: body.payment_info.payment_key,
             status: body.payment_info.status,
             order_id: body.payment_info.order_id,
-            order_name: body.payment_info.order_name,
-            card_type: body.payment_info.card_type,
-            owner_type: body.payment_info.owner_type,
+            order_name: body.payment_info.order_name || null,
+            card_type: body.payment_info.card_type || null,
+            owner_type: body.payment_info.owner_type || null,
             currency: body.payment_info.currency || DEFAULT_CURRENCY,
             approve_no: body.payment_info.approve_no,
           },
@@ -189,7 +149,6 @@ export async function POST(req: NextRequest) {
           status = 404;
           errorMessage = 'Record not found';
           break;
-        // 필요한 경우 더 많은 에러 케이스 추가
       }
     } else if (error instanceof Error) {
       errorMessage = error.message;
