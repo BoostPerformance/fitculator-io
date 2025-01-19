@@ -15,6 +15,7 @@ interface PaymentConfirmRequest {
 
 export async function POST(req: Request) {
   try {
+
     const { amount, orderId, paymentKey }: PaymentConfirmRequest =
       await req.json();
 
@@ -27,6 +28,7 @@ export async function POST(req: Request) {
       );
     }
     const basicToken = Buffer.from(secretKey + ':', 'utf-8').toString('base64');
+
 
     const response = await fetch(url, {
       method: 'POST',
@@ -51,11 +53,13 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           message: responseData.message || '결제 확인 실패 route.ts',
+
           code: response.status,
         },
         { status: response.status }
       );
     }
+
 
     // const paymentInfo = {
     //   ...responseData,
@@ -67,6 +71,7 @@ export async function POST(req: Request) {
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
     //console.error('Payments error:', error);
+
     return NextResponse.json(
       { error: 'Error processing payment' },
       { status: 500 }

@@ -4,6 +4,7 @@ export interface UserInfoFormData {
     birthday?: string;
     email: string;
     phone_number: string;
+
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -55,6 +56,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     owner_type: string;
     currency: string;
     approve_no: string;
+
   };
 }
 
@@ -64,6 +66,7 @@ export interface RequestItemsType {
     birthday?: string;
     email: string;
     phone_number: string;
+
     gender?: string;
     start_day: string;
   };

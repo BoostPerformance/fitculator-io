@@ -86,6 +86,7 @@ const RegisterForm = () => {
     },
   });
 
+
   const isEmailValid = (email: string) => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     return emailRegex.test(email);
@@ -99,6 +100,7 @@ const RegisterForm = () => {
     const isFormValid =
       name?.trim() !== '' &&
       gender?.trim() !== '' &&
+
       email?.trim() !== '' &&
       isEmailValid(email) &&
       phone_number?.trim() !== '' &&
@@ -109,7 +111,9 @@ const RegisterForm = () => {
       exercise_level != null &&
       referral_source?.trim() !== '';
 
+
     //console.log(isFormValid);
+
 
     setIsButtonDisabled(!isFormValid);
   }, [formData, title]);
@@ -129,6 +133,7 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
+
       // console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
@@ -137,6 +142,7 @@ const RegisterForm = () => {
 
       // console.log('새로운 주문번호 생성:', orderId);
       //console.log('Form data saved:', JSON.stringify(formData));
+
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),

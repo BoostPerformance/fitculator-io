@@ -15,6 +15,7 @@ interface ProductItemProps {
   basic?: boolean;
   pro?: boolean;
   plus?: boolean;
+
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -29,6 +30,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   basic,
   pro,
   plus,
+
 }) => {
   const registerDate = new Date();
   const currentYear = registerDate.getFullYear();
@@ -163,6 +165,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             },
           }}
         >
+
           <Button text="신청하기" variant="white" size="sm" basic={basic} />
         </Link>
       )}

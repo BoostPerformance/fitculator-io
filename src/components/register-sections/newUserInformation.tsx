@@ -22,6 +22,7 @@ export default function NewUserInformation({
     birthday: '',
     email: '',
     phone_number: '',
+
     start_date: '',
   });
 
@@ -30,6 +31,7 @@ export default function NewUserInformation({
       ...prevData,
       users: {
         ...prevData.users,
+
         [name]: value,
       },
     }));
@@ -41,6 +43,7 @@ export default function NewUserInformation({
     setFormData((prevData) => ({
       ...prevData,
       users: { ...prevData.users, gender },
+
     }));
   };
 
@@ -50,10 +53,12 @@ export default function NewUserInformation({
       ...prevData,
       users: {
         ...prevData.users,
+
         start_date,
       },
     }));
   };
+
   const emailValidation = (email: string) => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     if (!emailRegex.test(email)) {
@@ -102,6 +107,7 @@ export default function NewUserInformation({
         break;
     }
 
+
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
@@ -113,10 +119,12 @@ export default function NewUserInformation({
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
           <UserName
             value={formData.users}
+
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
+
           <UserBDay
             value={formData.users}
             errors={errors}
@@ -135,6 +143,7 @@ export default function NewUserInformation({
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
+
           <UserGender
             value={formData.users}
             onGenderSelect={handleGenderSelect}
@@ -143,6 +152,7 @@ export default function NewUserInformation({
           {title !== 'Basic' && (
             <DatePicker
               value={formData.users.start_date || ''}
+
               onChange={handleDateChange}
               placeholder="날짜를 선택하세요"
               minDate={new Date()}
