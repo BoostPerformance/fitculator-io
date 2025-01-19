@@ -10,7 +10,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     //console.log('Received body:', body);
-    //console.log('보이니?');
     if (!body.users) {
       throw new Error('User data is missing');
     }
@@ -155,12 +154,10 @@ export async function POST(req: NextRequest) {
         // console.log(result);
       }
     } catch (error) {
-      console.log(error, '웹훅 작동안됨');
+      console.error('Slack webhook error:', error);
     }
 
-    const response = Response.json(result);
-    // console.log('response', response);
-    return response;
+    return NextResponse.json(result);
 
   } catch (error) {
     console.error('Prisma error:', error);
