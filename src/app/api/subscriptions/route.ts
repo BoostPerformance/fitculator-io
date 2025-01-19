@@ -8,8 +8,8 @@ import { SlackWebhook } from '@/lib/slackWebhook';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log('Received body:', body);
-    console.log('보이니?');
+    //console.log('Received body:', body);
+    //console.log('보이니?');
     if (!body.users) {
       throw new Error('User data is missing');
     }
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         // });
 
         const birthDate = new Date(`${body.users.birthday}`);
-        console.log(body);
+        //console.log(body);
 
         const userInfo = await tx.users.create({
           data: {
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 
           const paymentDate = body.payment_info.payment_date || Date.now();
 
-          console.log('body', body);
+          //console.log('body', body);
 
           paymentInfo = await tx.payment_info.create({
             data: {
@@ -128,23 +128,18 @@ export async function POST(req: NextRequest) {
     const SLACK_WEBHOOK_URL_BASIC = process.env.SLACK_WEBHOOK_URL_BASIC;
     const SLACK_WEBHOOK_URL_PLUS = process.env.SLACK_WEBHOOK_URL_PLUS;
     const SLACK_WEBHOOK_URL_PRO = process.env.SLACK_WEBHOOK_URL_PRO;
-    console.log('Webhook URLs:', {
-      basic: SLACK_WEBHOOK_URL_BASIC,
-      plus: SLACK_WEBHOOK_URL_PLUS,
-      pro: SLACK_WEBHOOK_URL_PRO,
-    });
 
     try {
       switch (body.programs.name) {
         case 'Basic':
           if (SLACK_WEBHOOK_URL_BASIC) {
-            console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
+            //console.log('webhook', SLACK_WEBHOOK_URL_BASIC);
             await SlackWebhook(SLACK_WEBHOOK_URL_BASIC, result);
           }
           break;
         case 'PLUS':
           if (SLACK_WEBHOOK_URL_PLUS) {
-            console.log('webhook', SLACK_WEBHOOK_URL_PLUS);
+            //console.log('webhook', SLACK_WEBHOOK_URL_PLUS);
             await SlackWebhook(SLACK_WEBHOOK_URL_PLUS, result);
           }
           break;
@@ -155,14 +150,14 @@ export async function POST(req: NextRequest) {
           break;
         default:
           console.log('Unknown program name:', body.programs.name);
-          console.log(result);
+        // console.log(result);
       }
     } catch (error) {
       console.log(error, '웹훅 작동안됨');
     }
 
     const response = Response.json(result);
-    console.log('response', response);
+    // console.log('response', response);
     return response;
   } catch (error) {
     console.error('Prisma error:', error);

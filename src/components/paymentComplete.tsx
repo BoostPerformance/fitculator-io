@@ -89,10 +89,10 @@ export default function PaymentComplete() {
     const confirmPayment = async () => {
       try {
         const savedFormData = localStorage.getItem('formData');
-        console.log('savedFormData', savedFormData);
+        //('savedFormData', savedFormData);
 
         if (!savedFormData) {
-          console.log(savedFormData);
+          //  console.log(savedFormData);
           throw new Error('신청 폼 데이터가 없습니다');
         }
 
