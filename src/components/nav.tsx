@@ -23,7 +23,7 @@ const Nav: React.FC<NavProps> = ({ navMenu = false, smWidth = '' }) => {
         <NavMenu />
       ) : (
         <Link href="/#product-section">
-          <Button text="핏큘레이터 신청하기" size="xs" variant="default" />
+          <Button text="시작하기" size="xs" variant="default" />
         </Link>
       )}
     </nav>

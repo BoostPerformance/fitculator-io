@@ -12,31 +12,28 @@ export default function RegisterSection() {
             <div className="text-3-700 sm:text-left sm:px-[2rem] sm:pb-[0.3rem] sm:text-1.25-700 leading-tight">
               <div className="sm:pb-[0.7rem]">
                 <span>
-                  정확한 운동량을 알려주는
+                  무조건 운동하게 만드는
                   <br />
                 </span>
 
                 <span>
-                  나만의 피트니스 가이드,
+                  핏큘레이터
                   <br />
                 </span>
               </div>
-              <span className="sm:text-2.25-700 sm:pb-[0.6rem]">
-                핏큘레이터
-              </span>
             </div>
 
             <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12 sm:pt-[0.6rem]">
-              핏큘레이터와 함께&nbsp;
+              자기관리의 시작.&nbsp;
               <span className="sm:inline hidden">
                 <br />
               </span>
-              꾸준한 운동을 생활화 하세요.
+              나에게 필요한 운동량을 매주 채워보세요.
             </p>
           </div>
 
           <Link href="#product-section" className="sm:hidden">
-            <Button text="핏큘레이터 신청하기" size="md" variant="default" />
+            <Button text="시작하기" size="md" variant="default" />
           </Link>
 
           <Link
@@ -44,7 +41,7 @@ export default function RegisterSection() {
             className="hidden sm:inline sm:pl-[2rem]"
           >
             <Button
-              text="핏큘레이터 신청하기"
+              text="시작하기"
               size="xs"
               variant="default"
               className="sm:py-[1.3rem] sm:w-[10rem] sm:px-[0.7rem]"
