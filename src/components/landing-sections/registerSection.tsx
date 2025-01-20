@@ -23,10 +23,10 @@ export default function RegisterSection() {
               </div>
             </div>
 
-            <p className="text-xl sm:text-sm font-medium text-gray-900 sm:px-8 sm:text-left text-center">
-              자기관리의 시작
-              <br className="block" />
-              나에게 필요한 운동량을 매주 채워보세요
+            <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12 sm:pt-[0.6rem]">
+              자기관리의 시작.&nbsp;
+                <br />
+              나에게 필요한 운동량을 매주 채워보세요.
             </p>
           </div>
 
