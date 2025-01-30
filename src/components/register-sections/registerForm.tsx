@@ -86,11 +86,21 @@ const RegisterForm = () => {
     },
   });
 
-
   const isEmailValid = (email: string) => {
     const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     return emailRegex.test(email);
   };
+
+  const isPhoneNumberValid = (phone_number: string) => {
+    const phoneRegex = /^010[0-9]{8}$/;
+    return phoneRegex.test(phone_number);
+  };
+
+  const isBdayValid = (birthday: any) => {
+    const birthdayRegex = /^\d{4}-\d{2}-\d{2}$/;
+    return birthdayRegex.test(birthday);
+  };
+
   useEffect(() => {
     const { name, gender, email, phone_number, birthday, start_date } =
       formData.users;
@@ -100,20 +110,19 @@ const RegisterForm = () => {
     const isFormValid =
       name?.trim() !== '' &&
       gender?.trim() !== '' &&
-
       email?.trim() !== '' &&
       isEmailValid(email) &&
       phone_number?.trim() !== '' &&
+      isPhoneNumberValid(phone_number) &&
       birthday?.trim() !== '' &&
       (title === 'Basic' ? true : start_date?.trim() !== '') &&
+      isBdayValid(birthday) &&
       wearable_device?.trim() !== '' &&
       exercise_goal?.trim() !== '' &&
       exercise_level != null &&
       referral_source?.trim() !== '';
 
-
     //console.log(isFormValid);
-
 
     setIsButtonDisabled(!isFormValid);
   }, [formData, title]);
@@ -133,7 +142,6 @@ const RegisterForm = () => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || 'no key'
       );
 
-
       // console.log('Form Data:', formData);
 
       const orderId = Math.random().toString(36).slice(2);
@@ -142,7 +150,6 @@ const RegisterForm = () => {
 
       // console.log('새로운 주문번호 생성:', orderId);
       //console.log('Form data saved:', JSON.stringify(formData));
-
 
       await tossPayments.requestPayment('카드', {
         amount: Number(`${price}`),
