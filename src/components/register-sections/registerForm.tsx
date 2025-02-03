@@ -50,7 +50,7 @@ const RegisterForm = () => {
       owner_type: '',
       payment_date: '',
       currency: 'KRW',
-      approve_no: '',
+      approve_no: null,
     },
   });
   const [isLoading, setIsLoading] = useState(false);

@@ -55,7 +55,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     card_type: string;
     owner_type: string;
     currency: string;
-    approve_no: string;
+    approve_no: string | null;
   };
 }
 
@@ -96,7 +96,7 @@ export interface RequestItemsType {
     card_type: string;
     owner_type: string;
     currency: string;
-    approve_no: string;
+    approve_no: string | null;
   };
 }
 
@@ -126,7 +126,7 @@ export interface ApiResponse {
     card_type: string;
     owner_type: string;
     currency: string;
-    approve_no: string;
+    approve_no: string | null;
   };
   userSubscription: {
     id: string;
