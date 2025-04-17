@@ -20,7 +20,7 @@ export default function UserEmail({
       <div className="flex gap-[0.5rem] items-end sm:items-center">
         <h1 className="text-1.25-700 text-gray-6 sm:text-1-700">이메일 주소</h1>
         <p className="text-1-500 text-gray-7 sm:text-0.75-500">
-          이메일 주소를 입력해 주세요.
+          테스터 초대를 위해 App Store 또는 Google Play 계정을 입력해 주세요.
         </p>
       </div>
       <Input
