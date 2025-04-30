@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface InputProps {
+  id?: string;
   name?: string;
   value: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -16,6 +17,7 @@ interface InputProps {
 }
 
 export default function Input({
+  id,
   name,
   value,
   onChange,
@@ -32,6 +34,7 @@ export default function Input({
   return (
     <>
       <input
+        id={id}
         className={`pl-[1rem] rounded-[0.375rem] border-gray-9 border-[0.1rem] ${height} ${width} sm:w-[16.4rem] ${className}`}
         name={name}
         value={value}

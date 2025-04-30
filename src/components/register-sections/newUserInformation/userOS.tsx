@@ -16,7 +16,7 @@ export default function UserOS({
 }: UserOSProps) {
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      console.log('OS 선택됨:', e.target.value);
+      // console.log('OS 선택됨:', e.target.value);
 
       onInputChange('os', e.target.value);
 
@@ -40,6 +40,7 @@ export default function UserOS({
           className="flex gap-3 items-center cursor-pointer"
         >
           <Input
+            id="os-ios"
             name="os"
             type="radio"
             value="ios"
@@ -55,12 +56,13 @@ export default function UserOS({
           className="flex gap-3 items-center cursor-pointer"
         >
           <Input
+            id="os-android"
             name="os"
             type="radio"
             value="android"
-            height="1rem sm:w-[1rem] "
+            height="1rem sm:w-[1rem]"
             width="1rem"
-            className="m-0 p-0 "
+            className="m-0 p-0"
             onChange={handleRadioChange}
           />
           <div className="text-1-400 text-gray-6">안드로이드 (Android)</div>
