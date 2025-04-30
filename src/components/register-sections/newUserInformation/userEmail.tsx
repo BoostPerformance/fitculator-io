@@ -26,7 +26,7 @@ export default function UserEmail({
       <Input
         name="email"
         placeholder="fit@gmail.com"
-        width="31.25rem"
+        width="w-[21.25rem]"
         value={value.email || ''}
         onChange={(e) => onInputChange('email', e.target.value)}
         onBlur={(e) => onBlur('email', e.target.value)}
