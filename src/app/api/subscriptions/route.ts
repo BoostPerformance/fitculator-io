@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Prisma } from '@prisma/client';
 import { nanoid } from 'nanoid';
 import { addDays } from 'date-fns';
-import prisma from '@/lib/prisma';
+import { supabase } from '@/lib/supabse';
 import { SlackWebhook } from '@/lib/slackWebhook';
 
 // 상수 정의
-const TRANSACTION_TIMEOUT = 10000;
-const TRANSACTION_MAX_WAIT = 7000;
 const DEFAULT_CURRENCY = 'KRW';
 
 // 유틸리티 함수
@@ -54,14 +51,15 @@ const sendErrorToSlack = async (error: any, requestBody?: any) => {
     ],
   };
 
-  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+  // Supabase 에러 처리
+  if (error.code) {
     errorMessage.blocks.push({
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Prisma 에러 코드:* ${error.code}\n*메타 정보:* ${JSON.stringify(
-          error.meta
-        )}`,
+        text: `*Supabase 에러 코드:* ${
+          error.code
+        }\n*메타 정보:* ${JSON.stringify(error.details || error.hint || {})}`,
       },
     });
   }
@@ -103,91 +101,113 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await prisma.$transaction(
-      async (tx) => {
-        const userInfo = await tx.users.create({
-          data: {
-            id: nanoid(),
-            name: body.users.name,
-            gender: body.users.gender.toLowerCase(),
-            phone_number: body.users.phone_number,
-            email: body.users.email,
-            birth: new Date(body.users.birthday),
-            os: body.users.os,
-          },
-        });
+    // 1. 사용자 생성
+    const userId = nanoid();
+    const { data: userInfo, error: userError } = await supabase
+      .from('users')
+      .insert({
+        id: userId,
+        name: body.users.name,
+        gender: body.users.gender.toLowerCase(),
+        phone_number: body.users.phone_number,
+        email: body.users.email,
+        birth: new Date(body.users.birthday).toISOString(),
+        os: body.users.os,
+      })
+      .select()
+      .single();
 
-        // 2. 프로그램 생성
-        const programInfo = await tx.programs.create({
-          data: {
-            id: nanoid(),
-            name: body.programs.name,
-          },
-        });
+    if (userError) throw userError;
 
-        // 3. 운동 선호도 생성
-        const exercisePreferencesInfo = await tx.exercise_preferences.create({
-          data: {
-            id: nanoid(),
-            user_id: userInfo.id,
-            wearable_device: body.exercise_preferences.wearable_device,
-            exercise_level: body.exercise_preferences.exercise_level,
-            exercise_goal: body.exercise_preferences.exercise_goal,
-            exercise_concern:
-              body.exercise_preferences.exercise_concern || null,
-            referral_source: body.exercise_preferences.referral_source || null,
-          },
-        });
+    // 2. 프로그램 생성
+    const programId = nanoid();
+    const { data: programInfo, error: programError } = await supabase
+      .from('programs')
+      .insert({
+        id: programId,
+        name: body.programs.name,
+      })
+      .select()
+      .single();
 
-        // 4. 구독 정보 생성
-        const startDate =
-          body.programs.name !== 'Basic' ? body.users.start_date : null;
-        const userSubscriptionInfo = await tx.user_subscriptions.create({
-          data: {
-            id: nanoid(),
-            users: { connect: { id: userInfo.id } },
-            programs: { connect: { id: programInfo.id } },
-            start_date: startDate ? new Date(startDate).toISOString() : null,
-            end_date: calculateEndDate(startDate, body.programs.name),
-          },
-        });
+    if (programError) throw programError;
 
-        // 5. 결제 정보 생성 (Basic이 아닌 경우)
-        let paymentInfo = null;
-        if (body.programs.name !== 'Basic' && body.payment_info) {
-          paymentInfo = await tx.payment_info.create({
-            data: {
-              id: nanoid(),
-              user_subscription_id: userSubscriptionInfo.id,
-              amount: body.payment_info.amount,
-              payment_date: body.payment_info.payment_date || Date.now(),
-              payment_method: body.payment_info.payment_method,
-              payment_key: body.payment_info.payment_key,
-              status: body.payment_info.status,
-              order_id: body.payment_info.order_id,
-              order_name: body.payment_info.order_name || null,
-              card_type: body.payment_info.card_type || null,
-              owner_type: body.payment_info.owner_type || null,
-              currency: body.payment_info.currency || DEFAULT_CURRENCY,
-              approve_no: body.payment_info.approve_no,
-            },
-          });
-        }
+    // 3. 운동 선호도 생성
+    const exercisePreferenceId = nanoid();
+    const { data: exercisePreferencesInfo, error: exerciseError } =
+      await supabase
+        .from('exercise_preferences')
+        .insert({
+          id: exercisePreferenceId,
+          user_id: userId,
+          wearable_device: body.exercise_preferences.wearable_device,
+          exercise_level: body.exercise_preferences.exercise_level,
+          exercise_goal: body.exercise_preferences.exercise_goal,
+          exercise_concern: body.exercise_preferences.exercise_concern || null,
+          referral_source: body.exercise_preferences.referral_source || null,
+        })
+        .select()
+        .single();
 
-        return {
-          users: userInfo,
-          exercise_preferences: exercisePreferencesInfo,
-          programs: programInfo,
-          user_subscriptions: userSubscriptionInfo,
-          payment_info: paymentInfo,
-        };
-      },
-      {
-        timeout: TRANSACTION_TIMEOUT,
-        maxWait: TRANSACTION_MAX_WAIT,
-        isolationLevel: 'Serializable',
-      }
-    );
+    if (exerciseError) throw exerciseError;
+
+    // 4. 구독 정보 생성
+    const subscriptionId = nanoid();
+    const startDate =
+      body.programs.name !== 'Basic' ? body.users.start_date : null;
+    const endDate = calculateEndDate(startDate, body.programs.name);
+
+    const { data: userSubscriptionInfo, error: subscriptionError } =
+      await supabase
+        .from('user_subscriptions')
+        .insert({
+          id: subscriptionId,
+          user_id: userId,
+          program_id: programId,
+          start_date: startDate ? new Date(startDate).toISOString() : null,
+          end_date: endDate ? endDate.toISOString() : null,
+        })
+        .select()
+        .single();
+
+    if (subscriptionError) throw subscriptionError;
+
+    // 5. 결제 정보 생성 (Basic이 아닌 경우)
+    let paymentInfo = null;
+    if (body.programs.name !== 'Basic' && body.payment_info) {
+      const paymentId = nanoid();
+      const { data: paymentData, error: paymentError } = await supabase
+        .from('payment_info')
+        .insert({
+          id: paymentId,
+          user_subscription_id: subscriptionId,
+          amount: body.payment_info.amount,
+          payment_date:
+            body.payment_info.payment_date || new Date().toISOString(),
+          payment_method: body.payment_info.payment_method,
+          payment_key: body.payment_info.payment_key,
+          status: body.payment_info.status,
+          order_id: body.payment_info.order_id,
+          order_name: body.payment_info.order_name || null,
+          card_type: body.payment_info.card_type || null,
+          owner_type: body.payment_info.owner_type || null,
+          currency: body.payment_info.currency || DEFAULT_CURRENCY,
+          approve_no: body.payment_info.approve_no,
+        })
+        .select()
+        .single();
+
+      if (paymentError) throw paymentError;
+      paymentInfo = paymentData;
+    }
+
+    const result = {
+      users: userInfo,
+      exercise_preferences: exercisePreferencesInfo,
+      programs: programInfo,
+      user_subscriptions: userSubscriptionInfo,
+      payment_info: paymentInfo,
+    };
 
     // Slack 알림 전송
     try {
@@ -204,20 +224,22 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(result);
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Registration Error]:', error);
     await sendErrorToSlack(error, req.body);
 
     let status = 500;
     let errorMessage = 'Internal server error';
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    // Supabase 에러 처리
+    if (error.code) {
+      // PostgreSQL 에러 코드 또는 Supabase 에러 코드 처리
       switch (error.code) {
-        case 'P2002':
+        case '23505': // 중복 키 충돌 (PostgreSQL)
           status = 409;
           errorMessage = 'Resource already exists';
           break;
-        case 'P2025':
+        case 'PGRST116': // 레코드 없음 (PostgREST)
           status = 404;
           errorMessage = 'Record not found';
           break;
@@ -229,14 +251,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error: errorMessage,
-        code:
-          error instanceof Prisma.PrismaClientKnownRequestError
-            ? error.code
-            : 'UNKNOWN',
+        code: error.code || 'UNKNOWN',
       },
       { status }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }

@@ -26,7 +26,6 @@ export default function UserName({
       <Input
         name="name"
         placeholder="홍길동"
-        width="21.25rem"
         value={value.name || ''}
         onChange={(e) => onInputChange('name', e.target.value)}
         onBlur={(e) => onBlur('name', e.target.value)}

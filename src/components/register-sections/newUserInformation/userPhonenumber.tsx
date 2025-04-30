@@ -25,7 +25,7 @@ export default function UserPhonenumber({
       <Input
         name="phone_number"
         placeholder="01012345678"
-        width="21.25rem"
+        width="w-[21.25rem]"
         value={value.phone_number || ''}
         onChange={(e) => onInputChange('phone_number', e.target.value)}
         onBlur={(e) => onBlur('phone_number', e.target.value)}
