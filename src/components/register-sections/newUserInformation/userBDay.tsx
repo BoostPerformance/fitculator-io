@@ -26,7 +26,6 @@ export default function UserBDay({
       <Input
         name="birthday"
         placeholder="YYYY-MM-DD"
-        width="21.25rem"
         value={value.birthday || ''}
         onChange={(e) => onInputChange('birthday', e.target.value)}
         onBlur={(e) => onBlur('birthday', e.target.value)}

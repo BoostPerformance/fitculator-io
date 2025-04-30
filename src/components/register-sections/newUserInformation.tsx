@@ -1,4 +1,3 @@
-import Input from '../input';
 import RegisterItemTitle from './registerItemTitle';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -6,10 +5,10 @@ import UserEmail from './newUserInformation/userEmail';
 import UserPhonenumber from './newUserInformation/userPhonenumber';
 import { UserInformationProps, DropdownOption } from '@/types/types';
 import DatePicker from '../utils/datePicker';
-import Router from 'next/router';
 import UserName from './newUserInformation/userName';
 import UserGender from './newUserInformation/userGender';
 import UserBDay from './newUserInformation/userBDay';
+import UserOS from './newUserInformation/userOS';
 
 export default function NewUserInformation({
   formData,
@@ -22,7 +21,7 @@ export default function NewUserInformation({
     birthday: '',
     email: '',
     phone_number: '',
-
+    os: '',
     start_date: '',
   });
 
@@ -31,7 +30,6 @@ export default function NewUserInformation({
       ...prevData,
       users: {
         ...prevData.users,
-
         [name]: value,
       },
     }));
@@ -43,12 +41,10 @@ export default function NewUserInformation({
     setFormData((prevData) => ({
       ...prevData,
       users: { ...prevData.users, gender },
-
     }));
   };
 
   const handleDateChange = (start_date: string) => {
-    // console.log('선택된 날짜:', start_date); // 날짜 선택 시 로그 출력
     setFormData((prevData) => ({
       ...prevData,
       users: {
@@ -89,6 +85,13 @@ export default function NewUserInformation({
     }
     return '';
   };
+  const osValidation = (os: string) => {
+    if (!os || os.trim() === '') {
+      return '* 휴대전화 종류를 선택해 주세요.';
+    }
+    return '';
+  };
+
   const handleBlurChange = (name: string, value: string) => {
     let error = '';
 
@@ -104,9 +107,10 @@ export default function NewUserInformation({
         break;
       case 'name':
         error = nameValidation(value);
+      case 'os':
+        error = osValidation(value);
         break;
     }
-
 
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
@@ -119,13 +123,18 @@ export default function NewUserInformation({
         <div className="flex flex-col gap-[3.12rem] sm:gap-[2.5rem]">
           <UserName
             value={formData.users}
-
             errors={errors}
             onInputChange={handleInputChange}
             onBlur={handleBlurChange}
           />
 
           <UserBDay
+            value={formData.users}
+            errors={errors}
+            onInputChange={handleInputChange}
+            onBlur={handleBlurChange}
+          />
+          <UserOS
             value={formData.users}
             errors={errors}
             onInputChange={handleInputChange}
@@ -152,7 +161,6 @@ export default function NewUserInformation({
           {title !== 'Basic' && (
             <DatePicker
               value={formData.users.start_date || ''}
-
               onChange={handleDateChange}
               placeholder="날짜를 선택하세요"
               minDate={new Date()}
