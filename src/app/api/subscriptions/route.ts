@@ -113,6 +113,7 @@ export async function POST(req: NextRequest) {
             phone_number: body.users.phone_number,
             email: body.users.email,
             birth: new Date(body.users.birthday),
+            os: body.users.os,
           },
         });
 

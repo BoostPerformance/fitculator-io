@@ -28,6 +28,7 @@ const RegisterForm = () => {
       phone_number: '',
       gender: null,
       start_date: '',
+      os: '',
     },
     exercise_preferences: {
       exercise_level: 1,

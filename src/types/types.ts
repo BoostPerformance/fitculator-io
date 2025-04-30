@@ -4,7 +4,7 @@ export interface UserInfoFormData {
     birthday?: string;
     email: string;
     phone_number: string;
-
+    os: '아이폰 (iOS)' | '안드로이드 (Android)' | '';
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
   };
@@ -16,6 +16,7 @@ export interface FormErrors {
   birthday: string;
   phone_number: string;
   start_date: string;
+  os: string;
 }
 
 export interface ExerciseConcernFormData {
@@ -40,6 +41,7 @@ export interface RegisterFormData extends ExercisePreferenceType {
     phone_number: string;
     gender?: 'male' | 'female' | 'other' | 'undisclosed' | null;
     start_date: string;
+    os: '아이폰 (iOS)' | '안드로이드 (Android)' | '';
   };
   programs: {
     name: string;
@@ -65,9 +67,9 @@ export interface RequestItemsType {
     birthday?: string;
     email: string;
     phone_number: string;
-
+    os: '아이폰 (iOS)' | '안드로이드 (Android)' | '';
     gender?: string;
-    start_day: string;
+    start_date: string;
   };
   exercise_preferences: {
     exercise_level: number;
@@ -106,6 +108,7 @@ export interface ApiResponse {
     name: string;
     birthday: string;
     email: string;
+    os: '아이폰 (iOS)' | '안드로이드 (Android)' | '';
     phone_number: string;
     gender: 'male' | 'female' | 'undisclosed' | null;
     start_date: string;
