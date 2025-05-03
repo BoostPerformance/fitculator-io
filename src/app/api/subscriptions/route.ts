@@ -19,6 +19,7 @@ const calculateEndDate = (
 };
 
 const getSlackWebhookUrl = (programName: string): string | undefined => {
+  console.log('slackhook 함수동작');
   const webhooks = {
     Basic: process.env.SLACK_WEBHOOK_URL_BASIC,
     PLUS: process.env.SLACK_WEBHOOK_URL_PLUS,
@@ -209,17 +210,52 @@ export async function POST(req: NextRequest) {
       payment_info: paymentInfo,
     };
 
-    // Slack 알림 전송
     try {
       const webhookUrl = getSlackWebhookUrl(body.programs.name);
+      console.log('웹훅 URL 확인:', webhookUrl ? '존재함' : '없음');
+
       if (webhookUrl) {
-        await SlackWebhook(webhookUrl, result);
+        // 데이터 구조를 로깅하여 확인
+        console.log(
+          'Slack으로 전송될 데이터:',
+          JSON.stringify(result, null, 2)
+        );
+
+        // 데이터 구조 검증 및 변환
+        const slackPayload = {
+          users: userInfo,
+          exercise_preferences: exercisePreferencesInfo,
+          programs: programInfo,
+          user_subscriptions: {
+            ...userSubscriptionInfo,
+            users: { id: userId },
+            programs: { id: programId },
+          },
+          payment_info: paymentInfo,
+        };
+
+        // 웹훅 URL 로깅
+        console.log('사용 중인 웹훅 URL:', webhookUrl);
+
+        // 변환된 데이터로 슬랙 웹훅 호출
+        await SlackWebhook(webhookUrl, slackPayload);
+      } else {
+        console.warn(
+          `⚠️ Slack 웹훅 URL 없음! 프로그램 이름: ${body.programs.name}`
+        );
       }
     } catch (error) {
       console.error('[Slack Notification Error]:', error);
+      // 에러 발생 시 전체 에러 객체 로깅
+      console.error(
+        '상세 에러:',
+        JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+      );
       await sendErrorToSlack(error, {
         slackWebhookError: true,
         programName: body.programs.name,
+        // 슬랙 페이로드 데이터도 포함
+        slackPayload: result,
       });
     }
 
