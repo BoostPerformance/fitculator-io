@@ -1,7 +1,11 @@
 export async function SlackWebhook(webhookUrl: string, data: any) {
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | string | null) => {
     if (!date) return '베이직플랜';
-    return date.toISOString().split('T')[0];
+
+    const dateObj = date instanceof Date ? date : new Date(date);
+    if (isNaN(dateObj.getTime())) return 'Invalid Date';
+
+    return dateObj.toISOString().split('T')[0];
   };
 
   try {
