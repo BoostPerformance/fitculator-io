@@ -24,7 +24,9 @@ export async function SlackWebhook(webhookUrl: string, data: any) {
                 data.users.name
               }\n*생년월일:* ${formatDate(data.users.birth)}\n*연락처:* ${
                 data.users.phone_number
-              }\n*이메일:* ${data.users.email}\n*시작날짜:* ${
+              }\n*이메일:* ${data.users.email}\n*OS:* ${
+                data.users.os
+              }\n*시작날짜:* ${
                 data.programs.name === 'Basic'
                   ? new Date().toISOString().split('T')[0]
                   : formatDate(data.user_subscriptions.start_date)

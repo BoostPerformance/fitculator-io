@@ -19,7 +19,6 @@ const calculateEndDate = (
 };
 
 const getSlackWebhookUrl = (programName: string): string | undefined => {
-  console.log('slackhook 함수동작');
   const webhooks = {
     Basic: process.env.SLACK_WEBHOOK_URL_BASIC,
     PLUS: process.env.SLACK_WEBHOOK_URL_PLUS,
