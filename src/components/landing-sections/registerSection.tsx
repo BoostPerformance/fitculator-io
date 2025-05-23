@@ -25,7 +25,7 @@ export default function RegisterSection() {
 
             <p className="sm:px-[2rem] sm:text-left sm:text-0.875-700 text-1.75-500 text-gray-12 sm:pt-[0.6rem]">
               자기관리의 시작.&nbsp;
-                <br />
+              <br />
               나에게 필요한 운동량을 매주 채워보세요.
             </p>
           </div>
@@ -49,13 +49,15 @@ export default function RegisterSection() {
       </div>
       <div className="relative md:overflow-hidden sm:overflow-hidden md:h-auto sm:h-[28rem]">
         <Image
-          src="/images/landing-running.png"
+          src="/images/landing-running.webp"
           alt="woman running"
           width={2600}
-          height={600}
-          className="sm:top-[10rem] sm:scale-200 md:scale-150 sm:transform sm:translate-x-[-6rem] sm:translate-y-[6rem] md:translate-x-[-6rem] md:translate-y-[4rem]"
-          priority={true}
+          height={600} // 대신 layout이 자동 맞춰짐
+          sizes="(max-width: 768px) 100vw, 50vw" // 적절한 크기 선택
+          priority
+          className="object-cover sm:top-[10rem] sm:scale-200 md:scale-150 sm:transform sm:translate-x-[-6rem] sm:translate-y-[6rem] md:translate-x-[-6rem] md:translate-y-[4rem]"
         />
+
         <div
           className="absolute inset-0 w-[55%]"
           style={{
