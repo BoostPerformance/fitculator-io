@@ -13,7 +13,7 @@ export default function SnsIcons() {
           height={100}
         />
       </Link>
-      <Link href="https://www.threads.net/@fitculator_official">
+      <Link href="https://www.threads.net/@fitculator.io">
         <Image
           className="sm:size-[1rem] w-[1.5rem]"
           src="/svg/threads-logo.svg"
@@ -22,7 +22,7 @@ export default function SnsIcons() {
           height={10}
         />
       </Link>
-      <Link href="https://instagram.com/fitculator_official/">
+      <Link href="https://instagram.com/fitculator.io/">
         <Image
           className="sm:size-[1rem] w-[1.7rem]"
           src="/svg/instagram.svg"
